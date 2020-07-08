@@ -1,5 +1,8 @@
 package com.bootdo.ecosys.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -86,8 +89,26 @@ public class EnterpriseController {
 	@RequestMapping("/update")
 	@RequiresPermissions("ecosys:enterprise:edit")
 	public R update( EnterpriseDO enterprise){
-		enterpriseService.update(enterprise);
-		return R.ok();
+		try {
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS Z");
+			String registeredTime = enterprise.getRegisteredTime().toString();
+			registeredTime = registeredTime.replace("Z", " UTC");
+			Date d = format.parse(registeredTime);
+
+			String fullFormTime = enterprise.getFullFormTime().toString();
+			fullFormTime = fullFormTime.replace("Z", " UTC");
+			Date d1 = format.parse(fullFormTime);
+			enterprise.setRegisteredTime(d);
+			enterprise.setFullFormTime(d1);
+
+		} catch (ParseException e) {
+
+		}
+
+		if(enterpriseService.update(enterprise)>0){
+			return R.ok();
+		}
+		return R.error();
 	}
 	
 	/**

@@ -59,7 +59,7 @@ public class EnterpriseDO implements Serializable {
 	//经营场所取得
 	private String businessAreaNatureCode;
 	//部门设置
-	private Integer dept;
+	private String dept;
 	//纳税人性质
 	private String taxpayerCode;
 	//互联网营销方式
@@ -73,16 +73,16 @@ public class EnterpriseDO implements Serializable {
 	//调查人
 	private String surveyPersonName;
 
-	/*@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")*/
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createTime;
 	//
 	private String createUserName;
 	//
 	private Integer createBy;
 
-	/*@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")*/
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date modifyTime;
 	//
 	private String modifyUserName;
@@ -326,13 +326,13 @@ public class EnterpriseDO implements Serializable {
 	/**
 	 * 设置：部门设置
 	 */
-	public void setDept(Integer dept) {
+	public void setDept(String dept) {
 		this.dept = dept;
 	}
 	/**
 	 * 获取：部门设置
 	 */
-	public Integer getDept() {
+	public String getDept() {
 		return dept;
 	}
 	/**

@@ -225,11 +225,14 @@
 		delete from eco_enterprise where enterprise_id = #{value}
 	</delete>
 	
-	<delete id="batchRemove">
-		delete from eco_enterprise where enterprise_id in 
+	<update id="batchRemove">
+		update eco_enterprise
+		set `modify_time` = CURRENT_TIMESTAMP(),
+		`delete_flag` = '1'
+		 where enterprise_id in
 		<foreach item="enterpriseId" collection="array" open="(" separator="," close=")">
 			#{enterpriseId}
 		</foreach>
-	</delete>
+	</update>
 
 </mapper>

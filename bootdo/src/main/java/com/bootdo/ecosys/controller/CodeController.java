@@ -3,6 +3,7 @@ package com.bootdo.ecosys.controller;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.fastjson.JSON;
 import com.bootdo.ecosys.domain.CodeDO;
 import com.bootdo.ecosys.service.CodeService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -30,41 +31,39 @@ import com.bootdo.common.utils.R;
  */
  
 @Controller
-@RequestMapping("/system/code")
+@RequestMapping("/ecosys/code")
 public class CodeController {
 	@Autowired
 	private CodeService codeService;
 	
 	@GetMapping()
-	@RequiresPermissions("system:code:code")
+	@RequiresPermissions("ecosys:code:code")
 	String Code(){
-	    return "system/code/code";
+	    return "ecosys/code/code";
 	}
 	
 	@ResponseBody
 	@GetMapping("/list")
-	@RequiresPermissions("system:code:code")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
-        Query query = new Query(params);
-		List<CodeDO> codeList = codeService.list(query);
-		int total = codeService.count(query);
+		List<CodeDO> codeList = codeService.list(params);
+		int total = codeService.count(params);
 		PageUtils pageUtils = new PageUtils(codeList, total);
 		return pageUtils;
 	}
 	
 	@GetMapping("/add")
-	@RequiresPermissions("system:code:add")
+	@RequiresPermissions("ecosys:code:add")
 	String add(){
-	    return "system/code/add";
+	    return "ecosys/code/add";
 	}
 
 	@GetMapping("/edit/{id}")
-	@RequiresPermissions("system:code:edit")
+	@RequiresPermissions("ecosys:code:edit")
 	String edit(@PathVariable("id") Long id,Model model){
 		CodeDO code = codeService.get(id);
 		model.addAttribute("code", code);
-	    return "system/code/edit";
+	    return "ecosys/code/edit";
 	}
 	
 	/**
@@ -72,7 +71,7 @@ public class CodeController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("system:code:add")
+	@RequiresPermissions("ecosys:code:add")
 	public R save( CodeDO code){
 		if(codeService.save(code)>0){
 			return R.ok();
@@ -84,7 +83,7 @@ public class CodeController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("system:code:edit")
+	@RequiresPermissions("ecosys:code:edit")
 	public R update( CodeDO code){
 		codeService.update(code);
 		return R.ok();
@@ -95,7 +94,7 @@ public class CodeController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("system:code:remove")
+	@RequiresPermissions("ecosys:code:remove")
 	public R remove( Long id){
 		if(codeService.remove(id)>0){
 		return R.ok();
@@ -108,7 +107,7 @@ public class CodeController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("system:code:batchRemove")
+	@RequiresPermissions("ecosys:code:batchRemove")
 	public R remove(@RequestParam("ids[]") Long[] ids){
 		codeService.batchRemove(ids);
 		return R.ok();

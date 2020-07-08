@@ -1,6 +1,11 @@
-
-var prefix = "/ecosys/enterprise"
+var prefix = "/ecosys/enterprise";
+var enterpriseNatureCodeList;
+var taxpayerCodeList;
+var marketCodeList;
 $(function() {
+	/*loadEnterpriseNatureCode();
+	taxpayerCode();
+	marketCode();*/
 	load();
 });
 
@@ -47,26 +52,34 @@ function load() {
 								{
 									checkbox : true
 								},
-																/*{
-									field : 'enterpriseId', 
-									title : '企业id' 
-								},*/
-																{
+								{
 									field : 'enterpriseName', 
 									title : '企业名称' 
 								},
-																{
+								{
 									field : 'socialCreditCode', 
 									title : '社会信用编码' 
 								},
-																{
+								{
 									field : 'registeredAddress', 
 									title : '注册地址' 
 								},
-																{
+								{
 									field : 'registeredTime',
 									title : '注册时间' 
 								},
+								{
+								title : '企业相关',
+								field : 'id',
+								align : 'center',
+								formatter : function(value, row, index) {
+									var a = '<a class="btn btn-primary" href="#" onclick="openPageJump(\'' + '/ecosys/firedevice/' + '\',\'' + '消防设备管理' + '\',\'' + row.enterpriseId + '\')">'+'消'+'</a>';
+									return a ;
+								}
+							},
+
+
+							/*
 																{
 									field : 'registeredFund', 
 									title : '注册资金' 
@@ -77,7 +90,18 @@ function load() {
 								},
 																{
 									field : 'enterpriseScope', 
-									title : '企业规模' 
+									title : '企业规模',
+									formatter : function(value, row, index) {
+										if(value == 1){
+											return row.enterpriseScope = "大";
+										}else if(value == 2){
+											return row.enterpriseScope = "中";
+										}else if(value == 3){
+											return row.enterpriseScope = "小";
+										}else{
+											return row.enterpriseScope = "";
+										}
+									}
 								},
 																{
 									field : 'coordinates', 
@@ -85,8 +109,15 @@ function load() {
 								},
 																{
 									field : 'enterpriseNatureCode', 
-									title : '企业性质' 
-								},/*
+									title : '企业性质',
+									formatter : function(value, row, index) {
+										for(var i = 0;i<enterpriseNatureCodeList.length;i++){
+											if(value == enterpriseNatureCodeList[i].codeId){
+												return enterpriseNatureCodeList[i].name;
+											}
+										}
+									}
+								},
 																{
 									field : 'enterpriseLegalPerson',
 									title : '企业法人'
@@ -121,19 +152,47 @@ function load() {
 								},
 																{
 									field : 'businessAreaNatureCode',
-									title : '经营场所取得'
-								},
-																{
+									title : '经营场所取得',
+									formatter : function(value, row, index) {
+										if(value == '021'){
+											return "自由";
+										}else if(value == '022'){
+											return "租赁";
+										}
+									}
+								}, {
 									field : 'dept',
 									title : '部门设置'
 								},
 																{
 									field : 'taxpayerCode',
-									title : '纳税人性质'
+									title : '纳税人性质',
+									formatter : function(value, row, index) {
+										for(var i = 0;i<taxpayerCodeList.length;i++){
+											if(value == taxpayerCodeList[i].codeId){
+												return taxpayerCodeList[i].name;
+											}
+										}
+									}
 								},
 																{
 									field : 'marketCode',
-									title : '互联网营销方式'
+									title : '互联网营销方式',
+									formatter : function(value, row, index) {
+										var marketName = '' ;
+										//拆分
+										if(value != "" && value != null && value != undefined){
+											var codeList = value.split(",");
+											for(var i = 0;i<codeList.length;i++){
+												for(var j = 0;j<marketCodeList.length;j++){
+													if(codeList[i] == marketCodeList[j].codeId){
+														marketName = marketCodeList[j].name + "," + marketName;
+													}
+												}
+											}
+										}
+										return marketName;
+									}
 								},
 																{
 									field : 'surveytedPersonName',
@@ -153,31 +212,11 @@ function load() {
 								},
 																{
 									field : 'createTime',
-									title : ''
+									title : '创建时间'
 								},
 																{
 									field : 'createUserName',
-									title : ''
-								},
-																{
-									field : 'createBy',
-									title : ''
-								},
-																{
-									field : 'modifyTime',
-									title : ''
-								},
-																{
-									field : 'modifyUserName',
-									title : ''
-								},
-																{
-									field : 'modifyBy',
-									title : ''
-								},
-																{
-									field : 'deleteFlag',
-									title : ''
+									title : '创建人'
 								},
 																{
 									field : 'administrativeDivision',
@@ -187,7 +226,7 @@ function load() {
 									field : 'urbanorrural',
 									title : '城乡分类'
 								},*/
-																{
+								{
 									title : '操作',
 									field : 'id',
 									align : 'center',
@@ -287,3 +326,59 @@ function batchRemove() {
 
 	});
 }
+
+
+
+//加载企业性质
+function loadEnterpriseNatureCode() {
+	$.ajax({
+		type: "get",
+		url: "/ecosys/code/list",
+		dataType: "json",
+		data: {
+			parentId: 1
+		},
+		success: function (data) {
+			enterpriseNatureCodeList = data.rows;
+		}
+	})
+}
+//加载纳税人性质
+function taxpayerCode(){
+	$.ajax({
+		type: "get",
+		url: "/ecosys/code/list",
+		dataType: "json",
+		data: {
+			parentId: 10
+		},
+		success: function (data) {
+			taxpayerCodeList = data.rows;
+		}
+	})
+}
+
+//加载互联网营销方式多选框
+function marketCode(){
+	$.ajax({
+		type: "get",
+		url: "/ecosys/code/list",
+		dataType: "json",
+		data: {
+			parentId: 14
+		},
+		success: function (data) {
+			marketCodeList = data.rows;
+		}
+	})
+}
+
+function doSubmit(){
+	/*window.location.href='/ecosys/firedevice/';*/
+
+
+
+}
+
+
+

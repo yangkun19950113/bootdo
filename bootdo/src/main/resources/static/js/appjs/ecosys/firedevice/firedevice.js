@@ -1,5 +1,5 @@
 
-var prefix = "/system/firedevice"
+var prefix = "/ecosys/firedevice"
 $(function() {
 	load();
 });
