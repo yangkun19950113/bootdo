@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="product_id" name="product_id" th:value="${product.product_id}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">企业id：</label>
+								<div class="col-sm-8">
+									<input id="enterpriseId" name="enterpriseId" th:value="${product.enterpriseId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">企业名称：</label>
+								<div class="col-sm-8">
+									<input id="enterpriseName" name="enterpriseName" th:value="${product.enterpriseName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">产品名称：</label>
+								<div class="col-sm-8">
+									<input id="prodectName" name="prodectName" th:value="${product.prodectName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">规格：</label>
+								<div class="col-sm-8">
+									<input id="specifical" name="specifical" th:value="${product.specifical}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">型号：</label>
+								<div class="col-sm-8">
+									<input id="model" name="model" th:value="${product.model}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">生产工艺：</label>
+								<div class="col-sm-8">
+									<input id="produtProcess" name="produtProcess" th:value="${product.produtProcess}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">产品参数：</label>
+								<div class="col-sm-8">
+									<input id="prodectParam" name="prodectParam" th:value="${product.prodectParam}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">最低价格：</label>
+								<div class="col-sm-8">
+									<input id="minPrice" name="minPrice" th:value="${product.minPrice}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">最高价格：</label>
+								<div class="col-sm-8">
+									<input id="maxPrice" name="maxPrice" th:value="${product.maxPrice}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">设备名称：</label>
+								<div class="col-sm-8">
+									<input id="deviceName" name="deviceName" th:value="${product.deviceName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">月产量：</label>
+								<div class="col-sm-8">
+									<input id="monthProduction" name="monthProduction" th:value="${product.monthProduction}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">功能作用：</label>
+								<div class="col-sm-8">
+									<input id="functionRemark" name="functionRemark" th:value="${product.functionRemark}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-8">
+									<input id="remark" name="remark" th:value="${product.remark}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">被调查人姓名：</label>
+								<div class="col-sm-8">
+									<input id="surveytedPersonName" name="surveytedPersonName" th:value="${product.surveytedPersonName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">被调查人职位：</label>
+								<div class="col-sm-8">
+									<input id="surveytedPersonPosition" name="surveytedPersonPosition" th:value="${product.surveytedPersonPosition}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">填表日期：</label>
+								<div class="col-sm-8">
+									<input id="fullFormTime" name="fullFormTime" th:value="${product.fullFormTime}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">调查人：</label>
+								<div class="col-sm-8">
+									<input id="surveyPersonName" name="surveyPersonName" th:value="${product.surveyPersonName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">：</label>
+								<div class="col-sm-8">
+									<input id="createTime" name="createTime" th:value="${product.createTime}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">：</label>
+								<div class="col-sm-8">
+									<input id="createUserName" name="createUserName" th:value="${product.createUserName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">：</label>
+								<div class="col-sm-8">
+									<input id="createBy" name="createBy" th:value="${product.createBy}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">：</label>
+								<div class="col-sm-8">
+									<input id="modifyTime" name="modifyTime" th:value="${product.modifyTime}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">：</label>
+								<div class="col-sm-8">
+									<input id="modifyUserName" name="modifyUserName" th:value="${product.modifyUserName}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">：</label>
+								<div class="col-sm-8">
+									<input id="modifyBy" name="modifyBy" th:value="${product.modifyBy}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">：</label>
+								<div class="col-sm-8">
+									<input id="deleteFlag" name="deleteFlag" th:value="${product.deleteFlag}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">行政区划：</label>
+								<div class="col-sm-8">
+									<input id="administrativeDivision" name="administrativeDivision" th:value="${product.administrativeDivision}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">城乡分类：</label>
+								<div class="col-sm-8">
+									<input id="urbanorrural" name="urbanorrural" th:value="${product.urbanorrural}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/system/product/edit.js">
+	</script>
+</body>
+</html>
