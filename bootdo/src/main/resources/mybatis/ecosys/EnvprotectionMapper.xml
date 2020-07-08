@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.ecosys.dao.EnvprotectionDao">
+
+	<select id="get" resultType="com.bootdo.ecosys.domain.EnvprotectionDO">
+		select `envir_ protection_id`,`enterprise_id`,`enterprise_name`,`eco_estimate_flg`,`eco_licence`,`park_flg`,`eco__standard_flg`,`industry_code`,`project_manage_code`,`is_or_not_acceptance`,`tradable_permits_code`,`pollution_license_flg`,`pollution_category_code`,`annual_inspection_flg`,`area_code`,`main_energy_code`,`measures`,`normal_factors_code`,`special_factors_code`,`nomal_waste`,`danger_waste`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_envprotection where envir_ protection_id = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.ecosys.domain.EnvprotectionDO">
+		select `envir_ protection_id`,`enterprise_id`,`enterprise_name`,`eco_estimate_flg`,`eco_licence`,`park_flg`,`eco__standard_flg`,`industry_code`,`project_manage_code`,`is_or_not_acceptance`,`tradable_permits_code`,`pollution_license_flg`,`pollution_category_code`,`annual_inspection_flg`,`area_code`,`main_energy_code`,`measures`,`normal_factors_code`,`special_factors_code`,`nomal_waste`,`danger_waste`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_envprotection
+        <where>  
+		  		  <if test="envir protectionId != null and envir protectionId != ''"> and envir_ protection_id = #{envir protectionId} </if>
+		  		  <if test="enterpriseId != null and enterpriseId != ''"> and enterprise_id = #{enterpriseId} </if>
+		  		  <if test="enterpriseName != null and enterpriseName != ''"> and enterprise_name = #{enterpriseName} </if>
+		  		  <if test="ecoEstimateFlg != null and ecoEstimateFlg != ''"> and eco_estimate_flg = #{ecoEstimateFlg} </if>
+		  		  <if test="ecoLicence != null and ecoLicence != ''"> and eco_licence = #{ecoLicence} </if>
+		  		  <if test="parkFlg != null and parkFlg != ''"> and park_flg = #{parkFlg} </if>
+		  		  <if test="ecoStandardFlg != null and ecoStandardFlg != ''"> and eco__standard_flg = #{ecoStandardFlg} </if>
+		  		  <if test="industryCode != null and industryCode != ''"> and industry_code = #{industryCode} </if>
+		  		  <if test="projectManageCode != null and projectManageCode != ''"> and project_manage_code = #{projectManageCode} </if>
+		  		  <if test="isOrNotAcceptance != null and isOrNotAcceptance != ''"> and is_or_not_acceptance = #{isOrNotAcceptance} </if>
+		  		  <if test="tradablePermitsCode != null and tradablePermitsCode != ''"> and tradable_permits_code = #{tradablePermitsCode} </if>
+		  		  <if test="pollutionLicenseFlg != null and pollutionLicenseFlg != ''"> and pollution_license_flg = #{pollutionLicenseFlg} </if>
+		  		  <if test="pollutionCategoryCode != null and pollutionCategoryCode != ''"> and pollution_category_code = #{pollutionCategoryCode} </if>
+		  		  <if test="annualInspectionFlg != null and annualInspectionFlg != ''"> and annual_inspection_flg = #{annualInspectionFlg} </if>
+		  		  <if test="areaCode != null and areaCode != ''"> and area_code = #{areaCode} </if>
+		  		  <if test="mainEnergyCode != null and mainEnergyCode != ''"> and main_energy_code = #{mainEnergyCode} </if>
+		  		  <if test="measures != null and measures != ''"> and measures = #{measures} </if>
+		  		  <if test="normalFactorsCode != null and normalFactorsCode != ''"> and normal_factors_code = #{normalFactorsCode} </if>
+		  		  <if test="specialFactorsCode != null and specialFactorsCode != ''"> and special_factors_code = #{specialFactorsCode} </if>
+		  		  <if test="nomalWaste != null and nomalWaste != ''"> and nomal_waste = #{nomalWaste} </if>
+		  		  <if test="dangerWaste != null and dangerWaste != ''"> and danger_waste = #{dangerWaste} </if>
+		  		  <if test="surveytedPersonName != null and surveytedPersonName != ''"> and surveyted_person_name = #{surveytedPersonName} </if>
+		  		  <if test="surveytedPersonPosition != null and surveytedPersonPosition != ''"> and surveyted_person_position = #{surveytedPersonPosition} </if>
+		  		  <if test="fullFormTime != null and fullFormTime != ''"> and full_form_time = #{fullFormTime} </if>
+		  		  <if test="surveyPersonName != null and surveyPersonName != ''"> and survey_person_name = #{surveyPersonName} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="createUserName != null and createUserName != ''"> and create_user_name = #{createUserName} </if>
+		  		  <if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
+		  		  <if test="modifyTime != null and modifyTime != ''"> and modify_time = #{modifyTime} </if>
+		  		  <if test="modifyUserName != null and modifyUserName != ''"> and modify_user_name = #{modifyUserName} </if>
+		  		  <if test="modifyBy != null and modifyBy != ''"> and modify_by = #{modifyBy} </if>
+		  		  <if test="deleteFlag != null and deleteFlag != ''"> and delete_flag = #{deleteFlag} </if>
+		  		  <if test="administrativeDivision != null and administrativeDivision != ''"> and administrative_division = #{administrativeDivision} </if>
+		  		  <if test="urbanorrural != null and urbanorrural != ''"> and urbanorrural = #{urbanorrural} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by envir_ protection_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from eco_envprotection
+		 <where>  
+		  		  <if test="envir protectionId != null and envir protectionId != ''"> and envir_ protection_id = #{envir protectionId} </if>
+		  		  <if test="enterpriseId != null and enterpriseId != ''"> and enterprise_id = #{enterpriseId} </if>
+		  		  <if test="enterpriseName != null and enterpriseName != ''"> and enterprise_name = #{enterpriseName} </if>
+		  		  <if test="ecoEstimateFlg != null and ecoEstimateFlg != ''"> and eco_estimate_flg = #{ecoEstimateFlg} </if>
+		  		  <if test="ecoLicence != null and ecoLicence != ''"> and eco_licence = #{ecoLicence} </if>
+		  		  <if test="parkFlg != null and parkFlg != ''"> and park_flg = #{parkFlg} </if>
+		  		  <if test="ecoStandardFlg != null and ecoStandardFlg != ''"> and eco__standard_flg = #{ecoStandardFlg} </if>
+		  		  <if test="industryCode != null and industryCode != ''"> and industry_code = #{industryCode} </if>
+		  		  <if test="projectManageCode != null and projectManageCode != ''"> and project_manage_code = #{projectManageCode} </if>
+		  		  <if test="isOrNotAcceptance != null and isOrNotAcceptance != ''"> and is_or_not_acceptance = #{isOrNotAcceptance} </if>
+		  		  <if test="tradablePermitsCode != null and tradablePermitsCode != ''"> and tradable_permits_code = #{tradablePermitsCode} </if>
+		  		  <if test="pollutionLicenseFlg != null and pollutionLicenseFlg != ''"> and pollution_license_flg = #{pollutionLicenseFlg} </if>
+		  		  <if test="pollutionCategoryCode != null and pollutionCategoryCode != ''"> and pollution_category_code = #{pollutionCategoryCode} </if>
+		  		  <if test="annualInspectionFlg != null and annualInspectionFlg != ''"> and annual_inspection_flg = #{annualInspectionFlg} </if>
+		  		  <if test="areaCode != null and areaCode != ''"> and area_code = #{areaCode} </if>
+		  		  <if test="mainEnergyCode != null and mainEnergyCode != ''"> and main_energy_code = #{mainEnergyCode} </if>
+		  		  <if test="measures != null and measures != ''"> and measures = #{measures} </if>
+		  		  <if test="normalFactorsCode != null and normalFactorsCode != ''"> and normal_factors_code = #{normalFactorsCode} </if>
+		  		  <if test="specialFactorsCode != null and specialFactorsCode != ''"> and special_factors_code = #{specialFactorsCode} </if>
+		  		  <if test="nomalWaste != null and nomalWaste != ''"> and nomal_waste = #{nomalWaste} </if>
+		  		  <if test="dangerWaste != null and dangerWaste != ''"> and danger_waste = #{dangerWaste} </if>
+		  		  <if test="surveytedPersonName != null and surveytedPersonName != ''"> and surveyted_person_name = #{surveytedPersonName} </if>
+		  		  <if test="surveytedPersonPosition != null and surveytedPersonPosition != ''"> and surveyted_person_position = #{surveytedPersonPosition} </if>
+		  		  <if test="fullFormTime != null and fullFormTime != ''"> and full_form_time = #{fullFormTime} </if>
+		  		  <if test="surveyPersonName != null and surveyPersonName != ''"> and survey_person_name = #{surveyPersonName} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="createUserName != null and createUserName != ''"> and create_user_name = #{createUserName} </if>
+		  		  <if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
+		  		  <if test="modifyTime != null and modifyTime != ''"> and modify_time = #{modifyTime} </if>
+		  		  <if test="modifyUserName != null and modifyUserName != ''"> and modify_user_name = #{modifyUserName} </if>
+		  		  <if test="modifyBy != null and modifyBy != ''"> and modify_by = #{modifyBy} </if>
+		  		  <if test="deleteFlag != null and deleteFlag != ''"> and delete_flag = #{deleteFlag} </if>
+		  		  <if test="administrativeDivision != null and administrativeDivision != ''"> and administrative_division = #{administrativeDivision} </if>
+		  		  <if test="urbanorrural != null and urbanorrural != ''"> and urbanorrural = #{urbanorrural} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.ecosys.domain.EnvprotectionDO">
+		insert into eco_envprotection
+		(
+			`envir_ protection_id`, 
+			`enterprise_id`, 
+			`enterprise_name`, 
+			`eco_estimate_flg`, 
+			`eco_licence`, 
+			`park_flg`, 
+			`eco__standard_flg`, 
+			`industry_code`, 
+			`project_manage_code`, 
+			`is_or_not_acceptance`, 
+			`tradable_permits_code`, 
+			`pollution_license_flg`, 
+			`pollution_category_code`, 
+			`annual_inspection_flg`, 
+			`area_code`, 
+			`main_energy_code`, 
+			`measures`, 
+			`normal_factors_code`, 
+			`special_factors_code`, 
+			`nomal_waste`, 
+			`danger_waste`, 
+			`surveyted_person_name`, 
+			`surveyted_person_position`, 
+			`full_form_time`, 
+			`survey_person_name`, 
+			`create_time`, 
+			`create_user_name`, 
+			`create_by`, 
+			`modify_time`, 
+			`modify_user_name`, 
+			`modify_by`, 
+			`delete_flag`, 
+			`administrative_division`, 
+			`urbanorrural`
+		)
+		values
+		(
+			#{envir protectionId}, 
+			#{enterpriseId}, 
+			#{enterpriseName}, 
+			#{ecoEstimateFlg}, 
+			#{ecoLicence}, 
+			#{parkFlg}, 
+			#{ecoStandardFlg}, 
+			#{industryCode}, 
+			#{projectManageCode}, 
+			#{isOrNotAcceptance}, 
+			#{tradablePermitsCode}, 
+			#{pollutionLicenseFlg}, 
+			#{pollutionCategoryCode}, 
+			#{annualInspectionFlg}, 
+			#{areaCode}, 
+			#{mainEnergyCode}, 
+			#{measures}, 
+			#{normalFactorsCode}, 
+			#{specialFactorsCode}, 
+			#{nomalWaste}, 
+			#{dangerWaste}, 
+			#{surveytedPersonName}, 
+			#{surveytedPersonPosition}, 
+			#{fullFormTime}, 
+			#{surveyPersonName}, 
+			#{createTime}, 
+			#{createUserName}, 
+			#{createBy}, 
+			#{modifyTime}, 
+			#{modifyUserName}, 
+			#{modifyBy}, 
+			#{deleteFlag}, 
+			#{administrativeDivision}, 
+			#{urbanorrural}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.ecosys.domain.EnvprotectionDO">
+		update eco_envprotection 
+		<set>
+			<if test="enterpriseId != null">`enterprise_id` = #{enterpriseId}, </if>
+			<if test="enterpriseName != null">`enterprise_name` = #{enterpriseName}, </if>
+			<if test="ecoEstimateFlg != null">`eco_estimate_flg` = #{ecoEstimateFlg}, </if>
+			<if test="ecoLicence != null">`eco_licence` = #{ecoLicence}, </if>
+			<if test="parkFlg != null">`park_flg` = #{parkFlg}, </if>
+			<if test="ecoStandardFlg != null">`eco__standard_flg` = #{ecoStandardFlg}, </if>
+			<if test="industryCode != null">`industry_code` = #{industryCode}, </if>
+			<if test="projectManageCode != null">`project_manage_code` = #{projectManageCode}, </if>
+			<if test="isOrNotAcceptance != null">`is_or_not_acceptance` = #{isOrNotAcceptance}, </if>
+			<if test="tradablePermitsCode != null">`tradable_permits_code` = #{tradablePermitsCode}, </if>
+			<if test="pollutionLicenseFlg != null">`pollution_license_flg` = #{pollutionLicenseFlg}, </if>
+			<if test="pollutionCategoryCode != null">`pollution_category_code` = #{pollutionCategoryCode}, </if>
+			<if test="annualInspectionFlg != null">`annual_inspection_flg` = #{annualInspectionFlg}, </if>
+			<if test="areaCode != null">`area_code` = #{areaCode}, </if>
+			<if test="mainEnergyCode != null">`main_energy_code` = #{mainEnergyCode}, </if>
+			<if test="measures != null">`measures` = #{measures}, </if>
+			<if test="normalFactorsCode != null">`normal_factors_code` = #{normalFactorsCode}, </if>
+			<if test="specialFactorsCode != null">`special_factors_code` = #{specialFactorsCode}, </if>
+			<if test="nomalWaste != null">`nomal_waste` = #{nomalWaste}, </if>
+			<if test="dangerWaste != null">`danger_waste` = #{dangerWaste}, </if>
+			<if test="surveytedPersonName != null">`surveyted_person_name` = #{surveytedPersonName}, </if>
+			<if test="surveytedPersonPosition != null">`surveyted_person_position` = #{surveytedPersonPosition}, </if>
+			<if test="fullFormTime != null">`full_form_time` = #{fullFormTime}, </if>
+			<if test="surveyPersonName != null">`survey_person_name` = #{surveyPersonName}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="createUserName != null">`create_user_name` = #{createUserName}, </if>
+			<if test="createBy != null">`create_by` = #{createBy}, </if>
+			<if test="modifyTime != null">`modify_time` = #{modifyTime}, </if>
+			<if test="modifyUserName != null">`modify_user_name` = #{modifyUserName}, </if>
+			<if test="modifyBy != null">`modify_by` = #{modifyBy}, </if>
+			<if test="deleteFlag != null">`delete_flag` = #{deleteFlag}, </if>
+			<if test="administrativeDivision != null">`administrative_division` = #{administrativeDivision}, </if>
+			<if test="urbanorrural != null">`urbanorrural` = #{urbanorrural}</if>
+		</set>
+		where envir_ protection_id = #{envir protectionId}
+	</update>
+	
+	<delete id="remove">
+		delete from eco_envprotection where envir_ protection_id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from eco_envprotection where envir_ protection_id in 
+		<foreach item="envirProtectionId" collection="envirProtectionIds" open="(" separator="," close=")">
+			#{envirProtectionId}
+		</foreach>
+	</delete>
+
+</mapper>

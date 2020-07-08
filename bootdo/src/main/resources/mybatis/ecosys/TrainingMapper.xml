@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.ecosys.dao.TrainingDao">
+
+	<select id="get" resultType="com.bootdo.ecosys.domain.TrainingDO">
+		select `training_id`,`enterprise_id`,`
+traning_ecosys_flg`,`la_provide_flg`,`train_name`,`train_type`,`person_number`,`dept_code`,`traning_file_flg`,`phone_number`,`train_time`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_training where training_id = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.ecosys.domain.TrainingDO">
+		select `training_id`,`enterprise_id`,`
+traning_ecosys_flg`,`la_provide_flg`,`train_name`,`train_type`,`person_number`,`dept_code`,`traning_file_flg`,`phone_number`,`train_time`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_training
+        <where>  
+		  		  <if test="trainingId != null and trainingId != ''"> and training_id = #{trainingId} </if>
+		  		  <if test="enterpriseId != null and enterpriseId != ''"> and enterprise_id = #{enterpriseId} </if>
+		  		  <if test="
+traningecosysFlg != null and traningecosysFlg != ''"> and 
+traning_ecosys_flg = #{
+traningecosysFlg} </if>
+		  		  <if test="laProvideFlg != null and laProvideFlg != ''"> and la_provide_flg = #{laProvideFlg} </if>
+		  		  <if test="trainName != null and trainName != ''"> and train_name = #{trainName} </if>
+		  		  <if test="trainType != null and trainType != ''"> and train_type = #{trainType} </if>
+		  		  <if test="personNumber != null and personNumber != ''"> and person_number = #{personNumber} </if>
+		  		  <if test="deptCode != null and deptCode != ''"> and dept_code = #{deptCode} </if>
+		  		  <if test="traningFileFlg != null and traningFileFlg != ''"> and traning_file_flg = #{traningFileFlg} </if>
+		  		  <if test="phoneNumber != null and phoneNumber != ''"> and phone_number = #{phoneNumber} </if>
+		  		  <if test="trainTime != null and trainTime != ''"> and train_time = #{trainTime} </if>
+		  		  <if test="surveytedPersonName != null and surveytedPersonName != ''"> and surveyted_person_name = #{surveytedPersonName} </if>
+		  		  <if test="surveytedPersonPosition != null and surveytedPersonPosition != ''"> and surveyted_person_position = #{surveytedPersonPosition} </if>
+		  		  <if test="fullFormTime != null and fullFormTime != ''"> and full_form_time = #{fullFormTime} </if>
+		  		  <if test="surveyPersonName != null and surveyPersonName != ''"> and survey_person_name = #{surveyPersonName} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="createUserName != null and createUserName != ''"> and create_user_name = #{createUserName} </if>
+		  		  <if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
+		  		  <if test="modifyTime != null and modifyTime != ''"> and modify_time = #{modifyTime} </if>
+		  		  <if test="modifyUserName != null and modifyUserName != ''"> and modify_user_name = #{modifyUserName} </if>
+		  		  <if test="modifyBy != null and modifyBy != ''"> and modify_by = #{modifyBy} </if>
+		  		  <if test="deleteFlag != null and deleteFlag != ''"> and delete_flag = #{deleteFlag} </if>
+		  		  <if test="administrativeDivision != null and administrativeDivision != ''"> and administrative_division = #{administrativeDivision} </if>
+		  		  <if test="urbanorrural != null and urbanorrural != ''"> and urbanorrural = #{urbanorrural} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by training_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from eco_training
+		 <where>  
+		  		  <if test="trainingId != null and trainingId != ''"> and training_id = #{trainingId} </if>
+		  		  <if test="enterpriseId != null and enterpriseId != ''"> and enterprise_id = #{enterpriseId} </if>
+		  		  <if test="
+traningecosysFlg != null and traningecosysFlg != ''"> and 
+traning_ecosys_flg = #{
+traningecosysFlg} </if>
+		  		  <if test="laProvideFlg != null and laProvideFlg != ''"> and la_provide_flg = #{laProvideFlg} </if>
+		  		  <if test="trainName != null and trainName != ''"> and train_name = #{trainName} </if>
+		  		  <if test="trainType != null and trainType != ''"> and train_type = #{trainType} </if>
+		  		  <if test="personNumber != null and personNumber != ''"> and person_number = #{personNumber} </if>
+		  		  <if test="deptCode != null and deptCode != ''"> and dept_code = #{deptCode} </if>
+		  		  <if test="traningFileFlg != null and traningFileFlg != ''"> and traning_file_flg = #{traningFileFlg} </if>
+		  		  <if test="phoneNumber != null and phoneNumber != ''"> and phone_number = #{phoneNumber} </if>
+		  		  <if test="trainTime != null and trainTime != ''"> and train_time = #{trainTime} </if>
+		  		  <if test="surveytedPersonName != null and surveytedPersonName != ''"> and surveyted_person_name = #{surveytedPersonName} </if>
+		  		  <if test="surveytedPersonPosition != null and surveytedPersonPosition != ''"> and surveyted_person_position = #{surveytedPersonPosition} </if>
+		  		  <if test="fullFormTime != null and fullFormTime != ''"> and full_form_time = #{fullFormTime} </if>
+		  		  <if test="surveyPersonName != null and surveyPersonName != ''"> and survey_person_name = #{surveyPersonName} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="createUserName != null and createUserName != ''"> and create_user_name = #{createUserName} </if>
+		  		  <if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
+		  		  <if test="modifyTime != null and modifyTime != ''"> and modify_time = #{modifyTime} </if>
+		  		  <if test="modifyUserName != null and modifyUserName != ''"> and modify_user_name = #{modifyUserName} </if>
+		  		  <if test="modifyBy != null and modifyBy != ''"> and modify_by = #{modifyBy} </if>
+		  		  <if test="deleteFlag != null and deleteFlag != ''"> and delete_flag = #{deleteFlag} </if>
+		  		  <if test="administrativeDivision != null and administrativeDivision != ''"> and administrative_division = #{administrativeDivision} </if>
+		  		  <if test="urbanorrural != null and urbanorrural != ''"> and urbanorrural = #{urbanorrural} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.ecosys.domain.TrainingDO">
+		insert into eco_training
+		(
+			`training_id`, 
+			`enterprise_id`, 
+			`
+traning_ecosys_flg`, 
+			`la_provide_flg`, 
+			`train_name`, 
+			`train_type`, 
+			`person_number`, 
+			`dept_code`, 
+			`traning_file_flg`, 
+			`phone_number`, 
+			`train_time`, 
+			`surveyted_person_name`, 
+			`surveyted_person_position`, 
+			`full_form_time`, 
+			`survey_person_name`, 
+			`create_time`, 
+			`create_user_name`, 
+			`create_by`, 
+			`modify_time`, 
+			`modify_user_name`, 
+			`modify_by`, 
+			`delete_flag`, 
+			`administrative_division`, 
+			`urbanorrural`
+		)
+		values
+		(
+			#{trainingId}, 
+			#{enterpriseId}, 
+			#{
+traningecosysFlg}, 
+			#{laProvideFlg}, 
+			#{trainName}, 
+			#{trainType}, 
+			#{personNumber}, 
+			#{deptCode}, 
+			#{traningFileFlg}, 
+			#{phoneNumber}, 
+			#{trainTime}, 
+			#{surveytedPersonName}, 
+			#{surveytedPersonPosition}, 
+			#{fullFormTime}, 
+			#{surveyPersonName}, 
+			#{createTime}, 
+			#{createUserName}, 
+			#{createBy}, 
+			#{modifyTime}, 
+			#{modifyUserName}, 
+			#{modifyBy}, 
+			#{deleteFlag}, 
+			#{administrativeDivision}, 
+			#{urbanorrural}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.ecosys.domain.TrainingDO">
+		update eco_training 
+		<set>
+			<if test="enterpriseId != null">`enterprise_id` = #{enterpriseId}, </if>
+			<if test="
+traningecosysFlg != null">`
+traning_ecosys_flg` = #{
+traningecosysFlg}, </if>
+			<if test="laProvideFlg != null">`la_provide_flg` = #{laProvideFlg}, </if>
+			<if test="trainName != null">`train_name` = #{trainName}, </if>
+			<if test="trainType != null">`train_type` = #{trainType}, </if>
+			<if test="personNumber != null">`person_number` = #{personNumber}, </if>
+			<if test="deptCode != null">`dept_code` = #{deptCode}, </if>
+			<if test="traningFileFlg != null">`traning_file_flg` = #{traningFileFlg}, </if>
+			<if test="phoneNumber != null">`phone_number` = #{phoneNumber}, </if>
+			<if test="trainTime != null">`train_time` = #{trainTime}, </if>
+			<if test="surveytedPersonName != null">`surveyted_person_name` = #{surveytedPersonName}, </if>
+			<if test="surveytedPersonPosition != null">`surveyted_person_position` = #{surveytedPersonPosition}, </if>
+			<if test="fullFormTime != null">`full_form_time` = #{fullFormTime}, </if>
+			<if test="surveyPersonName != null">`survey_person_name` = #{surveyPersonName}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="createUserName != null">`create_user_name` = #{createUserName}, </if>
+			<if test="createBy != null">`create_by` = #{createBy}, </if>
+			<if test="modifyTime != null">`modify_time` = #{modifyTime}, </if>
+			<if test="modifyUserName != null">`modify_user_name` = #{modifyUserName}, </if>
+			<if test="modifyBy != null">`modify_by` = #{modifyBy}, </if>
+			<if test="deleteFlag != null">`delete_flag` = #{deleteFlag}, </if>
+			<if test="administrativeDivision != null">`administrative_division` = #{administrativeDivision}, </if>
+			<if test="urbanorrural != null">`urbanorrural` = #{urbanorrural}</if>
+		</set>
+		where training_id = #{trainingId}
+	</update>
+	
+	<delete id="remove">
+		delete from eco_training where training_id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from eco_training where training_id in 
+		<foreach item="trainingId" collection="array" open="(" separator="," close=")">
+			#{trainingId}
+		</foreach>
+	</delete>
+
+</mapper>

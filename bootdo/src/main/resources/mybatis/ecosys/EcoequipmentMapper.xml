@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.ecosys.dao.EcoequipmentDao">
+
+	<select id="get" resultType="com.bootdo.ecosys.domain.EcoequipmentDO">
+		select `equipment_id`,`equipment_name`,`equipment_code`,`enterprise_id`,`product_id`,`protection_person`,`phone_number`,`equipment_type`,`pollution_name`,`pollution_type`,`emission_way`,`install_time`,`monit_time`,`maintenance_cycle`,`loss_material`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_ecoequipment where equipment_id = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.ecosys.domain.EcoequipmentDO">
+		select `equipment_id`,`equipment_name`,`equipment_code`,`enterprise_id`,`product_id`,`protection_person`,`phone_number`,`equipment_type`,`pollution_name`,`pollution_type`,`emission_way`,`install_time`,`monit_time`,`maintenance_cycle`,`loss_material`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_ecoequipment
+        <where>  
+		  		  <if test="equipmentId != null and equipmentId != ''"> and equipment_id = #{equipmentId} </if>
+		  		  <if test="equipmentName != null and equipmentName != ''"> and equipment_name = #{equipmentName} </if>
+		  		  <if test="equipmentCode != null and equipmentCode != ''"> and equipment_code = #{equipmentCode} </if>
+		  		  <if test="enterpriseId != null and enterpriseId != ''"> and enterprise_id = #{enterpriseId} </if>
+		  		  <if test="productId != null and productId != ''"> and product_id = #{productId} </if>
+		  		  <if test="protectionPerson != null and protectionPerson != ''"> and protection_person = #{protectionPerson} </if>
+		  		  <if test="phoneNumber != null and phoneNumber != ''"> and phone_number = #{phoneNumber} </if>
+		  		  <if test="equipmentType != null and equipmentType != ''"> and equipment_type = #{equipmentType} </if>
+		  		  <if test="pollutionName != null and pollutionName != ''"> and pollution_name = #{pollutionName} </if>
+		  		  <if test="pollutionType != null and pollutionType != ''"> and pollution_type = #{pollutionType} </if>
+		  		  <if test="emissionWay != null and emissionWay != ''"> and emission_way = #{emissionWay} </if>
+		  		  <if test="installTime != null and installTime != ''"> and install_time = #{installTime} </if>
+		  		  <if test="monitTime != null and monitTime != ''"> and monit_time = #{monitTime} </if>
+		  		  <if test="maintenanceCycle != null and maintenanceCycle != ''"> and maintenance_cycle = #{maintenanceCycle} </if>
+		  		  <if test="lossMaterial != null and lossMaterial != ''"> and loss_material = #{lossMaterial} </if>
+		  		  <if test="surveytedPersonName != null and surveytedPersonName != ''"> and surveyted_person_name = #{surveytedPersonName} </if>
+		  		  <if test="surveytedPersonPosition != null and surveytedPersonPosition != ''"> and surveyted_person_position = #{surveytedPersonPosition} </if>
+		  		  <if test="fullFormTime != null and fullFormTime != ''"> and full_form_time = #{fullFormTime} </if>
+		  		  <if test="surveyPersonName != null and surveyPersonName != ''"> and survey_person_name = #{surveyPersonName} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="createUserName != null and createUserName != ''"> and create_user_name = #{createUserName} </if>
+		  		  <if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
+		  		  <if test="modifyTime != null and modifyTime != ''"> and modify_time = #{modifyTime} </if>
+		  		  <if test="modifyUserName != null and modifyUserName != ''"> and modify_user_name = #{modifyUserName} </if>
+		  		  <if test="modifyBy != null and modifyBy != ''"> and modify_by = #{modifyBy} </if>
+		  		  <if test="deleteFlag != null and deleteFlag != ''"> and delete_flag = #{deleteFlag} </if>
+		  		  <if test="administrativeDivision != null and administrativeDivision != ''"> and administrative_division = #{administrativeDivision} </if>
+		  		  <if test="urbanorrural != null and urbanorrural != ''"> and urbanorrural = #{urbanorrural} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by equipment_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from eco_ecoequipment
+		 <where>  
+		  		  <if test="equipmentId != null and equipmentId != ''"> and equipment_id = #{equipmentId} </if>
+		  		  <if test="equipmentName != null and equipmentName != ''"> and equipment_name = #{equipmentName} </if>
+		  		  <if test="equipmentCode != null and equipmentCode != ''"> and equipment_code = #{equipmentCode} </if>
+		  		  <if test="enterpriseId != null and enterpriseId != ''"> and enterprise_id = #{enterpriseId} </if>
+		  		  <if test="productId != null and productId != ''"> and product_id = #{productId} </if>
+		  		  <if test="protectionPerson != null and protectionPerson != ''"> and protection_person = #{protectionPerson} </if>
+		  		  <if test="phoneNumber != null and phoneNumber != ''"> and phone_number = #{phoneNumber} </if>
+		  		  <if test="equipmentType != null and equipmentType != ''"> and equipment_type = #{equipmentType} </if>
+		  		  <if test="pollutionName != null and pollutionName != ''"> and pollution_name = #{pollutionName} </if>
+		  		  <if test="pollutionType != null and pollutionType != ''"> and pollution_type = #{pollutionType} </if>
+		  		  <if test="emissionWay != null and emissionWay != ''"> and emission_way = #{emissionWay} </if>
+		  		  <if test="installTime != null and installTime != ''"> and install_time = #{installTime} </if>
+		  		  <if test="monitTime != null and monitTime != ''"> and monit_time = #{monitTime} </if>
+		  		  <if test="maintenanceCycle != null and maintenanceCycle != ''"> and maintenance_cycle = #{maintenanceCycle} </if>
+		  		  <if test="lossMaterial != null and lossMaterial != ''"> and loss_material = #{lossMaterial} </if>
+		  		  <if test="surveytedPersonName != null and surveytedPersonName != ''"> and surveyted_person_name = #{surveytedPersonName} </if>
+		  		  <if test="surveytedPersonPosition != null and surveytedPersonPosition != ''"> and surveyted_person_position = #{surveytedPersonPosition} </if>
+		  		  <if test="fullFormTime != null and fullFormTime != ''"> and full_form_time = #{fullFormTime} </if>
+		  		  <if test="surveyPersonName != null and surveyPersonName != ''"> and survey_person_name = #{surveyPersonName} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="createUserName != null and createUserName != ''"> and create_user_name = #{createUserName} </if>
+		  		  <if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
+		  		  <if test="modifyTime != null and modifyTime != ''"> and modify_time = #{modifyTime} </if>
+		  		  <if test="modifyUserName != null and modifyUserName != ''"> and modify_user_name = #{modifyUserName} </if>
+		  		  <if test="modifyBy != null and modifyBy != ''"> and modify_by = #{modifyBy} </if>
+		  		  <if test="deleteFlag != null and deleteFlag != ''"> and delete_flag = #{deleteFlag} </if>
+		  		  <if test="administrativeDivision != null and administrativeDivision != ''"> and administrative_division = #{administrativeDivision} </if>
+		  		  <if test="urbanorrural != null and urbanorrural != ''"> and urbanorrural = #{urbanorrural} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.ecosys.domain.EcoequipmentDO">
+		insert into eco_ecoequipment
+		(
+			`equipment_id`, 
+			`equipment_name`, 
+			`equipment_code`, 
+			`enterprise_id`, 
+			`product_id`, 
+			`protection_person`, 
+			`phone_number`, 
+			`equipment_type`, 
+			`pollution_name`, 
+			`pollution_type`, 
+			`emission_way`, 
+			`install_time`, 
+			`monit_time`, 
+			`maintenance_cycle`, 
+			`loss_material`, 
+			`surveyted_person_name`, 
+			`surveyted_person_position`, 
+			`full_form_time`, 
+			`survey_person_name`, 
+			`create_time`, 
+			`create_user_name`, 
+			`create_by`, 
+			`modify_time`, 
+			`modify_user_name`, 
+			`modify_by`, 
+			`delete_flag`, 
+			`administrative_division`, 
+			`urbanorrural`
+		)
+		values
+		(
+			#{equipmentId}, 
+			#{equipmentName}, 
+			#{equipmentCode}, 
+			#{enterpriseId}, 
+			#{productId}, 
+			#{protectionPerson}, 
+			#{phoneNumber}, 
+			#{equipmentType}, 
+			#{pollutionName}, 
+			#{pollutionType}, 
+			#{emissionWay}, 
+			#{installTime}, 
+			#{monitTime}, 
+			#{maintenanceCycle}, 
+			#{lossMaterial}, 
+			#{surveytedPersonName}, 
+			#{surveytedPersonPosition}, 
+			#{fullFormTime}, 
+			#{surveyPersonName}, 
+			#{createTime}, 
+			#{createUserName}, 
+			#{createBy}, 
+			#{modifyTime}, 
+			#{modifyUserName}, 
+			#{modifyBy}, 
+			#{deleteFlag}, 
+			#{administrativeDivision}, 
+			#{urbanorrural}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.ecosys.domain.EcoequipmentDO">
+		update eco_ecoequipment 
+		<set>
+			<if test="equipmentName != null">`equipment_name` = #{equipmentName}, </if>
+			<if test="equipmentCode != null">`equipment_code` = #{equipmentCode}, </if>
+			<if test="enterpriseId != null">`enterprise_id` = #{enterpriseId}, </if>
+			<if test="productId != null">`product_id` = #{productId}, </if>
+			<if test="protectionPerson != null">`protection_person` = #{protectionPerson}, </if>
+			<if test="phoneNumber != null">`phone_number` = #{phoneNumber}, </if>
+			<if test="equipmentType != null">`equipment_type` = #{equipmentType}, </if>
+			<if test="pollutionName != null">`pollution_name` = #{pollutionName}, </if>
+			<if test="pollutionType != null">`pollution_type` = #{pollutionType}, </if>
+			<if test="emissionWay != null">`emission_way` = #{emissionWay}, </if>
+			<if test="installTime != null">`install_time` = #{installTime}, </if>
+			<if test="monitTime != null">`monit_time` = #{monitTime}, </if>
+			<if test="maintenanceCycle != null">`maintenance_cycle` = #{maintenanceCycle}, </if>
+			<if test="lossMaterial != null">`loss_material` = #{lossMaterial}, </if>
+			<if test="surveytedPersonName != null">`surveyted_person_name` = #{surveytedPersonName}, </if>
+			<if test="surveytedPersonPosition != null">`surveyted_person_position` = #{surveytedPersonPosition}, </if>
+			<if test="fullFormTime != null">`full_form_time` = #{fullFormTime}, </if>
+			<if test="surveyPersonName != null">`survey_person_name` = #{surveyPersonName}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="createUserName != null">`create_user_name` = #{createUserName}, </if>
+			<if test="createBy != null">`create_by` = #{createBy}, </if>
+			<if test="modifyTime != null">`modify_time` = #{modifyTime}, </if>
+			<if test="modifyUserName != null">`modify_user_name` = #{modifyUserName}, </if>
+			<if test="modifyBy != null">`modify_by` = #{modifyBy}, </if>
+			<if test="deleteFlag != null">`delete_flag` = #{deleteFlag}, </if>
+			<if test="administrativeDivision != null">`administrative_division` = #{administrativeDivision}, </if>
+			<if test="urbanorrural != null">`urbanorrural` = #{urbanorrural}</if>
+		</set>
+		where equipment_id = #{equipmentId}
+	</update>
+	
+	<delete id="remove">
+		delete from eco_ecoequipment where equipment_id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from eco_ecoequipment where equipment_id in 
+		<foreach item="equipmentId" collection="array" open="(" separator="," close=")">
+			#{equipmentId}
+		</foreach>
+	</delete>
+
+</mapper>

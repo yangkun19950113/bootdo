@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.ecosys.dao.EnterpriseDao">
+
+	<select id="get" resultType="com.bootdo.ecosys.domain.EnterpriseDO">
+		select `enterprise_id`,`enterprise_name`,`social_credit_code`,`registered_address`,`registered_time`,`registered_fund`,`employee_num`,`enterprise_scope`,`coordinates`,`enterprise_nature_code`,`enterprise_legal_person`,`legal_person_phone_number`,`environmental_protection_person`,`en_person_phone_number`,`safe_prodect_person`,`safe_per_phone_number`,`business_scope`,`business_area`,`business_area_nature_code`,`dept`,`taxpayer_code`,`market_code`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_enterprise where enterprise_id = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.ecosys.domain.EnterpriseDO">
+		select `enterprise_id`,`enterprise_name`,`social_credit_code`,`registered_address`,`registered_time`,`registered_fund`,`employee_num`,`enterprise_scope`,`coordinates`,`enterprise_nature_code`,`enterprise_legal_person`,`legal_person_phone_number`,`environmental_protection_person`,`en_person_phone_number`,`safe_prodect_person`,`safe_per_phone_number`,`business_scope`,`business_area`,`business_area_nature_code`,`dept`,`taxpayer_code`,`market_code`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_enterprise
+        <where>
+				  delete_flag = '0'
+		  		  <if test="enterpriseId != null and enterpriseId != ''"> and enterprise_id = #{enterpriseId} </if>
+		  		  <if test="enterpriseName != null and enterpriseName != ''"> and enterprise_name = #{enterpriseName} </if>
+		  		  <if test="socialCreditCode != null and socialCreditCode != ''"> and social_credit_code = #{socialCreditCode} </if>
+		  		  <if test="registeredAddress != null and registeredAddress != ''"> and registered_address = #{registeredAddress} </if>
+		  		  <if test="registeredTime != null and registeredTime != ''"> and registered_time = #{registeredTime} </if>
+		  		  <if test="registeredFund != null and registeredFund != ''"> and registered_fund = #{registeredFund} </if>
+		  		  <if test="employeeNum != null and employeeNum != ''"> and employee_num = #{employeeNum} </if>
+		  		  <if test="enterpriseScope != null and enterpriseScope != ''"> and enterprise_scope = #{enterpriseScope} </if>
+		  		  <if test="coordinates != null and coordinates != ''"> and coordinates = #{coordinates} </if>
+		  		  <if test="enterpriseNatureCode != null and enterpriseNatureCode != ''"> and enterprise_nature_code = #{enterpriseNatureCode} </if>
+		  		  <if test="enterpriseLegalPerson != null and enterpriseLegalPerson != ''"> and enterprise_legal_person = #{enterpriseLegalPerson} </if>
+		  		  <if test="legalPersonPhoneNumber != null and legalPersonPhoneNumber != ''"> and legal_person_phone_number = #{legalPersonPhoneNumber} </if>
+		  		  <if test="environmentalProtectionPerson != null and environmentalProtectionPerson != ''"> and environmental_protection_person = #{environmentalProtectionPerson} </if>
+		  		  <if test="enPersonPhoneNumber != null and enPersonPhoneNumber != ''"> and en_person_phone_number = #{enPersonPhoneNumber} </if>
+		  		  <if test="safeProdectPerson != null and safeProdectPerson != ''"> and safe_prodect_person = #{safeProdectPerson} </if>
+		  		  <if test="safePerPhoneNumber != null and safePerPhoneNumber != ''"> and safe_per_phone_number = #{safePerPhoneNumber} </if>
+		  		  <if test="businessScope != null and businessScope != ''"> and business_scope = #{businessScope} </if>
+		  		  <if test="businessArea != null and businessArea != ''"> and business_area = #{businessArea} </if>
+		  		  <if test="businessAreaNatureCode != null and businessAreaNatureCode != ''"> and business_area_nature_code = #{businessAreaNatureCode} </if>
+		  		  <if test="dept != null and dept != ''"> and dept = #{dept} </if>
+		  		  <if test="taxpayerCode != null and taxpayerCode != ''"> and taxpayer_code = #{taxpayerCode} </if>
+		  		  <if test="marketCode != null and marketCode != ''"> and market_code = #{marketCode} </if>
+		  		  <if test="surveytedPersonName != null and surveytedPersonName != ''"> and surveyted_person_name = #{surveytedPersonName} </if>
+		  		  <if test="surveytedPersonPosition != null and surveytedPersonPosition != ''"> and surveyted_person_position = #{surveytedPersonPosition} </if>
+		  		  <if test="fullFormTime != null and fullFormTime != ''"> and full_form_time = #{fullFormTime} </if>
+		  		  <if test="surveyPersonName != null and surveyPersonName != ''"> and survey_person_name = #{surveyPersonName} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="createUserName != null and createUserName != ''"> and create_user_name = #{createUserName} </if>
+		  		  <if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
+		  		  <if test="modifyTime != null and modifyTime != ''"> and modify_time = #{modifyTime} </if>
+		  		  <if test="modifyUserName != null and modifyUserName != ''"> and modify_user_name = #{modifyUserName} </if>
+		  		  <if test="modifyBy != null and modifyBy != ''"> and modify_by = #{modifyBy} </if>
+		  		  <if test="administrativeDivision != null and administrativeDivision != ''"> and administrative_division = #{administrativeDivision} </if>
+		  		  <if test="urbanorrural != null and urbanorrural != ''"> and urbanorrural = #{urbanorrural} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by enterprise_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from eco_enterprise
+		 <where>
+			 	  delete_flag = '0'
+		  		  <if test="enterpriseId != null and enterpriseId != ''"> and enterprise_id = #{enterpriseId} </if>
+		  		  <if test="enterpriseName != null and enterpriseName != ''"> and enterprise_name = #{enterpriseName} </if>
+		  		  <if test="socialCreditCode != null and socialCreditCode != ''"> and social_credit_code = #{socialCreditCode} </if>
+		  		  <if test="registeredAddress != null and registeredAddress != ''"> and registered_address = #{registeredAddress} </if>
+		  		  <if test="registeredTime != null and registeredTime != ''"> and registered_time = #{registeredTime} </if>
+		  		  <if test="registeredFund != null and registeredFund != ''"> and registered_fund = #{registeredFund} </if>
+		  		  <if test="employeeNum != null and employeeNum != ''"> and employee_num = #{employeeNum} </if>
+		  		  <if test="enterpriseScope != null and enterpriseScope != ''"> and enterprise_scope = #{enterpriseScope} </if>
+		  		  <if test="coordinates != null and coordinates != ''"> and coordinates = #{coordinates} </if>
+		  		  <if test="enterpriseNatureCode != null and enterpriseNatureCode != ''"> and enterprise_nature_code = #{enterpriseNatureCode} </if>
+		  		  <if test="enterpriseLegalPerson != null and enterpriseLegalPerson != ''"> and enterprise_legal_person = #{enterpriseLegalPerson} </if>
+		  		  <if test="legalPersonPhoneNumber != null and legalPersonPhoneNumber != ''"> and legal_person_phone_number = #{legalPersonPhoneNumber} </if>
+		  		  <if test="environmentalProtectionPerson != null and environmentalProtectionPerson != ''"> and environmental_protection_person = #{environmentalProtectionPerson} </if>
+		  		  <if test="enPersonPhoneNumber != null and enPersonPhoneNumber != ''"> and en_person_phone_number = #{enPersonPhoneNumber} </if>
+		  		  <if test="safeProdectPerson != null and safeProdectPerson != ''"> and safe_prodect_person = #{safeProdectPerson} </if>
+		  		  <if test="safePerPhoneNumber != null and safePerPhoneNumber != ''"> and safe_per_phone_number = #{safePerPhoneNumber} </if>
+		  		  <if test="businessScope != null and businessScope != ''"> and business_scope = #{businessScope} </if>
+		  		  <if test="businessArea != null and businessArea != ''"> and business_area = #{businessArea} </if>
+		  		  <if test="businessAreaNatureCode != null and businessAreaNatureCode != ''"> and business_area_nature_code = #{businessAreaNatureCode} </if>
+		  		  <if test="dept != null and dept != ''"> and dept = #{dept} </if>
+		  		  <if test="taxpayerCode != null and taxpayerCode != ''"> and taxpayer_code = #{taxpayerCode} </if>
+		  		  <if test="marketCode != null and marketCode != ''"> and market_code = #{marketCode} </if>
+		  		  <if test="surveytedPersonName != null and surveytedPersonName != ''"> and surveyted_person_name = #{surveytedPersonName} </if>
+		  		  <if test="surveytedPersonPosition != null and surveytedPersonPosition != ''"> and surveyted_person_position = #{surveytedPersonPosition} </if>
+		  		  <if test="fullFormTime != null and fullFormTime != ''"> and full_form_time = #{fullFormTime} </if>
+		  		  <if test="surveyPersonName != null and surveyPersonName != ''"> and survey_person_name = #{surveyPersonName} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="createUserName != null and createUserName != ''"> and create_user_name = #{createUserName} </if>
+		  		  <if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
+		  		  <if test="modifyTime != null and modifyTime != ''"> and modify_time = #{modifyTime} </if>
+		  		  <if test="modifyUserName != null and modifyUserName != ''"> and modify_user_name = #{modifyUserName} </if>
+		  		  <if test="modifyBy != null and modifyBy != ''"> and modify_by = #{modifyBy} </if>
+		  		  <if test="administrativeDivision != null and administrativeDivision != ''"> and administrative_division = #{administrativeDivision} </if>
+		  		  <if test="urbanorrural != null and urbanorrural != ''"> and urbanorrural = #{urbanorrural} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.ecosys.domain.EnterpriseDO">
+		insert into eco_enterprise
+		(
+			`enterprise_id`, 
+			`enterprise_name`, 
+			`social_credit_code`, 
+			`registered_address`, 
+			`registered_time`, 
+			`registered_fund`, 
+			`employee_num`, 
+			`enterprise_scope`, 
+			`coordinates`, 
+			`enterprise_nature_code`, 
+			`enterprise_legal_person`, 
+			`legal_person_phone_number`, 
+			`environmental_protection_person`, 
+			`en_person_phone_number`, 
+			`safe_prodect_person`, 
+			`safe_per_phone_number`, 
+			`business_scope`, 
+			`business_area`, 
+			`business_area_nature_code`, 
+			`dept`, 
+			`taxpayer_code`, 
+			`market_code`, 
+			`surveyted_person_name`, 
+			`surveyted_person_position`, 
+			`full_form_time`, 
+			`survey_person_name`, 
+			`create_time`, 
+			`create_user_name`, 
+			`create_by`, 
+			`modify_time`, 
+			`modify_user_name`, 
+			`modify_by`, 
+			`delete_flag`, 
+			`administrative_division`, 
+			`urbanorrural`
+		)
+		values
+		(
+			#{enterpriseId}, 
+			#{enterpriseName}, 
+			#{socialCreditCode}, 
+			#{registeredAddress}, 
+			#{registeredTime},
+			#{registeredFund}, 
+			#{employeeNum}, 
+			#{enterpriseScope}, 
+			#{coordinates}, 
+			#{enterpriseNatureCode}, 
+			#{enterpriseLegalPerson}, 
+			#{legalPersonPhoneNumber}, 
+			#{environmentalProtectionPerson}, 
+			#{enPersonPhoneNumber}, 
+			#{safeProdectPerson}, 
+			#{safePerPhoneNumber}, 
+			#{businessScope}, 
+			#{businessArea}, 
+			#{businessAreaNatureCode}, 
+			#{dept}, 
+			#{taxpayerCode}, 
+			#{marketCode}, 
+			#{surveytedPersonName}, 
+			#{surveytedPersonPosition}, 
+			#{fullFormTime},
+			#{surveyPersonName}, 
+			CURRENT_TIMESTAMP(),
+			#{createUserName}, 
+			#{createBy}, 
+			CURRENT_TIMESTAMP(),
+			#{modifyUserName}, 
+			#{modifyBy}, 
+			'0',
+			#{administrativeDivision}, 
+			#{urbanorrural}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.ecosys.domain.EnterpriseDO">
+		update eco_enterprise 
+		<set>
+			`modify_time` = CURRENT_TIMESTAMP()
+			<if test="enterpriseName != null">,`enterprise_name` = #{enterpriseName} </if>
+			<if test="socialCreditCode != null">,`social_credit_code` = #{socialCreditCode} </if>
+			<if test="registeredAddress != null">,`registered_address` = #{registeredAddress} </if>
+			<if test="registeredTime != null">,`registered_time` = #{registeredTime} </if>
+			<if test="registeredFund != null">,`registered_fund` = #{registeredFund} </if>
+			<if test="employeeNum != null">,`employee_num` = #{employeeNum} </if>
+			<if test="enterpriseScope != null">,`enterprise_scope` = #{enterpriseScope} </if>
+			<if test="coordinates != null">,`coordinates` = #{coordinates} </if>
+			<if test="enterpriseNatureCode != null">,`enterprise_nature_code` = #{enterpriseNatureCode} </if>
+			<if test="enterpriseLegalPerson != null">,`enterprise_legal_person` = #{enterpriseLegalPerson} </if>
+			<if test="legalPersonPhoneNumber != null">,`legal_person_phone_number` = #{legalPersonPhoneNumber} </if>
+			<if test="environmentalProtectionPerson != null">,`environmental_protection_person` = #{environmentalProtectionPerson} </if>
+			<if test="enPersonPhoneNumber != null">,`en_person_phone_number` = #{enPersonPhoneNumber} </if>
+			<if test="safeProdectPerson != null">,`safe_prodect_person` = #{safeProdectPerson} </if>
+			<if test="safePerPhoneNumber != null">,`safe_per_phone_number` = #{safePerPhoneNumber} </if>
+			<if test="businessScope != null">,`business_scope` = #{businessScope} </if>
+			<if test="businessArea != null">,`business_area` = #{businessArea} </if>
+			<if test="businessAreaNatureCode != null">,`business_area_nature_code` = #{businessAreaNatureCode} </if>
+			<if test="dept != null">,`dept` = #{dept} </if>
+			<if test="taxpayerCode != null">,`taxpayer_code` = #{taxpayerCode} </if>
+			<if test="marketCode != null">,`market_code` = #{marketCode} </if>
+			<if test="surveytedPersonName != null">,`surveyted_person_name` = #{surveytedPersonName} </if>
+			<if test="surveytedPersonPosition != null">,`surveyted_person_position` = #{surveytedPersonPosition} </if>
+			<if test="fullFormTime != null">,`full_form_time` = #{fullFormTime} </if>
+			<if test="surveyPersonName != null">,`survey_person_name` = #{surveyPersonName}</if>
+			<if test="createTime != null">,`create_time` = #{createTime}</if>
+			<if test="createUserName != null">,`create_user_name` = #{createUserName} </if>
+			<if test="createBy != null">,`create_by` = #{createBy}</if>
+			<if test="modifyTime != null">,`modify_time` = #{modifyTime} </if>
+			<if test="modifyUserName != null">,`modify_user_name` = #{modifyUserName} </if>
+			<if test="modifyBy != null">,`modify_by` = #{modifyBy} </if>
+			<if test="deleteFlag != null">,`delete_flag` = #{deleteFlag}</if>
+			<if test="administrativeDivision != null">,`administrative_division` = #{administrativeDivision}</if>
+			<if test="urbanorrural != null">,`urbanorrural` = #{urbanorrural}</if>
+		</set>
+		where enterprise_id = #{enterpriseId}
+	</update>
+	
+	<delete id="remove">
+		delete from eco_enterprise where enterprise_id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from eco_enterprise where enterprise_id in 
+		<foreach item="enterpriseId" collection="array" open="(" separator="," close=")">
+			#{enterpriseId}
+		</foreach>
+	</delete>
+
+</mapper>

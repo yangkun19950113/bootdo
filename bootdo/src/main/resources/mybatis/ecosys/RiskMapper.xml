@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.ecosys.dao.RiskDao">
+
+	<select id="get" resultType="com.bootdo.ecosys.domain.RiskDO">
+		select `safe_trouble_id`,`enterprise_id`,`
+equipment_id`,`people_find_name`,`find_time`,`level`,`type`,`apart`,`remark`,`rectificat`,`rect_user_name`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_risk where safe_trouble_id = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.ecosys.domain.RiskDO">
+		select `safe_trouble_id`,`enterprise_id`,`
+equipment_id`,`people_find_name`,`find_time`,`level`,`type`,`apart`,`remark`,`rectificat`,`rect_user_name`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_risk
+        <where>  
+		  		  <if test="safeTroubleId != null and safeTroubleId != ''"> and safe_trouble_id = #{safeTroubleId} </if>
+		  		  <if test="enterpriseId != null and enterpriseId != ''"> and enterprise_id = #{enterpriseId} </if>
+		  		  <if test="
+equipmentId != null and equipmentId != ''"> and 
+equipment_id = #{
+equipmentId} </if>
+		  		  <if test="peopleFindName != null and peopleFindName != ''"> and people_find_name = #{peopleFindName} </if>
+		  		  <if test="findTime != null and findTime != ''"> and find_time = #{findTime} </if>
+		  		  <if test="level != null and level != ''"> and level = #{level} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="apart != null and apart != ''"> and apart = #{apart} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		  <if test="rectificat != null and rectificat != ''"> and rectificat = #{rectificat} </if>
+		  		  <if test="rectUserName != null and rectUserName != ''"> and rect_user_name = #{rectUserName} </if>
+		  		  <if test="surveytedPersonName != null and surveytedPersonName != ''"> and surveyted_person_name = #{surveytedPersonName} </if>
+		  		  <if test="surveytedPersonPosition != null and surveytedPersonPosition != ''"> and surveyted_person_position = #{surveytedPersonPosition} </if>
+		  		  <if test="fullFormTime != null and fullFormTime != ''"> and full_form_time = #{fullFormTime} </if>
+		  		  <if test="surveyPersonName != null and surveyPersonName != ''"> and survey_person_name = #{surveyPersonName} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="createUserName != null and createUserName != ''"> and create_user_name = #{createUserName} </if>
+		  		  <if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
+		  		  <if test="modifyTime != null and modifyTime != ''"> and modify_time = #{modifyTime} </if>
+		  		  <if test="modifyUserName != null and modifyUserName != ''"> and modify_user_name = #{modifyUserName} </if>
+		  		  <if test="modifyBy != null and modifyBy != ''"> and modify_by = #{modifyBy} </if>
+		  		  <if test="deleteFlag != null and deleteFlag != ''"> and delete_flag = #{deleteFlag} </if>
+		  		  <if test="administrativeDivision != null and administrativeDivision != ''"> and administrative_division = #{administrativeDivision} </if>
+		  		  <if test="urbanorrural != null and urbanorrural != ''"> and urbanorrural = #{urbanorrural} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by safe_trouble_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from eco_risk
+		 <where>  
+		  		  <if test="safeTroubleId != null and safeTroubleId != ''"> and safe_trouble_id = #{safeTroubleId} </if>
+		  		  <if test="enterpriseId != null and enterpriseId != ''"> and enterprise_id = #{enterpriseId} </if>
+		  		  <if test="
+equipmentId != null and equipmentId != ''"> and 
+equipment_id = #{
+equipmentId} </if>
+		  		  <if test="peopleFindName != null and peopleFindName != ''"> and people_find_name = #{peopleFindName} </if>
+		  		  <if test="findTime != null and findTime != ''"> and find_time = #{findTime} </if>
+		  		  <if test="level != null and level != ''"> and level = #{level} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="apart != null and apart != ''"> and apart = #{apart} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		  <if test="rectificat != null and rectificat != ''"> and rectificat = #{rectificat} </if>
+		  		  <if test="rectUserName != null and rectUserName != ''"> and rect_user_name = #{rectUserName} </if>
+		  		  <if test="surveytedPersonName != null and surveytedPersonName != ''"> and surveyted_person_name = #{surveytedPersonName} </if>
+		  		  <if test="surveytedPersonPosition != null and surveytedPersonPosition != ''"> and surveyted_person_position = #{surveytedPersonPosition} </if>
+		  		  <if test="fullFormTime != null and fullFormTime != ''"> and full_form_time = #{fullFormTime} </if>
+		  		  <if test="surveyPersonName != null and surveyPersonName != ''"> and survey_person_name = #{surveyPersonName} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="createUserName != null and createUserName != ''"> and create_user_name = #{createUserName} </if>
+		  		  <if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
+		  		  <if test="modifyTime != null and modifyTime != ''"> and modify_time = #{modifyTime} </if>
+		  		  <if test="modifyUserName != null and modifyUserName != ''"> and modify_user_name = #{modifyUserName} </if>
+		  		  <if test="modifyBy != null and modifyBy != ''"> and modify_by = #{modifyBy} </if>
+		  		  <if test="deleteFlag != null and deleteFlag != ''"> and delete_flag = #{deleteFlag} </if>
+		  		  <if test="administrativeDivision != null and administrativeDivision != ''"> and administrative_division = #{administrativeDivision} </if>
+		  		  <if test="urbanorrural != null and urbanorrural != ''"> and urbanorrural = #{urbanorrural} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.ecosys.domain.RiskDO">
+		insert into eco_risk
+		(
+			`safe_trouble_id`, 
+			`enterprise_id`, 
+			`
+equipment_id`, 
+			`people_find_name`, 
+			`find_time`, 
+			`level`, 
+			`type`, 
+			`apart`, 
+			`remark`, 
+			`rectificat`, 
+			`rect_user_name`, 
+			`surveyted_person_name`, 
+			`surveyted_person_position`, 
+			`full_form_time`, 
+			`survey_person_name`, 
+			`create_time`, 
+			`create_user_name`, 
+			`create_by`, 
+			`modify_time`, 
+			`modify_user_name`, 
+			`modify_by`, 
+			`delete_flag`, 
+			`administrative_division`, 
+			`urbanorrural`
+		)
+		values
+		(
+			#{safeTroubleId}, 
+			#{enterpriseId}, 
+			#{
+equipmentId}, 
+			#{peopleFindName}, 
+			#{findTime}, 
+			#{level}, 
+			#{type}, 
+			#{apart}, 
+			#{remark}, 
+			#{rectificat}, 
+			#{rectUserName}, 
+			#{surveytedPersonName}, 
+			#{surveytedPersonPosition}, 
+			#{fullFormTime}, 
+			#{surveyPersonName}, 
+			#{createTime}, 
+			#{createUserName}, 
+			#{createBy}, 
+			#{modifyTime}, 
+			#{modifyUserName}, 
+			#{modifyBy}, 
+			#{deleteFlag}, 
+			#{administrativeDivision}, 
+			#{urbanorrural}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.ecosys.domain.RiskDO">
+		update eco_risk 
+		<set>
+			<if test="enterpriseId != null">`enterprise_id` = #{enterpriseId}, </if>
+			<if test="
+equipmentId != null">`
+equipment_id` = #{
+equipmentId}, </if>
+			<if test="peopleFindName != null">`people_find_name` = #{peopleFindName}, </if>
+			<if test="findTime != null">`find_time` = #{findTime}, </if>
+			<if test="level != null">`level` = #{level}, </if>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="apart != null">`apart` = #{apart}, </if>
+			<if test="remark != null">`remark` = #{remark}, </if>
+			<if test="rectificat != null">`rectificat` = #{rectificat}, </if>
+			<if test="rectUserName != null">`rect_user_name` = #{rectUserName}, </if>
+			<if test="surveytedPersonName != null">`surveyted_person_name` = #{surveytedPersonName}, </if>
+			<if test="surveytedPersonPosition != null">`surveyted_person_position` = #{surveytedPersonPosition}, </if>
+			<if test="fullFormTime != null">`full_form_time` = #{fullFormTime}, </if>
+			<if test="surveyPersonName != null">`survey_person_name` = #{surveyPersonName}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="createUserName != null">`create_user_name` = #{createUserName}, </if>
+			<if test="createBy != null">`create_by` = #{createBy}, </if>
+			<if test="modifyTime != null">`modify_time` = #{modifyTime}, </if>
+			<if test="modifyUserName != null">`modify_user_name` = #{modifyUserName}, </if>
+			<if test="modifyBy != null">`modify_by` = #{modifyBy}, </if>
+			<if test="deleteFlag != null">`delete_flag` = #{deleteFlag}, </if>
+			<if test="administrativeDivision != null">`administrative_division` = #{administrativeDivision}, </if>
+			<if test="urbanorrural != null">`urbanorrural` = #{urbanorrural}</if>
+		</set>
+		where safe_trouble_id = #{safeTroubleId}
+	</update>
+	
+	<delete id="remove">
+		delete from eco_risk where safe_trouble_id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from eco_risk where safe_trouble_id in 
+		<foreach item="safeTroubleId" collection="array" open="(" separator="," close=")">
+			#{safeTroubleId}
+		</foreach>
+	</delete>
+
+</mapper>
