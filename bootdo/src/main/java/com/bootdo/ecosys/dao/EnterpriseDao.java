@@ -29,4 +29,5 @@ public interface EnterpriseDao {
 	int remove(Integer enterprise_id);
 	
 	int batchRemove(Integer[] enterpriseIds);
+	EnterpriseDO getenterprise (String  enterpriseName);
 }

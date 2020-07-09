@@ -94,6 +94,25 @@ public class EnterpriseDO implements Serializable {
 	private Integer administrativeDivision;
 	//城乡分类
 	private Integer urbanorrural;
+	private String imgUrl;
+
+	private String[] imgUrls;
+
+	public String[] getImgUrls() {
+		return imgUrls;
+	}
+
+	public void setImgUrls(String[] imgUrls) {
+		this.imgUrls = imgUrls;
+	}
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
 
 	/**
 	 * 设置：企业id

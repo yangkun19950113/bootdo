@@ -57,5 +57,10 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 	public int batchRemove(Integer[] enterpriseIds){
 		return enterpriseDao.batchRemove(enterpriseIds);
 	}
-	
+
+	@Override
+	public EnterpriseDO getenterprise(String enterpriseName) {
+		return enterpriseDao.getenterprise(enterpriseName);
+	}
+
 }

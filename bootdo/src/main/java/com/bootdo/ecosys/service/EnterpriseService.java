@@ -28,4 +28,5 @@ public interface EnterpriseService {
 	int remove(Integer enterpriseId);
 	
 	int batchRemove(Integer[] enterpriseIds);
+	EnterpriseDO getenterprise (String  enterpriseName);
 }

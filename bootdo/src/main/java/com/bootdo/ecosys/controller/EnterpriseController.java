@@ -3,26 +3,24 @@ package com.bootdo.ecosys.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.fastjson.JSONObject;
 import com.bootdo.ecosys.domain.EnterpriseDO;
 import com.bootdo.ecosys.service.EnterpriseService;
+import com.bootdo.tool.MessageResult;
+import com.bootdo.tool.R;
+import com.bootdo.tool.ResponseData;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
-import com.bootdo.common.utils.R;
 
 /**
  * 
@@ -31,8 +29,8 @@ import com.bootdo.common.utils.R;
  * @email 1992lcg@163.com
  * @date 2020-07-07 11:41:01
  */
- 
-@Controller
+
+@RestController
 @RequestMapping("/ecosys/enterprise")
 public class EnterpriseController {
 	@Autowired
@@ -76,7 +74,7 @@ public class EnterpriseController {
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("ecosys:enterprise:add")
-	public R save( EnterpriseDO enterprise){
+	public R save(EnterpriseDO enterprise){
 		if(enterpriseService.save(enterprise)>0){
 			return R.ok();
 		}
@@ -134,5 +132,22 @@ public class EnterpriseController {
 		enterpriseService.batchRemove(enterpriseIds);
 		return R.ok();
 	}
-	
+	// 获取企业信息
+
+	@GetMapping("/enterpriseList")
+	public ResponseData enterpriseList(String enterpriseName,String socialCreditCode){
+		Map<String, Object> params = new HashMap<>();
+		enterpriseName = "德云社";
+		params.put("enterpriseName","德云社");
+		params.put("socialCreditCode",socialCreditCode);
+		EnterpriseDO enterprise = enterpriseService.getenterprise(enterpriseName);
+		String imgUrl = enterprise.getImgUrl();
+		String[] strArray = imgUrl.split(",");
+		System.out.println(strArray);
+		for(String s : strArray){
+			System.out.println(s);
+		}
+		enterprise.setImgUrls(strArray);
+		return MessageResult.success("200","菜谱列表", enterprise);
+	}
 }
