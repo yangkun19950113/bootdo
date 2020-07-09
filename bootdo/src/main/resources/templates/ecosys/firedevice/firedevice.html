@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="gray-bg">
@@ -9,10 +9,13 @@
 				<div class="ibox-body">
 					<div class="fixed-table-toolbar">
 						<div class="columns pull-left">
-							<button shiro:hasPermission="system:firedevice:add" type="button" class="btn  btn-primary" onclick="add()">
+							<div>
+								<input id="enterpriseId" name="enterpriseId" th:value="${enterpriseId}"  type="hidden">
+							</div>
+							<button shiro:hasPermission="ecosys:firedevice:add" type="button" class="btn  btn-primary" onclick="add()">
 								<i class="fa fa-plus" aria-hidden="true"></i>添加
 							</button>
-							<button shiro:hasPermission="system:firedevice:batchRemove" type="button" class="btn  btn-danger"
+							<button shiro:hasPermission="ecosys:firedevice:batchRemove" type="button" class="btn  btn-danger"
 								onclick="batchRemove()">
 								<i class="fa fa-trash" aria-hidden="true"></i>删除
 							</button>
@@ -39,17 +42,17 @@
 				var s_resetPwd_h = 'hidden';
 			</script>
 		</div>
-		<div shiro:hasPermission="system:firedevice:edit">
+		<div shiro:hasPermission="ecosys:firedevice:edit">
 			<script type="text/javascript">
 				s_edit_h = '';
 			</script>
 		</div>
-		<div shiro:hasPermission="system:firedevice:remove">
+		<div shiro:hasPermission="ecosys:firedevice:remove">
 			<script type="text/javascript">
 				var s_remove_h = '';
 			</script>
 		</div>
-		<div shiro:hasPermission="system:firedevice:resetPwd">
+		<div shiro:hasPermission="ecosys:firedevice:resetPwd">
 			<script type="text/javascript">
 				var s_resetPwd_h = '';
 			</script>

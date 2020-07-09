@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.bootdo.ecosys.domain.EnterpriseDO;
 import com.bootdo.ecosys.service.EnterpriseService;
@@ -132,6 +133,15 @@ public class EnterpriseController {
 		enterpriseService.batchRemove(enterpriseIds);
 		return R.ok();
 	}
+
+	@ResponseBody
+	@GetMapping("/getEnterpriseById")
+	public EnterpriseDO getEnterpriseById(@RequestParam Map<String, Object> params){
+		Integer enterpriseId = Integer.parseInt(params.get("enterpriseId").toString());
+		EnterpriseDO enterprise = enterpriseService.get(enterpriseId);
+		return enterprise;
+	}
+
 	// 获取企业信息
 
 	@GetMapping("/enterpriseList")

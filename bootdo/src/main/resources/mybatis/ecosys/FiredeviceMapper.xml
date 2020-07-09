@@ -8,33 +8,38 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.ecosys.domain.FiredeviceDO">
-		select `equipment_id`,`equipment_name`,`equipment_code`,`enterprise_id`,`model`,`buy_time`,`effect_time`,`brand`,`install_position`,`product_id`,`protection_person`,`phone_number`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_firedevice
-        <where>  
-		  		  <if test="equipmentId != null and equipmentId != ''"> and equipment_id = #{equipmentId} </if>
-		  		  <if test="equipmentName != null and equipmentName != ''"> and equipment_name = #{equipmentName} </if>
-		  		  <if test="equipmentCode != null and equipmentCode != ''"> and equipment_code = #{equipmentCode} </if>
-		  		  <if test="enterpriseId != null and enterpriseId != ''"> and enterprise_id = #{enterpriseId} </if>
-		  		  <if test="model != null and model != ''"> and model = #{model} </if>
-		  		  <if test="buyTime != null and buyTime != ''"> and buy_time = #{buyTime} </if>
-		  		  <if test="effectTime != null and effectTime != ''"> and effect_time = #{effectTime} </if>
-		  		  <if test="brand != null and brand != ''"> and brand = #{brand} </if>
-		  		  <if test="installPosition != null and installPosition != ''"> and install_position = #{installPosition} </if>
-		  		  <if test="productId != null and productId != ''"> and product_id = #{productId} </if>
-		  		  <if test="protectionPerson != null and protectionPerson != ''"> and protection_person = #{protectionPerson} </if>
-		  		  <if test="phoneNumber != null and phoneNumber != ''"> and phone_number = #{phoneNumber} </if>
-		  		  <if test="surveytedPersonName != null and surveytedPersonName != ''"> and surveyted_person_name = #{surveytedPersonName} </if>
-		  		  <if test="surveytedPersonPosition != null and surveytedPersonPosition != ''"> and surveyted_person_position = #{surveytedPersonPosition} </if>
-		  		  <if test="fullFormTime != null and fullFormTime != ''"> and full_form_time = #{fullFormTime} </if>
-		  		  <if test="surveyPersonName != null and surveyPersonName != ''"> and survey_person_name = #{surveyPersonName} </if>
-		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
-		  		  <if test="createUserName != null and createUserName != ''"> and create_user_name = #{createUserName} </if>
-		  		  <if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
-		  		  <if test="modifyTime != null and modifyTime != ''"> and modify_time = #{modifyTime} </if>
-		  		  <if test="modifyUserName != null and modifyUserName != ''"> and modify_user_name = #{modifyUserName} </if>
-		  		  <if test="modifyBy != null and modifyBy != ''"> and modify_by = #{modifyBy} </if>
-		  		  <if test="deleteFlag != null and deleteFlag != ''"> and delete_flag = #{deleteFlag} </if>
-		  		  <if test="administrativeDivision != null and administrativeDivision != ''"> and administrative_division = #{administrativeDivision} </if>
-		  		  <if test="urbanorrural != null and urbanorrural != ''"> and urbanorrural = #{urbanorrural} </if>
+		select fi.equipment_id,fi.equipment_name,fi.equipment_code,fi.enterprise_id,fi.model,fi.buy_time,fi.effect_time,
+		fi.brand,fi.install_position,fi.product_id,fi.protection_person,fi.phone_number,fi.surveyted_person_name,fi.surveyted_person_position,
+		fi.full_form_time,fi.survey_person_name,fi.create_time,fi.create_user_name,fi.create_by,fi.modify_time,
+		fi.modify_user_name,fi.modify_by,fi.delete_flag,fi.administrative_division,fi.urbanorrural,
+		en.enterprise_name
+		from eco_firedevice fi left join eco_enterprise en on en.enterprise_id = fi.enterprise_id
+        <where>
+			fi.delete_flag = '0'
+				  <if test="equipmentId != null and equipmentId != ''"> and fi.equipment_id = #{equipmentId} </if>
+		  		  <if test="equipmentName != null and equipmentName != ''"> and fi.equipment_name = #{equipmentName} </if>
+		  		  <if test="equipmentCode != null and equipmentCode != ''"> and fi.equipment_code = #{equipmentCode} </if>
+		  		  <if test="enterpriseId != null and enterpriseId != ''"> and fi.enterprise_id = #{enterpriseId} </if>
+		  		  <if test="model != null and model != ''"> and fi.model = #{model} </if>
+		  		  <if test="buyTime != null and buyTime != ''"> and fi.buy_time = #{buyTime} </if>
+		  		  <if test="effectTime != null and effectTime != ''"> and fi.effect_time = #{effectTime} </if>
+		  		  <if test="brand != null and brand != ''"> and fi.brand = #{brand} </if>
+		  		  <if test="installPosition != null and installPosition != ''"> and fi.install_position = #{installPosition} </if>
+		  		  <if test="productId != null and productId != ''"> and fi.product_id = #{productId} </if>
+		  		  <if test="protectionPerson != null and protectionPerson != ''"> and fi.protection_person = #{protectionPerson} </if>
+		  		  <if test="phoneNumber != null and phoneNumber != ''"> and fi.phone_number = #{phoneNumber} </if>
+		  		  <if test="surveytedPersonName != null and surveytedPersonName != ''"> and fi.surveyted_person_name = #{surveytedPersonName} </if>
+		  		  <if test="surveytedPersonPosition != null and surveytedPersonPosition != ''"> and fi.surveyted_person_position = #{surveytedPersonPosition} </if>
+		  		  <if test="fullFormTime != null and fullFormTime != ''"> and fi.full_form_time = #{fullFormTime} </if>
+		  		  <if test="surveyPersonName != null and surveyPersonName != ''"> and fi.survey_person_name = #{surveyPersonName} </if>
+		  		  <if test="createTime != null and createTime != ''"> and fi.create_time = #{createTime} </if>
+		  		  <if test="createUserName != null and createUserName != ''"> and fi.create_user_name = #{createUserName} </if>
+		  		  <if test="createBy != null and createBy != ''"> and fi.create_by = #{createBy} </if>
+		  		  <if test="modifyTime != null and modifyTime != ''"> and fi.modify_time = #{modifyTime} </if>
+		  		  <if test="modifyUserName != null and modifyUserName != ''"> and fi.modify_user_name = #{modifyUserName} </if>
+		  		  <if test="modifyBy != null and modifyBy != ''"> and fi.modify_by = #{modifyBy} </if>
+		  		  <if test="administrativeDivision != null and administrativeDivision != ''"> and fi.administrative_division = #{administrativeDivision} </if>
+		  		  <if test="urbanorrural != null and urbanorrural != ''"> and fi.urbanorrural = #{urbanorrural} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -51,7 +56,8 @@
 	
  	<select id="count" resultType="int">
 		select count(*) from eco_firedevice
-		 <where>  
+		 <where>
+			 delete_flag = '0'
 		  		  <if test="equipmentId != null and equipmentId != ''"> and equipment_id = #{equipmentId} </if>
 		  		  <if test="equipmentName != null and equipmentName != ''"> and equipment_name = #{equipmentName} </if>
 		  		  <if test="equipmentCode != null and equipmentCode != ''"> and equipment_code = #{equipmentCode} </if>
@@ -74,7 +80,6 @@
 		  		  <if test="modifyTime != null and modifyTime != ''"> and modify_time = #{modifyTime} </if>
 		  		  <if test="modifyUserName != null and modifyUserName != ''"> and modify_user_name = #{modifyUserName} </if>
 		  		  <if test="modifyBy != null and modifyBy != ''"> and modify_by = #{modifyBy} </if>
-		  		  <if test="deleteFlag != null and deleteFlag != ''"> and delete_flag = #{deleteFlag} </if>
 		  		  <if test="administrativeDivision != null and administrativeDivision != ''"> and administrative_division = #{administrativeDivision} </if>
 		  		  <if test="urbanorrural != null and urbanorrural != ''"> and urbanorrural = #{urbanorrural} </if>
 		  		</where>
@@ -127,13 +132,13 @@
 			#{surveytedPersonPosition}, 
 			#{fullFormTime}, 
 			#{surveyPersonName}, 
-			#{createTime}, 
+			CURRENT_TIMESTAMP(),
 			#{createUserName}, 
 			#{createBy}, 
-			#{modifyTime}, 
+			CURRENT_TIMESTAMP(),
 			#{modifyUserName}, 
 			#{modifyBy}, 
-			#{deleteFlag}, 
+			'0',
 			#{administrativeDivision}, 
 			#{urbanorrural}
 		)
@@ -160,7 +165,7 @@
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
 			<if test="createUserName != null">`create_user_name` = #{createUserName}, </if>
 			<if test="createBy != null">`create_by` = #{createBy}, </if>
-			<if test="modifyTime != null">`modify_time` = #{modifyTime}, </if>
+			<if test="modifyTime != null">`modify_time` = CURRENT_TIMESTAMP(), </if>
 			<if test="modifyUserName != null">`modify_user_name` = #{modifyUserName}, </if>
 			<if test="modifyBy != null">`modify_by` = #{modifyBy}, </if>
 			<if test="deleteFlag != null">`delete_flag` = #{deleteFlag}, </if>
@@ -170,15 +175,21 @@
 		where equipment_id = #{equipmentId}
 	</update>
 	
-	<delete id="remove">
-		delete from eco_firedevice where equipment_id = #{value}
-	</delete>
-	
-	<delete id="batchRemove">
-		delete from eco_firedevice where equipment_id in 
+	<update id="remove">
+		update eco_firedevice
+		set delete_flag = '1',
+		modify_time = CURRENT_TIMESTAMP()
+		where equipment_id = #{value}
+	</update>
+
+	<update id="batchRemove">
+		update eco_firedevice
+		set `modify_time` = CURRENT_TIMESTAMP(),
+		`delete_flag` = '1'
+		where equipment_id in
 		<foreach item="equipmentId" collection="array" open="(" separator="," close=")">
 			#{equipmentId}
 		</foreach>
-	</delete>
+	</update>
 
 </mapper>

@@ -3,7 +3,9 @@ package com.bootdo.ecosys.controller;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.ecosys.domain.EnterpriseDO;
 import com.bootdo.ecosys.domain.FiredeviceDO;
+import com.bootdo.ecosys.service.EnterpriseService;
 import com.bootdo.ecosys.service.FiredeviceService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,35 +36,42 @@ import com.bootdo.common.utils.R;
 public class FiredeviceController {
 	@Autowired
 	private FiredeviceService firedeviceService;
+	@Autowired
+	private EnterpriseService enterpriseService;
 	
-	@GetMapping()
+	@GetMapping("/{enterpriseId}")
 	@RequiresPermissions("ecosys:firedevice:firedevice")
-	String Firedevice(){
+	String Firedevice(@PathVariable("enterpriseId") Long enterpriseId,Model model){
+		model.addAttribute("enterpriseId", enterpriseId);
 	    return "ecosys/firedevice/firedevice";
 	}
-	
+
 	@ResponseBody
-	@GetMapping("/list")
+	@GetMapping("/list/{enterpriseId}")
 	@RequiresPermissions("ecosys:firedevice:firedevice")
-	public PageUtils list(@RequestParam Map<String, Object> params){
+	public PageUtils list(@RequestParam Map<String, Object> params,@PathVariable("enterpriseId") Long enterpriseId){
+		params.put("enterpriseId",enterpriseId);
+		Query query = new Query(params);
 		//查询列表数据
-        Query query = new Query(params);
 		List<FiredeviceDO> firedeviceList = firedeviceService.list(query);
 		int total = firedeviceService.count(query);
 		PageUtils pageUtils = new PageUtils(firedeviceList, total);
 		return pageUtils;
 	}
 	
-	@GetMapping("/add")
+	@GetMapping("/add/{enterpriseId}")
 	@RequiresPermissions("ecosys:firedevice:add")
-	String add(){
-	    return "ecosys/firedevice/add";
+	String add(@PathVariable("enterpriseId") Long enterpriseId,Model model){
+		model.addAttribute("enterpriseId", enterpriseId);
+		return "ecosys/firedevice/add";
 	}
 
 	@GetMapping("/edit/{equipmentId}")
 	@RequiresPermissions("ecosys:firedevice:edit")
 	String edit(@PathVariable("equipmentId") Integer equipmentId,Model model){
 		FiredeviceDO firedevice = firedeviceService.get(equipmentId);
+		EnterpriseDO enterprise = enterpriseService.get(firedevice.getEnterpriseId());
+		firedevice.setEnterpriseName(enterprise.getEnterpriseName());
 		model.addAttribute("firedevice", firedevice);
 	    return "ecosys/firedevice/edit";
 	}
@@ -86,8 +95,10 @@ public class FiredeviceController {
 	@RequestMapping("/update")
 	@RequiresPermissions("ecosys:firedevice:edit")
 	public R update( FiredeviceDO firedevice){
-		firedeviceService.update(firedevice);
-		return R.ok();
+		if(firedeviceService.update(firedevice)>0){
+			return R.ok();
+		}
+		return R.error();
 	}
 	
 	/**

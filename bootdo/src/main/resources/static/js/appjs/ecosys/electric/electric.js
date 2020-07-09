@@ -1,6 +1,7 @@
-
-var prefix = "/system/electric"
+var enterpriseId;
+var prefix = "/ecosys/electric"
 $(function() {
+	enterpriseId = $("#enterpriseId").val();
 	load();
 });
 
@@ -9,7 +10,7 @@ function load() {
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url : prefix + "/list", // 服务器数据的加载地址
+						url : prefix + "/list/"+enterpriseId, // 服务器数据的加载地址
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,
@@ -47,10 +48,10 @@ function load() {
 								{
 									checkbox : true
 								},
-																{
+									/*							{
 									field : 'equipmentId', 
 									title : '设备id' 
-								},
+								},*/
 																{
 									field : 'equipmentName', 
 									title : '设备名称' 
@@ -99,58 +100,15 @@ function load() {
 									field : 'equipmentType', 
 									title : '设备类型' 
 								},
-																{
-									field : 'surveytedPersonName', 
-									title : '' 
-								},
-																{
-									field : 'surveytedPersonPosition', 
-									title : '' 
-								},
-																{
-									field : 'fullFormTime', 
-									title : '' 
-								},
-																{
-									field : 'surveyPersonName', 
-									title : '' 
-								},
-																{
-									field : 'createTime', 
-									title : '' 
-								},
-																{
-									field : 'createUserName', 
-									title : '' 
-								},
-																{
-									field : 'createBy', 
-									title : '' 
-								},
-																{
-									field : 'modifyTime', 
-									title : '' 
-								},
-																{
-									field : 'modifyUserName', 
-									title : '' 
-								},
-																{
-									field : 'modifyBy', 
-									title : '' 
-								},
-																{
-									field : 'deleteFlag', 
-									title : '' 
-								},
-																{
+
+													/*			{
 									field : 'administrativeDivision', 
 									title : '' 
 								},
 																{
 									field : 'urbanorrural', 
 									title : '' 
-								},
+								},*/
 																{
 									title : '操作',
 									field : 'id',
@@ -180,7 +138,7 @@ function add() {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
-		content : prefix + '/add' // iframe的url
+		content : prefix + '/add/' + enterpriseId // iframe的url
 	});
 }
 function edit(id) {

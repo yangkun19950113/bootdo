@@ -1,5 +1,8 @@
+var enterpriseIdFa;
 $().ready(function() {
+	enterpriseIdFa = $("#enterpriseIdFa").val();
 	validateRule();
+	getEnterpriseList();//加载企业下拉框
 });
 
 $.validator.setDefaults({
@@ -11,7 +14,7 @@ function save() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/system/firedevice/save",
+		url : "/ecosys/firedevice/save",
 		data : $('#signupForm').serialize(),// 你的formid
 		async : false,
 		error : function(request) {
@@ -44,6 +47,23 @@ function validateRule() {
 			name : {
 				required : icon + "请输入姓名"
 			}
+		}
+	})
+}
+
+//加载企业（用于设备企业归属）
+function getEnterpriseList(){
+	$.ajax({
+		type: "get",
+		url: "/ecosys/enterprise/getEnterpriseById",
+		dataType: "json",
+		data: {
+			enterpriseId: enterpriseIdFa
+		},
+		success: function (data) {
+			$("#enterpriseId").val(data.enterpriseId);
+			$("#enterpriseId1").val(data.enterpriseName);
+			layer.closeAll('loading');//关闭loading
 		}
 	})
 }

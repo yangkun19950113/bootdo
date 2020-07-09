@@ -66,6 +66,8 @@ public class FiredeviceDO implements Serializable {
 	//
 	private Integer urbanorrural;
 
+	private String enterpriseName;
+
 	/**
 	 * 设置：设备id
 	 */
@@ -365,5 +367,13 @@ public class FiredeviceDO implements Serializable {
 	 */
 	public Integer getUrbanorrural() {
 		return urbanorrural;
+	}
+
+	public String getEnterpriseName() {
+		return enterpriseName;
+	}
+
+	public void setEnterpriseName(String enterpriseName) {
+		this.enterpriseName = enterpriseName;
 	}
 }

@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.bootdo.ecosys.domain.ElectricDO;
+import com.bootdo.ecosys.domain.EnterpriseDO;
 import com.bootdo.ecosys.service.ElectricService;
+import com.bootdo.ecosys.service.EnterpriseService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -30,22 +32,26 @@ import com.bootdo.common.utils.R;
  */
  
 @Controller
-@RequestMapping("/system/electric")
+@RequestMapping("/ecosys/electric")
 public class ElectricController {
 	@Autowired
 	private ElectricService electricService;
+	@Autowired
+	private EnterpriseService enterpriseService;
 	
-	@GetMapping()
-	@RequiresPermissions("system:electric:electric")
-	String Electric(){
-	    return "system/electric/electric";
+	@GetMapping("/{enterpriseId}")
+	@RequiresPermissions("ecosys:electric:electric")
+	String Electric(@PathVariable("enterpriseId") Long enterpriseId,Model model){
+		model.addAttribute("enterpriseId", enterpriseId);
+		return "ecosys/electric/electric";
 	}
 	
 	@ResponseBody
-	@GetMapping("/list")
-	@RequiresPermissions("system:electric:electric")
-	public PageUtils list(@RequestParam Map<String, Object> params){
+	@GetMapping("/list/{enterpriseId}")
+	@RequiresPermissions("ecosys:electric:electric")
+	public PageUtils list(@RequestParam Map<String, Object> params,@PathVariable("enterpriseId") Long enterpriseId){
 		//查询列表数据
+		params.put("enterpriseId",enterpriseId);
         Query query = new Query(params);
 		List<ElectricDO> electricList = electricService.list(query);
 		int total = electricService.count(query);
@@ -53,18 +59,21 @@ public class ElectricController {
 		return pageUtils;
 	}
 	
-	@GetMapping("/add")
-	@RequiresPermissions("system:electric:add")
-	String add(){
-	    return "system/electric/add";
+	@GetMapping("/add/{enterpriseId}")
+	@RequiresPermissions("ecosys:electric:add")
+	String add(@PathVariable("enterpriseId") Long enterpriseId,Model model){
+		model.addAttribute("enterpriseId", enterpriseId);
+		return "ecosys/electric/add";
 	}
 
 	@GetMapping("/edit/{equipmentId}")
-	@RequiresPermissions("system:electric:edit")
+	@RequiresPermissions("ecosys:electric:edit")
 	String edit(@PathVariable("equipmentId") Integer equipmentId,Model model){
 		ElectricDO electric = electricService.get(equipmentId);
+		EnterpriseDO enterprise = enterpriseService.get(electric.getEnterpriseId());
+		electric.setEnterpriseName(enterprise.getEnterpriseName());
 		model.addAttribute("electric", electric);
-	    return "system/electric/edit";
+	    return "ecosys/electric/edit";
 	}
 	
 	/**
@@ -72,7 +81,7 @@ public class ElectricController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("system:electric:add")
+	@RequiresPermissions("ecosys:electric:add")
 	public R save( ElectricDO electric){
 		if(electricService.save(electric)>0){
 			return R.ok();
@@ -84,10 +93,12 @@ public class ElectricController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("system:electric:edit")
+	@RequiresPermissions("ecosys:electric:edit")
 	public R update( ElectricDO electric){
-		electricService.update(electric);
-		return R.ok();
+		if(electricService.update(electric)>0){
+			return R.ok();
+		}
+		return R.error();
 	}
 	
 	/**
@@ -95,10 +106,10 @@ public class ElectricController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("system:electric:remove")
+	@RequiresPermissions("ecosys:electric:remove")
 	public R remove( Integer equipmentId){
 		if(electricService.remove(equipmentId)>0){
-		return R.ok();
+			return R.ok();
 		}
 		return R.error();
 	}
@@ -108,7 +119,7 @@ public class ElectricController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("system:electric:batchRemove")
+	@RequiresPermissions("ecosys:electric:batchRemove")
 	public R remove(@RequestParam("ids[]") Integer[] equipmentIds){
 		electricService.batchRemove(equipmentIds);
 		return R.ok();
