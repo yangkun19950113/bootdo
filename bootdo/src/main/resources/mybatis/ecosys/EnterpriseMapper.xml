@@ -7,8 +7,12 @@
 		select `enterprise_id`,`enterprise_name`,`social_credit_code`,`registered_address`,`registered_time`,`registered_fund`,`employee_num`,`enterprise_scope`,`coordinates`,`enterprise_nature_code`,`enterprise_legal_person`,`legal_person_phone_number`,`environmental_protection_person`,`en_person_phone_number`,`safe_prodect_person`,`safe_per_phone_number`,`business_scope`,`business_area`,`business_area_nature_code`,`dept`,`taxpayer_code`,`market_code`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_enterprise where enterprise_id = #{value}
 	</select>
 
+	<select id="getenterprise" resultType="com.bootdo.ecosys.domain.EnterpriseDO">
+		select * from eco_enterprise where enterprise_name = #{value}
+	</select>
+
 	<select id="list" resultType="com.bootdo.ecosys.domain.EnterpriseDO">
-		select `enterprise_id`,`enterprise_name`,`social_credit_code`,`registered_address`,`registered_time`,`registered_fund`,`employee_num`,`enterprise_scope`,`coordinates`,`enterprise_nature_code`,`enterprise_legal_person`,`legal_person_phone_number`,`environmental_protection_person`,`en_person_phone_number`,`safe_prodect_person`,`safe_per_phone_number`,`business_scope`,`business_area`,`business_area_nature_code`,`dept`,`taxpayer_code`,`market_code`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_enterprise
+		select `enterprise_id`,`enterprise_name`,`social_credit_code`,`registered_address`,`registered_time`,`registered_fund`,`employee_num`,`enterprise_scope`,`coordinates`,`enterprise_nature_code`,`enterprise_legal_person`,`legal_person_phone_number`,`environmental_protection_person`,`en_person_phone_number`,`safe_prodect_person`,`safe_per_phone_number`,`business_scope`,`business_area`,`business_area_nature_code`,`dept`,`taxpayer_code`,`market_code`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural`,`img_url` from eco_enterprise
         <where>
 				  delete_flag = '0'
 		  		  <if test="enterpriseId != null and enterpriseId != ''"> and enterprise_id = #{enterpriseId} </if>
@@ -45,6 +49,7 @@
 		  		  <if test="modifyBy != null and modifyBy != ''"> and modify_by = #{modifyBy} </if>
 		  		  <if test="administrativeDivision != null and administrativeDivision != ''"> and administrative_division = #{administrativeDivision} </if>
 		  		  <if test="urbanorrural != null and urbanorrural != ''"> and urbanorrural = #{urbanorrural} </if>
+			     <if test="imgUrl != null and imgUrl != ''"> and img_url = #{imgUrl} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -97,6 +102,7 @@
 		  		  <if test="modifyBy != null and modifyBy != ''"> and modify_by = #{modifyBy} </if>
 		  		  <if test="administrativeDivision != null and administrativeDivision != ''"> and administrative_division = #{administrativeDivision} </if>
 		  		  <if test="urbanorrural != null and urbanorrural != ''"> and urbanorrural = #{urbanorrural} </if>
+			     <if test="imgUrl != null and imgUrl != ''"> and img_url = #{imgUrl} </if>
 		  		</where>
 	</select>
 	 
@@ -137,7 +143,8 @@
 			`modify_by`, 
 			`delete_flag`, 
 			`administrative_division`, 
-			`urbanorrural`
+			`urbanorrural`,
+		   `img_url`
 		)
 		values
 		(
@@ -175,7 +182,8 @@
 			#{modifyBy}, 
 			'0',
 			#{administrativeDivision}, 
-			#{urbanorrural}
+			#{urbanorrural},
+			#{imgUrl}
 		)
 	</insert>
 	 

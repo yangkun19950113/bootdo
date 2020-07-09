@@ -148,6 +148,6 @@ public class EnterpriseController {
 			System.out.println(s);
 		}
 		enterprise.setImgUrls(strArray);
-		return MessageResult.success("200","菜谱列表", enterprise);
+		return MessageResult.success("200","", enterprise);
 	}
 }
