@@ -29,4 +29,5 @@ public interface ProductDao {
 	int remove(Integer product_id);
 	
 	int batchRemove(Integer[] productIds);
+	ProductDO getData(Integer enterpriseId);
 }

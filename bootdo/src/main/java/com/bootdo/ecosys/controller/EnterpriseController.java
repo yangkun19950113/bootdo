@@ -10,7 +10,11 @@ import java.util.Map;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.bootdo.ecosys.domain.EnterpriseDO;
+import com.bootdo.ecosys.domain.EnvprotectionDO;
+import com.bootdo.ecosys.domain.ShowDataDO;
 import com.bootdo.ecosys.service.EnterpriseService;
+import com.bootdo.ecosys.service.EnvprotectionService;
+import com.bootdo.ecosys.service.ProductService;
 import com.bootdo.tool.MessageResult;
 import com.bootdo.tool.R;
 import com.bootdo.tool.ResponseData;
@@ -36,6 +40,10 @@ import com.bootdo.common.utils.Query;
 public class EnterpriseController {
 	@Autowired
 	private EnterpriseService enterpriseService;
+	@Autowired
+	private EnvprotectionService envprotectionService;
+	@Autowired
+	private ProductService productService;
 	
 	@GetMapping()
 	@RequiresPermissions("ecosys:enterprise:enterprise")
@@ -142,14 +150,17 @@ public class EnterpriseController {
 		return enterprise;
 	}
 
-	// 获取企业信息
+	// 获取前台显示信息
 
 	@GetMapping("/enterpriseList")
-	public ResponseData enterpriseList(String enterpriseName,String socialCreditCode){
+	public ResponseData enterpriseList(String enterpriseName){
+		SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		ShowDataDO ShowData = new ShowDataDO();
 		Map<String, Object> params = new HashMap<>();
 		enterpriseName = "德云社";
 		params.put("enterpriseName","德云社");
-		params.put("socialCreditCode",socialCreditCode);
+//		params.put("socialCreditCode",socialCreditCode);
+		// 企业信息
 		EnterpriseDO enterprise = enterpriseService.getenterprise(enterpriseName);
 		String imgUrl = enterprise.getImgUrl();
 		String[] strArray = imgUrl.split(",");
@@ -158,6 +169,46 @@ public class EnterpriseController {
 			System.out.println(s);
 		}
 		enterprise.setImgUrls(strArray);
-		return MessageResult.success("200","", enterprise);
+		// 轮播图片
+		ShowData.setImgUrls(strArray);
+		// 企业名称
+		ShowData.setEnterpriseName(enterpriseName);
+		// 社会信用编码
+		String socialCreditCode = enterprise.getSocialCreditCode();
+		ShowData.setSocialCreditCode(socialCreditCode);
+		// 注册地址
+		String registeredAddress = enterprise.getRegisteredAddress();
+		ShowData.setRegisteredAddress(registeredAddress);
+		// 注册时间
+		Date registeredTime = enterprise.getRegisteredTime();
+		ShowData.getRegisteredTime(registeredTime);
+		//  注册资金
+		Float registeredFund = enterprise.getRegisteredFund();
+		ShowData.setRegisteredFund(registeredFund);
+		// 员工数
+		Long employeeNum = enterprise.getEmployeeNum();
+		ShowData.setEmployeeNum(employeeNum);
+		// 企业id
+		Integer enterpriseId = enterprise.getEnterpriseId();
+
+		// 环保基本信息
+		EnvprotectionDO EnvprotectionDO = envprotectionService.getData(enterpriseId);
+		// 是否有环评文号
+		String ecoEstimateFlg = EnvprotectionDO.getEcoEstimateFlg();
+		ShowData.setEcoEstimateFlg(ecoEstimateFlg);
+		// 环评文号
+		String ecoLicence = EnvprotectionDO.getEcoLicence();
+		ShowData.setEcoLicence(ecoLicence);
+		// 是够属于园区
+		String parkFlg = EnvprotectionDO.getParkFlg();
+		ShowData.setParkFlg(parkFlg);
+		// 是否有环保制度
+		String ecoStandardFlg = EnvprotectionDO.getEcoEstimateFlg();
+		ShowData.setEcoEstimateFlg(ecoStandardFlg);
+
+		// 企业产品及产能
+
+
+		return MessageResult.success("200","", ShowData);
 	}
 }

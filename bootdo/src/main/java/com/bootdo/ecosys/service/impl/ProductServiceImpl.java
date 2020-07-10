@@ -50,5 +50,10 @@ public class ProductServiceImpl implements ProductService {
 	public int batchRemove(Integer[] productIds){
 		return productDao.batchRemove(productIds);
 	}
-	
+
+	@Override
+	public ProductDO getData(Integer enterpriseId) {
+		return productDao.getData(enterpriseId);
+	}
+
 }
