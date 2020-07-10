@@ -7,7 +7,14 @@
 		select `equipment_id`,`equipment_name`,`equipment_code`,`enterprise_id`,`product_id`,`protection_person`,`phone_number`,`equipment_type`,`pollution_name`,`pollution_type`,`emission_way`,`install_time`,`monit_time`,`maintenance_cycle`,`loss_material`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_ecoequipment where equipment_id = #{value}
 	</select>
 	<select id="getData" resultType="com.bootdo.ecosys.domain.EcoequipmentDO">
-		select `equipment_id`,`equipment_name`,`equipment_code`,`enterprise_id`,`product_id`,`protection_person`,`phone_number`,`equipment_type`,`pollution_name`,`pollution_type`,`emission_way`,`install_time`,`monit_time`,`maintenance_cycle`,`loss_material`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_ecoequipment where enterprise_id = #{value} LIMIT 1
+		SELECT
+		*
+		FROM
+		eco_ecoequipment
+		WHERE
+		delete_flag = '0'
+		AND enterprise_id = #{value}
+		LIMIT 1
 	</select>
 
 	<select id="list" resultType="com.bootdo.ecosys.domain.EcoequipmentDO">

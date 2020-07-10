@@ -7,7 +7,14 @@
 		select `envir_protection_id`,`enterprise_id`,`enterprise_name`,`eco_estimate_flg`,`eco_licence`,`park_flg`,`eco__standard_flg`,`industry_code`,`project_manage_code`,`is_or_not_acceptance`,`tradable_permits_code`,`pollution_license_flg`,`pollution_category_code`,`annual_inspection_flg`,`area_code`,`main_energy_code`,`measures`,`normal_factors_code`,`special_factors_code`,`nomal_waste`,`danger_waste`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_envprotection where envir_protection_id = #{value}
 	</select>
 	<select id="getData" resultType="com.bootdo.ecosys.domain.EnvprotectionDO">
-		select `envir_protection_id`,`enterprise_id`,`enterprise_name`,`eco_estimate_flg`,`eco_licence`,`park_flg`,`eco__standard_flg`,`industry_code`,`project_manage_code`,`is_or_not_acceptance`,`tradable_permits_code`,`pollution_license_flg`,`pollution_category_code`,`annual_inspection_flg`,`area_code`,`main_energy_code`,`measures`,`normal_factors_code`,`special_factors_code`,`nomal_waste`,`danger_waste`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_envprotection where enterprise_id = #{value} LIMIT 1
+		SELECT
+		*
+		FROM
+		eco_envprotection
+		WHERE
+		delete_flag = '0'
+		and enterprise_id = #{value}
+		LIMIT 1
 	</select>
 
 	<select id="list" resultType="com.bootdo.ecosys.domain.EnvprotectionDO">
