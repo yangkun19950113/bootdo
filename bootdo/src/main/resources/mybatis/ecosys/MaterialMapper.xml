@@ -6,6 +6,9 @@
 	<select id="get" resultType="com.bootdo.ecosys.domain.MaterialDO">
 		select `material_id`,`material_type`,`product_id`,`material_name`,`specifical`,`model`,`orgion_way`,`month_consumption`,`danger_material`,`content`,`remark`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`enterprise_id`,`administrative_division`,`urbanorrural` from eco_material where material_id = #{value}
 	</select>
+	<select id="getData" resultType="com.bootdo.ecosys.domain.MaterialDO">
+		select `material_id`,`material_type`,`product_id`,`material_name`,`specifical`,`model`,`orgion_way`,`month_consumption`,`danger_material`,`content`,`remark`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`enterprise_id`,`administrative_division`,`urbanorrural` from eco_material where enterprise_id = #{value} LIMIT 1
+	</select>
 
 	<select id="list" resultType="com.bootdo.ecosys.domain.MaterialDO">
 		select `material_id`,`material_type`,`product_id`,`material_name`,`specifical`,`model`,`orgion_way`,`month_consumption`,`danger_material`,`content`,`remark`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`enterprise_id`,`administrative_division`,`urbanorrural` from eco_material

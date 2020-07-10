@@ -28,4 +28,5 @@ public interface MaterialService {
 	int remove(Integer materialId);
 	
 	int batchRemove(Integer[] materialIds);
+	MaterialDO getData(Integer enterpriseId);
 }

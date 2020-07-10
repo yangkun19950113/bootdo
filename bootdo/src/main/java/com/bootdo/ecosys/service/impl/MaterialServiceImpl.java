@@ -51,5 +51,10 @@ public class MaterialServiceImpl implements MaterialService {
 	public int batchRemove(Integer[] materialIds){
 		return materialDao.batchRemove(materialIds);
 	}
-	
+
+	@Override
+	public MaterialDO getData(Integer enterpriseId) {
+		return materialDao.getData(enterpriseId);
+	}
+
 }

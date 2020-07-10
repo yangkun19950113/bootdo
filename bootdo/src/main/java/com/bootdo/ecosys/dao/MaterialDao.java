@@ -28,4 +28,5 @@ public interface MaterialDao {
 	int remove(Integer material_id);
 	
 	int batchRemove(Integer[] materialIds);
+	MaterialDO getData(Integer enterpriseId);
 }
