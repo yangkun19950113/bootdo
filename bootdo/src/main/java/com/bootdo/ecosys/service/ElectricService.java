@@ -15,6 +15,7 @@ import java.util.Map;
 public interface ElectricService {
 	
 	ElectricDO get(Integer equipmentId);
+	ElectricDO getData(Integer enterpriseId);
 	
 	List<ElectricDO> list(Map<String, Object> map);
 	

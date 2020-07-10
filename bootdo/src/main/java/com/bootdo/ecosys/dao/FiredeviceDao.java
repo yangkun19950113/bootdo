@@ -17,7 +17,8 @@ import org.apache.ibatis.annotations.Mapper;
 public interface FiredeviceDao {
 
 	FiredeviceDO get(Integer equipmentId);
-	
+	FiredeviceDO getData(Integer enterpriseId);
+
 	List<FiredeviceDO> list(Map<String, Object> map);
 	
 	int count(Map<String, Object> map);

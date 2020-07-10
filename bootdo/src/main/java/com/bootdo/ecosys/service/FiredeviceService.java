@@ -16,6 +16,7 @@ import java.util.Map;
 public interface FiredeviceService {
 	
 	FiredeviceDO get(Integer equipmentId);
+	FiredeviceDO getData(Integer enterpriseId);
 	
 	List<FiredeviceDO> list(Map<String, Object> map);
 	

@@ -21,7 +21,12 @@ public class FiredeviceServiceImpl implements FiredeviceService {
 	public FiredeviceDO get(Integer equipmentId){
 		return firedeviceDao.get(equipmentId);
 	}
-	
+
+	@Override
+	public FiredeviceDO getData(Integer enterpriseId) {
+		return firedeviceDao.getData(enterpriseId);
+	}
+
 	@Override
 	public List<FiredeviceDO> list(Map<String, Object> map){
 		return firedeviceDao.list(map);

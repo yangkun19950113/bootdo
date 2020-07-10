@@ -6,6 +6,9 @@
 	<select id="get" resultType="com.bootdo.ecosys.domain.FiredeviceDO">
 		select `equipment_id`,`equipment_name`,`equipment_code`,`enterprise_id`,`model`,`buy_time`,`effect_time`,`brand`,`install_position`,`product_id`,`protection_person`,`phone_number`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_firedevice where equipment_id = #{value}
 	</select>
+	<select id="getData" resultType="com.bootdo.ecosys.domain.FiredeviceDO">
+		select `equipment_id`,`equipment_name`,`equipment_code`,`enterprise_id`,`model`,`buy_time`,`effect_time`,`brand`,`install_position`,`product_id`,`protection_person`,`phone_number`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_firedevice where enterprise_id = #{value} LIMIT 1
+	</select>
 
 	<select id="list" resultType="com.bootdo.ecosys.domain.FiredeviceDO">
 		select fi.equipment_id,fi.equipment_name,fi.equipment_code,fi.enterprise_id,fi.model,fi.buy_time,fi.effect_time,

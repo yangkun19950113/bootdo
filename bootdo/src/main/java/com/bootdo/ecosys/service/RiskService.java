@@ -15,6 +15,7 @@ import java.util.Map;
 public interface RiskService {
 	
 	RiskDO get(Integer safeTroubleId);
+	RiskDO getData(Integer enterpriseId);
 	
 	List<RiskDO> list(Map<String, Object> map);
 	

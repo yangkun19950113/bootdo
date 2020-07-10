@@ -4,20 +4,18 @@
 <mapper namespace="com.bootdo.ecosys.dao.RiskDao">
 
 	<select id="get" resultType="com.bootdo.ecosys.domain.RiskDO">
-		select `safe_trouble_id`,`enterprise_id`,`
-equipment_id`,`people_find_name`,`find_time`,`level`,`type`,`apart`,`remark`,`rectificat`,`rect_user_name`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_risk where safe_trouble_id = #{value}
+		select `safe_trouble_id`,`enterprise_id`,`equipment_id`,`people_find_name`,`find_time`,`level`,`type`,`apart`,`remark`,`rectificat`,`rect_user_name`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_risk where safe_trouble_id = #{value}
+	</select>
+	<select id="getData" resultType="com.bootdo.ecosys.domain.RiskDO">
+		select `safe_trouble_id`,`enterprise_id`,`equipment_id`,`people_find_name`,`find_time`,`level`,`type`,`apart`,`remark`,`rectificat`,`rect_user_name`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_risk where enterprise_id = #{value} LIMIT 1
 	</select>
 
 	<select id="list" resultType="com.bootdo.ecosys.domain.RiskDO">
-		select `safe_trouble_id`,`enterprise_id`,`
-equipment_id`,`people_find_name`,`find_time`,`level`,`type`,`apart`,`remark`,`rectificat`,`rect_user_name`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_risk
+		select `safe_trouble_id`,`enterprise_id`,`equipment_id`,`people_find_name`,`find_time`,`level`,`type`,`apart`,`remark`,`rectificat`,`rect_user_name`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_risk
         <where>  
 		  		  <if test="safeTroubleId != null and safeTroubleId != ''"> and safe_trouble_id = #{safeTroubleId} </if>
 		  		  <if test="enterpriseId != null and enterpriseId != ''"> and enterprise_id = #{enterpriseId} </if>
-		  		  <if test="
-equipmentId != null and equipmentId != ''"> and 
-equipment_id = #{
-equipmentId} </if>
+		  		  <if test="equipmentId != null and equipmentId != ''"> and equipment_id = #{equipmentId} </if>
 		  		  <if test="peopleFindName != null and peopleFindName != ''"> and people_find_name = #{peopleFindName} </if>
 		  		  <if test="findTime != null and findTime != ''"> and find_time = #{findTime} </if>
 		  		  <if test="level != null and level != ''"> and level = #{level} </if>
@@ -58,10 +56,7 @@ equipmentId} </if>
 		 <where>  
 		  		  <if test="safeTroubleId != null and safeTroubleId != ''"> and safe_trouble_id = #{safeTroubleId} </if>
 		  		  <if test="enterpriseId != null and enterpriseId != ''"> and enterprise_id = #{enterpriseId} </if>
-		  		  <if test="
-equipmentId != null and equipmentId != ''"> and 
-equipment_id = #{
-equipmentId} </if>
+		  		  <if test="equipmentId != null and equipmentId != ''"> and equipment_id = #{equipmentId} </if>
 		  		  <if test="peopleFindName != null and peopleFindName != ''"> and people_find_name = #{peopleFindName} </if>
 		  		  <if test="findTime != null and findTime != ''"> and find_time = #{findTime} </if>
 		  		  <if test="level != null and level != ''"> and level = #{level} </if>
@@ -91,8 +86,7 @@ equipmentId} </if>
 		(
 			`safe_trouble_id`, 
 			`enterprise_id`, 
-			`
-equipment_id`, 
+			`equipment_id`,
 			`people_find_name`, 
 			`find_time`, 
 			`level`, 
@@ -119,8 +113,7 @@ equipment_id`,
 		(
 			#{safeTroubleId}, 
 			#{enterpriseId}, 
-			#{
-equipmentId}, 
+			#{equipmentId},
 			#{peopleFindName}, 
 			#{findTime}, 
 			#{level}, 
@@ -132,14 +125,14 @@ equipmentId},
 			#{surveytedPersonName}, 
 			#{surveytedPersonPosition}, 
 			#{fullFormTime}, 
-			#{surveyPersonName}, 
-			#{createTime}, 
+			#{surveyPersonName},
+		    CURRENT_TIMESTAMP(),
 			#{createUserName}, 
-			#{createBy}, 
-			#{modifyTime}, 
+			#{createBy},
+		   CURRENT_TIMESTAMP(),
 			#{modifyUserName}, 
-			#{modifyBy}, 
-			#{deleteFlag}, 
+			#{modifyBy},
+		    '0',
 			#{administrativeDivision}, 
 			#{urbanorrural}
 		)
@@ -149,10 +142,7 @@ equipmentId},
 		update eco_risk 
 		<set>
 			<if test="enterpriseId != null">`enterprise_id` = #{enterpriseId}, </if>
-			<if test="
-equipmentId != null">`
-equipment_id` = #{
-equipmentId}, </if>
+			<if test="equipmentId != null">`equipment_id` = #{equipmentId}, </if>
 			<if test="peopleFindName != null">`people_find_name` = #{peopleFindName}, </if>
 			<if test="findTime != null">`find_time` = #{findTime}, </if>
 			<if test="level != null">`level` = #{level}, </if>
@@ -177,16 +167,22 @@ equipmentId}, </if>
 		</set>
 		where safe_trouble_id = #{safeTroubleId}
 	</update>
-	
-	<delete id="remove">
-		delete from eco_risk where safe_trouble_id = #{value}
-	</delete>
-	
-	<delete id="batchRemove">
-		delete from eco_risk where safe_trouble_id in 
+
+	<update id="remove">
+		update eco_risk
+		set delete_flag = '1',
+		modify_time = CURRENT_TIMESTAMP()
+		where safe_trouble_id = #{value}
+	</update>
+
+	<update id="batchRemove">
+		update eco_risk
+		set `modify_time` = CURRENT_TIMESTAMP(),
+		`delete_flag` = '1'
+		where safe_trouble_id in
 		<foreach item="safeTroubleId" collection="array" open="(" separator="," close=")">
 			#{safeTroubleId}
 		</foreach>
-	</delete>
+	</update>
 
 </mapper>

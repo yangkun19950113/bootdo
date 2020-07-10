@@ -21,7 +21,12 @@ public class ElectricServiceImpl implements ElectricService {
 	public ElectricDO get(Integer equipmentId){
 		return electricDao.get(equipmentId);
 	}
-	
+
+	@Override
+	public ElectricDO getData(Integer enterpriseId) {
+		return electricDao.getData(enterpriseId);
+	}
+
 	@Override
 	public List<ElectricDO> list(Map<String, Object> map){
 		return electricDao.list(map);

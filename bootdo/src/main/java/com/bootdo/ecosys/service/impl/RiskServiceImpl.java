@@ -20,7 +20,12 @@ public class RiskServiceImpl implements RiskService {
 	public RiskDO get(Integer safeTroubleId){
 		return riskDao.get(safeTroubleId);
 	}
-	
+
+	@Override
+	public RiskDO getData(Integer enterpriseId) {
+		return riskDao.getData(enterpriseId);
+	}
+
 	@Override
 	public List<RiskDO> list(Map<String, Object> map){
 		return riskDao.list(map);

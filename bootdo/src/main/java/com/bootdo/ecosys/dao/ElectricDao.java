@@ -17,6 +17,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface ElectricDao {
 
 	ElectricDO get(Integer equipmentId);
+	ElectricDO getData(Integer enterpriseId);
 	
 	List<ElectricDO> list(Map<String, Object> map);
 	

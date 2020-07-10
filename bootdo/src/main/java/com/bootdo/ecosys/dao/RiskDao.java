@@ -16,7 +16,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface RiskDao {
 
 	RiskDO get(Integer safeTroubleId);
-	
+	RiskDO getData(Integer enterpriseId);
 	List<RiskDO> list(Map<String, Object> map);
 	
 	int count(Map<String, Object> map);
