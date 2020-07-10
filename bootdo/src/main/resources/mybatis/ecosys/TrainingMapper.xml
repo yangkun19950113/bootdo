@@ -7,7 +7,14 @@
 		select `training_id`,`enterprise_id`,`traning_ecosys_flg`,`la_provide_flg`,`train_name`,`train_type`,`person_number`,`dept_code`,`traning_file_flg`,`phone_number`,`train_time`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_training where training_id = #{value}
 	</select>
 	<select id="getData" resultType="com.bootdo.ecosys.domain.TrainingDO">
-		select `training_id`,`enterprise_id`,`traning_ecosys_flg`,`la_provide_flg`,`train_name`,`train_type`,`person_number`,`dept_code`,`traning_file_flg`,`phone_number`,`train_time`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_training where enterprise_id = #{value}
+		SELECT
+		*
+		FROM
+		eco_training
+		WHERE
+		enterprise_id = #{value}
+		and delete_flag = '0'
+		LIMIT 1
 	</select>
 
 	<select id="list" resultType="com.bootdo.ecosys.domain.TrainingDO">
