@@ -16,6 +16,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface EcoequipmentDao {
 
 	EcoequipmentDO get(Integer equipmentId);
+	EcoequipmentDO getData(Integer enterpriseId);
 	
 	List<EcoequipmentDO> list(Map<String, Object> map);
 	

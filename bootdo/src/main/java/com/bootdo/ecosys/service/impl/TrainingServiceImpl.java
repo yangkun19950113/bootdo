@@ -21,7 +21,12 @@ public class TrainingServiceImpl implements TrainingService {
 	public TrainingDO get(Integer trainingId){
 		return trainingDao.get(trainingId);
 	}
-	
+
+	@Override
+	public TrainingDO getData(Integer enterpriseId) {
+		return trainingDao.getData(enterpriseId);
+	}
+
 	@Override
 	public List<TrainingDO> list(Map<String, Object> map){
 		return trainingDao.list(map);

@@ -16,7 +16,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface TrainingDao {
 
 	TrainingDO get(Integer trainingId);
-	
+	TrainingDO getData(Integer enterpriseId);
 	List<TrainingDO> list(Map<String, Object> map);
 	
 	int count(Map<String, Object> map);

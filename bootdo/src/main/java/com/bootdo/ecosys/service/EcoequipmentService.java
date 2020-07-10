@@ -28,4 +28,5 @@ public interface EcoequipmentService {
 	int remove(Integer equipmentId);
 	
 	int batchRemove(Integer[] equipmentIds);
+	EcoequipmentDO getData(Integer enterpriseId);
 }

@@ -21,7 +21,12 @@ public class DangersourceServiceImpl implements DangersourceService {
 	public DangersourceDO get(Integer dangerSourceId){
 		return dangersourceDao.get(dangerSourceId);
 	}
-	
+
+	@Override
+	public DangersourceDO getData(Integer enterpriseId) {
+		return dangersourceDao.getData(enterpriseId);
+	}
+
 	@Override
 	public List<DangersourceDO> list(Map<String, Object> map){
 		return dangersourceDao.list(map);

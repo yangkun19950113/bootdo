@@ -6,6 +6,9 @@
 	<select id="get" resultType="com.bootdo.ecosys.domain.DangersourceDO">
 		select `danger_source_id`,`danger_source_name`,`part_detail`,`degree_code`,`accident_type`,`monit`,`protection_person`,`phone_number`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`enterprise_id`,`administrative_division`,`urbanorrural` from eco_dangersource where danger_source_id = #{value}
 	</select>
+	<select id="getData" resultType="com.bootdo.ecosys.domain.DangersourceDO">
+		select `danger_source_id`,`danger_source_name`,`part_detail`,`degree_code`,`accident_type`,`monit`,`protection_person`,`phone_number`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`enterprise_id`,`administrative_division`,`urbanorrural` from eco_dangersource where enterprise_id = #{value} LIMIT 1
+	</select>
 
 	<select id="list" resultType="com.bootdo.ecosys.domain.DangersourceDO">
 		select `danger_source_id`,`danger_source_name`,`part_detail`,`degree_code`,`accident_type`,`monit`,`protection_person`,`phone_number`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`enterprise_id`,`administrative_division`,`urbanorrural` from eco_dangersource

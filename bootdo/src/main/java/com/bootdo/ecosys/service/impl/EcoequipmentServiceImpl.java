@@ -51,5 +51,10 @@ public class EcoequipmentServiceImpl implements EcoequipmentService {
 	public int batchRemove(Integer[] equipmentIds){
 		return ecoequipmentDao.batchRemove(equipmentIds);
 	}
-	
+
+	@Override
+	public EcoequipmentDO getData(Integer enterpriseId) {
+		return ecoequipmentDao.getData(enterpriseId);
+	}
+
 }

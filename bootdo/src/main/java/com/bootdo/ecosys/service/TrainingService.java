@@ -16,6 +16,7 @@ import java.util.Map;
 public interface TrainingService {
 	
 	TrainingDO get(Integer trainingId);
+	TrainingDO getData(Integer enterpriseId);
 	
 	List<TrainingDO> list(Map<String, Object> map);
 	

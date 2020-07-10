@@ -16,6 +16,7 @@ import java.util.Map;
 public interface DangersourceService {
 	
 	DangersourceDO get(Integer dangerSourceId);
+	DangersourceDO getData(Integer enterpriseId);
 	
 	List<DangersourceDO> list(Map<String, Object> map);
 	

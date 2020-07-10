@@ -17,6 +17,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface DangersourceDao {
 
 	DangersourceDO get(Integer dangerSourceId);
+	DangersourceDO getData(Integer enterpriseId);
 	
 	List<DangersourceDO> list(Map<String, Object> map);
 	
