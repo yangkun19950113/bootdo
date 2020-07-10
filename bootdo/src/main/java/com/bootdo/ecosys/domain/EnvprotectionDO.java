@@ -84,6 +84,16 @@ public class EnvprotectionDO implements Serializable {
 	//城乡分类
 	private Integer urbanorrural;
 
+	private String envprotectionMinImgUrl;
+
+	public String getEnvprotectionMinImgUrl() {
+		return envprotectionMinImgUrl;
+	}
+
+	public void setEnvprotectionMinImgUrl(String envprotectionMinImgUrl) {
+		this.envprotectionMinImgUrl = envprotectionMinImgUrl;
+	}
+
 
 	/**
 	 * 设置：企业id

@@ -69,6 +69,15 @@ public class ElectricDO implements Serializable {
 	private Integer urbanorrural;
 
 	private String enterpriseName;
+	private String electricMinImgUrl;
+
+	public String getElectricMinImgUrl() {
+		return electricMinImgUrl;
+	}
+
+	public void setElectricMinImgUrl(String electricMinImgUrl) {
+		this.electricMinImgUrl = electricMinImgUrl;
+	}
 
 	/**
 	 * 设置：设备id

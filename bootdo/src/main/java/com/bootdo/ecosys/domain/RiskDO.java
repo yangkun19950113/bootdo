@@ -63,6 +63,15 @@ public class RiskDO implements Serializable {
 	private Integer administrativeDivision;
 	//
 	private Integer urbanorrural;
+	private String riskMinImgUrl;
+
+	public String getRiskMinImgUrl() {
+		return riskMinImgUrl;
+	}
+
+	public void setRiskMinImgUrl(String riskMinImgUrl) {
+		this.riskMinImgUrl = riskMinImgUrl;
+	}
 
 	/**
 	 * 设置：培训会议id

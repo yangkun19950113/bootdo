@@ -67,6 +67,16 @@ public class MaterialDO implements Serializable {
 	//城乡分类
 	private Integer urbanorrural;
 
+	private String materialMinImgUrl;
+
+	public String getMaterialMinImgUrl() {
+		return materialMinImgUrl;
+	}
+
+	public void setMaterialMinImgUrl(String materialMinImgUrl) {
+		this.materialMinImgUrl = materialMinImgUrl;
+	}
+
 	/**
 	 * 设置：
 	 */

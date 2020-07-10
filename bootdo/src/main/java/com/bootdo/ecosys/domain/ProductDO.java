@@ -70,6 +70,15 @@ public class ProductDO implements Serializable {
 	private Integer administrativeDivision;
 	//城乡分类
 	private Integer urbanorrural;
+	private String productMinImgUrl;
+
+	public String getProductMinImgUrl() {
+		return productMinImgUrl;
+	}
+
+	public void setProductMinImgUrl(String productMinImgUrl) {
+		this.productMinImgUrl = productMinImgUrl;
+	}
 
 	/**
 	 * 设置：产品id

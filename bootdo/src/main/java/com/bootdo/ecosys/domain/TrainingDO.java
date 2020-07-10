@@ -63,6 +63,15 @@ public class TrainingDO implements Serializable {
 	private Integer administrativeDivision;
 	//
 	private Integer urbanorrural;
+	private String trainingMinImgUrl;
+
+	public String getTrainingMinImgUrl() {
+		return trainingMinImgUrl;
+	}
+
+	public void setTrainingMinImgUrl(String trainingMinImgUrl) {
+		this.trainingMinImgUrl = trainingMinImgUrl;
+	}
 
 	/**
 	 * 设置：培训会议id

@@ -71,6 +71,15 @@ public class EcoequipmentDO implements Serializable {
 	private Integer administrativeDivision;
 	//城乡分类
 	private Integer urbanorrural;
+	private String ecoequipmentMinImgUrl;
+
+	public String getEcoequipmentMinImgUrl() {
+		return ecoequipmentMinImgUrl;
+	}
+
+	public void setEcoequipmentMinImgUrl(String ecoequipmentMinImgUrl) {
+		this.ecoequipmentMinImgUrl = ecoequipmentMinImgUrl;
+	}
 
 	/**
 	 * 设置：设备id

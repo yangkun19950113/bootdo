@@ -67,6 +67,15 @@ public class FiredeviceDO implements Serializable {
 	private Integer urbanorrural;
 
 	private String enterpriseName;
+	private String firedeviceMinImgUrl;
+
+	public String getFiredeviceMinImgUrl() {
+		return firedeviceMinImgUrl;
+	}
+
+	public void setFiredeviceMinImgUrl(String firedeviceMinImgUrl) {
+		this.firedeviceMinImgUrl = firedeviceMinImgUrl;
+	}
 
 	/**
 	 * 设置：设备id

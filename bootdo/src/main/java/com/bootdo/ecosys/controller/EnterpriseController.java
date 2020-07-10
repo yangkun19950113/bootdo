@@ -181,7 +181,7 @@ public class EnterpriseController {
 		ShowData.setRegisteredAddress(registeredAddress);
 		// 注册时间
 		Date registeredTime = enterprise.getRegisteredTime();
-		ShowData.getRegisteredTime(registeredTime);
+		ShowData.setRegisteredTime(registeredTime);
 		//  注册资金
 		Float registeredFund = enterprise.getRegisteredFund();
 		ShowData.setRegisteredFund(registeredFund);

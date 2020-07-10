@@ -59,6 +59,15 @@ public class DangersourceDO implements Serializable {
 	private Integer administrativeDivision;
 	//
 	private Integer urbanorrural;
+	private String dangersourceMinImgUrl;
+
+	public String getDangersourceMinImgUrl() {
+		return dangersourceMinImgUrl;
+	}
+
+	public void setDangersourceMinImgUrl(String dangersourceMinImgUrl) {
+		this.dangersourceMinImgUrl = dangersourceMinImgUrl;
+	}
 
 	/**
 	 * 设置：危险源信息id

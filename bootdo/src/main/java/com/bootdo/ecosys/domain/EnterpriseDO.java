@@ -97,6 +97,15 @@ public class EnterpriseDO implements Serializable {
 	private String imgUrl;
 
 	private String[] imgUrls;
+	private String minImgUrl;
+
+	public String getMinImgUrl() {
+		return minImgUrl;
+	}
+
+	public void setMinImgUrl(String minImgUrl) {
+		this.minImgUrl = minImgUrl;
+	}
 
 	public String[] getImgUrls() {
 		return imgUrls;
