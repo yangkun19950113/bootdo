@@ -20,8 +20,7 @@ public class TrainingDO implements Serializable {
 	//企业id
 	private Integer enterpriseId;
 	//是否建立安全培训制度
-	private String 
-traningSystemFlg;
+	private String traningSystemFlg;
 	//是否为劳动者提供防护用品
 	private String laProvideFlg;
 	//培训主题

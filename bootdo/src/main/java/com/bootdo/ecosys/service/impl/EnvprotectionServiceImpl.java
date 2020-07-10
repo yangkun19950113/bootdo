@@ -51,5 +51,10 @@ public class EnvprotectionServiceImpl implements EnvprotectionService {
 	public int batchRemove(Integer[] envirProtectionIds){
 		return envprotectionDao.batchRemove(envirProtectionIds);
 	}
-	
+
+	@Override
+	public EnvprotectionDO getData(Integer enterpriseId) {
+		return envprotectionDao.getData(enterpriseId);
+	}
+
 }
