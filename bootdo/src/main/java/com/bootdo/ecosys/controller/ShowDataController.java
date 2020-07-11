@@ -59,7 +59,6 @@ public class ShowDataController {
 		SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		ShowDataDO ShowData = new ShowDataDO();
 		Map<String, Object> params = new HashMap<>();
-		enterpriseName = "德云社";
 		params.put("enterpriseName","德云社");
 //		params.put("socialCreditCode",socialCreditCode);
 		// 企业信息
@@ -215,7 +214,7 @@ public class ShowDataController {
 		ShowData.setEleequipmentName(eleequipmentName);
 		//设备编码
 		String eleequipmentCode = electricDO.getEquipmentCode();
-		ShowData.setEquipmentCode(eleequipmentCode);
+		ShowData.setEleequipmentCode(eleequipmentCode);
 		//相数
 		Integer phaseNumber = electricDO.getPhaseNumber();
 		ShowData.setPhaseNumber(phaseNumber);
@@ -256,6 +255,8 @@ public class ShowDataController {
 		//采购时间
 		Date buyTime = firedeviceDO.getBuyTime();
 		ShowData.setBuyTime(buyTime);
+		String firedeviceMinImgUrl = firedeviceDO.getFiredeviceMinImgUrl();
+		ShowData.setFiredeviceMinImgUrl(firedeviceMinImgUrl);
 		return MessageResult.success("200","", ShowData);
 	}
 }
