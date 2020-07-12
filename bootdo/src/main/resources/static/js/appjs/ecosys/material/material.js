@@ -1,6 +1,7 @@
-
-var prefix = "/system/material"
+var enterpriseId;
+var prefix = "/ecosys/material"
 $(function() {
+	enterpriseId = $("#enterpriseId").val();
 	load();
 });
 
@@ -9,7 +10,7 @@ function load() {
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url : prefix + "/list", // 服务器数据的加载地址
+						url : prefix + "/list/" + enterpriseId, // 服务器数据的加载地址
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,
@@ -48,28 +49,24 @@ function load() {
 									checkbox : true
 								},
 																{
-									field : 'materialId', 
-									title : '' 
-								},
-																{
 									field : 'materialType', 
-									title : '' 
+									title : '物料类型'
 								},
 																{
 									field : 'productId', 
-									title : '' 
+									title : '产品id'
 								},
 																{
 									field : 'materialName', 
-									title : '' 
+									title : '物料名称'
 								},
 																{
 									field : 'specifical', 
-									title : '' 
+									title : '规格'
 								},
 																{
 									field : 'model', 
-									title : '' 
+									title : '型号'
 								},
 																{
 									field : 'orgionWay', 
@@ -89,7 +86,7 @@ function load() {
 								},
 																{
 									field : 'remark', 
-									title : '' 
+									title : '备注'
 								},
 																{
 									field : 'surveytedPersonName', 
@@ -108,36 +105,8 @@ function load() {
 									title : '' 
 								},
 																{
-									field : 'createTime', 
-									title : '' 
-								},
-																{
-									field : 'createUserName', 
-									title : '' 
-								},
-																{
-									field : 'createBy', 
-									title : '' 
-								},
-																{
-									field : 'modifyTime', 
-									title : '' 
-								},
-																{
-									field : 'modifyUserName', 
-									title : '' 
-								},
-																{
-									field : 'modifyBy', 
-									title : '' 
-								},
-																{
-									field : 'deleteFlag', 
-									title : '' 
-								},
-																{
 									field : 'enterpriseId', 
-									title : '' 
+									title : '所属企业'
 								},
 																{
 									field : 'administrativeDivision', 
@@ -152,15 +121,9 @@ function load() {
 									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
-										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
-												+ row.materialId
-												+ '\')"><i class="fa fa-edit"></i></a> ';
-										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
-												+ row.materialId
-												+ '\')"><i class="fa fa-remove"></i></a> ';
-										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.materialId
-												+ '\')"><i class="fa fa-key"></i></a> ';
+										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\'' + row.materialId + '\')"><i class="fa fa-edit"></i></a> ';
+										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\'' + row.materialId + '\')"><i class="fa fa-remove"></i></a> ';
+										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\'' + row.materialId + '\')"><i class="fa fa-key"></i></a> ';
 										return e + d ;
 									}
 								} ]
@@ -176,7 +139,7 @@ function add() {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
-		content : prefix + '/add' // iframe的url
+		content : prefix + '/add/' + enterpriseId // iframe的url
 	});
 }
 function edit(id) {

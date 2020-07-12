@@ -3,7 +3,9 @@ package com.bootdo.ecosys.controller;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.ecosys.domain.EnterpriseDO;
 import com.bootdo.ecosys.domain.MaterialDO;
+import com.bootdo.ecosys.service.EnterpriseService;
 import com.bootdo.ecosys.service.MaterialService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,22 +31,26 @@ import com.bootdo.common.utils.R;
  */
  
 @Controller
-@RequestMapping("/system/material")
+@RequestMapping("/ecosys/material")
 public class MaterialController {
 	@Autowired
 	private MaterialService materialService;
-	
-	@GetMapping()
-	@RequiresPermissions("system:material:material")
-	String Material(){
-	    return "system/material/material";
+	@Autowired
+	private EnterpriseService enterpriseService;
+
+	@GetMapping("/{enterpriseId}")
+	@RequiresPermissions("ecosys:material:material")
+	String Material(@PathVariable("enterpriseId") Long enterpriseId,Model model){
+		model.addAttribute("enterpriseId", enterpriseId);
+		return "ecosys/material/material";
 	}
 	
 	@ResponseBody
-	@GetMapping("/list")
-	@RequiresPermissions("system:material:material")
-	public PageUtils list(@RequestParam Map<String, Object> params){
+	@GetMapping("/list/{enterpriseId}")
+	@RequiresPermissions("ecosys:material:material")
+	public PageUtils list(@RequestParam Map<String, Object> params,@PathVariable("enterpriseId") Long enterpriseId){
 		//查询列表数据
+		params.put("enterpriseId",enterpriseId);
         Query query = new Query(params);
 		List<MaterialDO> materialList = materialService.list(query);
 		int total = materialService.count(query);
@@ -52,18 +58,24 @@ public class MaterialController {
 		return pageUtils;
 	}
 	
-	@GetMapping("/add")
-	@RequiresPermissions("system:material:add")
-	String add(){
-	    return "system/material/add";
+	@GetMapping("/add/{enterpriseId}")
+	@RequiresPermissions("ecosys:material:add")
+	String add(@PathVariable("enterpriseId") Long enterpriseId,Model model){
+		EnterpriseDO enterprise = enterpriseService.get(enterpriseId.intValue());
+		String enterpriseName = enterprise.getEnterpriseName();
+		model.addAttribute("enterpriseId", enterpriseId);
+		model.addAttribute("enterpriseName", enterpriseName);
+		return "ecosys/material/add";
 	}
 
 	@GetMapping("/edit/{materialId}")
-	@RequiresPermissions("system:material:edit")
+	@RequiresPermissions("ecosys:material:edit")
 	String edit(@PathVariable("materialId") Integer materialId,Model model){
 		MaterialDO material = materialService.get(materialId);
+		EnterpriseDO enterprise = enterpriseService.get(material.getEnterpriseId());
+		material.setEnterpriseName(enterprise.getEnterpriseName());
 		model.addAttribute("material", material);
-	    return "system/material/edit";
+	    return "ecosys/material/edit";
 	}
 	
 	/**
@@ -71,7 +83,7 @@ public class MaterialController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("system:material:add")
+	@RequiresPermissions("ecosys:material:add")
 	public R save( MaterialDO material){
 		if(materialService.save(material)>0){
 			return R.ok();
@@ -83,10 +95,12 @@ public class MaterialController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("system:material:edit")
+	@RequiresPermissions("ecosys:material:edit")
 	public R update( MaterialDO material){
-		materialService.update(material);
-		return R.ok();
+		if(materialService.update(material)>0){
+			return R.ok();
+		}
+		return R.error();
 	}
 	
 	/**
@@ -94,10 +108,10 @@ public class MaterialController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("system:material:remove")
+	@RequiresPermissions("ecosys:material:remove")
 	public R remove( Integer materialId){
 		if(materialService.remove(materialId)>0){
-		return R.ok();
+			return R.ok();
 		}
 		return R.error();
 	}
@@ -107,7 +121,7 @@ public class MaterialController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("system:material:batchRemove")
+	@RequiresPermissions("ecosys:material:batchRemove")
 	public R remove(@RequestParam("ids[]") Integer[] materialIds){
 		materialService.batchRemove(materialIds);
 		return R.ok();

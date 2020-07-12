@@ -1,6 +1,13 @@
 var prefix = "/ecosys/enterprise";
 var prefixFire = "/ecosys/firedevice";
 var prefixElectric = "/ecosys/electric";
+var prefixEnvprotection = "/ecosys/envprotection";
+var prefixDangerSource = "/ecosys/dangersource";
+var prefixMaterial = "/ecosys/material";
+var prefixProduct = "/ecosys/product";
+
+
+
 var enterpriseNatureCodeList;
 var taxpayerCodeList;
 var marketCodeList;
@@ -77,7 +84,11 @@ function load() {
 								formatter : function(value, row, index) {
 									var a = '<a class="btn btn-danger" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixFire +'\',\'' + prefixFire +'/'+row.enterpriseId+'\',\'' + '消防设备管理' + '\')">'+'消'+'</a>';
 									var b = '<a class="btn btn-primary" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixElectric +'\',\'' + prefixElectric +'/'+row.enterpriseId+'\',\'' + '用电设备管理' + '\')">'+'电'+'</a>';
-									return a + b ;
+									var c = '<a class="btn btn-success" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixEnvprotection +'\',\'' + prefixEnvprotection +'/'+row.enterpriseId+'\',\'' + '环保信息管理' + '\')">'+'环'+'</a>';
+									var d = '<a class="btn btn-danger" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixDangerSource +'\',\'' + prefixDangerSource +'/'+row.enterpriseId+'\',\'' + '危险源信息管理' + '\')">'+'危'+'</a>';
+									var e = '<a class="btn btn-info" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixMaterial +'\',\'' + prefixMaterial +'/'+row.enterpriseId+'\',\'' + '物料信息管理' + '\')">'+'物'+'</a>';
+									var f = '<a class="btn btn-warning" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixProduct +'\',\'' + prefixProduct +'/'+row.enterpriseId+'\',\'' + '产品信息管理' + '\')">'+'产'+'</a>';
+									return a + b + c + d + e + f ;
 								}
 							},
 

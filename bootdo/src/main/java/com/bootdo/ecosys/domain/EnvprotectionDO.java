@@ -94,6 +94,10 @@ public class EnvprotectionDO implements Serializable {
 		this.envprotectionMinImgUrl = envprotectionMinImgUrl;
 	}
 
+	private String industryName;
+
+	private String projectManageName;
+
 
 	/**
 	 * 设置：企业id
@@ -499,5 +503,21 @@ public class EnvprotectionDO implements Serializable {
 
 	public void setEnvirProtectionId(Integer envirProtectionId) {
 		this.envirProtectionId = envirProtectionId;
+	}
+
+	public String getIndustryName() {
+		return industryName;
+	}
+
+	public void setIndustryName(String industryName) {
+		this.industryName = industryName;
+	}
+
+	public String getProjectManageName() {
+		return projectManageName;
+	}
+
+	public void setProjectManageName(String projectManageName) {
+		this.projectManageName = projectManageName;
 	}
 }

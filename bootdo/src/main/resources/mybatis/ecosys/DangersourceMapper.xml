@@ -19,7 +19,8 @@
 
 	<select id="list" resultType="com.bootdo.ecosys.domain.DangersourceDO">
 		select `danger_source_id`,`danger_source_name`,`part_detail`,`degree_code`,`accident_type`,`monit`,`protection_person`,`phone_number`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`enterprise_id`,`administrative_division`,`urbanorrural` from eco_dangersource
-        <where>  
+        <where>
+			delete_flag = '0'
 		  		  <if test="dangerSourceId != null and dangerSourceId != ''"> and danger_source_id = #{dangerSourceId} </if>
 		  		  <if test="dangerSourceName != null and dangerSourceName != ''"> and danger_source_name = #{dangerSourceName} </if>
 		  		  <if test="partDetail != null and partDetail != ''"> and part_detail = #{partDetail} </if>
@@ -58,7 +59,8 @@
 	
  	<select id="count" resultType="int">
 		select count(*) from eco_dangersource
-		 <where>  
+		 <where>
+			 delete_flag = '0'
 		  		  <if test="dangerSourceId != null and dangerSourceId != ''"> and danger_source_id = #{dangerSourceId} </if>
 		  		  <if test="dangerSourceName != null and dangerSourceName != ''"> and danger_source_name = #{dangerSourceName} </if>
 		  		  <if test="partDetail != null and partDetail != ''"> and part_detail = #{partDetail} </if>
@@ -124,13 +126,13 @@
 			#{surveytedPersonPosition}, 
 			#{fullFormTime}, 
 			#{surveyPersonName}, 
-			#{createTime}, 
+			CURRENT_TIMESTAMP(),
 			#{createUserName}, 
 			#{createBy}, 
-			#{modifyTime}, 
+			CURRENT_TIMESTAMP(),
 			#{modifyUserName}, 
 			#{modifyBy}, 
-			#{deleteFlag}, 
+			'0',
 			#{enterpriseId}, 
 			#{administrativeDivision}, 
 			#{urbanorrural}
@@ -154,7 +156,7 @@
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
 			<if test="createUserName != null">`create_user_name` = #{createUserName}, </if>
 			<if test="createBy != null">`create_by` = #{createBy}, </if>
-			<if test="modifyTime != null">`modify_time` = #{modifyTime}, </if>
+			<if test="modifyTime != null">`modify_time` = CURRENT_TIMESTAMP(),, </if>
 			<if test="modifyUserName != null">`modify_user_name` = #{modifyUserName}, </if>
 			<if test="modifyBy != null">`modify_by` = #{modifyBy}, </if>
 			<if test="deleteFlag != null">`delete_flag` = #{deleteFlag}, </if>
@@ -165,15 +167,21 @@
 		where danger_source_id = #{dangerSourceId}
 	</update>
 	
-	<delete id="remove">
-		delete from eco_dangersource where danger_source_id = #{value}
-	</delete>
+	<update id="remove">
+		update eco_dangersource
+		set modify_time = CURRENT_TIMESTAMP(),
+		delete_flag = '1'
+		where danger_source_id = #{value}
+	</update>
 	
-	<delete id="batchRemove">
-		delete from eco_dangersource where danger_source_id in 
+	<update id="batchRemove">
+		update eco_dangersource
+		set modify_time = CURRENT_TIMESTAMP(),
+		delete_flag = '1'
+		where danger_source_id in
 		<foreach item="dangerSourceId" collection="array" open="(" separator="," close=")">
 			#{dangerSourceId}
 		</foreach>
-	</delete>
+	</update>
 
 </mapper>

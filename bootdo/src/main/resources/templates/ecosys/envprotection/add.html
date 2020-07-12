@@ -3,6 +3,9 @@
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="gray-bg">
+<div>
+	<input id="enterpriseIdFa" name="enterpriseIdFa" th:value="${enterpriseId}"  type="hidden">
+</div>
 	<div class="wrapper wrapper-content ">
 		<div class="row">
 			<div class="col-sm-12">
@@ -10,204 +13,168 @@
 					<div class="ibox-content">
 						<form class="form-horizontal m-t" id="signupForm">
 							<div class="form-group">	
-								<label class="col-sm-3 control-label">企业id：</label>
+								<label class="col-sm-3 control-label">所属企业：</label>
 								<div class="col-sm-8">
-									<input id="enterpriseId" name="enterpriseId" class="form-control" type="text">
+									<input id="enterpriseId" name="enterpriseId" class="form-control" type="hidden">
+									<input id="enterpriseId1" class="form-control" type="text" disabled>
 								</div>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">企业名称：</label>
-								<div class="col-sm-8">
-									<input id="enterpriseName" name="enterpriseName" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
+							<div class="form-group ecoEstimateFlg">
 								<label class="col-sm-3 control-label">是否有环评文号：</label>
 								<div class="col-sm-8">
-									<input id="ecoEstimateFlg" name="ecoEstimateFlg" class="form-control" type="text">
+									<label class="radio-inline"> <input type="radio" name="ecoEstimateFlg" value="0" /> 是</label>
+									<label class="radio-inline"> <input type="radio" name="ecoEstimateFlg" value="1" /> 否</label>
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">环评文号：</label>
 								<div class="col-sm-8">
-									<input id="ecoLicence" name="ecoLicence" class="form-control" type="text">
+									<input id="ecoLicence" name="ecoLicence" class="form-control" type="text" disabled>
 								</div>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">是够属于园区：</label>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">是否属于园区：</label>
 								<div class="col-sm-8">
-									<input id="parkFlg" name="parkFlg" class="form-control" type="text">
+									<label class="radio-inline"> <input type="radio" name="parkFlg" value="0" /> 是</label>
+									<label class="radio-inline"> <input type="radio" name="parkFlg" value="1" /> 否</label>
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">是否有环保制度：</label>
 								<div class="col-sm-8">
-									<input id="ecoStandardFlg" name="ecoStandardFlg" class="form-control" type="text">
+									<label class="radio-inline"> <input type="radio" name="ecoStandardFlg" value="0" /> 是</label>
+									<label class="radio-inline"> <input type="radio" name="ecoStandardFlg" value="1" /> 否</label>
 								</div>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">行业类别code：</label>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">行业类别：</label>
 								<div class="col-sm-8">
-									<input id="industryCode" name="industryCode" class="form-control" type="text">
+									<div id="industryCode" class="form-group"></div>
 								</div>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">项目管理类别code：</label>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">项目管理类别：</label>
 								<div class="col-sm-8">
-									<input id="projectManageCode" name="projectManageCode" class="form-control" type="text">
+									<div id="projectManageCode" class="form-group"></div>
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">是否竣工验收：</label>
 								<div class="col-sm-8">
-									<input id="isOrNotAcceptance" name="isOrNotAcceptance" class="form-control" type="text">
+									<label class="radio-inline"> <input type="radio" name="isOrNotAcceptance" value="0" /> 是</label>
+									<label class="radio-inline"> <input type="radio" name="isOrNotAcceptance" value="1" /> 否</label>
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">排污许可管理类别：</label>
 								<div class="col-sm-8">
-									<input id="tradablePermitsCode" name="tradablePermitsCode" class="form-control" type="text">
+									<label class="radio-inline"> <input type="radio" name="tradablePermitsCode" value="091" /> 登记管理</label>
+									<label class="radio-inline"> <input type="radio" name="tradablePermitsCode" value="092" /> 简化管理</label>
+									<label class="radio-inline"> <input type="radio" name="tradablePermitsCode" value="093" /> 重点管理</label>
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">是否核发排污许可证：</label>
 								<div class="col-sm-8">
-									<input id="pollutionLicenseFlg" name="pollutionLicenseFlg" class="form-control" type="text">
+									<label class="radio-inline"> <input type="radio" name="pollutionLicenseFlg" value="0" /> 是</label>
+									<label class="radio-inline"> <input type="radio" name="pollutionLicenseFlg" value="1" /> 否</label>
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">污染类别：</label>
 								<div class="col-sm-8">
-									<input id="pollutionCategoryCode" name="pollutionCategoryCode" class="form-control" type="text">
+									<div id="pollutionCategoryCode" class="form-group"></div>
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">年检监测是否有效：</label>
 								<div class="col-sm-8">
-									<input id="annualInspectionFlg" name="annualInspectionFlg" class="form-control" type="text">
+									<label class="radio-inline"> <input type="radio" name="annualInspectionFlg" value="0" /> 是</label>
+									<label class="radio-inline"> <input type="radio" name="annualInspectionFlg" value="1" /> 否</label>
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">所在区域：</label>
 								<div class="col-sm-8">
-									<input id="areaCode" name="areaCode" class="form-control" type="text">
+									<div id="areaCode" class="form-group"></div>
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">主要能源：</label>
 								<div class="col-sm-8">
-									<input id="mainEnergyCode" name="mainEnergyCode" class="form-control" type="text">
+									<div id="mainEnergyCode" class="form-group"></div>
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">污染治理措施：</label>
 								<div class="col-sm-8">
 									<input id="measures" name="measures" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">常规因子：</label>
 								<div class="col-sm-8">
-									<input id="normalFactorsCode" name="normalFactorsCode" class="form-control" type="text">
+									<div id="normalFactorsCode" class="form-group"></div>
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">特征因子：</label>
 								<div class="col-sm-8">
-									<input id="specialFactorsCode" name="specialFactorsCode" class="form-control" type="text">
+									<div id="specialFactorsCode" class="form-group"></div>
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">一般固体废物：</label>
 								<div class="col-sm-8">
 									<input id="nomalWaste" name="nomalWaste" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">危险废物：</label>
 								<div class="col-sm-8">
 									<input id="dangerWaste" name="dangerWaste" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">被调查人姓名：</label>
 								<div class="col-sm-8">
 									<input id="surveytedPersonName" name="surveytedPersonName" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">被调查人职务：</label>
 								<div class="col-sm-8">
 									<input id="surveytedPersonPosition" name="surveytedPersonPosition" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">填表日期：</label>
-								<div class="col-sm-8">
-									<input id="fullFormTime" name="fullFormTime" class="form-control" type="text">
+								<div class='input-group date col-sm-8' id='datetimepicker1' style="width:480px" >
+									<input id="fullFormTime" name="fullFormTime" class="form-control" type="text" style="margin-left: 15px;">
+									<span class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar" style="margin-left: 15px;"></span>
+									</span>
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">调查人：</label>
 								<div class="col-sm-8">
 									<input id="surveyPersonName" name="surveyPersonName" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">：</label>
-								<div class="col-sm-8">
-									<input id="createTime" name="createTime" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">：</label>
-								<div class="col-sm-8">
-									<input id="createUserName" name="createUserName" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">：</label>
-								<div class="col-sm-8">
-									<input id="createBy" name="createBy" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">：</label>
-								<div class="col-sm-8">
-									<input id="modifyTime" name="modifyTime" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">：</label>
-								<div class="col-sm-8">
-									<input id="modifyUserName" name="modifyUserName" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">：</label>
-								<div class="col-sm-8">
-									<input id="modifyBy" name="modifyBy" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">：</label>
-								<div class="col-sm-8">
-									<input id="deleteFlag" name="deleteFlag" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">行政区划：</label>
 								<div class="col-sm-8">
 									<input id="administrativeDivision" name="administrativeDivision" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">城乡分类：</label>
 								<div class="col-sm-8">
 									<input id="urbanorrural" name="urbanorrural" class="form-control" type="text">
 								</div>
 							</div>
-																					<div class="form-group">
+							<div class="form-group">
 								<div class="col-sm-8 col-sm-offset-3">
 									<button type="submit" class="btn btn-primary">提交</button>
 								</div>
@@ -219,7 +186,22 @@
 	</div>
 	</div>
 	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/system/envprotection/add.js">
-	</script>
+	<script type="text/javascript" src="/js/appjs/ecosys/envprotection/add.js"></script>
+<link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.24.0/moment-with-locales.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript">
+	$(function () {
+		$('#datetimepicker1').datetimepicker({
+			format: 'YYYY-MM-DD',
+			locale: moment.locale('zh-cn')
+		});
+	});
+</script>
+
+
+
+
 </body>
 </html>

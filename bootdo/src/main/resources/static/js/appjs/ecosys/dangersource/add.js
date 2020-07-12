@@ -1,4 +1,6 @@
+var enterpriseIdFa;
 $().ready(function() {
+	enterpriseIdFa = $("#enterpriseIdFa").val();
 	validateRule();
 });
 
@@ -11,7 +13,7 @@ function save() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/system/dangersource/save",
+		url : "/ecosys/dangersource/save",
 		data : $('#signupForm').serialize(),// 你的formid
 		async : false,
 		error : function(request) {

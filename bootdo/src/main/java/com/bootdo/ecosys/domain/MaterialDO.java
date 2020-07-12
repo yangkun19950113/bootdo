@@ -69,6 +69,8 @@ public class MaterialDO implements Serializable {
 
 	private String materialMinImgUrl;
 
+	private String enterpriseName;
+
 	public String getMaterialMinImgUrl() {
 		return materialMinImgUrl;
 	}
@@ -376,5 +378,13 @@ public class MaterialDO implements Serializable {
 	 */
 	public Integer getUrbanorrural() {
 		return urbanorrural;
+	}
+
+	public String getEnterpriseName() {
+		return enterpriseName;
+	}
+
+	public void setEnterpriseName(String enterpriseName) {
+		this.enterpriseName = enterpriseName;
 	}
 }

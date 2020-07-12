@@ -1,6 +1,19 @@
-
-var prefix = "/system/envprotection"
+var enterpriseId;
+var prefix = "/ecosys/envprotection";
+var industryCodeList;
+var projectManageCodeList;
+var pollutionCategoryCodeList;
+var areaCodeList;
+var mainEnergyCodeList;
+var normalFactorsCodeList;
+var specialFactorCodeList;
 $(function() {
+	enterpriseId = $("#enterpriseId").val();
+	getSpecialFactorsCode();//加载特征因子
+	getPollutionCategoryCode();//加载污染类别
+	getAreaCode();//加载所在区域
+	getMainEnergyCode();//加载主要能源
+	getNormalFactorsCode();//加载常规因子
 	load();
 });
 
@@ -9,7 +22,7 @@ function load() {
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url : prefix + "/list", // 服务器数据的加载地址
+						url : prefix + "/list/"+enterpriseId, // 服务器数据的加载地址
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,
@@ -47,69 +60,147 @@ function load() {
 								{
 									checkbox : true
 								},
-																{
-									field : 'envir protectionId', 
-									title : '环保基础信息id' 
-								},
-																{
-									field : 'enterpriseId', 
-									title : '企业id' 
-								},
-																{
+								{
 									field : 'enterpriseName', 
 									title : '企业名称' 
 								},
-																{
+								{
 									field : 'ecoEstimateFlg', 
-									title : '是否有环评文号' 
+									title : '是否有环评文号' ,
+									formatter : function(value, row, index) {
+										if(value == '0'){
+											return row.ecoEstimateFlg = "是";
+										}else if(value == '1') {
+											return row.ecoEstimateFlg = "否";
+										}
+									}
 								},
-																{
+								{
 									field : 'ecoLicence', 
 									title : '环评文号' 
 								},
-																{
+								{
 									field : 'parkFlg', 
-									title : '是够属于园区' 
+									title : '是够属于园区' ,
+									formatter : function(value, row, index) {
+										if(value == '0'){
+											return row.parkFlg = "是";
+										}else if(value == '1') {
+											return row.parkFlg = "否";
+										}
+									}
 								},
-																{
+								{
 									field : 'ecoStandardFlg', 
-									title : '是否有环保制度' 
+									title : '是否有环保制度',
+									formatter : function(value, row, index) {
+										if(value == '0'){
+											return row.ecoStandardFlg = "是";
+										}else if(value == '1') {
+											return row.ecoStandardFlg = "否";
+										}
+									}
 								},
-																{
-									field : 'industryCode', 
-									title : '行业类别code' 
+								{
+									field : 'industryName',
+									title : '行业类别'
 								},
-																{
-									field : 'projectManageCode', 
-									title : '项目管理类别code' 
+								{
+									field : 'projectManageName',
+									title : '项目管理类别'
 								},
-																{
+								{
 									field : 'isOrNotAcceptance', 
-									title : '是否竣工验收' 
+									title : '是否竣工验收',
+									formatter : function(value, row, index) {
+										if(value == '0'){
+											return row.isOrNotAcceptance = "是";
+										}else if(value == '1') {
+											return row.isOrNotAcceptance = "否";
+										}
+									}
 								},
-																{
+								{
 									field : 'tradablePermitsCode', 
-									title : '排污许可管理类别' 
+									title : '排污许可管理类别',
+									formatter : function(value, row, index) {
+										if(value == '091'){
+											return row.tradablePermitsCode = "登记管理";
+										}else if(value == '092') {
+											return row.tradablePermitsCode = "简化管理";
+										}else if(value == '093') {
+											return row.tradablePermitsCode = "重点管理";
+										}
+									}
 								},
-																{
+								{
 									field : 'pollutionLicenseFlg', 
-									title : '是否核发排污许可证' 
+									title : '是否核发排污许可证',
+									formatter : function(value, row, index) {
+										if(value == '0'){
+											return row.pollutionLicenseFlg = "是";
+										}else if(value == '1') {
+											return row.pollutionLicenseFlg = "否";
+										}
+									}
 								},
-																{
+								{
 									field : 'pollutionCategoryCode', 
-									title : '污染类别' 
+									title : '污染类别',
+									formatter : function(value, row, index) {
+										var pollutionName = '' ;
+										if(value != "" && value != null && value != undefined){
+											var codeList = value.split(",");
+											for(var i = 0;i<codeList.length;i++){
+												for(var j = 0;j<pollutionCategoryCodeList.length;j++){
+													if(codeList[i] == pollutionCategoryCodeList[j].codeId){
+														pollutionName = pollutionCategoryCodeList[j].name + "," + pollutionName;
+													}
+												}
+											}
+										}
+										return pollutionName;
+									}
 								},
-																{
+								{
 									field : 'annualInspectionFlg', 
-									title : '年检监测是否有效' 
+									title : '年检监测是否有效',
+									formatter : function(value, row, index) {
+										if(value == '0'){
+											return row.annualInspectionFlg = "是";
+										}else if(value == '1') {
+											return row.annualInspectionFlg = "否";
+										}
+									}
 								},
-																{
+								{
 									field : 'areaCode', 
-									title : '所在区域' 
+									title : '所在区域',
+									formatter : function(value, row, index) {
+										for(var i = 0;i<areaCodeList.length;i++){
+											if(value == areaCodeList[i].codeId){
+												return areaCodeList[i].name;
+											}
+										}
+									}
 								},
-																{
+								{
 									field : 'mainEnergyCode', 
-									title : '主要能源' 
+									title : '主要能源',
+									formatter : function(value, row, index) {
+										var mainEnergyName = '' ;
+										if(value != "" && value != null && value != undefined){
+											var codeList = value.split(",");
+											for(var i = 0;i<codeList.length;i++){
+												for(var j = 0;j<mainEnergyCodeList.length;j++){
+													if(codeList[i] == mainEnergyCodeList[j].codeId){
+														mainEnergyName = mainEnergyCodeList[j].name + "," + mainEnergyName;
+													}
+												}
+											}
+										}
+										return mainEnergyName;
+									}
 								},
 																{
 									field : 'measures', 
@@ -117,11 +208,39 @@ function load() {
 								},
 																{
 									field : 'normalFactorsCode', 
-									title : '常规因子' 
+									title : '常规因子',
+									formatter : function(value, row, index) {
+										var normalFactorsName = '' ;
+										if(value != "" && value != null && value != undefined){
+											var codeList = value.split(",");
+											for(var i = 0;i<codeList.length;i++){
+												for(var j = 0;j<normalFactorsCodeList.length;j++){
+													if(codeList[i] == normalFactorsCodeList[j].codeId){
+														normalFactorsName = normalFactorsCodeList[j].name + "," + normalFactorsName;
+													}
+												}
+											}
+										}
+										return normalFactorsName;
+									}
 								},
 																{
 									field : 'specialFactorsCode', 
-									title : '特征因子' 
+									title : '特征因子',
+									formatter : function(value, row, index) {
+										var specialFactorsName = '' ;
+										if(value != "" && value != null && value != undefined){
+											var codeList = value.split(",");
+											for(var i = 0;i<codeList.length;i++){
+												for(var j = 0;j<specialFactorCodeList.length;j++){
+													if(codeList[i] == specialFactorCodeList[j].codeId){
+														specialFactorsName = specialFactorCodeList[j].name + "," + specialFactorsName;
+													}
+												}
+											}
+										}
+										return specialFactorsName;
+									}
 								},
 																{
 									field : 'nomalWaste', 
@@ -148,34 +267,6 @@ function load() {
 									title : '调查人' 
 								},
 																{
-									field : 'createTime', 
-									title : '' 
-								},
-																{
-									field : 'createUserName', 
-									title : '' 
-								},
-																{
-									field : 'createBy', 
-									title : '' 
-								},
-																{
-									field : 'modifyTime', 
-									title : '' 
-								},
-																{
-									field : 'modifyUserName', 
-									title : '' 
-								},
-																{
-									field : 'modifyBy', 
-									title : '' 
-								},
-																{
-									field : 'deleteFlag', 
-									title : '' 
-								},
-																{
 									field : 'administrativeDivision', 
 									title : '行政区划' 
 								},
@@ -189,13 +280,13 @@ function load() {
 									align : 'center',
 									formatter : function(value, row, index) {
 										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
-												+ row.envir protectionId
+												+ row.envirProtectionId
 												+ '\')"><i class="fa fa-edit"></i></a> ';
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
-												+ row.envir protectionId
+												+ row.envirProtectionId
 												+ '\')"><i class="fa fa-remove"></i></a> ';
 										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.envir protectionId
+												+ row.envirProtectionId
 												+ '\')"><i class="fa fa-key"></i></a> ';
 										return e + d ;
 									}
@@ -212,7 +303,7 @@ function add() {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
-		content : prefix + '/add' // iframe的url
+		content : prefix + '/add/' + enterpriseId // iframe的url
 	});
 }
 function edit(id) {
@@ -282,4 +373,74 @@ function batchRemove() {
 	}, function() {
 
 	});
+}
+//加载污染类别
+function getPollutionCategoryCode(){
+	$.ajax({
+		type: "get",
+		url: "/ecosys/code/list",
+		dataType: "json",
+		data: {
+			parentId: 42
+		},
+		success: function (data) {
+			pollutionCategoryCodeList = data.rows;
+		}
+	})
+}
+//加载所在区域
+function getAreaCode(){
+	$.ajax({
+		type: "get",
+		url: "/ecosys/code/list",
+		dataType: "json",
+		data: {
+			parentId: 48
+		},
+		success: function (data) {
+			areaCodeList = data.rows;
+		}
+	})
+}
+//加载主要能源
+function getMainEnergyCode(){
+	$.ajax({
+		type: "get",
+		url: "/ecosys/code/list",
+		dataType: "json",
+		data: {
+			parentId: 53
+		},
+		success: function (data) {
+			mainEnergyCodeList = data.rows;
+		}
+	})
+}
+//加载常规因子
+function getNormalFactorsCode(){
+	$.ajax({
+		type: "get",
+		url: "/ecosys/code/list",
+		dataType: "json",
+		data: {
+			parentId: 57
+		},
+		success: function (data) {
+			normalFactorsCodeList = data.rows;
+		}
+	})
+}
+//加载特征因子
+function getSpecialFactorsCode(){
+	$.ajax({
+		type: "get",
+		url: "/ecosys/code/list",
+		dataType: "json",
+		data: {
+			parentId: 66
+		},
+		success: function (data) {
+			specialFactorCodeList = data.rows;
+		}
+	})
 }

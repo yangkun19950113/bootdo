@@ -3,7 +3,9 @@ package com.bootdo.ecosys.controller;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.ecosys.domain.EnterpriseDO;
 import com.bootdo.ecosys.domain.ProductDO;
+import com.bootdo.ecosys.service.EnterpriseService;
 import com.bootdo.ecosys.service.ProductService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,41 +32,51 @@ import com.bootdo.common.utils.R;
  */
  
 @Controller
-@RequestMapping("/system/product")
+@RequestMapping("/ecosys/product")
 public class ProductController {
 	@Autowired
 	private ProductService productService;
-	
-	@GetMapping()
-	@RequiresPermissions("system:product:product")
-	String Product(){
-	    return "system/product/product";
+	@Autowired
+	private EnterpriseService enterpriseService;
+
+	@GetMapping("/{enterpriseId}")
+	@RequiresPermissions("ecosys:product:product")
+	String Product(@PathVariable("enterpriseId") Long enterpriseId,Model model){
+		model.addAttribute("enterpriseId", enterpriseId);
+		return "ecosys/product/product";
 	}
 	
 	@ResponseBody
-	@GetMapping("/list")
-	@RequiresPermissions("system:product:product")
-	public PageUtils list(@RequestParam Map<String, Object> params){
+	@GetMapping("/list/{enterpriseId}")
+	@RequiresPermissions("ecosys:product:product")
+	public PageUtils list(@RequestParam Map<String, Object> params,@PathVariable("enterpriseId") Long enterpriseId){
 		//查询列表数据
+		params.put("enterpriseId",enterpriseId);
         Query query = new Query(params);
 		List<ProductDO> productList = productService.list(query);
 		int total = productService.count(query);
 		PageUtils pageUtils = new PageUtils(productList, total);
 		return pageUtils;
 	}
-	
-	@GetMapping("/add")
-	@RequiresPermissions("system:product:add")
-	String add(){
-	    return "system/product/add";
+
+	@GetMapping("/add/{enterpriseId}")
+	@RequiresPermissions("ecosys:product:add")
+	String add(@PathVariable("enterpriseId") Long enterpriseId,Model model){
+		EnterpriseDO enterprise = enterpriseService.get(enterpriseId.intValue());
+		String enterpriseName = enterprise.getEnterpriseName();
+		model.addAttribute("enterpriseId", enterpriseId);
+		model.addAttribute("enterpriseName", enterpriseName);
+	    return "ecosys/product/add";
 	}
 
 	@GetMapping("/edit/{productId}")
-	@RequiresPermissions("system:product:edit")
+	@RequiresPermissions("ecosys:product:edit")
 	String edit(@PathVariable("productId") Integer productId,Model model){
 		ProductDO product = productService.get(productId);
+		EnterpriseDO enterprise = enterpriseService.get(product.getEnterpriseId());
+		product.setEnterpriseName(enterprise.getEnterpriseName());
 		model.addAttribute("product", product);
-	    return "system/product/edit";
+	    return "ecosys/product/edit";
 	}
 	
 	/**
@@ -72,7 +84,7 @@ public class ProductController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("system:product:add")
+	@RequiresPermissions("ecosys:product:add")
 	public R save( ProductDO product){
 		if(productService.save(product)>0){
 			return R.ok();
@@ -84,10 +96,12 @@ public class ProductController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("system:product:edit")
+	@RequiresPermissions("ecosys:product:edit")
 	public R update( ProductDO product){
-		productService.update(product);
-		return R.ok();
+		if(productService.update(product)>0){
+			return R.ok();
+		}
+		return R.error();
 	}
 	
 	/**
@@ -95,10 +109,10 @@ public class ProductController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("system:product:remove")
+	@RequiresPermissions("ecosys:product:remove")
 	public R remove( Integer productId){
 		if(productService.remove(productId)>0){
-		return R.ok();
+			return R.ok();
 		}
 		return R.error();
 	}
@@ -108,7 +122,7 @@ public class ProductController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("system:product:batchRemove")
+	@RequiresPermissions("ecosys:product:batchRemove")
 	public R remove(@RequestParam("ids[]") Integer[] productIds){
 		productService.batchRemove(productIds);
 		return R.ok();

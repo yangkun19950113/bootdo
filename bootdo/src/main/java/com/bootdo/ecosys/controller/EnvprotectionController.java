@@ -30,22 +30,24 @@ import com.bootdo.common.utils.R;
  */
  
 @Controller
-@RequestMapping("/system/envprotection")
+@RequestMapping("/ecosys/envprotection")
 public class EnvprotectionController {
 	@Autowired
 	private EnvprotectionService envprotectionService;
 	
-	@GetMapping()
-	@RequiresPermissions("system:envprotection:envprotection")
-	String Envprotection(){
-	    return "system/envprotection/envprotection";
+	@GetMapping("/{enterpriseId}")
+	@RequiresPermissions("ecosys:envprotection:envprotection")
+	String Envprotection(@PathVariable("enterpriseId") Long enterpriseId,Model model){
+		model.addAttribute("enterpriseId", enterpriseId);
+		return "ecosys/envprotection/envprotection";
 	}
 	
 	@ResponseBody
-	@GetMapping("/list")
-	@RequiresPermissions("system:envprotection:envprotection")
-	public PageUtils list(@RequestParam Map<String, Object> params){
+	@GetMapping("/list/{enterpriseId}")
+	@RequiresPermissions("ecosys:envprotection:envprotection")
+	public PageUtils list(@RequestParam Map<String, Object> params,@PathVariable("enterpriseId") Long enterpriseId){
 		//查询列表数据
+		params.put("enterpriseId",enterpriseId);
         Query query = new Query(params);
 		List<EnvprotectionDO> envprotectionList = envprotectionService.list(query);
 		int total = envprotectionService.count(query);
@@ -53,18 +55,19 @@ public class EnvprotectionController {
 		return pageUtils;
 	}
 	
-	@GetMapping("/add")
-	@RequiresPermissions("system:envprotection:add")
-	String add(){
-	    return "system/envprotection/add";
+	@GetMapping("/add/{enterpriseId}")
+	@RequiresPermissions("ecosys:envprotection:add")
+	String add(@PathVariable("enterpriseId") Long enterpriseId,Model model){
+		model.addAttribute("enterpriseId", enterpriseId);
+		return "ecosys/envprotection/add";
 	}
 
-	@GetMapping("/edit/{envir protectionId}")
-	@RequiresPermissions("system:envprotection:edit")
-	String edit(@PathVariable("envir protectionId") Integer envirProtectionId,Model model){
+	@GetMapping("/edit/{envirProtectionId}")
+	@RequiresPermissions("ecosys:envprotection:edit")
+	String edit(@PathVariable("envirProtectionId") Integer envirProtectionId,Model model){
 		EnvprotectionDO envprotection = envprotectionService.get(envirProtectionId);
 		model.addAttribute("envprotection", envprotection);
-	    return "system/envprotection/edit";
+	    return "ecosys/envprotection/edit";
 	}
 	
 	/**
@@ -72,7 +75,7 @@ public class EnvprotectionController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("system:envprotection:add")
+	@RequiresPermissions("ecosys:envprotection:add")
 	public R save( EnvprotectionDO envprotection){
 		if(envprotectionService.save(envprotection)>0){
 			return R.ok();
@@ -84,7 +87,7 @@ public class EnvprotectionController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("system:envprotection:edit")
+	@RequiresPermissions("ecosys:envprotection:edit")
 	public R update( EnvprotectionDO envprotection){
 		envprotectionService.update(envprotection);
 		return R.ok();
@@ -95,7 +98,7 @@ public class EnvprotectionController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("system:envprotection:remove")
+	@RequiresPermissions("ecosys:envprotection:remove")
 	public R remove( Integer envirProtectionId){
 		if(envprotectionService.remove(envirProtectionId)>0){
 		return R.ok();
@@ -108,7 +111,7 @@ public class EnvprotectionController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("system:envprotection:batchRemove")
+	@RequiresPermissions("ecosys:envprotection:batchRemove")
 	public R remove(@RequestParam("ids[]") Integer[] envirProtectionIds){
 		envprotectionService.batchRemove(envirProtectionIds);
 		return R.ok();

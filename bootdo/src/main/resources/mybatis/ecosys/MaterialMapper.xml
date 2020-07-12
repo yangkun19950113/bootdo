@@ -19,7 +19,8 @@
 
 	<select id="list" resultType="com.bootdo.ecosys.domain.MaterialDO">
 		select `material_id`,`material_type`,`product_id`,`material_name`,`specifical`,`model`,`orgion_way`,`month_consumption`,`danger_material`,`content`,`remark`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`enterprise_id`,`administrative_division`,`urbanorrural` from eco_material
-        <where>  
+        <where>
+			delete_flag = '0'
 		  		  <if test="materialId != null and materialId != ''"> and material_id = #{materialId} </if>
 		  		  <if test="materialType != null and materialType != ''"> and material_type = #{materialType} </if>
 		  		  <if test="productId != null and productId != ''"> and product_id = #{productId} </if>
@@ -61,7 +62,8 @@
 	
  	<select id="count" resultType="int">
 		select count(*) from eco_material
-		 <where>  
+		 <where>
+			 delete_flag = '0'
 		  		  <if test="materialId != null and materialId != ''"> and material_id = #{materialId} </if>
 		  		  <if test="materialType != null and materialType != ''"> and material_type = #{materialType} </if>
 		  		  <if test="productId != null and productId != ''"> and product_id = #{productId} </if>
@@ -136,13 +138,13 @@
 			#{surveytedPersonPosition}, 
 			#{fullFormTime}, 
 			#{surveyPersonName}, 
-			#{createTime}, 
+			CURRENT_TIMESTAMP(),
 			#{createUserName}, 
 			#{createBy}, 
-			#{modifyTime}, 
+			CURRENT_TIMESTAMP(),
 			#{modifyUserName}, 
 			#{modifyBy}, 
-			#{deleteFlag}, 
+			'0',
 			#{enterpriseId}, 
 			#{administrativeDivision}, 
 			#{urbanorrural}
@@ -169,7 +171,7 @@
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
 			<if test="createUserName != null">`create_user_name` = #{createUserName}, </if>
 			<if test="createBy != null">`create_by` = #{createBy}, </if>
-			<if test="modifyTime != null">`modify_time` = #{modifyTime}, </if>
+			<if test="modifyTime != null">`modify_time` = CURRENT_TIMESTAMP(), </if>
 			<if test="modifyUserName != null">`modify_user_name` = #{modifyUserName}, </if>
 			<if test="modifyBy != null">`modify_by` = #{modifyBy}, </if>
 			<if test="deleteFlag != null">`delete_flag` = #{deleteFlag}, </if>
@@ -180,15 +182,21 @@
 		where material_id = #{materialId}
 	</update>
 	
-	<delete id="remove">
-		delete from eco_material where material_id = #{value}
-	</delete>
+	<update id="remove">
+		update eco_material
+		set modify_time = CURRENT_TIMESTAMP(),
+		delete_flag = '1'
+		where material_id = #{value}
+	</update>
 	
-	<delete id="batchRemove">
-		delete from eco_material where material_id in 
+	<update id="batchRemove">
+		update eco_material
+		set modify_time = CURRENT_TIMESTAMP(),
+		delete_flag = '1'
+		where material_id in
 		<foreach item="materialId" collection="array" open="(" separator="," close=")">
 			#{materialId}
 		</foreach>
-	</delete>
+	</update>
 
 </mapper>

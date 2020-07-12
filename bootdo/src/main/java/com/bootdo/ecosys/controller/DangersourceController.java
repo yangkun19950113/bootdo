@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.bootdo.ecosys.domain.DangersourceDO;
+import com.bootdo.ecosys.domain.EnterpriseDO;
 import com.bootdo.ecosys.service.DangersourceService;
+import com.bootdo.ecosys.service.EnterpriseService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -29,22 +31,26 @@ import com.bootdo.common.utils.R;
  */
  
 @Controller
-@RequestMapping("/system/dangersource")
+@RequestMapping("/ecosys/dangersource")
 public class DangersourceController {
 	@Autowired
 	private DangersourceService dangersourceService;
-	
-	@GetMapping()
-	@RequiresPermissions("system:dangersource:dangersource")
-	String Dangersource(){
-	    return "system/dangersource/dangersource";
+	@Autowired
+	private EnterpriseService enterpriseService;
+
+	@GetMapping("/{enterpriseId}")
+	@RequiresPermissions("ecosys:dangersource:dangersource")
+	String Dangersource(@PathVariable("enterpriseId") Long enterpriseId,Model model){
+		model.addAttribute("enterpriseId", enterpriseId);
+		return "ecosys/dangersource/dangersource";
 	}
 	
 	@ResponseBody
-	@GetMapping("/list")
-	@RequiresPermissions("system:dangersource:dangersource")
-	public PageUtils list(@RequestParam Map<String, Object> params){
+	@GetMapping("/list/{enterpriseId}")
+	@RequiresPermissions("ecosys:dangersource:dangersource")
+	public PageUtils list(@RequestParam Map<String, Object> params,@PathVariable("enterpriseId") Long enterpriseId){
 		//查询列表数据
+		params.put("enterpriseId",enterpriseId);
         Query query = new Query(params);
 		List<DangersourceDO> dangersourceList = dangersourceService.list(query);
 		int total = dangersourceService.count(query);
@@ -52,18 +58,22 @@ public class DangersourceController {
 		return pageUtils;
 	}
 	
-	@GetMapping("/add")
-	@RequiresPermissions("system:dangersource:add")
-	String add(){
-	    return "system/dangersource/add";
+	@GetMapping("/add/{enterpriseId}")
+	@RequiresPermissions("ecosys:dangersource:add")
+	String add(@PathVariable("enterpriseId") Long enterpriseId,Model model){
+		EnterpriseDO enterprise = enterpriseService.get(enterpriseId.intValue());
+		String enterpriseName = enterprise.getEnterpriseName();
+		model.addAttribute("enterpriseId", enterpriseId);
+		model.addAttribute("enterpriseName", enterpriseName);
+		return "ecosys/dangersource/add";
 	}
 
 	@GetMapping("/edit/{dangerSourceId}")
-	@RequiresPermissions("system:dangersource:edit")
+	@RequiresPermissions("ecosys:dangersource:edit")
 	String edit(@PathVariable("dangerSourceId") Integer dangerSourceId,Model model){
 		DangersourceDO dangersource = dangersourceService.get(dangerSourceId);
 		model.addAttribute("dangersource", dangersource);
-	    return "system/dangersource/edit";
+	    return "ecosys/dangersource/edit";
 	}
 	
 	/**
@@ -71,7 +81,7 @@ public class DangersourceController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("system:dangersource:add")
+	@RequiresPermissions("ecosys:dangersource:add")
 	public R save( DangersourceDO dangersource){
 		if(dangersourceService.save(dangersource)>0){
 			return R.ok();
@@ -83,7 +93,7 @@ public class DangersourceController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("system:dangersource:edit")
+	@RequiresPermissions("ecosys:dangersource:edit")
 	public R update( DangersourceDO dangersource){
 		dangersourceService.update(dangersource);
 		return R.ok();
@@ -94,7 +104,7 @@ public class DangersourceController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("system:dangersource:remove")
+	@RequiresPermissions("ecosys:dangersource:remove")
 	public R remove( Integer dangerSourceId){
 		if(dangersourceService.remove(dangerSourceId)>0){
 		return R.ok();
@@ -107,7 +117,7 @@ public class DangersourceController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("system:dangersource:batchRemove")
+	@RequiresPermissions("ecosys:dangersource:batchRemove")
 	public R remove(@RequestParam("ids[]") Integer[] dangerSourceIds){
 		dangersourceService.batchRemove(dangerSourceIds);
 		return R.ok();

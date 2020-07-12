@@ -1,6 +1,7 @@
-
-var prefix = "/system/dangersource"
+var enterpriseId;
+var prefix = "/ecosys/dangersource"
 $(function() {
+	enterpriseId = $("#enterpriseId").val();
 	load();
 });
 
@@ -9,7 +10,7 @@ function load() {
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url : prefix + "/list", // 服务器数据的加载地址
+						url : prefix + "/list/"+enterpriseId, // 服务器数据的加载地址
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,
@@ -47,95 +48,59 @@ function load() {
 								{
 									checkbox : true
 								},
-																{
-									field : 'dangerSourceId', 
-									title : '危险源信息id' 
-								},
-																{
+								{
 									field : 'dangerSourceName', 
 									title : '危险源信息名称' 
 								},
-																{
+								{
 									field : 'partDetail', 
 									title : '具体位置' 
 								},
-																{
+								{
 									field : 'degreeCode', 
 									title : '危险程度' 
 								},
-																{
+								{
 									field : 'accidentType', 
 									title : '可能会发生的事故类型' 
 								},
-																{
+								{
 									field : 'monit', 
 									title : '监控措施' 
 								},
-																{
+								{
 									field : 'protectionPerson', 
 									title : '责任人' 
 								},
-																{
+								{
 									field : 'phoneNumber', 
 									title : '联系电话' 
 								},
-																{
+								{
 									field : 'surveytedPersonName', 
-									title : '' 
+									title : '被调查人姓名'
 								},
-																{
+								{
 									field : 'surveytedPersonPosition', 
-									title : '' 
+									title : '被调查人职务'
 								},
-																{
+								{
 									field : 'fullFormTime', 
-									title : '' 
+									title : '填表日期'
 								},
-																{
+								{
 									field : 'surveyPersonName', 
-									title : '' 
+									title : '调查人'
 								},
-																{
-									field : 'createTime', 
-									title : '' 
-								},
-																{
-									field : 'createUserName', 
-									title : '' 
-								},
-																{
-									field : 'createBy', 
-									title : '' 
-								},
-																{
-									field : 'modifyTime', 
-									title : '' 
-								},
-																{
-									field : 'modifyUserName', 
-									title : '' 
-								},
-																{
-									field : 'modifyBy', 
-									title : '' 
-								},
-																{
-									field : 'deleteFlag', 
-									title : '' 
-								},
-																{
-									field : 'enterpriseId', 
-									title : '' 
-								},
-																{
+								{
 									field : 'administrativeDivision', 
-									title : '' 
+									title : '行政区划'
 								},
-																{
+								{
 									field : 'urbanorrural', 
-									title : '' 
+									title : '城乡分类'
 								},
-																{
+								{
 									title : '操作',
 									field : 'id',
 									align : 'center',
@@ -164,7 +129,7 @@ function add() {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
-		content : prefix + '/add' // iframe的url
+		content : prefix + '/add/' + enterpriseId // iframe的url
 	});
 }
 function edit(id) {

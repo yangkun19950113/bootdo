@@ -19,7 +19,8 @@
 
 	<select id="list" resultType="com.bootdo.ecosys.domain.ProductDO">
 		select `product_id`,`enterprise_id`,`enterprise_name`,`prodect_name`,`specifical`,`model`,`produt_process`,`prodect_param`,`min_price`,`max_price`,`device_name`,`month_production`,`function_remark`,`remark`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_product
-        <where>  
+        <where>
+			delete_flag = '0'
 		  		  <if test="productId != null and productId != ''"> and product_id = #{productId} </if>
 		  		  <if test="enterpriseId != null and enterpriseId != ''"> and enterprise_id = #{enterpriseId} </if>
 		  		  <if test="enterpriseName != null and enterpriseName != ''"> and enterprise_name = #{enterpriseName} </if>
@@ -63,7 +64,8 @@
 	
  	<select id="count" resultType="int">
 		select count(*) from eco_product
-		 <where>  
+		 <where>
+			 delete_flag = '0'
 		  		  <if test="productId != null and productId != ''"> and product_id = #{productId} </if>
 		  		  <if test="enterpriseId != null and enterpriseId != ''"> and enterprise_id = #{enterpriseId} </if>
 		  		  <if test="enterpriseName != null and enterpriseName != ''"> and enterprise_name = #{enterpriseName} </if>
@@ -145,13 +147,13 @@
 			#{surveytedPersonPosition}, 
 			#{fullFormTime}, 
 			#{surveyPersonName}, 
-			#{createTime}, 
+			CURRENT_TIMESTAMP(),
 			#{createUserName}, 
 			#{createBy}, 
-			#{modifyTime}, 
+			CURRENT_TIMESTAMP(),
 			#{modifyUserName}, 
 			#{modifyBy}, 
-			#{deleteFlag}, 
+			'0',
 			#{administrativeDivision}, 
 			#{urbanorrural}
 		)
@@ -180,7 +182,7 @@
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
 			<if test="createUserName != null">`create_user_name` = #{createUserName}, </if>
 			<if test="createBy != null">`create_by` = #{createBy}, </if>
-			<if test="modifyTime != null">`modify_time` = #{modifyTime}, </if>
+			<if test="modifyTime != null">`modify_time` = CURRENT_TIMESTAMP(), </if>
 			<if test="modifyUserName != null">`modify_user_name` = #{modifyUserName}, </if>
 			<if test="modifyBy != null">`modify_by` = #{modifyBy}, </if>
 			<if test="deleteFlag != null">`delete_flag` = #{deleteFlag}, </if>
@@ -190,15 +192,21 @@
 		where product_id = #{productId}
 	</update>
 	
-	<delete id="remove">
-		delete from eco_product where product_id = #{value}
-	</delete>
+	<update id="remove">
+		update eco_product
+		set modify_time = CURRENT_TIMESTAMP(),
+		delete_flag = '1'
+		where product_id = #{value}
+	</update>
 	
-	<delete id="batchRemove">
-		delete from eco_product where product_id in 
+	<update id="batchRemove">
+		update eco_product
+		set modify_time = CURRENT_TIMESTAMP(),
+		delete_flag = '1'
+		where product_id in
 		<foreach item="productId" collection="array" open="(" separator="," close=")">
 			#{productId}
 		</foreach>
-	</delete>
+	</update>
 
 </mapper>
