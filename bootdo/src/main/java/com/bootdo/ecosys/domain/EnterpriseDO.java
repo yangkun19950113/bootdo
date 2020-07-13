@@ -27,8 +27,8 @@ public class EnterpriseDO implements Serializable {
 	//注册地址
 	private String registeredAddress;
 	//注册时间
-	/*@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")*/
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date registeredTime;
 	//注册资金
 	private Float registeredFund;

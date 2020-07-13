@@ -26,6 +26,10 @@ public class ShowDataDO implements Serializable {
 	private String socialCreditCode;
 	//注册地址
 	private String registeredAddress;
+	private String enterpriseNatureCode;
+	private String industryCode;
+
+
 	//注册时间
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -137,6 +141,31 @@ public class ShowDataDO implements Serializable {
 	private String electricMinImgUrl;
 	private String riskMinImgUrl;
 	private String firedeviceMinImgUrl;
+	private BigDecimal monthProduction;
+
+	public BigDecimal getMonthProduction() {
+		return monthProduction;
+	}
+
+	public void setMonthProduction(BigDecimal monthProduction) {
+		this.monthProduction = monthProduction;
+	}
+
+	public String getIndustryCode() {
+		return industryCode;
+	}
+
+	public void setIndustryCode(String industryCode) {
+		this.industryCode = industryCode;
+	}
+
+	public String getEnterpriseNatureCode() {
+		return enterpriseNatureCode;
+	}
+
+	public void setEnterpriseNatureCode(String enterpriseNatureCode) {
+		this.enterpriseNatureCode = enterpriseNatureCode;
+	}
 
 	public String getFiredeviceMinImgUrl() {
 		return firedeviceMinImgUrl;

@@ -60,43 +60,43 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">：</label>
+								<label class="col-sm-3 control-label">有害有毒物质：</label>
 								<div class="col-sm-8">
 									<input id="dangerMaterial" name="dangerMaterial" th:value="${material.dangerMaterial}" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">：</label>
+								<label class="col-sm-3 control-label">含量：</label>
 								<div class="col-sm-8">
 									<input id="content" name="content" th:value="${material.content}" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">：</label>
+								<label class="col-sm-3 control-label">备注：</label>
 								<div class="col-sm-8">
 									<input id="remark" name="remark" th:value="${material.remark}" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">：</label>
+								<label class="col-sm-3 control-label">被调查人姓名：</label>
 								<div class="col-sm-8">
 									<input id="surveytedPersonName" name="surveytedPersonName" th:value="${material.surveytedPersonName}" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">：</label>
+								<label class="col-sm-3 control-label">被调查人职务：</label>
 								<div class="col-sm-8">
 									<input id="surveytedPersonPosition" name="surveytedPersonPosition" th:value="${material.surveytedPersonPosition}" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">：</label>
+								<label class="col-sm-3 control-label">填表日期：</label>
 								<div class="col-sm-8">
-									<input id="fullFormTime" name="fullFormTime" th:value="${material.fullFormTime}" class="form-control" type="text">
+									<input id="fullFormTime" name="fullFormTime" th:value="${#dates.format(material.fullFormTime,'yyyy-MM-dd')}" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">：</label>
+								<label class="col-sm-3 control-label">调查人：</label>
 								<div class="col-sm-8">
 									<input id="surveyPersonName" name="surveyPersonName" th:value="${material.surveyPersonName}" class="form-control" type="text">
 								</div>

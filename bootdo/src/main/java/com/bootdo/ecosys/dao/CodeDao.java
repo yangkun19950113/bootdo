@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.bootdo.ecosys.domain.CodeDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 数据字典表
@@ -29,4 +30,5 @@ public interface CodeDao {
 	int remove(Long id);
 	
 	int batchRemove(Long[] ids);
+	CodeDO getName(@Param("codeId") String  codeId, @Param("parentId")String parentId);
 }

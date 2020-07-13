@@ -6,6 +6,15 @@
 	<select id="get" resultType="com.bootdo.ecosys.domain.CodeDO">
 		select `id`,`code_id`,`parent_id`,`name`,`order_num`,`del_flag`,`alternate1`,`alternate2`,`alternate3` from eco_code where id = #{value}
 	</select>
+	<select id="getName" resultType="com.bootdo.ecosys.domain.CodeDO">
+		SELECT
+		*
+	FROM
+		eco_code
+	WHERE
+		code_id = #{codeId}
+		and parent_id = #{parentId}
+	</select>
 
 	<select id="list" resultType="com.bootdo.ecosys.domain.CodeDO">
 		select `id`,`code_id`,`parent_id`,`name`,`order_num`,`del_flag`,`alternate1`,`alternate2`,`alternate3` from eco_code

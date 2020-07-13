@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.bootdo.ecosys.domain.EnterpriseDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 
@@ -29,5 +30,5 @@ public interface EnterpriseDao {
 	int remove(Integer enterprise_id);
 	
 	int batchRemove(Integer[] enterpriseIds);
-	EnterpriseDO getenterprise (String  enterpriseName);
+	EnterpriseDO getenterprise (@Param("enterpriseName") String  enterpriseName,@Param("socialCreditCode") String socialCreditCode);
 }

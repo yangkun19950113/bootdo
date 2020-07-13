@@ -2,6 +2,7 @@ package com.bootdo.ecosys.controller;
 
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
+import com.bootdo.ecosys.dao.CodeDao;
 import com.bootdo.ecosys.domain.*;
 import com.bootdo.ecosys.service.*;
 import com.bootdo.tool.MessageResult;
@@ -51,18 +52,16 @@ public class ShowDataController {
 	private RiskService riskService;
 	@Autowired
 	private FiredeviceService firedeviceService;
+	@Autowired
+	private CodeDao codeDao;
 
 	// 获取前台显示信息
 
 	@GetMapping("/enterpriseList")
-	public ResponseData enterpriseList(String enterpriseName){
-		SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	public ResponseData enterpriseList(String enterpriseName,String socialCreditCode){
 		ShowDataDO ShowData = new ShowDataDO();
-		Map<String, Object> params = new HashMap<>();
-		params.put("enterpriseName","德云社");
-//		params.put("socialCreditCode",socialCreditCode);
 		// 企业信息
-		EnterpriseDO enterprise = enterpriseService.getenterprise(enterpriseName);
+		EnterpriseDO enterprise = enterpriseService.getenterprise(enterpriseName,socialCreditCode);
 		String imgUrl = enterprise.getImgUrl();
 		String[] strArray = imgUrl.split(",");
 		System.out.println(strArray);
@@ -79,9 +78,10 @@ public class ShowDataController {
 		Integer enterpriseId = enterprise.getEnterpriseId();
 		ShowData.setEnterpriseId(enterpriseId);
 		// 企业名称
+		enterpriseName = enterprise.getEnterpriseName();
 		ShowData.setEnterpriseName(enterpriseName);
 		// 社会信用编码
-		String socialCreditCode = enterprise.getSocialCreditCode();
+		socialCreditCode = enterprise.getSocialCreditCode();
 		ShowData.setSocialCreditCode(socialCreditCode);
 		// 注册地址
 		String registeredAddress = enterprise.getRegisteredAddress();
@@ -95,6 +95,11 @@ public class ShowDataController {
 		// 员工数
 		Long employeeNum = enterprise.getEmployeeNum();
 		ShowData.setEmployeeNum(employeeNum);
+		// 企业性质
+		String enterpriseNatureCode = enterprise.getEnterpriseNatureCode();
+		CodeDO codeDO = codeDao.getName(enterpriseNatureCode,"1");
+		enterpriseNatureCode = codeDO.getName();
+		ShowData.setEnterpriseNatureCode(enterpriseNatureCode);
 
 
 		// 环保基本信息
@@ -113,7 +118,11 @@ public class ShowDataController {
 		ShowData.setEcoEstimateFlg(ecoStandardFlg);
 		String envprotectionMinImgUrl = EnvprotectionDO.getEnvprotectionMinImgUrl();
 		ShowData.setEnvprotectionMinImgUrl(envprotectionMinImgUrl);
-
+		// 行业类别
+		String industryCode = EnvprotectionDO.getIndustryCode();
+		CodeDO EnvprotectionDOCodeDO = codeDao.getName(industryCode,"26");
+		industryCode = EnvprotectionDOCodeDO.getName();
+		ShowData.setIndustryCode(industryCode);
 		// 企业产品及产能
 		ProductDO productDO = productService.getData(enterpriseId);
 		// 产品名称
@@ -130,11 +139,17 @@ public class ShowDataController {
 		ShowData.setProdutProcess(produtProcess);
 		String productMinImgUrl = productDO.getProductMinImgUrl();
 		ShowData.setProductMinImgUrl(productMinImgUrl);
+		// 月产量
+		BigDecimal monthProduction = productDO.getMonthProduction();
+		ShowData.setMonthProduction(monthProduction);
+
 
 		// 产品原材料
 		MaterialDO materialDO = materialService.getData(enterpriseId);
 		// 原材料类型
 		String materialType = materialDO.getMaterialType();
+		CodeDO materialDOCodeDO = codeDao.getName(materialType,"103");
+		materialType = materialDOCodeDO.getName();
 		ShowData.setMaterialType(materialType);
 		// 原材料名称
 		String materialName = materialDO.getMaterialName();
@@ -144,6 +159,7 @@ public class ShowDataController {
 		ShowData.setMonthConsumption(monthConsumption);
 		String materialMinImgUrl = materialDO.getMaterialMinImgUrl();
 		ShowData.setMaterialMinImgUrl(materialMinImgUrl);
+		//
 
 		//  防治设备
 		EcoequipmentDO ecoequipmentDO = ecoequipmentService.getData(enterpriseId);
