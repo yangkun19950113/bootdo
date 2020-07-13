@@ -52,10 +52,10 @@ function load() {
 									field : 'equipmentName', 
 									title : '设备名称' 
 								},
-																{
+								/*								{
 									field : 'equipmentCode', 
 									title : '设备编码' 
-								},
+								},*/
 								{
 									field : 'enterpriseName',
 									title : '所属企业'
@@ -79,10 +79,6 @@ function load() {
 																{
 									field : 'installPosition', 
 									title : '安装位置' 
-								},
-																{
-									field : 'productId', 
-									title : '产品id' 
 								},
 																{
 									field : 'protectionPerson', 

@@ -22,7 +22,7 @@
 		select fi.equipment_id,fi.equipment_name,fi.equipment_code,fi.enterprise_id,fi.model,fi.buy_time,fi.effect_time,
 		fi.brand,fi.install_position,fi.product_id,fi.protection_person,fi.phone_number,fi.surveyted_person_name,fi.surveyted_person_position,
 		fi.full_form_time,fi.survey_person_name,fi.create_time,fi.create_user_name,fi.create_by,fi.modify_time,
-		fi.modify_user_name,fi.modify_by,fi.delete_flag,fi.administrative_division,fi.urbanorrural,fi.equipment_type
+		fi.modify_user_name,fi.modify_by,fi.delete_flag,fi.administrative_division,fi.urbanorrural,fi.equipment_type,
 		en.enterprise_name
 		from eco_firedevice fi left join eco_enterprise en on en.enterprise_id = fi.enterprise_id
         <where>

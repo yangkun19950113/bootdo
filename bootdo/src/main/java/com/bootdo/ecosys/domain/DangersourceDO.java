@@ -59,7 +59,10 @@ public class DangersourceDO implements Serializable {
 	private Integer administrativeDivision;
 	//
 	private Integer urbanorrural;
+
 	private String dangersourceMinImgUrl;
+
+	private String enterpriseName;
 
 	public String getDangersourceMinImgUrl() {
 		return dangersourceMinImgUrl;
@@ -332,5 +335,13 @@ public class DangersourceDO implements Serializable {
 	 */
 	public Integer getUrbanorrural() {
 		return urbanorrural;
+	}
+
+	public String getEnterpriseName() {
+		return enterpriseName;
+	}
+
+	public void setEnterpriseName(String enterpriseName) {
+		this.enterpriseName = enterpriseName;
 	}
 }

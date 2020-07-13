@@ -42,14 +42,130 @@ function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
 		rules : {
-			name : {
+			ecoEstimateFlg : {
 				required : true
-			}
+			},
+			/*ecoLicence : {
+				callback: {
+					message: '请输入环评文号',
+					callback: function(value, validator) {
+						var ecoEstimateFlg = $('input:radio[name="ecoEstimateFlg"]:checked').val();
+						if(ecoEstimateFlg == '0'){
+							return true;
+						}
+					}
+				},
+			},*/
+			parkFlg : {
+				required : true
+			},
+			ecoStandardFlg : {
+				required : true
+			},
+			industryCode : {
+				required : true
+			},
+			projectManageCode : {
+				required : true
+			},
+			isOrNotAcceptance : {
+				required : true
+			},
+			tradablePermitsCode : {
+				required : true
+			},
+			pollutionLicenseFlg : {
+				required : true
+			},
+			pollutionCategoryCode : {
+				required : true
+			},
+			annualInspectionFlg : {
+				required : true
+			},
+			areaCode : {
+				required : true
+			},
+			mainEnergyCode: {
+				required : true
+			},
+			dosage: {
+				required : true
+			},
+			measures: {
+				required : true
+			},
+			surveytedPersonName : {
+				required : true
+			},
+			surveytedPersonPosition : {
+				required : true
+			},
+			fullFormTime : {
+				required : true
+			},
+			surveyPersonName : {
+				required : true
+			},
 		},
 		messages : {
-			name : {
-				required : icon + "请输入名字"
-			}
+			ecoEstimateFlg : {
+				required : icon + "请选择是否有环评文号"
+			},
+			/*ecoLicence: {
+				callback : icon + "请选择是否属于园区"
+			},*/
+			parkFlg : {
+				required : icon + "请选择是否属于园区"
+			},
+			ecoStandardFlg : {
+				required : icon + "请选择是否有环保制度"
+			},
+			industryCode : {
+				required : icon + "请选择行业类别"
+			},
+			projectManageCode : {
+				required : icon + "请选择项目管理类别"
+			},
+			isOrNotAcceptance : {
+				required : icon + "请选择是否竣工验收"
+			},
+			tradablePermitsCode : {
+				required : icon + "请选择排污许可管理类别"
+			},
+			pollutionLicenseFlg : {
+				required : icon + "请选择是否核发排污许可证"
+			},
+			pollutionCategoryCode : {
+				required : icon + "请选择污染类别"
+			},
+			annualInspectionFlg : {
+				required : icon + "请选择年检监测是否有效"
+			},
+			areaCode : {
+				required : icon + "请选择所在区域"
+			},
+			mainEnergyCode: {
+				required : icon + "请选择主要能源"
+			},
+			dosage: {
+				required : icon + "请填写年消耗量"
+			},
+			measures: {
+				required : icon + "请填写污染治理措施"
+			},
+			surveytedPersonName : {
+				required : icon + "请输入被调查人姓名"
+			},
+			surveytedPersonPosition : {
+				required : icon + "请输入被调查人职务"
+			},
+			fullFormTime : {
+				required : icon + "请选择填表时间"
+			},
+			surveyPersonName : {
+				required : icon + "请输入调查人姓名"
+			},
 		}
 	})
 }
@@ -158,7 +274,8 @@ function getAreaCode(){
 }
 //加载主要能源
 function getMainEnergyCode(){
-	var member = $("#mainEnergyCode1").val().split(",");
+	var member = $("#mainEnergyCode1").val();
+	var dosage = $("#dosage1").val();
 	$.ajax({
 		type: "get",
 		url: "/ecosys/code/list",
@@ -169,13 +286,14 @@ function getMainEnergyCode(){
 		success: function (data) {
 			var code_list = data.rows;
 			for (var i = 0; i < code_list.length; i++) {
-				$("#mainEnergyCode").append("<label style='margin-left: 15px;' class='radio-inline'><input type='checkbox' name='mainEnergyCode' value=" + code_list[i].codeId + " id=" + code_list[i].codeId + " />&nbsp;&nbsp;" + code_list[i].name + "</label>");
-				for(var j = 0; j < member.length; j++ ){
-					if(code_list[i].codeId == member[j]){
-						$("#"+ code_list[i].codeId +"").prop("checked",true);
-					}
+				$("#mainEnergyCode").append("<label class='radio-inline'><input type='radio' name='mainEnergyCode' class='hhhbb' value=" + code_list[i].codeId + " id=" + code_list[i].codeId + " />&nbsp;&nbsp;" + code_list[i].name + "<input type='text' name='dosage' class='form-control' id='dosage"+ code_list[i].codeId + "'/></label>");
+				if(code_list[i].codeId == member){
+					$("#"+ code_list[i].codeId +"").prop("checked",true);
+					$("#dosage" + member).val(dosage);
 				}
 			}
+			$('input:input[name="dosage"]').attr("disabled","disabled");
+			$("#dosage" + member).removeAttr("disabled");
 			layer.closeAll('loading');//关闭loading
 		}
 	})
@@ -228,3 +346,12 @@ function getSpecialFactorsCode(){
 		}
 	})
 }
+
+//主要能源，监听事件
+$(document).on('click', '.hhhbb', function() {
+	var checkValue = $('input:radio[name="mainEnergyCode"]:checked').val();
+	$('input:input[name="dosage"]').attr("disabled","disabled");
+	$("#dosage" + checkValue).removeAttr("disabled");
+	//清空
+	$('input:input[name="dosage"]').val("");
+})

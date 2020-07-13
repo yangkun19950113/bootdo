@@ -48,7 +48,7 @@ function load() {
 								{
 									checkbox : true
 								},
-																{
+								/*								{
 									field : 'productId', 
 									title : '产品id' 
 								},
@@ -60,18 +60,18 @@ function load() {
 									field : 'enterpriseName', 
 									title : '企业名称' 
 								},
-																{
+															*/	{
 									field : 'prodectName', 
 									title : '产品名称' 
 								},
 																{
 									field : 'specifical', 
-									title : '规格' 
+									title : '规格型号'
 								},
-																{
+								/*								{
 									field : 'model', 
 									title : '型号' 
-								},
+								},*/
 																{
 									field : 'produtProcess', 
 									title : '生产工艺' 
@@ -82,15 +82,15 @@ function load() {
 								},
 																{
 									field : 'minPrice', 
-									title : '最低价格' 
+									title : '价格区间'
 								},
-																{
+								/*								{
 									field : 'maxPrice', 
 									title : '最高价格' 
-								},
+								},*/
 																{
 									field : 'deviceName', 
-									title : '设备名称' 
+									title : '生产设施'
 								},
 																{
 									field : 'monthProduction', 
@@ -100,7 +100,7 @@ function load() {
 									field : 'functionRemark', 
 									title : '功能作用' 
 								},
-																{
+								/*								{
 									field : 'remark', 
 									title : '备注' 
 								},
@@ -119,7 +119,7 @@ function load() {
 																{
 									field : 'surveyPersonName', 
 									title : '调查人' 
-								},
+								},*/
 																{
 									field : 'administrativeDivision', 
 									title : '行政区划' 

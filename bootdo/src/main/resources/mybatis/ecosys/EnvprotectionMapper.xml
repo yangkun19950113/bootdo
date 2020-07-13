@@ -10,7 +10,7 @@
 		ep.area_code,ep.main_energy_code,ep.measures,ep.normal_factors_code,ep.special_factors_code,ep.nomal_waste,
 		ep.danger_waste,ep.surveyted_person_name,ep.surveyted_person_position,ep.full_form_time,ep.survey_person_name,
 		ep.create_time,ep.create_user_name,ep.create_by,ep.modify_time,ep.modify_user_name,ep.modify_by,ep.delete_flag,ep.administrative_division,
-		ep.urbanorrural,
+		ep.urbanorrural,ep.dosage,
 		(select en.enterprise_name from eco_enterprise en where en.enterprise_id = ep.enterprise_id) as enterpriseName
 		from eco_envprotection ep where ep.envir_protection_id = #{value}
 	</select>
@@ -33,7 +33,7 @@
 		ep.tradable_permits_code,ep.pollution_license_flg,ep.pollution_category_code,ep.annual_inspection_flg,
 		ep.area_code,ep.main_energy_code,ep.measures,ep.normal_factors_code,ep.special_factors_code,ep.nomal_waste,
 		ep.danger_waste,ep.surveyted_person_name,ep.surveyted_person_position,ep.full_form_time,ep.survey_person_name,
-		ep.create_time,ep.create_user_name,ep.create_by,ep.modify_time,ep.modify_user_name,ep.modify_by,ep.delete_flag,ep.administrative_division,
+		ep.create_time,ep.create_user_name,ep.create_by,ep.modify_time,ep.modify_user_name,ep.modify_by,ep.delete_flag,ep.administrative_division,ep.dosage,
 		ep.urbanorrural,en.enterprise_name,
 		(select co.name  from eco_code co where co.code_id = ep.industry_code) as industryName,
 		(select co.name  from eco_code co where co.code_id = ep.project_manage_code) as projectManageName
@@ -162,7 +162,8 @@
 			`modify_by`, 
 			`delete_flag`, 
 			`administrative_division`, 
-			`urbanorrural`
+			`urbanorrural`,
+			`dosage`
 		)
 		values
 		(
@@ -198,7 +199,8 @@
 			#{modifyBy}, 
 			'0',
 			#{administrativeDivision}, 
-			#{urbanorrural}
+			#{urbanorrural},
+			#{dosage}
 		)
 	</insert>
 	 
@@ -236,7 +238,8 @@
 			<if test="modifyBy != null">`modify_by` = #{modifyBy}, </if>
 			<if test="deleteFlag != null">`delete_flag` = #{deleteFlag}, </if>
 			<if test="administrativeDivision != null">`administrative_division` = #{administrativeDivision}, </if>
-			<if test="urbanorrural != null">`urbanorrural` = #{urbanorrural}</if>
+			<if test="urbanorrural != null">`urbanorrural` = #{urbanorrural},</if>
+			<if test="dosage != null">`dosage` = #{dosage}</if>
 		</set>
 		where envir_protection_id = #{envirProtectionId}
 	</update>

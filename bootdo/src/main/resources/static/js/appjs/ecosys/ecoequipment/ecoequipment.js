@@ -48,15 +48,39 @@ function load() {
 								{
 									checkbox : true
 								},
-																{
-									field : 'equipmentId', 
-									title : '设备id' 
-								},
-																{
+								{
 									field : 'equipmentName', 
-									title : '设备名称' 
+									title : '生产设施名称'
 								},
-																{
+								{
+									field : 'pollutionName',
+									title : '对应产污环节名称'
+								},
+								{
+									field : 'pollutionType',
+									title : '污染物种类'
+								},
+								{
+									field : 'emissionWay',
+									title : '排放方式'
+								},
+								{
+									field : 'installTime',
+									title : '安装时间'
+								},
+								{
+									field : 'monitTime',
+									title : '监测时间'
+								},
+								{
+									field : 'maintenanceCycle',
+									title : '维护周期'
+								},
+								{
+									field : 'lossMaterial',
+									title : '易损耗材'
+								},
+								/*								{
 									field : 'equipmentCode', 
 									title : '设备编码' 
 								},
@@ -67,7 +91,7 @@ function load() {
 																{
 									field : 'productId', 
 									title : '产品id' 
-								},
+								},*/
 																{
 									field : 'protectionPerson', 
 									title : '设备负责人' 
@@ -80,35 +104,7 @@ function load() {
 									field : 'equipmentType', 
 									title : '设备类型' 
 								},
-																{
-									field : 'pollutionName', 
-									title : '对应产污环节名称' 
-								},
-																{
-									field : 'pollutionType', 
-									title : '污染物种类' 
-								},
-																{
-									field : 'emissionWay', 
-									title : '排放方式' 
-								},
-																{
-									field : 'installTime', 
-									title : '安装时间' 
-								},
-																{
-									field : 'monitTime', 
-									title : '监测时间' 
-								},
-																{
-									field : 'maintenanceCycle', 
-									title : '维护周期' 
-								},
-																{
-									field : 'lossMaterial', 
-									title : '易损耗材' 
-								},
-																{
+									/*							{
 									field : 'surveytedPersonName', 
 									title : '' 
 								},
@@ -123,7 +119,7 @@ function load() {
 																{
 									field : 'surveyPersonName', 
 									title : '' 
-								},
+								},*/
 																{
 									field : 'administrativeDivision', 
 									title : '行政区划' 

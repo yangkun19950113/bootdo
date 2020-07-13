@@ -72,6 +72,8 @@ public class DangersourceController {
 	@RequiresPermissions("ecosys:dangersource:edit")
 	String edit(@PathVariable("dangerSourceId") Integer dangerSourceId,Model model){
 		DangersourceDO dangersource = dangersourceService.get(dangerSourceId);
+		EnterpriseDO enterprise = enterpriseService.get(dangersource.getEnterpriseId());
+		dangersource.setEnterpriseName(enterprise.getEnterpriseName());
 		model.addAttribute("dangersource", dangersource);
 	    return "ecosys/dangersource/edit";
 	}

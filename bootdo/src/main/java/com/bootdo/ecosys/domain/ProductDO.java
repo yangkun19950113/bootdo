@@ -33,7 +33,7 @@ public class ProductDO implements Serializable {
 	//产品参数
 	private String prodectParam;
 	//最低价格
-	private BigDecimal minPrice;
+	private String minPrice;
 	//最高价格
 	private BigDecimal maxPrice;
 	//设备名称
@@ -179,13 +179,13 @@ public class ProductDO implements Serializable {
 	/**
 	 * 设置：最低价格
 	 */
-	public void setMinPrice(BigDecimal minPrice) {
+	public void setMinPrice(String minPrice) {
 		this.minPrice = minPrice;
 	}
 	/**
 	 * 获取：最低价格
 	 */
-	public BigDecimal getMinPrice() {
+	public String getMinPrice() {
 		return minPrice;
 	}
 	/**

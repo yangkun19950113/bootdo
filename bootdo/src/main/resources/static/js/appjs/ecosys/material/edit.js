@@ -1,5 +1,6 @@
 $().ready(function() {
 	validateRule();
+	checkMaterialType();
 });
 
 $.validator.setDefaults({
@@ -36,14 +37,71 @@ function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
 		rules : {
-			name : {
+			materialName : {
 				required : true
-			}
+			},
+			materialType : {
+				required : true
+			},
+			/*specifical : {
+				required : true
+			},*/
+			orgionWay : {
+				required : true
+			},
+			monthConsumption : {
+				required : true
+			},
+			surveytedPersonName : {
+				required : true
+			},
+			surveytedPersonPosition : {
+				required : true
+			},
+			fullFormTime : {
+				required : true
+			},
+			surveyPersonName : {
+				required : true
+			},
 		},
 		messages : {
-			name : {
-				required : icon + "请输入名字"
-			}
+			materialName : {
+				required : icon + "请输入物料名称"
+			},
+			materialType : {
+				required : icon + "请选择物料类型"
+			},
+			/*specifical : {
+				required : icon + "请输入规格"
+			},*/
+			orgionWay : {
+				required : icon + "请输入进货渠道"
+			},
+			monthConsumption : {
+				required : icon + "请输入月使用量"
+			},
+			surveytedPersonName : {
+				required : icon + "请输入被调查人姓名"
+			},
+			surveytedPersonPosition : {
+				required : icon + "请输入被调查人职务"
+			},
+			fullFormTime : {
+				required : icon + "请选择填表时间"
+			},
+			surveyPersonName : {
+				required : icon + "请输入调查人姓名"
+			},
 		}
 	})
+}
+
+function checkMaterialType(){
+	var materialType = $("#materialType").val();
+	if(materialType == '0'){
+		$("#materialType0").attr("checked","checked");
+	}else {
+		$("#materialType1").attr("checked","checked");
+	}
 }

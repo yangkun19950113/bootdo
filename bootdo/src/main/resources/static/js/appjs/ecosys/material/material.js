@@ -48,29 +48,28 @@ function load() {
 								{
 									checkbox : true
 								},
-																{
-									field : 'materialType', 
-									title : '物料类型'
-								},
-																{
-									field : 'productId', 
-									title : '产品id'
-								},
-																{
-									field : 'materialName', 
+								{
+									field : 'materialName',
 									title : '物料名称'
 								},
-																{
+								{
+									field : 'materialType', 
+									title : '物料类型',
+									formatter : function(value, row, index) {
+										if(value == '0'){
+											return "原材料";
+										}else if(value == '1') {
+											return "辅料";
+										}
+									}
+								},
+								{
 									field : 'specifical', 
 									title : '规格'
 								},
-																{
-									field : 'model', 
-									title : '型号'
-								},
-																{
+								{
 									field : 'orgionWay', 
-									title : '' 
+									title : '进货渠道'
 								},
 																{
 									field : 'monthConsumption', 
@@ -78,37 +77,13 @@ function load() {
 								},
 																{
 									field : 'dangerMaterial', 
-									title : '' 
+									title : '有害有毒物质'
 								},
 																{
 									field : 'content', 
-									title : '' 
+									title : '含量'
 								},
-																{
-									field : 'remark', 
-									title : '备注'
-								},
-																{
-									field : 'surveytedPersonName', 
-									title : '' 
-								},
-																{
-									field : 'surveytedPersonPosition', 
-									title : '' 
-								},
-																{
-									field : 'fullFormTime', 
-									title : '' 
-								},
-																{
-									field : 'surveyPersonName', 
-									title : '' 
-								},
-																{
-									field : 'enterpriseId', 
-									title : '所属企业'
-								},
-																{
+								{
 									field : 'administrativeDivision', 
 									title : '行政区划' 
 								},
@@ -116,7 +91,7 @@ function load() {
 									field : 'urbanorrural', 
 									title : '城乡分类' 
 								},
-																{
+								{
 									title : '操作',
 									field : 'id',
 									align : 'center',

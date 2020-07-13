@@ -36,14 +36,38 @@ function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
 		rules : {
-			name : {
+			equipmentName : {
 				required : true
-			}
+			},
+			surveytedPersonName : {
+				required : true
+			},
+			surveytedPersonPosition : {
+				required : true
+			},
+			fullFormTime : {
+				required : true
+			},
+			surveyPersonName : {
+				required : true
+			},
 		},
 		messages : {
-			name : {
-				required : icon + "请输入姓名"
-			}
+			equipmentName : {
+				required : icon + "请输入生产设施名称"
+			},
+			surveytedPersonName : {
+				required : icon + "请输入被调查人姓名"
+			},
+			surveytedPersonPosition : {
+				required : icon + "请输入被调查人职务"
+			},
+			fullFormTime : {
+				required : icon + "请选择填表时间"
+			},
+			surveyPersonName : {
+				required : icon + "请输入调查人姓名"
+			},
 		}
 	})
 }

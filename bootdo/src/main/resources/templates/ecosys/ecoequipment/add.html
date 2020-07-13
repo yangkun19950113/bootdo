@@ -20,12 +20,12 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">设备名称：</label>
+								<label class="col-sm-3 control-label">生产设施名称：</label>
 								<div class="col-sm-8">
 									<input id="equipmentName" name="equipmentName" class="form-control" type="text">
 								</div>
 							</div>
-							<div class="form-group">
+							<!--<div class="form-group">
 								<label class="col-sm-3 control-label">设备编码：</label>
 								<div class="col-sm-8">
 									<input id="equipmentCode" name="equipmentCode" class="form-control" type="text">
@@ -36,7 +36,7 @@
 								<div class="col-sm-8">
 									<input id="productId" name="productId" class="form-control" type="text">
 								</div>
-							</div>
+							</div>-->
 							<div class="form-group">
 								<label class="col-sm-3 control-label">设备负责人：</label>
 								<div class="col-sm-8">
@@ -75,14 +75,20 @@
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">安装时间：</label>
-								<div class="col-sm-8">
-									<input id="installTime" name="installTime" class="form-control" type="text">
+								<div class='input-group date col-sm-8' id='datetimepicker3' style="width:480px">
+									<input id="installTime" name="installTime" class="form-control" type="text" style="margin-left: 15px;">
+									<span class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar" style="margin-left: 15px;"></span>
+									</span>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">监测时间：</label>
-								<div class="col-sm-8">
-									<input id="monitTime" name="monitTime" class="form-control" type="text">
+								<div class='input-group date col-sm-8' id='datetimepicker2' style="width:480px">
+									<input id="monitTime" name="monitTime" class="form-control" type="text" style="margin-left: 15px;">
+									<span class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar" style="margin-left: 15px;"></span>
+									</span>
 								</div>
 							</div>
 							<div class="form-group">
@@ -98,25 +104,28 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">：</label>
+								<label class="col-sm-3 control-label">被调查人姓名：</label>
 								<div class="col-sm-8">
 									<input id="surveytedPersonName" name="surveytedPersonName" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">：</label>
+								<label class="col-sm-3 control-label">被调查人职位：</label>
 								<div class="col-sm-8">
 									<input id="surveytedPersonPosition" name="surveytedPersonPosition" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">：</label>
-								<div class="col-sm-8">
-									<input id="fullFormTime" name="fullFormTime" class="form-control" type="text">
+								<label class="col-sm-3 control-label">填表日期：</label>
+								<div class='input-group date col-sm-8' id='datetimepicker1' style="width:480px">
+									<input id="fullFormTime" name="fullFormTime" class="form-control" type="text" style="margin-left: 15px;">
+									<span class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar" style="margin-left: 15px;"></span>
+									</span>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">：</label>
+								<label class="col-sm-3 control-label">调查人：</label>
 								<div class="col-sm-8">
 									<input id="surveyPersonName" name="surveyPersonName" class="form-control" type="text">
 								</div>
@@ -145,7 +154,26 @@
 	</div>
 	</div>
 	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/ecosys/ecoequipment/add.js">
+	<script type="text/javascript" src="/js/appjs/ecosys/ecoequipment/add.js"></script>
+	<link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdn.bootcss.com/moment.js/2.24.0/moment-with-locales.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			$('#datetimepicker1').datetimepicker({
+				format: 'YYYY-MM-DD',
+				locale: moment.locale('zh-cn')
+			});
+			$('#datetimepicker2').datetimepicker({
+				format: 'YYYY-MM-DD',
+				locale: moment.locale('zh-cn')
+			});
+			$('#datetimepicker3').datetimepicker({
+				format: 'YYYY-MM-DD',
+				locale: moment.locale('zh-cn')
+			});
+		});
 	</script>
 </body>
 </html>

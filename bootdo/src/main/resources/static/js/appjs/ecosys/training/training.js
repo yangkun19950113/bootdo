@@ -48,101 +48,76 @@ function load() {
 								{
 									checkbox : true
 								},
-																{
-									field : 'trainingId', 
-									title : '培训会议id' 
+								{
+									field : 'trainTime',
+									title : '培训时间'
 								},
-																{
-									field : 'enterpriseId', 
-									title : '企业id' 
+								{
+									field : 'trainName',
+									title : '培训主题'
 								},
-																{
+								{
+									field : 'trainType',
+									title : '培训类型'
+								},
+								{
+									field : 'personNumber',
+									title : '参加人数'
+								},
+								{
+									field : 'deptCode',
+									title : '参加部门'
+								},
+								{
+									field : 'traningFileFlg',
+									title : '是否有资料',
+									formatter : function(value, row, index) {
+										if(value == '0'){
+											return "有";
+										}else if(value == '1') {
+											return "无";
+										}else{
+											return "-";
+										}
+									}
+								},
+								{
+									field : 'phoneNumber',
+									title : '联系电话'
+								},
+								{
 									field : 'trainingFlg',
-									title : '是否建立安全培训制度' 
+									title : '是否建立安全培训制度',
+									formatter : function(value, row, index) {
+										if(value == '0'){
+											return "有";
+										}else if(value == '1') {
+											return "无";
+										}else{
+											return "-";
+										}
+									}
 								},
-																{
+								{
 									field : 'laProvideFlg', 
-									title : '是否为劳动者提供防护用品' 
+									title : '是否为劳动者提供防护用品',
+									formatter : function(value, row, index) {
+										if(value == '0'){
+											return "有";
+										}else if(value == '1') {
+											return "无";
+										}else{
+											return "-";
+										}
+									}
 								},
-																{
-									field : 'trainName', 
-									title : '培训主题' 
-								},
-																{
-									field : 'trainType', 
-									title : '培训类型' 
-								},
-																{
-									field : 'personNumber', 
-									title : '参加人数' 
-								},
-																{
-									field : 'deptCode', 
-									title : '参加部门' 
-								},
-																{
-									field : 'traningFileFlg', 
-									title : '是否有资料' 
-								},
-																{
-									field : 'phoneNumber', 
-									title : '联系电话' 
-								},
-																{
-									field : 'trainTime', 
-									title : '培训时间' 
-								},
-																{
-									field : 'surveytedPersonName', 
-									title : '' 
-								},
-																{
-									field : 'surveytedPersonPosition', 
-									title : '' 
-								},
-																{
-									field : 'fullFormTime', 
-									title : '' 
-								},
-																{
-									field : 'surveyPersonName', 
-									title : '' 
-								},
-																{
-									field : 'createTime', 
-									title : '' 
-								},
-																{
-									field : 'createUserName', 
-									title : '' 
-								},
-																{
-									field : 'createBy', 
-									title : '' 
-								},
-																{
-									field : 'modifyTime', 
-									title : '' 
-								},
-																{
-									field : 'modifyUserName', 
-									title : '' 
-								},
-																{
-									field : 'modifyBy', 
-									title : '' 
-								},
-																{
-									field : 'deleteFlag', 
-									title : '' 
-								},
-																{
+								{
 									field : 'administrativeDivision', 
-									title : '' 
+									title : '行政区划'
 								},
-																{
+								{
 									field : 'urbanorrural', 
-									title : '' 
+									title : '城乡分类'
 								},
 																{
 									title : '操作',

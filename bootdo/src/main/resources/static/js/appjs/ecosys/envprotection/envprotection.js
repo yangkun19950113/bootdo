@@ -177,9 +177,11 @@ function load() {
 									field : 'areaCode', 
 									title : '所在区域',
 									formatter : function(value, row, index) {
-										for(var i = 0;i<areaCodeList.length;i++){
-											if(value == areaCodeList[i].codeId){
-												return areaCodeList[i].name;
+										if (value != "" && value != null && value != undefined) {
+											for (var i = 0; i < areaCodeList.length; i++) {
+												if (value == areaCodeList[i].codeId) {
+													return areaCodeList[i].name;
+												}
 											}
 										}
 									}
@@ -188,25 +190,18 @@ function load() {
 									field : 'mainEnergyCode', 
 									title : '主要能源',
 									formatter : function(value, row, index) {
-										var mainEnergyName = '' ;
-										if(value != "" && value != null && value != undefined){
-											var codeList = value.split(",");
-											for(var i = 0;i<codeList.length;i++){
-												for(var j = 0;j<mainEnergyCodeList.length;j++){
-													if(codeList[i] == mainEnergyCodeList[j].codeId){
-														mainEnergyName = mainEnergyCodeList[j].name + "," + mainEnergyName;
-													}
-												}
+										for(var i = 0;i<mainEnergyCodeList.length;i++){
+											if(value == mainEnergyCodeList[i].codeId){
+												return mainEnergyCodeList[i].name;
 											}
 										}
-										return mainEnergyName;
 									}
 								},
-																{
+								{
 									field : 'measures', 
 									title : '污染治理措施' 
 								},
-																{
+								{
 									field : 'normalFactorsCode', 
 									title : '常规因子',
 									formatter : function(value, row, index) {
@@ -224,7 +219,7 @@ function load() {
 										return normalFactorsName;
 									}
 								},
-																{
+								{
 									field : 'specialFactorsCode', 
 									title : '特征因子',
 									formatter : function(value, row, index) {
@@ -250,7 +245,7 @@ function load() {
 									field : 'dangerWaste', 
 									title : '危险废物' 
 								},
-																{
+									/*							{
 									field : 'surveytedPersonName', 
 									title : '被调查人姓名' 
 								},
@@ -265,7 +260,7 @@ function load() {
 																{
 									field : 'surveyPersonName', 
 									title : '调查人' 
-								},
+								},*/
 																{
 									field : 'administrativeDivision', 
 									title : '行政区划' 

@@ -48,75 +48,47 @@ function load() {
 								{
 									checkbox : true
 								},
-																{
-									field : 'safeTroubleId', 
-									title : '培训会议id' 
-								},
-																{
-									field : 'enterpriseId', 
-									title : '企业id' 
-								},
-																{
-									field : 'equipmentId',
-									title : '设备id' 
-								},
-																{
+								{
 									field : 'peopleFindName', 
 									title : '发现人员' 
 								},
-																{
+								{
 									field : 'findTime', 
 									title : '发现时间' 
 								},
-																{
+								{
 									field : 'level', 
 									title : '级别' 
 								},
-																{
+								{
 									field : 'type', 
 									title : '类型' 
 								},
-																{
+								{
 									field : 'apart', 
 									title : '隐患部位' 
 								},
-																{
+								{
 									field : 'remark', 
 									title : '隐患描述' 
 								},
-																{
+								{
 									field : 'rectificat', 
 									title : '整改情况' 
 								},
-																{
+								{
 									field : 'rectUserName', 
 									title : '整改人' 
 								},
-																{
-									field : 'surveytedPersonName', 
-									title : '' 
-								},
-																{
-									field : 'surveytedPersonPosition', 
-									title : '' 
-								},
-																{
-									field : 'fullFormTime', 
-									title : '' 
-								},
-																{
-									field : 'surveyPersonName', 
-									title : '' 
-								},
 								{
 									field : 'administrativeDivision',
-									title : '' 
+									title : '行政区划'
 								},
-																{
+								{
 									field : 'urbanorrural', 
-									title : '' 
+									title : '城乡分类'
 								},
-																{
+								{
 									title : '操作',
 									field : 'id',
 									align : 'center',

@@ -98,6 +98,8 @@ public class EnvprotectionDO implements Serializable {
 
 	private String projectManageName;
 
+	private String dosage;
+
 
 	/**
 	 * 设置：企业id
@@ -519,5 +521,13 @@ public class EnvprotectionDO implements Serializable {
 
 	public void setProjectManageName(String projectManageName) {
 		this.projectManageName = projectManageName;
+	}
+
+	public String getDosage() {
+		return dosage;
+	}
+
+	public void setDosage(String dosage) {
+		this.dosage = dosage;
 	}
 }
