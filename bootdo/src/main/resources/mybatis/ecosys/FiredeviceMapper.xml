@@ -4,7 +4,7 @@
 <mapper namespace="com.bootdo.ecosys.dao.FiredeviceDao">
 
 	<select id="get" resultType="com.bootdo.ecosys.domain.FiredeviceDO">
-		select `equipment_id`,`equipment_name`,`equipment_code`,`enterprise_id`,`model`,`buy_time`,`effect_time`,`brand`,`install_position`,`product_id`,`protection_person`,`phone_number`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_firedevice where equipment_id = #{value}
+		select `equipment_id`,`equipment_name`,`equipment_type`,`equipment_code`,`enterprise_id`,`model`,`buy_time`,`effect_time`,`brand`,`install_position`,`product_id`,`protection_person`,`phone_number`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_firedevice where equipment_id = #{value}
 	</select>
 	<select id="getData" resultType="com.bootdo.ecosys.domain.FiredeviceDO">
 		SELECT
@@ -21,7 +21,7 @@
 		select fi.equipment_id,fi.equipment_name,fi.equipment_code,fi.enterprise_id,fi.model,fi.buy_time,fi.effect_time,
 		fi.brand,fi.install_position,fi.product_id,fi.protection_person,fi.phone_number,fi.surveyted_person_name,fi.surveyted_person_position,
 		fi.full_form_time,fi.survey_person_name,fi.create_time,fi.create_user_name,fi.create_by,fi.modify_time,
-		fi.modify_user_name,fi.modify_by,fi.delete_flag,fi.administrative_division,fi.urbanorrural,
+		fi.modify_user_name,fi.modify_by,fi.delete_flag,fi.administrative_division,fi.urbanorrural,fi.equipment_type
 		en.enterprise_name
 		from eco_firedevice fi left join eco_enterprise en on en.enterprise_id = fi.enterprise_id
         <where>
@@ -99,7 +99,8 @@
 		insert into eco_firedevice
 		(
 			`equipment_id`, 
-			`equipment_name`, 
+			`equipment_name`,
+			`equipment_type`,
 			`equipment_code`, 
 			`enterprise_id`, 
 			`model`, 
@@ -127,7 +128,8 @@
 		values
 		(
 			#{equipmentId}, 
-			#{equipmentName}, 
+			#{equipmentName},
+			#{equipmentType},
 			#{equipmentCode}, 
 			#{enterpriseId}, 
 			#{model}, 
@@ -158,6 +160,7 @@
 		update eco_firedevice 
 		<set>
 			<if test="equipmentName != null">`equipment_name` = #{equipmentName}, </if>
+			<if test="equipmentType != null">`equipment_type` = #{equipmentType}, </if>
 			<if test="equipmentCode != null">`equipment_code` = #{equipmentCode}, </if>
 			<if test="enterpriseId != null">`enterprise_id` = #{enterpriseId}, </if>
 			<if test="model != null">`model` = #{model}, </if>

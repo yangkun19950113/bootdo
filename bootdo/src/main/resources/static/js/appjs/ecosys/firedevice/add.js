@@ -39,14 +39,80 @@ function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
 		rules : {
-			name : {
+			equipmentName : {
 				required : true
-			}
+			},
+			equipmentType : {
+				required : true
+			},
+			buyTime : {
+				required : true
+			},
+			effectTime : {
+				required : true
+			},
+			brand : {
+				required : true
+			},
+			installPosition : {
+				required : true
+			},
+			protectionPerson : {
+				required : true
+			},
+			phoneNumber : {
+				required : true
+			},
+			surveytedPersonName : {
+				required : true
+			},
+			surveytedPersonPosition : {
+				required : true
+			},
+			fullFormTime : {
+				required : true
+			},
+			surveyPersonName : {
+				required : true
+			},
 		},
 		messages : {
-			name : {
-				required : icon + "请输入姓名"
-			}
+			equipmentName : {
+				required : icon + "请输入设备名称"
+			},
+			equipmentType : {
+				required : icon + "请输入设备类型"
+			},
+			buyTime : {
+				required : icon + "请选择采购时间"
+			},
+			effectTime : {
+				required : icon + "请选择有效时间"
+			},
+			brand : {
+				required : icon + "请输入品牌"
+			},
+			installPosition : {
+				required : icon + "请输入安装位置"
+			},
+			protectionPerson : {
+				required : icon + "请输入设备负责人"
+			},
+			phoneNumber : {
+				required : icon + "请输入联系电话"
+			},
+			surveytedPersonName : {
+				required : icon + "请输入被调查人姓名"
+			},
+			surveytedPersonPosition : {
+				required : icon + "请输入被调查人职务"
+			},
+			fullFormTime : {
+				required : icon + "请选择填表时间"
+			},
+			surveyPersonName : {
+				required : icon + "请输入调查人姓名"
+			},
 		}
 	})
 }

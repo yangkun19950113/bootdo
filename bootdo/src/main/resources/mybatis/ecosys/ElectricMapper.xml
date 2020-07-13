@@ -4,7 +4,7 @@
 <mapper namespace="com.bootdo.ecosys.dao.ElectricDao">
 
 	<select id="get" resultType="com.bootdo.ecosys.domain.ElectricDO">
-		select `equipment_id`,`equipment_name`,`equipment_code`,`enterprise_id`,`phase_number`,`number`,`is_or_not_through`,`install_position`,`equipment_use`,`product_id`,`protection_person`,`phone_number`,`equipment_type`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_electric where equipment_id = #{value}
+		select `equipment_id`,`equipment_power`,`equipment_name`,`equipment_code`,`enterprise_id`,`phase_number`,`number`,`is_or_not_through`,`install_position`,`equipment_use`,`product_id`,`protection_person`,`phone_number`,`equipment_type`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_electric where equipment_id = #{value}
 	</select>
 	<select id="getData" resultType="com.bootdo.ecosys.domain.ElectricDO">
 		SELECT
@@ -18,7 +18,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.ecosys.domain.ElectricDO">
-		select `equipment_id`,`equipment_name`,`equipment_code`,`enterprise_id`,`phase_number`,`number`,`is_or_not_through`,`install_position`,`equipment_use`,`product_id`,`protection_person`,`phone_number`,`equipment_type`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_electric
+		select `equipment_id`,`equipment_power`,`equipment_name`,`equipment_code`,`enterprise_id`,`phase_number`,`number`,`is_or_not_through`,`install_position`,`equipment_use`,`product_id`,`protection_person`,`phone_number`,`equipment_type`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_electric
         <where>
 			delete_flag = '0'
 		  		  <if test="equipmentId != null and equipmentId != ''"> and equipment_id = #{equipmentId} </if>
@@ -98,7 +98,8 @@
 		insert into eco_electric
 		(
 			`equipment_id`, 
-			`equipment_name`, 
+			`equipment_name`,
+			`equipment_power`,
 			`equipment_code`, 
 			`enterprise_id`, 
 			`phase_number`, 
@@ -127,7 +128,8 @@
 		values
 		(
 			#{equipmentId}, 
-			#{equipmentName}, 
+			#{equipmentName},
+			#{equipmentPower},
 			#{equipmentCode}, 
 			#{enterpriseId}, 
 			#{phaseNumber}, 
@@ -159,6 +161,7 @@
 		update eco_electric 
 		<set>
 			<if test="equipmentName != null">`equipment_name` = #{equipmentName}, </if>
+			<if test="equipmentPower != null">`equipment_power` = #{equipmentPower}, </if>
 			<if test="equipmentCode != null">`equipment_code` = #{equipmentCode}, </if>
 			<if test="enterpriseId != null">`enterprise_id` = #{enterpriseId}, </if>
 			<if test="phaseNumber != null">`phase_number` = #{phaseNumber}, </if>

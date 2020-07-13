@@ -169,7 +169,7 @@ function getMainEnergyCode(){
 		success: function (data) {
 			var code_list = data.rows;
 			for (var i = 0; i < code_list.length; i++) {
-				$("#mainEnergyCode").append("<label class='radio-inline'><input type='checkbox' name='mainEnergyCode' value=" + code_list[i].codeId + " />&nbsp;&nbsp;" + code_list[i].name + "</label>");
+				$("#mainEnergyCode").append("<label class='radio-inline'><input type='radio' name='mainEnergyCode' value=" + code_list[i].codeId + " />&nbsp;&nbsp;" + code_list[i].name + " <input type='text' name='dosage' class='form-control' id='dosage"+ code_list[i].codeId + "'/></label>");
 			}
 			layer.closeAll('loading');//关闭loading
 		}
@@ -211,3 +211,10 @@ function getSpecialFactorsCode(){
 		}
 	})
 }
+
+//主要能源，监听事件
+$('input:radio[name="mainEnergyCode"]').click(function(){
+	var checkValue = $('input:radio[name="mainEnergyCode"]:checked').val();
+	$('input:input[name="dosage"]:checked').attr("disabled","disabled");
+	$("#dosage" + checkValue).removeAttr("disabled");
+});

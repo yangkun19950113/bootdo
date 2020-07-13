@@ -10,7 +10,14 @@
 					<div class="ibox-content">
 						<form class="form-horizontal m-t" id="signupForm">
 						<input id="equipmentId" name="equipmentId" th:value="${firedevice.equipmentId}"  type="hidden">
-							<div class="form-group">	
+							<div class="form-group">
+								<label class="col-sm-3 control-label">所属企业：</label>
+								<div class="col-sm-8">
+									<input id="enterpriseId" name="enterpriseId" th:value="${firedevice.enterpriseId}" class="form-control" type="hidden">
+									<input id="enterpriseName" name="enterpriseName" th:value="${firedevice.enterpriseName}" class="form-control" type="text" disabled>
+								</div>
+							</div>
+							<div class="form-group">
 								<label class="col-sm-3 control-label">设备名称：</label>
 								<div class="col-sm-8">
 									<input id="equipmentName" name="equipmentName" th:value="${firedevice.equipmentName}" class="form-control" type="text">
@@ -23,10 +30,9 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">所属企业：</label>
+								<label class="col-sm-3 control-label">设备类型：</label>
 								<div class="col-sm-8">
-									<input id="enterpriseId" name="enterpriseId" th:value="${firedevice.enterpriseId}" class="form-control" type="hidden">
-									<input id="enterpriseName" name="enterpriseName" th:value="${firedevice.enterpriseName}" class="form-control" type="text" disabled>
+									<input id="equipmentType" name="equipmentType" th:value="${firedevice.equipmentType}" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">

@@ -12,18 +12,6 @@
 				<div class="ibox float-e-margins">
 					<div class="ibox-content">
 						<form class="form-horizontal m-t" id="signupForm">
-							<div class="form-group">	
-								<label class="col-sm-3 control-label">设备名称：</label>
-								<div class="col-sm-8">
-									<input id="equipmentName" name="equipmentName" class="form-control" type="text">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">设备编码：</label>
-								<div class="col-sm-8">
-									<input id="equipmentCode" name="equipmentCode" class="form-control" type="text">
-								</div>
-							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">所属企业：</label>
 								<div class="col-sm-8">
@@ -32,27 +20,9 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">相数：</label>
+								<label class="col-sm-3 control-label">设备名称：</label>
 								<div class="col-sm-8">
-									<input id="phaseNumber" name="phaseNumber" class="form-control" type="text">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">台数：</label>
-								<div class="col-sm-8">
-									<input id="number" name="number" class="form-control" type="text">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">电缆是否穿管：</label>
-								<div class="col-sm-8">
-									<input id="isOrNotThrough" name="isOrNotThrough" class="form-control" type="text">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">安装位置：</label>
-								<div class="col-sm-8">
-									<input id="installPosition" name="installPosition" class="form-control" type="text">
+									<input id="equipmentName" name="equipmentName" class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
@@ -62,12 +32,43 @@
 								</div>
 							</div>
 							<div class="form-group">
+								<label class="col-sm-3 control-label">设备功率(kw)：</label>
+								<div class="col-sm-8">
+									<input id="equipmentPower" name="equipmentPower" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">相数(相)：</label>
+								<div class="col-sm-8">
+									<input id="phaseNumber" name="phaseNumber" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">台数(台)：</label>
+								<div class="col-sm-8">
+									<input id="number" name="number" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">安装位置：</label>
+								<div class="col-sm-8">
+									<input id="installPosition" name="installPosition" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">电缆是否穿管：</label>
+								<div class="col-sm-8">
+									<label class="radio-inline"> <input type="radio" name="isOrNotThrough" value="0" /> 是</label>
+									<label class="radio-inline"> <input type="radio" name="isOrNotThrough" value="1" /> 否</label>
+								</div>
+							</div>
+							<!--<div class="form-group">
 								<label class="col-sm-3 control-label">产品id：</label>
 								<div class="col-sm-8">
 									<input id="productId" name="productId" class="form-control" type="text">
 								</div>
-							</div>
-							<div class="form-group">
+							</div>-->
+							<!--<div class="form-group">
 								<label class="col-sm-3 control-label">设备负责人：</label>
 								<div class="col-sm-8">
 									<input id="protectionPerson" name="protectionPerson" class="form-control" type="text">
@@ -78,13 +79,13 @@
 								<div class="col-sm-8">
 									<input id="phoneNumber" name="phoneNumber" class="form-control" type="text">
 								</div>
-							</div>
-							<div class="form-group">
+							</div>-->
+							<!--<div class="form-group">
 								<label class="col-sm-3 control-label">设备类型：</label>
 								<div class="col-sm-8">
 									<input id="equipmentType" name="equipmentType" class="form-control" type="text">
 								</div>
-							</div>
+							</div>-->
 							<div class="form-group">
 								<label class="col-sm-3 control-label">被调查人姓名：</label>
 								<div class="col-sm-8">
@@ -112,8 +113,6 @@
 									<input id="surveyPersonName" name="surveyPersonName" class="form-control" type="text">
 								</div>
 							</div>
-
-
 							<div class="form-group">
 								<label class="col-sm-3 control-label">行政区划：</label>
 								<div class="col-sm-8">

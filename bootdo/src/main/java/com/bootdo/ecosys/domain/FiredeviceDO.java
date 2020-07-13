@@ -67,7 +67,10 @@ public class FiredeviceDO implements Serializable {
 	private Integer urbanorrural;
 
 	private String enterpriseName;
+
 	private String firedeviceMinImgUrl;
+
+	private String equipmentType;
 
 	public String getFiredeviceMinImgUrl() {
 		return firedeviceMinImgUrl;
@@ -384,5 +387,13 @@ public class FiredeviceDO implements Serializable {
 
 	public void setEnterpriseName(String enterpriseName) {
 		this.enterpriseName = enterpriseName;
+	}
+
+	public String getEquipmentType() {
+		return equipmentType;
+	}
+
+	public void setEquipmentType(String equipmentType) {
+		this.equipmentType = equipmentType;
 	}
 }

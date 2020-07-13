@@ -69,7 +69,10 @@ public class ElectricDO implements Serializable {
 	private Integer urbanorrural;
 
 	private String enterpriseName;
+
 	private String electricMinImgUrl;
+
+	private String equipmentPower;
 
 	public String getElectricMinImgUrl() {
 		return electricMinImgUrl;
@@ -398,5 +401,13 @@ public class ElectricDO implements Serializable {
 
 	public void setEnterpriseName(String enterpriseName) {
 		this.enterpriseName = enterpriseName;
+	}
+
+	public String getEquipmentPower() {
+		return equipmentPower;
+	}
+
+	public void setEquipmentPower(String equipmentPower) {
+		this.equipmentPower = equipmentPower;
 	}
 }

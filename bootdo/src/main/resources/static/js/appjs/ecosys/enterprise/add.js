@@ -102,11 +102,7 @@ function validateRule() {
 			businessAreaNatureCode : {
 				required : true
 			},
-			dept : {
-				required : true
-			},
 			taxpayerCode : {
-				/*notEmpty : true,*/
 				required : true
 			},
 			marketCode : {
@@ -124,7 +120,6 @@ function validateRule() {
 			surveyPersonName : {
 				required : true
 			},
-
 		},
 		messages : {
 			enterpriseName : {
@@ -182,11 +177,8 @@ function validateRule() {
 			businessAreaNatureCode : {
 				required : icon + "请选择经营场所取得方式"
 			},
-			dept : {
-				required : icon + "请输入部门设置"
-			},
+
 			taxpayerCode : {
-				/*notEmpty :icon + "请选择纳税人性质",*/
 				required : icon + "请选择纳税人性质"
 			},
 			marketCode : {
