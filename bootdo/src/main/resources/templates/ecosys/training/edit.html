@@ -9,149 +9,104 @@
 				<div class="ibox float-e-margins">
 					<div class="ibox-content">
 						<form class="form-horizontal m-t" id="signupForm">
-						<input id="training_id" name="training_id" th:value="${training.training_id}"  type="hidden">
+						<input id="trainingId" name="trainingId" th:value="${training.trainingId}"  type="hidden">
 							<div class="form-group">	
-								<label class="col-sm-3 control-label">企业id：</label>
+								<label class="col-sm-3 control-label">所属企业：</label>
 								<div class="col-sm-8">
-									<input id="enterpriseId" name="enterpriseId" th:value="${training.enterpriseId}" class="form-control" type="text">
+									<input id="enterpriseName" name="enterpriseName" th:value="${training.enterpriseName}" class="form-control" type="text" disabled>
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">是否建立安全培训制度：</label>
 								<div class="col-sm-8">
-									<input id="
-traningSystemFlg" name="
-traningSystemFlg" th:value="${training.
-traningSystemFlg}" class="form-control" type="text">
+									<input id="trainingFlg" name="trainingFlg" th:value="${training.trainingFlg}" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">是否为劳动者提供防护用品：</label>
 								<div class="col-sm-8">
 									<input id="laProvideFlg" name="laProvideFlg" th:value="${training.laProvideFlg}" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">培训主题：</label>
 								<div class="col-sm-8">
 									<input id="trainName" name="trainName" th:value="${training.trainName}" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">培训类型：</label>
 								<div class="col-sm-8">
 									<input id="trainType" name="trainType" th:value="${training.trainType}" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">参加人数：</label>
 								<div class="col-sm-8">
 									<input id="personNumber" name="personNumber" th:value="${training.personNumber}" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">参加部门：</label>
 								<div class="col-sm-8">
 									<input id="deptCode" name="deptCode" th:value="${training.deptCode}" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">是否有资料：</label>
 								<div class="col-sm-8">
 									<input id="traningFileFlg" name="traningFileFlg" th:value="${training.traningFileFlg}" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">联系电话：</label>
 								<div class="col-sm-8">
 									<input id="phoneNumber" name="phoneNumber" th:value="${training.phoneNumber}" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">培训时间：</label>
 								<div class="col-sm-8">
 									<input id="trainTime" name="trainTime" th:value="${training.trainTime}" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">：</label>
 								<div class="col-sm-8">
 									<input id="surveytedPersonName" name="surveytedPersonName" th:value="${training.surveytedPersonName}" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">：</label>
 								<div class="col-sm-8">
 									<input id="surveytedPersonPosition" name="surveytedPersonPosition" th:value="${training.surveytedPersonPosition}" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">：</label>
 								<div class="col-sm-8">
 									<input id="fullFormTime" name="fullFormTime" th:value="${training.fullFormTime}" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">：</label>
 								<div class="col-sm-8">
 									<input id="surveyPersonName" name="surveyPersonName" th:value="${training.surveyPersonName}" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">：</label>
-								<div class="col-sm-8">
-									<input id="createTime" name="createTime" th:value="${training.createTime}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">：</label>
-								<div class="col-sm-8">
-									<input id="createUserName" name="createUserName" th:value="${training.createUserName}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">：</label>
-								<div class="col-sm-8">
-									<input id="createBy" name="createBy" th:value="${training.createBy}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">：</label>
-								<div class="col-sm-8">
-									<input id="modifyTime" name="modifyTime" th:value="${training.modifyTime}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">：</label>
-								<div class="col-sm-8">
-									<input id="modifyUserName" name="modifyUserName" th:value="${training.modifyUserName}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">：</label>
-								<div class="col-sm-8">
-									<input id="modifyBy" name="modifyBy" th:value="${training.modifyBy}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">：</label>
-								<div class="col-sm-8">
-									<input id="deleteFlag" name="deleteFlag" th:value="${training.deleteFlag}" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">：</label>
 								<div class="col-sm-8">
 									<input id="administrativeDivision" name="administrativeDivision" th:value="${training.administrativeDivision}" class="form-control" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-3 control-label">：</label>
 								<div class="col-sm-8">
 									<input id="urbanorrural" name="urbanorrural" th:value="${training.urbanorrural}" class="form-control" type="text">
 								</div>
 							</div>
-																					<div class="form-group">
+							<div class="form-group">
 								<div class="col-sm-8 col-sm-offset-3">
 									<button type="submit" class="btn btn-primary">提交</button>
 								</div>
@@ -163,7 +118,7 @@ traningSystemFlg}" class="form-control" type="text">
 	</div>
 	</div>
 	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/system/training/edit.js">
+	<script type="text/javascript" src="/js/appjs/ecosys/training/edit.js">
 	</script>
 </body>
 </html>

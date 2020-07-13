@@ -20,7 +20,7 @@ public class TrainingDO implements Serializable {
 	//企业id
 	private Integer enterpriseId;
 	//是否建立安全培训制度
-	private String traningEcosysFlg;
+	private String trainingFlg;
 	//是否为劳动者提供防护用品
 	private String laProvideFlg;
 	//培训主题
@@ -64,6 +64,8 @@ public class TrainingDO implements Serializable {
 	//
 	private Integer urbanorrural;
 	private String trainingMinImgUrl;
+
+	private String enterpriseName;
 
 	public String getTrainingMinImgUrl() {
 		return trainingMinImgUrl;
@@ -351,11 +353,19 @@ public class TrainingDO implements Serializable {
 		return urbanorrural;
 	}
 
-	public String getTraningEcosysFlg() {
-		return traningEcosysFlg;
+	public String getTrainingFlg() {
+		return trainingFlg;
 	}
 
-	public void setTraningEcosysFlg(String traningEcosysFlg) {
-		this.traningEcosysFlg = traningEcosysFlg;
+	public void setTrainingFlg(String trainingFlg) {
+		this.trainingFlg = trainingFlg;
+	}
+
+	public String getEnterpriseName() {
+		return enterpriseName;
+	}
+
+	public void setEnterpriseName(String enterpriseName) {
+		this.enterpriseName = enterpriseName;
 	}
 }

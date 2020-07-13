@@ -19,7 +19,8 @@
 
 	<select id="list" resultType="com.bootdo.ecosys.domain.EcoequipmentDO">
 		select `equipment_id`,`equipment_name`,`equipment_code`,`enterprise_id`,`product_id`,`protection_person`,`phone_number`,`equipment_type`,`pollution_name`,`pollution_type`,`emission_way`,`install_time`,`monit_time`,`maintenance_cycle`,`loss_material`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_ecoequipment
-        <where>  
+        <where>
+			delete_flag = '0'
 		  		  <if test="equipmentId != null and equipmentId != ''"> and equipment_id = #{equipmentId} </if>
 		  		  <if test="equipmentName != null and equipmentName != ''"> and equipment_name = #{equipmentName} </if>
 		  		  <if test="equipmentCode != null and equipmentCode != ''"> and equipment_code = #{equipmentCode} </if>
@@ -64,7 +65,8 @@
 	
  	<select id="count" resultType="int">
 		select count(*) from eco_ecoequipment
-		 <where>  
+		 <where>
+			 delete_flag = '0'
 		  		  <if test="equipmentId != null and equipmentId != ''"> and equipment_id = #{equipmentId} </if>
 		  		  <if test="equipmentName != null and equipmentName != ''"> and equipment_name = #{equipmentName} </if>
 		  		  <if test="equipmentCode != null and equipmentCode != ''"> and equipment_code = #{equipmentCode} </if>
@@ -87,7 +89,7 @@
 		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		  <if test="createUserName != null and createUserName != ''"> and create_user_name = #{createUserName} </if>
 		  		  <if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
-		  		  <if test="modifyTime != null and modifyTime != ''"> and modify_time = #{modifyTime} </if>
+		  		  <if test="modifyTime != null and modifyTime != ''"> and modify_time = CURRENT_TIMESTAMP() </if>
 		  		  <if test="modifyUserName != null and modifyUserName != ''"> and modify_user_name = #{modifyUserName} </if>
 		  		  <if test="modifyBy != null and modifyBy != ''"> and modify_by = #{modifyBy} </if>
 		  		  <if test="deleteFlag != null and deleteFlag != ''"> and delete_flag = #{deleteFlag} </if>
@@ -149,13 +151,13 @@
 			#{surveytedPersonPosition}, 
 			#{fullFormTime}, 
 			#{surveyPersonName}, 
-			#{createTime}, 
+			CURRENT_TIMESTAMP(),
 			#{createUserName}, 
 			#{createBy}, 
-			#{modifyTime}, 
+			CURRENT_TIMESTAMP(),
 			#{modifyUserName}, 
 			#{modifyBy}, 
-			#{deleteFlag}, 
+			'0',
 			#{administrativeDivision}, 
 			#{urbanorrural}
 		)
@@ -185,7 +187,7 @@
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
 			<if test="createUserName != null">`create_user_name` = #{createUserName}, </if>
 			<if test="createBy != null">`create_by` = #{createBy}, </if>
-			<if test="modifyTime != null">`modify_time` = #{modifyTime}, </if>
+			<if test="modifyTime != null">`modify_time` = CURRENT_TIMESTAMP(), </if>
 			<if test="modifyUserName != null">`modify_user_name` = #{modifyUserName}, </if>
 			<if test="modifyBy != null">`modify_by` = #{modifyBy}, </if>
 			<if test="deleteFlag != null">`delete_flag` = #{deleteFlag}, </if>
@@ -195,15 +197,21 @@
 		where equipment_id = #{equipmentId}
 	</update>
 	
-	<delete id="remove">
-		delete from eco_ecoequipment where equipment_id = #{value}
-	</delete>
+	<update id="remove">
+		update eco_ecoequipment
+		set modify_time = CURRENT_TIMESTAMP(),
+		delete_flag = '1'
+		where equipment_id = #{value}
+	</update>
 	
-	<delete id="batchRemove">
-		delete from eco_ecoequipment where equipment_id in 
+	<update id="batchRemove">
+		update eco_ecoequipment
+		set modify_time = CURRENT_TIMESTAMP(),
+		delete_flag = '1'
+		where equipment_id in
 		<foreach item="equipmentId" collection="array" open="(" separator="," close=")">
 			#{equipmentId}
 		</foreach>
-	</delete>
+	</update>
 
 </mapper>

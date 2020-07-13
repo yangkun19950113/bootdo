@@ -8,11 +8,14 @@
 			<div class="ibox">
 				<div class="ibox-body">
 					<div class="fixed-table-toolbar">
+						<div>
+							<input id="enterpriseId" name="enterpriseId" th:value="${enterpriseId}"  type="hidden">
+						</div>
 						<div class="columns pull-left">
-							<button shiro:hasPermission="system:ecoequipment:add" type="button" class="btn  btn-primary" onclick="add()">
+							<button shiro:hasPermission="ecosys:ecoequipment:add" type="button" class="btn  btn-primary" onclick="add()">
 								<i class="fa fa-plus" aria-hidden="true"></i>添加
 							</button>
-							<button shiro:hasPermission="system:ecoequipment:batchRemove" type="button" class="btn  btn-danger"
+							<button shiro:hasPermission="ecosys:ecoequipment:batchRemove" type="button" class="btn  btn-danger"
 								onclick="batchRemove()">
 								<i class="fa fa-trash" aria-hidden="true"></i>删除
 							</button>
@@ -39,23 +42,23 @@
 				var s_resetPwd_h = 'hidden';
 			</script>
 		</div>
-		<div shiro:hasPermission="system:ecoequipment:edit">
+		<div shiro:hasPermission="ecosys:ecoequipment:edit">
 			<script type="text/javascript">
 				s_edit_h = '';
 			</script>
 		</div>
-		<div shiro:hasPermission="system:ecoequipment:remove">
+		<div shiro:hasPermission="ecosys:ecoequipment:remove">
 			<script type="text/javascript">
 				var s_remove_h = '';
 			</script>
 		</div>
-		<div shiro:hasPermission="system:ecoequipment:resetPwd">
+		<div shiro:hasPermission="ecosys:ecoequipment:resetPwd">
 			<script type="text/javascript">
 				var s_resetPwd_h = '';
 			</script>
 		</div>
 	</div>
 	<div th:include="include :: footer"></div>
-	<script type="text/javascript" src="/js/appjs/system/ecoequipment/ecoequipment.js"></script>
+	<script type="text/javascript" src="/js/appjs/ecosys/ecoequipment/ecoequipment.js"></script>
 </body>
 </html>

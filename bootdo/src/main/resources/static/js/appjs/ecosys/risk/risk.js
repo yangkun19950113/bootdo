@@ -1,6 +1,7 @@
-
-var prefix = "/system/risk"
+var enterpriseId;
+var prefix = "/ecosys/risk"
 $(function() {
+	enterpriseId = $("#enterpriseId").val();
 	load();
 });
 
@@ -9,7 +10,7 @@ function load() {
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url : prefix + "/list", // 服务器数据的加载地址
+						url : prefix + "/list/"+enterpriseId, // 服务器数据的加载地址
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,
@@ -56,8 +57,7 @@ function load() {
 									title : '企业id' 
 								},
 																{
-									field : '
-equipmentId', 
+									field : 'equipmentId',
 									title : '设备id' 
 								},
 																{
@@ -108,36 +108,8 @@ equipmentId',
 									field : 'surveyPersonName', 
 									title : '' 
 								},
-																{
-									field : 'createTime', 
-									title : '' 
-								},
-																{
-									field : 'createUserName', 
-									title : '' 
-								},
-																{
-									field : 'createBy', 
-									title : '' 
-								},
-																{
-									field : 'modifyTime', 
-									title : '' 
-								},
-																{
-									field : 'modifyUserName', 
-									title : '' 
-								},
-																{
-									field : 'modifyBy', 
-									title : '' 
-								},
-																{
-									field : 'deleteFlag', 
-									title : '' 
-								},
-																{
-									field : 'administrativeDivision', 
+								{
+									field : 'administrativeDivision',
 									title : '' 
 								},
 																{
@@ -173,7 +145,7 @@ function add() {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
-		content : prefix + '/add' // iframe的url
+		content : prefix + '/add/' + enterpriseId // iframe的url
 	});
 }
 function edit(id) {

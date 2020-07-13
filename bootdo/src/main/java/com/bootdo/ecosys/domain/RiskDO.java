@@ -63,7 +63,10 @@ public class RiskDO implements Serializable {
 	private Integer administrativeDivision;
 	//
 	private Integer urbanorrural;
+
 	private String riskMinImgUrl;
+
+	private String enterpriseName;
 
 	public String getRiskMinImgUrl() {
 		return riskMinImgUrl;
@@ -359,5 +362,13 @@ public class RiskDO implements Serializable {
 
 	public void setEquipmentId(Integer equipmentId) {
 		this.equipmentId = equipmentId;
+	}
+
+	public String getEnterpriseName() {
+		return enterpriseName;
+	}
+
+	public void setEnterpriseName(String enterpriseName) {
+		this.enterpriseName = enterpriseName;
 	}
 }

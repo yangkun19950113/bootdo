@@ -8,11 +8,14 @@
 			<div class="ibox">
 				<div class="ibox-body">
 					<div class="fixed-table-toolbar">
+						<div>
+							<input id="enterpriseId" name="enterpriseId" th:value="${enterpriseId}"  type="hidden">
+						</div>
 						<div class="columns pull-left">
-							<button shiro:hasPermission="system:risk:add" type="button" class="btn  btn-primary" onclick="add()">
+							<button shiro:hasPermission="ecosys:risk:add" type="button" class="btn  btn-primary" onclick="add()">
 								<i class="fa fa-plus" aria-hidden="true"></i>添加
 							</button>
-							<button shiro:hasPermission="system:risk:batchRemove" type="button" class="btn  btn-danger"
+							<button shiro:hasPermission="ecosys:risk:batchRemove" type="button" class="btn  btn-danger"
 								onclick="batchRemove()">
 								<i class="fa fa-trash" aria-hidden="true"></i>删除
 							</button>
@@ -39,23 +42,23 @@
 				var s_resetPwd_h = 'hidden';
 			</script>
 		</div>
-		<div shiro:hasPermission="system:risk:edit">
+		<div shiro:hasPermission="ecosys:risk:edit">
 			<script type="text/javascript">
 				s_edit_h = '';
 			</script>
 		</div>
-		<div shiro:hasPermission="system:risk:remove">
+		<div shiro:hasPermission="ecosys:risk:remove">
 			<script type="text/javascript">
 				var s_remove_h = '';
 			</script>
 		</div>
-		<div shiro:hasPermission="system:risk:resetPwd">
+		<div shiro:hasPermission="ecosys:risk:resetPwd">
 			<script type="text/javascript">
 				var s_resetPwd_h = '';
 			</script>
 		</div>
 	</div>
 	<div th:include="include :: footer"></div>
-	<script type="text/javascript" src="/js/appjs/system/risk/risk.js"></script>
+	<script type="text/javascript" src="/js/appjs/ecosys/risk/risk.js"></script>
 </body>
 </html>

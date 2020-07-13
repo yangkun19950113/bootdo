@@ -189,7 +189,7 @@ public class ShowDataController {
 		// 安全生产培训
 		TrainingDO trainingDO = trainingService.getData(enterpriseId);
 		// 是否建立安全培训制度
-		String traningEcosysFlg = trainingDO.getTraningEcosysFlg();
+		String traningEcosysFlg = trainingDO.getTrainingFlg();
 		ShowData.setTraningSystemFlg(traningEcosysFlg);
 		//是否为劳动者提供防护用品
 		String laProvideFlg = trainingDO.getLaProvideFlg();

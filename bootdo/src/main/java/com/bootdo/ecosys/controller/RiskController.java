@@ -3,7 +3,9 @@ package com.bootdo.ecosys.controller;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.ecosys.domain.EnterpriseDO;
 import com.bootdo.ecosys.domain.RiskDO;
+import com.bootdo.ecosys.service.EnterpriseService;
 import com.bootdo.ecosys.service.RiskService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,41 +31,51 @@ import com.bootdo.common.utils.R;
  */
  
 @Controller
-@RequestMapping("/system/risk")
+@RequestMapping("/ecosys/risk")
 public class RiskController {
 	@Autowired
 	private RiskService riskService;
-	
-	@GetMapping()
-	@RequiresPermissions("system:risk:risk")
-	String Risk(){
-	    return "system/risk/risk";
+	@Autowired
+	private EnterpriseService enterpriseService;
+
+	@GetMapping("/{enterpriseId}")
+	@RequiresPermissions("ecosys:risk:risk")
+	String Risk(@PathVariable("enterpriseId") Long enterpriseId,Model model){
+		model.addAttribute("enterpriseId", enterpriseId);
+		return "ecosys/risk/risk";
 	}
 	
 	@ResponseBody
-	@GetMapping("/list")
-	@RequiresPermissions("system:risk:risk")
-	public PageUtils list(@RequestParam Map<String, Object> params){
+	@GetMapping("/list/{enterpriseId}")
+	@RequiresPermissions("ecosys:risk:risk")
+	public PageUtils list(@RequestParam Map<String, Object> params,@PathVariable("enterpriseId") Long enterpriseId){
 		//查询列表数据
+		params.put("enterpriseId",enterpriseId);
         Query query = new Query(params);
 		List<RiskDO> riskList = riskService.list(query);
 		int total = riskService.count(query);
 		PageUtils pageUtils = new PageUtils(riskList, total);
 		return pageUtils;
 	}
-	
-	@GetMapping("/add")
-	@RequiresPermissions("system:risk:add")
-	String add(){
-	    return "system/risk/add";
+
+	@GetMapping("/add/{enterpriseId}")
+	@RequiresPermissions("ecosys:risk:add")
+	String add(@PathVariable("enterpriseId") Long enterpriseId,Model model){
+		EnterpriseDO enterprise = enterpriseService.get(enterpriseId.intValue());
+		String enterpriseName = enterprise.getEnterpriseName();
+		model.addAttribute("enterpriseId", enterpriseId);
+		model.addAttribute("enterpriseName", enterpriseName);
+	    return "ecosys/risk/add";
 	}
 
 	@GetMapping("/edit/{safeTroubleId}")
-	@RequiresPermissions("system:risk:edit")
+	@RequiresPermissions("ecosys:risk:edit")
 	String edit(@PathVariable("safeTroubleId") Integer safeTroubleId,Model model){
 		RiskDO risk = riskService.get(safeTroubleId);
+		EnterpriseDO enterprise = enterpriseService.get(risk.getEnterpriseId());
+		risk.setEnterpriseName(enterprise.getEnterpriseName());
 		model.addAttribute("risk", risk);
-	    return "system/risk/edit";
+	    return "ecosys/risk/edit";
 	}
 	
 	/**
@@ -71,7 +83,7 @@ public class RiskController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("system:risk:add")
+	@RequiresPermissions("ecosys:risk:add")
 	public R save( RiskDO risk){
 		if(riskService.save(risk)>0){
 			return R.ok();
@@ -83,10 +95,12 @@ public class RiskController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("system:risk:edit")
+	@RequiresPermissions("ecosys:risk:edit")
 	public R update( RiskDO risk){
-		riskService.update(risk);
-		return R.ok();
+		if(riskService.update(risk)>0){
+			return R.ok();
+		}
+		return R.error();
 	}
 	
 	/**
@@ -94,10 +108,10 @@ public class RiskController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("system:risk:remove")
+	@RequiresPermissions("ecosys:risk:remove")
 	public R remove( Integer safeTroubleId){
 		if(riskService.remove(safeTroubleId)>0){
-		return R.ok();
+			return R.ok();
 		}
 		return R.error();
 	}
@@ -107,7 +121,7 @@ public class RiskController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("system:risk:batchRemove")
+	@RequiresPermissions("ecosys:risk:batchRemove")
 	public R remove(@RequestParam("ids[]") Integer[] safeTroubleIds){
 		riskService.batchRemove(safeTroubleIds);
 		return R.ok();

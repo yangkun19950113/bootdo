@@ -19,7 +19,8 @@
 
 	<select id="list" resultType="com.bootdo.ecosys.domain.RiskDO">
 		select `safe_trouble_id`,`enterprise_id`,`equipment_id`,`people_find_name`,`find_time`,`level`,`type`,`apart`,`remark`,`rectificat`,`rect_user_name`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_risk
-        <where>  
+        <where>
+			delete_flag = '0'
 		  		  <if test="safeTroubleId != null and safeTroubleId != ''"> and safe_trouble_id = #{safeTroubleId} </if>
 		  		  <if test="enterpriseId != null and enterpriseId != ''"> and enterprise_id = #{enterpriseId} </if>
 		  		  <if test="equipmentId != null and equipmentId != ''"> and equipment_id = #{equipmentId} </if>
@@ -60,7 +61,8 @@
 	
  	<select id="count" resultType="int">
 		select count(*) from eco_risk
-		 <where>  
+		 <where>
+			 delete_flag = '0'
 		  		  <if test="safeTroubleId != null and safeTroubleId != ''"> and safe_trouble_id = #{safeTroubleId} </if>
 		  		  <if test="enterpriseId != null and enterpriseId != ''"> and enterprise_id = #{enterpriseId} </if>
 		  		  <if test="equipmentId != null and equipmentId != ''"> and equipment_id = #{equipmentId} </if>
@@ -136,7 +138,7 @@
 		    CURRENT_TIMESTAMP(),
 			#{createUserName}, 
 			#{createBy},
-		   CURRENT_TIMESTAMP(),
+		    CURRENT_TIMESTAMP(),
 			#{modifyUserName}, 
 			#{modifyBy},
 		    '0',

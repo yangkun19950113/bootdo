@@ -73,6 +73,8 @@ public class EcoequipmentDO implements Serializable {
 	private Integer urbanorrural;
 	private String ecoequipmentMinImgUrl;
 
+	private String enterpriseName;
+
 	public String getEcoequipmentMinImgUrl() {
 		return ecoequipmentMinImgUrl;
 	}
@@ -416,5 +418,13 @@ public class EcoequipmentDO implements Serializable {
 	 */
 	public Integer getUrbanorrural() {
 		return urbanorrural;
+	}
+
+	public String getEnterpriseName() {
+		return enterpriseName;
+	}
+
+	public void setEnterpriseName(String enterpriseName) {
+		this.enterpriseName = enterpriseName;
 	}
 }

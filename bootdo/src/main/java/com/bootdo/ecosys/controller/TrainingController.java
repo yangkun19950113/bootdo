@@ -3,7 +3,9 @@ package com.bootdo.ecosys.controller;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.ecosys.domain.EnterpriseDO;
 import com.bootdo.ecosys.domain.TrainingDO;
+import com.bootdo.ecosys.service.EnterpriseService;
 import com.bootdo.ecosys.service.TrainingService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,41 +31,51 @@ import com.bootdo.common.utils.R;
  */
  
 @Controller
-@RequestMapping("/system/training")
+@RequestMapping("/ecosys/training")
 public class TrainingController {
 	@Autowired
 	private TrainingService trainingService;
-	
-	@GetMapping()
-	@RequiresPermissions("system:training:training")
-	String Training(){
-	    return "system/training/training";
+	@Autowired
+	private EnterpriseService enterpriseService;
+
+	@GetMapping("/{enterpriseId}")
+	@RequiresPermissions("ecosys:training:training")
+	String Training(@PathVariable("enterpriseId") Long enterpriseId,Model model){
+		model.addAttribute("enterpriseId", enterpriseId);
+		return "ecosys/training/training";
 	}
 	
 	@ResponseBody
-	@GetMapping("/list")
-	@RequiresPermissions("system:training:training")
-	public PageUtils list(@RequestParam Map<String, Object> params){
+	@GetMapping("/list/{enterpriseId}")
+	@RequiresPermissions("ecosys:training:training")
+	public PageUtils list(@RequestParam Map<String, Object> params,@PathVariable("enterpriseId") Long enterpriseId){
 		//查询列表数据
+		params.put("enterpriseId",enterpriseId);
         Query query = new Query(params);
 		List<TrainingDO> trainingList = trainingService.list(query);
 		int total = trainingService.count(query);
 		PageUtils pageUtils = new PageUtils(trainingList, total);
 		return pageUtils;
 	}
-	
-	@GetMapping("/add")
-	@RequiresPermissions("system:training:add")
-	String add(){
-	    return "system/training/add";
+
+	@GetMapping("/add/{enterpriseId}")
+	@RequiresPermissions("ecosys:training:add")
+	String add(@PathVariable("enterpriseId") Long enterpriseId,Model model){
+		EnterpriseDO enterprise = enterpriseService.get(enterpriseId.intValue());
+		String enterpriseName = enterprise.getEnterpriseName();
+		model.addAttribute("enterpriseId", enterpriseId);
+		model.addAttribute("enterpriseName", enterpriseName);
+	    return "ecosys/training/add";
 	}
 
 	@GetMapping("/edit/{trainingId}")
-	@RequiresPermissions("system:training:edit")
+	@RequiresPermissions("ecosys:training:edit")
 	String edit(@PathVariable("trainingId") Integer trainingId,Model model){
 		TrainingDO training = trainingService.get(trainingId);
+		EnterpriseDO enterprise = enterpriseService.get(training.getEnterpriseId());
+		training.setEnterpriseName(enterprise.getEnterpriseName());
 		model.addAttribute("training", training);
-	    return "system/training/edit";
+	    return "ecosys/training/edit";
 	}
 	
 	/**
@@ -71,7 +83,7 @@ public class TrainingController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("system:training:add")
+	@RequiresPermissions("ecosys:training:add")
 	public R save( TrainingDO training){
 		if(trainingService.save(training)>0){
 			return R.ok();
@@ -83,10 +95,12 @@ public class TrainingController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("system:training:edit")
+	@RequiresPermissions("ecosys:training:edit")
 	public R update( TrainingDO training){
-		trainingService.update(training);
-		return R.ok();
+		if(trainingService.update(training)>0){
+			return R.ok();
+		}
+		return R.error();
 	}
 	
 	/**
@@ -94,10 +108,10 @@ public class TrainingController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("system:training:remove")
+	@RequiresPermissions("ecosys:training:remove")
 	public R remove( Integer trainingId){
 		if(trainingService.remove(trainingId)>0){
-		return R.ok();
+			return R.ok();
 		}
 		return R.error();
 	}
@@ -107,7 +121,7 @@ public class TrainingController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("system:training:batchRemove")
+	@RequiresPermissions("ecosys:training:batchRemove")
 	public R remove(@RequestParam("ids[]") Integer[] trainingIds){
 		trainingService.batchRemove(trainingIds);
 		return R.ok();

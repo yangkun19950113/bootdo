@@ -1,6 +1,7 @@
-
-var prefix = "/system/training"
+var enterpriseId;
+var prefix = "/ecosys/training"
 $(function() {
+	enterpriseId = $("#enterpriseId").val();
 	load();
 });
 
@@ -9,7 +10,7 @@ function load() {
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url : prefix + "/list", // 服务器数据的加载地址
+						url : prefix + "/list/"+enterpriseId, // 服务器数据的加载地址
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,
@@ -56,8 +57,7 @@ function load() {
 									title : '企业id' 
 								},
 																{
-									field : '
-traningSystemFlg', 
+									field : 'trainingFlg',
 									title : '是否建立安全培训制度' 
 								},
 																{
@@ -173,7 +173,7 @@ function add() {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
-		content : prefix + '/add' // iframe的url
+		content : prefix + '/add/' + enterpriseId // iframe的url
 	});
 }
 function edit(id) {
