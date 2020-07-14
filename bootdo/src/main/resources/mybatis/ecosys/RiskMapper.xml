@@ -4,7 +4,7 @@
 <mapper namespace="com.bootdo.ecosys.dao.RiskDao">
 
 	<select id="get" resultType="com.bootdo.ecosys.domain.RiskDO">
-		select `safe_trouble_id`,`enterprise_id`,`equipment_id`,`people_find_name`,`find_time`,`level`,`type`,`apart`,`remark`,`rectificat`,`rect_user_name`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_risk where safe_trouble_id = #{value}
+		select `safe_trouble_id`,`enterprise_id`,`equipment_id`,`people_find_name`,`find_time`,`level`,`type`,`apart`,`remark`,`rectificat`,`rect_user_name`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural`,`country` from eco_risk where safe_trouble_id = #{value}
 	</select>
 	<select id="getData" resultType="com.bootdo.ecosys.domain.RiskDO">
 		SELECT
@@ -19,7 +19,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.ecosys.domain.RiskDO">
-		select `safe_trouble_id`,`enterprise_id`,`equipment_id`,`people_find_name`,`find_time`,`level`,`type`,`apart`,`remark`,`rectificat`,`rect_user_name`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_risk
+		select `safe_trouble_id`,`enterprise_id`,`equipment_id`,`people_find_name`,`find_time`,`level`,`type`,`apart`,`remark`,`rectificat`,`rect_user_name`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural`,`country` from eco_risk
         <where>
 			delete_flag = '0'
 		  		  <if test="safeTroubleId != null and safeTroubleId != ''"> and safe_trouble_id = #{safeTroubleId} </if>
@@ -88,6 +88,7 @@
 		  		  <if test="deleteFlag != null and deleteFlag != ''"> and delete_flag = #{deleteFlag} </if>
 		  		  <if test="administrativeDivision != null and administrativeDivision != ''"> and administrative_division = #{administrativeDivision} </if>
 		  		  <if test="urbanorrural != null and urbanorrural != ''"> and urbanorrural = #{urbanorrural} </if>
+			 	  <if test="country != null and country != ''"> and country = #{country} </if>
 		  		</where>
 	</select>
 	 
@@ -117,7 +118,8 @@
 			`modify_by`, 
 			`delete_flag`, 
 			`administrative_division`, 
-			`urbanorrural`
+			`urbanorrural`,
+			`country`
 		)
 		values
 		(
@@ -144,7 +146,8 @@
 			#{modifyBy},
 		    '0',
 			#{administrativeDivision}, 
-			#{urbanorrural}
+			#{urbanorrural},
+			#{country}
 		)
 	</insert>
 	 

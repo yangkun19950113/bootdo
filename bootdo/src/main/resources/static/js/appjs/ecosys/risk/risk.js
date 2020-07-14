@@ -80,14 +80,14 @@ function load() {
 									field : 'rectUserName', 
 									title : '整改人' 
 								},
-								{
+								/*{
 									field : 'administrativeDivision',
 									title : '行政区划'
 								},
 								{
 									field : 'urbanorrural', 
 									title : '城乡分类'
-								},
+								},*/
 								{
 									title : '操作',
 									field : 'id',

@@ -3,6 +3,7 @@ $().ready(function() {
 	enterpriseNatureCode();//加载企业性质下拉框
 	taxpayerCode();//加载纳税人性质下拉框
 	marketCode();//加载互联网营销方式多选框
+	administrativeDivision();//加载行政区划
 });
 
 $.validator.setDefaults({
@@ -120,6 +121,12 @@ function validateRule() {
 			surveyPersonName : {
 				required : true
 			},
+			administrativeDivision: {
+				required : true
+			},
+			country: {
+				required : true
+			},
 		},
 		messages : {
 			enterpriseName : {
@@ -196,6 +203,12 @@ function validateRule() {
 			surveyPersonName : {
 				required : icon + "请输入调查人姓名"
 			},
+			administrativeDivision: {
+				required : icon + "请选择乡镇"
+			},
+			country: {
+				required : icon + "请选择街道"
+			},
 		}
 	})
 }
@@ -264,4 +277,57 @@ function marketCode(){
 		}
 	})
 }
+//加载行政区划
+//一级
+function administrativeDivision(){
+	$.ajax({
+		type: "get",
+		url: "/ecosys/code/list",
+		dataType: "json",
+		data: {
+			parentId: 113
+		},
+		success: function (data) {
+			var code_list = data.rows;
+			var opts = "<option value=''>" +"请选择 "+"</option>";
+			for (var i = 0; i < code_list.length; i++) {
+				var code = code_list[i];
+				opts += "<option value='" + code.codeId + "' id='" + code.id + "'>" + code.name + "</option>";
+			}
+			$("#administrativeDivision").append(opts);
+			layer.closeAll('loading');//关闭loading
+		}
+	})
+}
+
+//行政区划，监听一级乡镇，联动村子
+$("#administrativeDivision").bind("change", function(){
+	//获取
+	var option = $("#administrativeDivision option:selected").val();
+	var parentId = $("#administrativeDivision option:selected").attr("id");
+	$("#country").find("option").remove();//清空option
+	//根据乡镇获取村
+	$.ajax({
+		type: "get",
+		url: "/ecosys/code/list",
+		dataType: "json",
+		data: {
+			parentId: parentId
+		},
+		success: function (data) {
+			var code_list = data.rows;
+			var opts = "<option value=''>" +"请选择 "+"</option>";
+			for (var i = 0; i < code_list.length; i++) {
+				var code = code_list[i];
+				opts += "<option value='" + code.orderNum + "'>" + code.name + "</option>";
+			}
+			$("#country").append(opts);
+			layer.closeAll('loading');//关闭loading
+		}
+	})
+
+})
+
+
+
 

@@ -1,10 +1,13 @@
 package com.bootdo.ecosys.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.ecosys.domain.CodeDO;
 import com.bootdo.ecosys.domain.EnterpriseDO;
 import com.bootdo.ecosys.domain.ProductDO;
+import com.bootdo.ecosys.service.CodeService;
 import com.bootdo.ecosys.service.EnterpriseService;
 import com.bootdo.ecosys.service.ProductService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -38,6 +41,8 @@ public class ProductController {
 	private ProductService productService;
 	@Autowired
 	private EnterpriseService enterpriseService;
+	@Autowired
+	private CodeService codeService;
 
 	@GetMapping("/{enterpriseId}")
 	@RequiresPermissions("ecosys:product:product")
@@ -63,6 +68,24 @@ public class ProductController {
 	@RequiresPermissions("ecosys:product:add")
 	String add(@PathVariable("enterpriseId") Long enterpriseId,Model model){
 		EnterpriseDO enterprise = enterpriseService.get(enterpriseId.intValue());
+		//乡镇
+		Map<String, Object> map = new HashMap<>();
+		map.put("codeId",enterprise.getAdministrativeDivision());
+		CodeDO code = codeService.getCode(map);
+		//村
+		Map<String, Object> map1 = new HashMap<>();
+		map1.put("parentId",code.getId());
+		map1.put("orderNum",enterprise.getCountry());
+		CodeDO contry = codeService.getCode(map1);
+
+		String administrativeDivisionName = code.getName();
+		String administrativeDivision = enterprise.getAdministrativeDivision();
+		String country = contry.getOrderNum().toString();
+		String countryName = contry.getName();
+		model.addAttribute("administrativeDivisionName", administrativeDivisionName);
+		model.addAttribute("administrativeDivision", administrativeDivision);
+		model.addAttribute("country", country);
+		model.addAttribute("countryName", countryName);
 		String enterpriseName = enterprise.getEnterpriseName();
 		model.addAttribute("enterpriseId", enterpriseId);
 		model.addAttribute("enterpriseName", enterpriseName);
@@ -74,6 +97,19 @@ public class ProductController {
 	String edit(@PathVariable("productId") Integer productId,Model model){
 		ProductDO product = productService.get(productId);
 		EnterpriseDO enterprise = enterpriseService.get(product.getEnterpriseId());
+		//乡镇
+		Map<String, Object> map = new HashMap<>();
+		map.put("codeId",product.getAdministrativeDivision());
+		CodeDO code = codeService.getCode(map);
+		//村
+		Map<String, Object> map1 = new HashMap<>();
+		map1.put("parentId",code.getId());
+		map1.put("orderNum",enterprise.getCountry());
+		CodeDO contry = codeService.getCode(map1);
+
+		product.setAdministrativeDivisionName(code.getName());
+		product.setCountryName(contry.getName());
+
 		product.setEnterpriseName(enterprise.getEnterpriseName());
 		model.addAttribute("product", product);
 	    return "ecosys/product/edit";

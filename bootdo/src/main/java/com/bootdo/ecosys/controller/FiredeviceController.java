@@ -1,12 +1,16 @@
 package com.bootdo.ecosys.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.ecosys.domain.CodeDO;
 import com.bootdo.ecosys.domain.EnterpriseDO;
 import com.bootdo.ecosys.domain.FiredeviceDO;
+import com.bootdo.ecosys.service.CodeService;
 import com.bootdo.ecosys.service.EnterpriseService;
 import com.bootdo.ecosys.service.FiredeviceService;
+import com.sun.tools.javac.jvm.Code;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -38,6 +42,8 @@ public class FiredeviceController {
 	private FiredeviceService firedeviceService;
 	@Autowired
 	private EnterpriseService enterpriseService;
+	@Autowired
+	private CodeService codeService;
 	
 	@GetMapping("/{enterpriseId}")
 	@RequiresPermissions("ecosys:firedevice:firedevice")
@@ -62,6 +68,25 @@ public class FiredeviceController {
 	@GetMapping("/add/{enterpriseId}")
 	@RequiresPermissions("ecosys:firedevice:add")
 	String add(@PathVariable("enterpriseId") Long enterpriseId,Model model){
+		EnterpriseDO enterprise = enterpriseService.get(enterpriseId.intValue());
+		//乡镇
+		Map<String, Object> map = new HashMap<>();
+		map.put("codeId",enterprise.getAdministrativeDivision());
+		CodeDO code = codeService.getCode(map);
+		//村
+		Map<String, Object> map1 = new HashMap<>();
+		map1.put("parentId",code.getId());
+		map1.put("orderNum",enterprise.getCountry());
+		CodeDO contry = codeService.getCode(map1);
+
+		String administrativeDivisionName = code.getName();
+		String administrativeDivision = enterprise.getAdministrativeDivision();
+		String country = contry.getOrderNum().toString();
+		String countryName = contry.getName();
+		model.addAttribute("administrativeDivisionName", administrativeDivisionName);
+		model.addAttribute("administrativeDivision", administrativeDivision);
+		model.addAttribute("country", country);
+		model.addAttribute("countryName", countryName);
 		model.addAttribute("enterpriseId", enterpriseId);
 		return "ecosys/firedevice/add";
 	}
@@ -71,7 +96,19 @@ public class FiredeviceController {
 	String edit(@PathVariable("equipmentId") Integer equipmentId,Model model){
 		FiredeviceDO firedevice = firedeviceService.get(equipmentId);
 		EnterpriseDO enterprise = enterpriseService.get(firedevice.getEnterpriseId());
+		//乡镇
+		Map<String, Object> map = new HashMap<>();
+		map.put("codeId",firedevice.getAdministrativeDivision());
+		CodeDO code = codeService.getCode(map);
+		//村
+		Map<String, Object> map1 = new HashMap<>();
+		map1.put("parentId",code.getId());
+		map1.put("orderNum",enterprise.getCountry());
+		CodeDO contry = codeService.getCode(map1);
+
+		firedevice.setAdministrativeDivisionName(code.getName());
 		firedevice.setEnterpriseName(enterprise.getEnterpriseName());
+		firedevice.setCountryName(contry.getName());
 		model.addAttribute("firedevice", firedevice);
 	    return "ecosys/firedevice/edit";
 	}

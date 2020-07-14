@@ -261,14 +261,14 @@ function load() {
 									field : 'surveyPersonName', 
 									title : '调查人' 
 								},*/
-																{
+								/*								{
 									field : 'administrativeDivision', 
 									title : '行政区划' 
 								},
 																{
 									field : 'urbanorrural', 
 									title : '城乡分类' 
-								},
+								},*/
 																{
 									title : '操作',
 									field : 'id',

@@ -33,8 +33,8 @@ function load() {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
-								offset:params.offset
-					           // name:$('#searchName').val(),
+								offset:params.offset,
+								prodectName:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
 						},
@@ -120,14 +120,14 @@ function load() {
 									field : 'surveyPersonName', 
 									title : '调查人' 
 								},*/
-																{
+										/*						{
 									field : 'administrativeDivision', 
 									title : '行政区划' 
 								},
 																{
 									field : 'urbanorrural', 
 									title : '城乡分类' 
-								},
+								},*/
 																{
 									title : '操作',
 									field : 'id',

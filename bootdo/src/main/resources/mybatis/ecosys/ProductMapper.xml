@@ -4,7 +4,7 @@
 <mapper namespace="com.bootdo.ecosys.dao.ProductDao">
 
 	<select id="get" resultType="com.bootdo.ecosys.domain.ProductDO">
-		select `product_id`,`enterprise_id`,`enterprise_name`,`prodect_name`,`specifical`,`model`,`produt_process`,`prodect_param`,`min_price`,`max_price`,`device_name`,`month_production`,`function_remark`,`remark`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_product where product_id = #{value}
+		select `product_id`,`enterprise_id`,`enterprise_name`,`prodect_name`,`specifical`,`model`,`produt_process`,`prodect_param`,`min_price`,`max_price`,`device_name`,`month_production`,`function_remark`,`remark`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural`,`country` from eco_product where product_id = #{value}
 	</select>
 	<select id="getData" resultType="com.bootdo.ecosys.domain.ProductDO">
 		SELECT
@@ -19,7 +19,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.ecosys.domain.ProductDO">
-		select `product_id`,`enterprise_id`,`enterprise_name`,`prodect_name`,`specifical`,`model`,`produt_process`,`prodect_param`,`min_price`,`max_price`,`device_name`,`month_production`,`function_remark`,`remark`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_product
+		select `product_id`,`enterprise_id`,`enterprise_name`,`prodect_name`,`specifical`,`model`,`produt_process`,`prodect_param`,`min_price`,`max_price`,`device_name`,`month_production`,`function_remark`,`remark`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural`,`country` from eco_product
         <where>
 			delete_flag = '0'
 		  		  <if test="productId != null and productId != ''"> and product_id = #{productId} </if>
@@ -49,6 +49,7 @@
 		  		  <if test="deleteFlag != null and deleteFlag != ''"> and delete_flag = #{deleteFlag} </if>
 		  		  <if test="administrativeDivision != null and administrativeDivision != ''"> and administrative_division = #{administrativeDivision} </if>
 		  		  <if test="urbanorrural != null and urbanorrural != ''"> and urbanorrural = #{urbanorrural} </if>
+				  <if test="country != null and country != ''"> and country = #{country} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -94,6 +95,7 @@
 		  		  <if test="deleteFlag != null and deleteFlag != ''"> and delete_flag = #{deleteFlag} </if>
 		  		  <if test="administrativeDivision != null and administrativeDivision != ''"> and administrative_division = #{administrativeDivision} </if>
 		  		  <if test="urbanorrural != null and urbanorrural != ''"> and urbanorrural = #{urbanorrural} </if>
+			 	  <if test="country != null and country != ''"> and country = #{country} </if>
 		  		</where>
 	</select>
 	 
@@ -126,7 +128,8 @@
 			`modify_by`, 
 			`delete_flag`, 
 			`administrative_division`, 
-			`urbanorrural`
+			`urbanorrural`,
+			`country`
 		)
 		values
 		(
@@ -156,7 +159,8 @@
 			#{modifyBy}, 
 			'0',
 			#{administrativeDivision}, 
-			#{urbanorrural}
+			#{urbanorrural},
+			#{country}
 		)
 	</insert>
 	 
@@ -189,6 +193,7 @@
 			<if test="deleteFlag != null">`delete_flag` = #{deleteFlag}, </if>
 			<if test="administrativeDivision != null">`administrative_division` = #{administrativeDivision}, </if>
 			<if test="urbanorrural != null">`urbanorrural` = #{urbanorrural}</if>
+			<if test="country != null">`country` = #{country}</if>
 		</set>
 		where product_id = #{productId}
 	</update>

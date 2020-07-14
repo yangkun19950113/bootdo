@@ -33,9 +33,10 @@ function load() {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
-								offset:params.offset
-					           // name:$('#searchName').val(),
-					           // username:$('#searchName').val()
+								offset:params.offset,
+								enterpriseId : $('#enterpriseId').val(),
+								equipmentName : $('#equipmentName').val(),
+								administrativeDivision : $('#administrativeDivision').val()
 							};
 						},
 						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -56,14 +57,14 @@ function load() {
 									field : 'equipmentName', 
 									title : '设备名称' 
 								},
-																{
+									/*							{
 									field : 'equipmentCode', 
 									title : '设备编码' 
-								},
-																{
+								},*/
+									/*							{
 									field : 'enterpriseId', 
 									title : '企业id' 
-								},
+								},*/
 																{
 									field : 'phaseNumber', 
 									title : '相数' 
@@ -74,21 +75,28 @@ function load() {
 								},
 																{
 									field : 'isOrNotThrough', 
-									title : '电缆是否穿管' 
+									title : '电缆是否穿管',
+									formatter : function(value, row, index) {
+										if(value == '0'){
+											return "是";
+										}else if(value == '1') {
+											return "否";
+										}
+									}
 								},
 																{
 									field : 'installPosition', 
 									title : '安装位置' 
 								},
-																{
+								/*								{
 									field : 'equipmentUse', 
 									title : '设备用途' 
-								},
-																{
+								},*/
+								/*								{
 									field : 'productId', 
 									title : '产品id' 
-								},
-																{
+								},*/
+										/*						{
 									field : 'protectionPerson', 
 									title : '设备负责人' 
 								},
@@ -99,7 +107,7 @@ function load() {
 																{
 									field : 'equipmentType', 
 									title : '设备类型' 
-								},
+								},*/
 
 													/*			{
 									field : 'administrativeDivision', 

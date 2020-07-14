@@ -90,8 +90,10 @@ public class EnterpriseDO implements Serializable {
 	private Integer modifyBy;
 	//
 	private String deleteFlag;
-	//行政区划
-	private Integer administrativeDivision;
+	//行政区划（乡镇）
+	private String administrativeDivision;
+	//街道（村）
+	private String country;
 	//城乡分类
 	private Integer urbanorrural;
 	private String imgUrl;
@@ -522,13 +524,13 @@ public class EnterpriseDO implements Serializable {
 	/**
 	 * 设置：行政区划
 	 */
-	public void setAdministrativeDivision(Integer administrativeDivision) {
+	public void setAdministrativeDivision(String administrativeDivision) {
 		this.administrativeDivision = administrativeDivision;
 	}
 	/**
 	 * 获取：行政区划
 	 */
-	public Integer getAdministrativeDivision() {
+	public String getAdministrativeDivision() {
 		return administrativeDivision;
 	}
 	/**
@@ -542,5 +544,13 @@ public class EnterpriseDO implements Serializable {
 	 */
 	public Integer getUrbanorrural() {
 		return urbanorrural;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
 	}
 }

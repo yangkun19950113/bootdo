@@ -47,8 +47,8 @@ public class CodeController {
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
 		List<CodeDO> codeList = codeService.list(params);
-		int total = codeService.count(params);
-		PageUtils pageUtils = new PageUtils(codeList, total);
+		/*int total = codeService.count(params);*/
+		PageUtils pageUtils = new PageUtils(codeList, codeList.size());
 		return pageUtils;
 	}
 	
@@ -111,6 +111,26 @@ public class CodeController {
 	public R remove(@RequestParam("ids[]") Long[] ids){
 		codeService.batchRemove(ids);
 		return R.ok();
+	}
+
+	//查询行政区划
+	@ResponseBody
+	@GetMapping("/getAdministrativeDivision")
+	public PageUtils getAdministrativeDivision(@RequestParam Map<String, Object> params){
+		//查询列表数据
+		System.out.println("params:"+ JSON.toJSONString(params));
+		List<CodeDO> codeList = codeService.getAdministrativeDivision(params);
+		PageUtils pageUtils = new PageUtils(codeList, codeList.size());
+		return pageUtils;
+	}
+
+	@ResponseBody
+	@GetMapping("/getAdministrativeDivisionOne")
+	public PageUtils getAdministrativeDivisionOne(@RequestParam Map<String, Object> params){
+		//查询列表数据
+		List<CodeDO> codeList = codeService.list(params);
+		PageUtils pageUtils = new PageUtils(codeList, codeList.size());
+		return pageUtils;
 	}
 	
 }

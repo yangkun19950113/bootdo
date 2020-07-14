@@ -64,7 +64,13 @@ public class ElectricDO implements Serializable {
 	//
 	private String deleteFlag;
 	//
-	private Integer administrativeDivision;
+	private String administrativeDivision;
+
+	private String administrativeDivisionName;
+
+	private String country;
+
+	private String countryName;
 	//
 	private Integer urbanorrural;
 
@@ -373,18 +379,6 @@ public class ElectricDO implements Serializable {
 	/**
 	 * 设置：
 	 */
-	public void setAdministrativeDivision(Integer administrativeDivision) {
-		this.administrativeDivision = administrativeDivision;
-	}
-	/**
-	 * 获取：
-	 */
-	public Integer getAdministrativeDivision() {
-		return administrativeDivision;
-	}
-	/**
-	 * 设置：
-	 */
 	public void setUrbanorrural(Integer urbanorrural) {
 		this.urbanorrural = urbanorrural;
 	}
@@ -409,5 +403,37 @@ public class ElectricDO implements Serializable {
 
 	public void setEquipmentPower(String equipmentPower) {
 		this.equipmentPower = equipmentPower;
+	}
+
+	public String getAdministrativeDivision() {
+		return administrativeDivision;
+	}
+
+	public void setAdministrativeDivision(String administrativeDivision) {
+		this.administrativeDivision = administrativeDivision;
+	}
+
+	public String getAdministrativeDivisionName() {
+		return administrativeDivisionName;
+	}
+
+	public void setAdministrativeDivisionName(String administrativeDivisionName) {
+		this.administrativeDivisionName = administrativeDivisionName;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getCountryName() {
+		return countryName;
+	}
+
+	public void setCountryName(String countryName) {
+		this.countryName = countryName;
 	}
 }

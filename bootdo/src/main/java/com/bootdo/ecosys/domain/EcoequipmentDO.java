@@ -68,9 +68,16 @@ public class EcoequipmentDO implements Serializable {
 	//
 	private String deleteFlag;
 	//行政区划
-	private Integer administrativeDivision;
+	private String administrativeDivision;
+
+	private String administrativeDivisionName;
+
+	private String country;
+
+	private String countryName;
 	//城乡分类
 	private Integer urbanorrural;
+
 	private String ecoequipmentMinImgUrl;
 
 	private String enterpriseName;
@@ -396,18 +403,6 @@ public class EcoequipmentDO implements Serializable {
 		return deleteFlag;
 	}
 	/**
-	 * 设置：行政区划
-	 */
-	public void setAdministrativeDivision(Integer administrativeDivision) {
-		this.administrativeDivision = administrativeDivision;
-	}
-	/**
-	 * 获取：行政区划
-	 */
-	public Integer getAdministrativeDivision() {
-		return administrativeDivision;
-	}
-	/**
 	 * 设置：城乡分类
 	 */
 	public void setUrbanorrural(Integer urbanorrural) {
@@ -426,5 +421,37 @@ public class EcoequipmentDO implements Serializable {
 
 	public void setEnterpriseName(String enterpriseName) {
 		this.enterpriseName = enterpriseName;
+	}
+
+	public String getAdministrativeDivision() {
+		return administrativeDivision;
+	}
+
+	public void setAdministrativeDivision(String administrativeDivision) {
+		this.administrativeDivision = administrativeDivision;
+	}
+
+	public String getAdministrativeDivisionName() {
+		return administrativeDivisionName;
+	}
+
+	public void setAdministrativeDivisionName(String administrativeDivisionName) {
+		this.administrativeDivisionName = administrativeDivisionName;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getCountryName() {
+		return countryName;
+	}
+
+	public void setCountryName(String countryName) {
+		this.countryName = countryName;
 	}
 }

@@ -4,7 +4,7 @@
 <mapper namespace="com.bootdo.ecosys.dao.DangersourceDao">
 
 	<select id="get" resultType="com.bootdo.ecosys.domain.DangersourceDO">
-		select `danger_source_id`,`danger_source_name`,`part_detail`,`degree_code`,`accident_type`,`monit`,`protection_person`,`phone_number`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`enterprise_id`,`administrative_division`,`urbanorrural` from eco_dangersource where danger_source_id = #{value}
+		select `danger_source_id`,`danger_source_name`,`part_detail`,`degree_code`,`accident_type`,`monit`,`protection_person`,`phone_number`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`enterprise_id`,`administrative_division`,`urbanorrural`,`country` from eco_dangersource where danger_source_id = #{value}
 	</select>
 	<select id="getData" resultType="com.bootdo.ecosys.domain.DangersourceDO">
 		SELECT
@@ -19,7 +19,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.ecosys.domain.DangersourceDO">
-		select `danger_source_id`,`danger_source_name`,`part_detail`,`degree_code`,`accident_type`,`monit`,`protection_person`,`phone_number`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`enterprise_id`,`administrative_division`,`urbanorrural` from eco_dangersource
+		select `danger_source_id`,`danger_source_name`,`part_detail`,`degree_code`,`accident_type`,`monit`,`protection_person`,`phone_number`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`enterprise_id`,`administrative_division`,`urbanorrural`,`country` from eco_dangersource
         <where>
 			delete_flag = '0'
 		  		  <if test="dangerSourceId != null and dangerSourceId != ''"> and danger_source_id = #{dangerSourceId} </if>
@@ -44,6 +44,7 @@
 		  		  <if test="enterpriseId != null and enterpriseId != ''"> and enterprise_id = #{enterpriseId} </if>
 		  		  <if test="administrativeDivision != null and administrativeDivision != ''"> and administrative_division = #{administrativeDivision} </if>
 		  		  <if test="urbanorrural != null and urbanorrural != ''"> and urbanorrural = #{urbanorrural} </if>
+				  <if test="country != null and country != ''"> and country = #{country} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -84,6 +85,7 @@
 		  		  <if test="enterpriseId != null and enterpriseId != ''"> and enterprise_id = #{enterpriseId} </if>
 		  		  <if test="administrativeDivision != null and administrativeDivision != ''"> and administrative_division = #{administrativeDivision} </if>
 		  		  <if test="urbanorrural != null and urbanorrural != ''"> and urbanorrural = #{urbanorrural} </if>
+			 	  <if test="country != null and country != ''"> and country = #{country} </if>
 		  		</where>
 	</select>
 	 
@@ -111,7 +113,8 @@
 			`delete_flag`, 
 			`enterprise_id`, 
 			`administrative_division`, 
-			`urbanorrural`
+			`urbanorrural`,
+			`country`
 		)
 		values
 		(
@@ -136,7 +139,8 @@
 			'0',
 			#{enterpriseId}, 
 			#{administrativeDivision}, 
-			#{urbanorrural}
+			#{urbanorrural},
+			#{country}
 		)
 	</insert>
 	 

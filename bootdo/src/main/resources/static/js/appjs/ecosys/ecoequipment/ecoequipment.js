@@ -33,8 +33,8 @@ function load() {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
-								offset:params.offset
-					           // name:$('#searchName').val(),
+								offset:params.offset,
+								equipmentName:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
 						},
@@ -50,7 +50,7 @@ function load() {
 								},
 								{
 									field : 'equipmentName', 
-									title : '生产设施名称'
+									title : '防治设备名称'
 								},
 								{
 									field : 'pollutionName',
@@ -92,14 +92,14 @@ function load() {
 									field : 'productId', 
 									title : '产品id' 
 								},*/
-																{
+									/*							{
 									field : 'protectionPerson', 
 									title : '设备负责人' 
 								},
 																{
 									field : 'phoneNumber', 
 									title : '联系电话' 
-								},
+								},*/
 																{
 									field : 'equipmentType', 
 									title : '设备类型' 
@@ -120,14 +120,14 @@ function load() {
 									field : 'surveyPersonName', 
 									title : '' 
 								},*/
-																{
+									/*							{
 									field : 'administrativeDivision', 
 									title : '行政区划' 
 								},
 																{
 									field : 'urbanorrural', 
 									title : '城乡分类' 
-								},
+								},*/
 																{
 									title : '操作',
 									field : 'id',

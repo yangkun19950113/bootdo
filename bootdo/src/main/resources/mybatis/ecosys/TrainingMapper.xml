@@ -4,7 +4,7 @@
 <mapper namespace="com.bootdo.ecosys.dao.TrainingDao">
 
 	<select id="get" resultType="com.bootdo.ecosys.domain.TrainingDO">
-		select `training_id`,`enterprise_id`,`training_flg`,`la_provide_flg`,`train_name`,`train_type`,`person_number`,`dept_code`,`traning_file_flg`,`phone_number`,`train_time`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_training where training_id = #{value}
+		select `training_id`,`enterprise_id`,`training_flg`,`la_provide_flg`,`train_name`,`train_type`,`person_number`,`dept_code`,`traning_file_flg`,`phone_number`,`train_time`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural`,`country` from eco_training where training_id = #{value}
 	</select>
 	<select id="getData" resultType="com.bootdo.ecosys.domain.TrainingDO">
 		SELECT
@@ -19,7 +19,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.ecosys.domain.TrainingDO">
-		select `training_id`,`enterprise_id`,`training_flg`,`la_provide_flg`,`train_name`,`train_type`,`person_number`,`dept_code`,`traning_file_flg`,`phone_number`,`train_time`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural` from eco_training
+		select `training_id`,`enterprise_id`,`training_flg`,`la_provide_flg`,`train_name`,`train_type`,`person_number`,`dept_code`,`traning_file_flg`,`phone_number`,`train_time`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural`,`country` from eco_training
         <where>
 			delete_flag = '0'
 		  		  <if test="trainingId != null and trainingId != ''"> and training_id = #{trainingId} </if>
@@ -46,6 +46,7 @@
 		  		  <if test="deleteFlag != null and deleteFlag != ''"> and delete_flag = #{deleteFlag} </if>
 		  		  <if test="administrativeDivision != null and administrativeDivision != ''"> and administrative_division = #{administrativeDivision} </if>
 		  		  <if test="urbanorrural != null and urbanorrural != ''"> and urbanorrural = #{urbanorrural} </if>
+				  <if test="country != null and country != ''"> and country = #{country} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -117,7 +118,8 @@
 			`modify_by`, 
 			`delete_flag`, 
 			`administrative_division`, 
-			`urbanorrural`
+			`urbanorrural`,
+			`country`
 		)
 		values
 		(
@@ -144,7 +146,8 @@
 			#{modifyBy}, 
 			'0',
 			#{administrativeDivision}, 
-			#{urbanorrural}
+			#{urbanorrural},
+			#{country}
 		)
 	</insert>
 	 

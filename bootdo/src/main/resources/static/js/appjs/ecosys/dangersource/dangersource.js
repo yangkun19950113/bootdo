@@ -76,7 +76,7 @@ function load() {
 									field : 'phoneNumber', 
 									title : '联系电话' 
 								},
-								{
+								/*{
 									field : 'surveytedPersonName', 
 									title : '被调查人姓名'
 								},
@@ -99,7 +99,7 @@ function load() {
 								{
 									field : 'urbanorrural', 
 									title : '城乡分类'
-								},
+								},*/
 								{
 									title : '操作',
 									field : 'id',

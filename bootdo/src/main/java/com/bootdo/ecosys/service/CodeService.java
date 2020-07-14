@@ -28,4 +28,8 @@ public interface CodeService {
 	int remove(Long id);
 	
 	int batchRemove(Long[] ids);
+
+	List<CodeDO> getAdministrativeDivision(Map<String, Object> map);
+
+	CodeDO getCode(Map<String, Object> map);
 }

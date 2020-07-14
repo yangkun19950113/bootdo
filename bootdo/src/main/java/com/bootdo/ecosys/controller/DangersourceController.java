@@ -1,10 +1,13 @@
 package com.bootdo.ecosys.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.ecosys.domain.CodeDO;
 import com.bootdo.ecosys.domain.DangersourceDO;
 import com.bootdo.ecosys.domain.EnterpriseDO;
+import com.bootdo.ecosys.service.CodeService;
 import com.bootdo.ecosys.service.DangersourceService;
 import com.bootdo.ecosys.service.EnterpriseService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -37,6 +40,8 @@ public class DangersourceController {
 	private DangersourceService dangersourceService;
 	@Autowired
 	private EnterpriseService enterpriseService;
+	@Autowired
+	private CodeService codeService;
 
 	@GetMapping("/{enterpriseId}")
 	@RequiresPermissions("ecosys:dangersource:dangersource")
@@ -62,7 +67,25 @@ public class DangersourceController {
 	@RequiresPermissions("ecosys:dangersource:add")
 	String add(@PathVariable("enterpriseId") Long enterpriseId,Model model){
 		EnterpriseDO enterprise = enterpriseService.get(enterpriseId.intValue());
+		//乡镇
+		Map<String, Object> map = new HashMap<>();
+		map.put("codeId",enterprise.getAdministrativeDivision());
+		CodeDO code = codeService.getCode(map);
+		//村
+		Map<String, Object> map1 = new HashMap<>();
+		map1.put("parentId",code.getId());
+		map1.put("orderNum",enterprise.getCountry());
+		CodeDO contry = codeService.getCode(map1);
+
 		String enterpriseName = enterprise.getEnterpriseName();
+		String administrativeDivisionName = code.getName();
+		String administrativeDivision = enterprise.getAdministrativeDivision();
+		String country = contry.getOrderNum().toString();
+		String countryName = contry.getName();
+		model.addAttribute("administrativeDivisionName", administrativeDivisionName);
+		model.addAttribute("administrativeDivision", administrativeDivision);
+		model.addAttribute("country", country);
+		model.addAttribute("countryName", countryName);
 		model.addAttribute("enterpriseId", enterpriseId);
 		model.addAttribute("enterpriseName", enterpriseName);
 		return "ecosys/dangersource/add";
@@ -73,6 +96,19 @@ public class DangersourceController {
 	String edit(@PathVariable("dangerSourceId") Integer dangerSourceId,Model model){
 		DangersourceDO dangersource = dangersourceService.get(dangerSourceId);
 		EnterpriseDO enterprise = enterpriseService.get(dangersource.getEnterpriseId());
+		//乡镇
+		Map<String, Object> map = new HashMap<>();
+		map.put("codeId",dangersource.getAdministrativeDivision());
+		CodeDO code = codeService.getCode(map);
+		//村
+		Map<String, Object> map1 = new HashMap<>();
+		map1.put("parentId",code.getId());
+		map1.put("orderNum",enterprise.getCountry());
+		CodeDO contry = codeService.getCode(map1);
+
+		dangersource.setAdministrativeDivisionName(code.getName());
+		dangersource.setEnterpriseName(enterprise.getEnterpriseName());
+		dangersource.setCountryName(contry.getName());
 		dangersource.setEnterpriseName(enterprise.getEnterpriseName());
 		model.addAttribute("dangersource", dangersource);
 	    return "ecosys/dangersource/edit";

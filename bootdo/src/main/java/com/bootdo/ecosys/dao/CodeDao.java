@@ -30,5 +30,10 @@ public interface CodeDao {
 	int remove(Long id);
 	
 	int batchRemove(Long[] ids);
+
 	CodeDO getName(@Param("codeId") String  codeId, @Param("parentId")String parentId);
+
+	List<CodeDO> listSon(Map<String, Object> map);
+
+	CodeDO getCode(Map<String, Object> map);
 }

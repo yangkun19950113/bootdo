@@ -1,11 +1,13 @@
 package com.bootdo.ecosys.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.bootdo.ecosys.dao.CodeDao;
 import com.bootdo.ecosys.domain.CodeDO;
 import com.bootdo.ecosys.service.CodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -52,5 +54,25 @@ public class CodeServiceImpl implements CodeService {
 	public int batchRemove(Long[] ids){
 		return codeDao.batchRemove(ids);
 	}
-	
+
+	@Override
+	public List<CodeDO> getAdministrativeDivision(Map<String, Object> map) {
+		List<CodeDO> listFa = codeDao.list(map);
+		String listFaStr = "";
+		for(int i = 0;i<listFa.size();i++){
+			CodeDO codeFa = listFa.get(i);
+			listFaStr = codeFa.getId() + "," + listFaStr;
+		}
+		Map<String, Object> map1 = new HashMap<>();
+		String[] ids = listFaStr.split(",");
+		map1.put("parentIdsArray", ids);
+		List<CodeDO> listSon = codeDao.listSon(map1);
+		return listSon;
+	}
+
+	@Override
+	public CodeDO getCode(Map<String, Object> map) {
+		return codeDao.getCode(map);
+	}
+
 }
