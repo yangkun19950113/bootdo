@@ -104,175 +104,286 @@ public class ShowDataController {
 
 		// 环保基本信息
 		EnvprotectionDO EnvprotectionDO = envprotectionService.getData(enterpriseId);
-		// 是否有环评文号
-		String ecoEstimateFlg = EnvprotectionDO.getEcoEstimateFlg();
-		ShowData.setEcoEstimateFlg(ecoEstimateFlg);
-		// 环评文号
-		String ecoLicence = EnvprotectionDO.getEcoLicence();
-		ShowData.setEcoLicence(ecoLicence);
-		// 是够属于园区
-		String parkFlg = EnvprotectionDO.getParkFlg();
-		ShowData.setParkFlg(parkFlg);
-		// 是否有环保制度
-		String ecoStandardFlg = EnvprotectionDO.getEcoEstimateFlg();
-		ShowData.setEcoEstimateFlg(ecoStandardFlg);
-		String envprotectionMinImgUrl = EnvprotectionDO.getEnvprotectionMinImgUrl();
-		ShowData.setEnvprotectionMinImgUrl(envprotectionMinImgUrl);
-		// 行业类别
-		String industryCode = EnvprotectionDO.getIndustryCode();
-		CodeDO EnvprotectionDOCodeDO = codeDao.getName(industryCode,"26");
-		industryCode = EnvprotectionDOCodeDO.getName();
-		ShowData.setIndustryCode(industryCode);
+		if(null !=EnvprotectionDO ){
+			// 是否有环评文号
+			String ecoEstimateFlg = EnvprotectionDO.getEcoEstimateFlg();
+			ShowData.setEcoEstimateFlg(ecoEstimateFlg);
+			// 环评文号
+			String ecoLicence = EnvprotectionDO.getEcoLicence();
+			ShowData.setEcoLicence(ecoLicence);
+			// 是够属于园区
+			String parkFlg = EnvprotectionDO.getParkFlg();
+			ShowData.setParkFlg(parkFlg);
+			// 是否有环保制度
+			String ecoStandardFlg = EnvprotectionDO.getEcoEstimateFlg();
+			ShowData.setEcoEstimateFlg(ecoStandardFlg);
+			String envprotectionMinImgUrl = EnvprotectionDO.getEnvprotectionMinImgUrl();
+			ShowData.setEnvprotectionMinImgUrl(envprotectionMinImgUrl);
+			// 行业类别
+			String industryCode = EnvprotectionDO.getIndustryCode();
+			CodeDO EnvprotectionDOCodeDO = codeDao.getName(industryCode,"26");
+			industryCode = EnvprotectionDOCodeDO.getName();
+			ShowData.setIndustryCode(industryCode);
+		}else {
+			// 是否有环评文号
+
+			ShowData.setEcoEstimateFlg("-");
+			// 环评文号
+
+			ShowData.setEcoLicence("-");
+			// 是够属于园区
+			ShowData.setParkFlg("-");
+			// 是否有环保制度
+			ShowData.setEcoEstimateFlg("-");
+			ShowData.setEnvprotectionMinImgUrl("img/1.jpg");
+			ShowData.setIndustryCode("-");
+		}
+
+
 		// 企业产品及产能
 		ProductDO productDO = productService.getData(enterpriseId);
-		// 产品名称
-		String prodectName = productDO.getProdectName();
-		ShowData.setProdectName(prodectName);
-		//规格
-		String specifical = productDO.getSpecifical();
-		ShowData.setSpecifical(specifical);
-		//型号
-		String model = productDO.getModel();
-		ShowData.setModel(model);
-		//生产工艺
-		String produtProcess = productDO.getProdutProcess();
-		ShowData.setProdutProcess(produtProcess);
-		String productMinImgUrl = productDO.getProductMinImgUrl();
-		ShowData.setProductMinImgUrl(productMinImgUrl);
-		// 月产量
-		BigDecimal monthProduction = productDO.getMonthProduction();
-		ShowData.setMonthProduction(monthProduction);
+		if(null !=productDO ){
+			// 产品名称
+			String prodectName = productDO.getProdectName();
+			ShowData.setProdectName(prodectName);
+			//规格
+			String specifical = productDO.getSpecifical();
+			ShowData.setSpecifical(specifical);
+			//型号
+			String model = productDO.getModel();
+			ShowData.setModel(model);
+			//生产工艺
+			String produtProcess = productDO.getProdutProcess();
+			ShowData.setProdutProcess(produtProcess);
+			String productMinImgUrl = productDO.getProductMinImgUrl();
+			ShowData.setProductMinImgUrl(productMinImgUrl);
+			// 月产量
+			BigDecimal monthProduction = productDO.getMonthProduction();
+			ShowData.setMonthProduction(monthProduction);
+		}else {
+			ShowData.setProdectName("-");
+			//规格
+			ShowData.setSpecifical("-");
+			//型号
+			ShowData.setModel("-");
+			//生产工艺
+			ShowData.setProdutProcess("-");
+			ShowData.setProductMinImgUrl("img/1.jpg");
+			// 月产量
+			ShowData.setMonthProduction(new BigDecimal(0));
+		}
+
 
 
 		// 产品原材料
 		MaterialDO materialDO = materialService.getData(enterpriseId);
-		// 原材料类型
-		String materialType = materialDO.getMaterialType();
-		CodeDO materialDOCodeDO = codeDao.getName(materialType,"103");
-		materialType = materialDOCodeDO.getName();
-		ShowData.setMaterialType(materialType);
-		// 原材料名称
-		String materialName = materialDO.getMaterialName();
-		ShowData.setMaterialName(materialName);
-		//月使用量
-		BigDecimal monthConsumption = materialDO.getMonthConsumption();
-		ShowData.setMonthConsumption(monthConsumption);
-		String materialMinImgUrl = materialDO.getMaterialMinImgUrl();
-		ShowData.setMaterialMinImgUrl(materialMinImgUrl);
+		if(null!=materialDO){
+			// 原材料类型
+			String materialType = materialDO.getMaterialType();
+			CodeDO materialDOCodeDO = codeDao.getName(materialType,"103");
+			materialType = materialDOCodeDO.getName();
+			ShowData.setMaterialType(materialType);
+			// 原材料名称
+			String materialName = materialDO.getMaterialName();
+			ShowData.setMaterialName(materialName);
+			//月使用量
+			BigDecimal monthConsumption = materialDO.getMonthConsumption();
+			ShowData.setMonthConsumption(monthConsumption);
+			String materialMinImgUrl = materialDO.getMaterialMinImgUrl();
+			ShowData.setMaterialMinImgUrl(materialMinImgUrl);
+		}else {
+			ShowData.setMaterialType("-");
+			// 原材料名称
+			ShowData.setMaterialName("-");
+			//月使用量
+			ShowData.setMonthConsumption(new BigDecimal(0));
+			ShowData.setMaterialMinImgUrl("img/1.jpg");
+		}
+
 		//
 
 		//  防治设备
 		EcoequipmentDO ecoequipmentDO = ecoequipmentService.getData(enterpriseId);
-		//设备名称
-		String equipmentName = ecoequipmentDO.getEquipmentName();
-		ShowData.setEquipmentName(equipmentName);
-		//设备编码
-		String equipmentCode = ecoequipmentDO.getEquipmentCode();
-		ShowData.setEquipmentCode(equipmentCode);
-		//设备负责人
-		String protectionPerson = ecoequipmentDO.getProtectionPerson();
-		ShowData.setProtectionPerson(protectionPerson);
-		//联系电话
-		String phoneNumber = ecoequipmentDO.getPhoneNumber();
-		ShowData.setPhoneNumber(phoneNumber);
-		String ecoequipmentMinImgUrl = ecoequipmentDO.getEcoequipmentMinImgUrl();
-		ShowData.setEcoequipmentMinImgUrl(ecoequipmentMinImgUrl);
+		if(null!=ecoequipmentDO ){
+			//设备名称
+			String equipmentName = ecoequipmentDO.getEquipmentName();
+			ShowData.setEquipmentName(equipmentName);
+			//设备编码
+			String equipmentCode = ecoequipmentDO.getEquipmentCode();
+			ShowData.setEquipmentCode(equipmentCode);
+			//设备负责人
+			String protectionPerson = ecoequipmentDO.getProtectionPerson();
+			ShowData.setProtectionPerson(protectionPerson);
+			//联系电话
+			String phoneNumber = ecoequipmentDO.getPhoneNumber();
+			ShowData.setPhoneNumber(phoneNumber);
+			String ecoequipmentMinImgUrl = ecoequipmentDO.getEcoequipmentMinImgUrl();
+			ShowData.setEcoequipmentMinImgUrl(ecoequipmentMinImgUrl);
+		}else {
+			ShowData.setEquipmentName("-");
+			//设备编码
+			ShowData.setEquipmentCode("-");
+			//设备负责人
+			ShowData.setProtectionPerson("-");
+			//联系电话
+			ShowData.setPhoneNumber("-");
+			ShowData.setEcoequipmentMinImgUrl("img/1.jpg");
+		}
+
 
 		// 重点部位（危险源)
 		DangersourceDO dangersourceDO = dangersourceService.getData(enterpriseId);
-		//危险源信息名称
-		String dangerSourceName = dangersourceDO.getDangerSourceName();
-		ShowData.setDangerSourceName(dangerSourceName);
-		//具体位置
-		String partDetail = dangersourceDO.getPartDetail();
-		ShowData.setPartDetail(partDetail);
-		//危险程度
-		String degreeCode = dangersourceDO.getDegreeCode();
-		ShowData.setDegreeCode(degreeCode);
-		//可能会发生的事故类型
-		String accidentType = dangersourceDO.getAccidentType();
-		ShowData.setAccidentType(accidentType);
-		//监控措施
-		String monit = dangersourceDO.getMonit();
-		ShowData.setMonit(monit);
-		//危险责任人
-		String dangerprotectionPerson = dangersourceDO.getProtectionPerson();
-		ShowData.setDangerprotectionPerson(dangerprotectionPerson);
-		String dangersourceMinImgUrl = dangersourceDO.getDangersourceMinImgUrl();
-		ShowData.setDangersourceMinImgUrl(dangersourceMinImgUrl);
+		if(null != dangersourceDO){
+			//危险源信息名称
+			String dangerSourceName = dangersourceDO.getDangerSourceName();
+			ShowData.setDangerSourceName(dangerSourceName);
+			//具体位置
+			String partDetail = dangersourceDO.getPartDetail();
+			ShowData.setPartDetail(partDetail);
+			//危险程度
+			String degreeCode = dangersourceDO.getDegreeCode();
+			ShowData.setDegreeCode(degreeCode);
+			//可能会发生的事故类型
+			String accidentType = dangersourceDO.getAccidentType();
+			ShowData.setAccidentType(accidentType);
+			//监控措施
+			String monit = dangersourceDO.getMonit();
+			ShowData.setMonit(monit);
+			//危险责任人
+			String dangerprotectionPerson = dangersourceDO.getProtectionPerson();
+			ShowData.setDangerprotectionPerson(dangerprotectionPerson);
+			String dangersourceMinImgUrl = dangersourceDO.getDangersourceMinImgUrl();
+			ShowData.setDangersourceMinImgUrl(dangersourceMinImgUrl);
+		}else {
+			ShowData.setDangerSourceName("-");
+			//具体位置-
+			ShowData.setPartDetail("-");
+			//危险程度-
+			ShowData.setDegreeCode("-");
+			//可能会发生的事故类型-
+			ShowData.setAccidentType("-");
+			//监控措施-
+			ShowData.setMonit("-");
+			//危险责任人-
+			ShowData.setDangerprotectionPerson("-");
+			ShowData.setDangersourceMinImgUrl("img/1.jpg");
+		}
+
 
 
 		// 安全生产培训
 		TrainingDO trainingDO = trainingService.getData(enterpriseId);
-		// 是否建立安全培训制度
-		String traningEcosysFlg = trainingDO.getTrainingFlg();
-		ShowData.setTraningSystemFlg(traningEcosysFlg);
-		//是否为劳动者提供防护用品
-		String laProvideFlg = trainingDO.getLaProvideFlg();
-		ShowData.setLaProvideFlg(laProvideFlg);
-		//培训主题
-	    String trainName = trainingDO.getTrainName();
-	    ShowData.setTrainName(trainName);
-		//培训类型
-		String trainType = trainingDO.getTrainType();
-		ShowData.setTrainType(trainType);
-		//参加人数
-		Long personNumber = trainingDO.getPersonNumber();
-		ShowData.setPersonNumber(personNumber);
-		String trainingMinImgUrl = trainingDO.getTrainingMinImgUrl();
-		ShowData.setTrainingMinImgUrl(trainingMinImgUrl);
-
+		if(null!=trainingDO){
+			// 是否建立安全培训制度
+			String traningEcosysFlg = trainingDO.getTrainingFlg();
+			ShowData.setTraningSystemFlg(traningEcosysFlg);
+			//是否为劳动者提供防护用品
+			String laProvideFlg = trainingDO.getLaProvideFlg();
+			ShowData.setLaProvideFlg(laProvideFlg);
+			//培训主题
+			String trainName = trainingDO.getTrainName();
+			ShowData.setTrainName(trainName);
+			//培训类型
+			String trainType = trainingDO.getTrainType();
+			ShowData.setTrainType(trainType);
+			//参加人数
+			Long personNumber = trainingDO.getPersonNumber();
+			ShowData.setPersonNumber(personNumber);
+			String trainingMinImgUrl = trainingDO.getTrainingMinImgUrl();
+			ShowData.setTrainingMinImgUrl(trainingMinImgUrl);
+		}else{
+			ShowData.setTraningSystemFlg("-");
+			ShowData.setLaProvideFlg("-");
+			ShowData.setTrainName("-");
+			ShowData.setTrainType("-");
+			ShowData.setPersonNumber( Long.parseLong("0"));
+			ShowData.setTrainingMinImgUrl("img/1.jpg");
+		}
 
 		// 用电设备
 		ElectricDO electricDO = electricService.getData(enterpriseId);
-		// 设备名称
-		String eleequipmentName = electricDO.getEquipmentName();
-		ShowData.setEleequipmentName(eleequipmentName);
-		//设备编码
-		String eleequipmentCode = electricDO.getEquipmentCode();
-		ShowData.setEleequipmentCode(eleequipmentCode);
-		//相数
-		Integer phaseNumber = electricDO.getPhaseNumber();
-		ShowData.setPhaseNumber(phaseNumber);
-		//台数
-		Integer number = electricDO.getNumber();
-		ShowData.setNumber(number);
-		String electricMinImgUrl = electricDO.getElectricMinImgUrl();
-		ShowData.setElectricMinImgUrl(electricMinImgUrl);
+		if(null != electricDO ){
+			// 设备名称
+			String eleequipmentName = electricDO.getEquipmentName();
+			ShowData.setEleequipmentName(eleequipmentName);
+			//设备编码
+			String eleequipmentCode = electricDO.getEquipmentCode();
+			ShowData.setEleequipmentCode(eleequipmentCode);
+			//相数
+			Integer phaseNumber = electricDO.getPhaseNumber();
+			ShowData.setPhaseNumber(phaseNumber);
+			//台数
+			Integer number = electricDO.getNumber();
+			ShowData.setNumber(number);
+			String electricMinImgUrl = electricDO.getElectricMinImgUrl();
+			ShowData.setElectricMinImgUrl(electricMinImgUrl);
+		}else {
+			ShowData.setEleequipmentName("-");
+			//设备编码-
+			ShowData.setEleequipmentCode("-");
+			//相数-
+			ShowData.setPhaseNumber(0);
+			//台数-
+			ShowData.setNumber(0);
+			ShowData.setElectricMinImgUrl("img/1.jpg");
+		}
+
 
 		// 安全隐患表
 		RiskDO riskDO = riskService.getData(enterpriseId);
-		//发现人员
-		String peopleFindName = riskDO.getPeopleFindName();
-		ShowData.setPeopleFindName(peopleFindName);
-		//发现时间
-		Date findTime = riskDO.getFindTime();
-		ShowData.setFindTime(findTime);
-		//级别
-		String level = riskDO.getLevel();
-		ShowData.setLevel(level);
-		//类型
-		String type = riskDO.getType();
-		ShowData.setType(type);
-		String riskMinImgUrl = riskDO.getRiskMinImgUrl();
-		ShowData.setRiskMinImgUrl(riskMinImgUrl);
+		if(null != riskDO){
+			//发现人员
+			String peopleFindName = riskDO.getPeopleFindName();
+			ShowData.setPeopleFindName(peopleFindName);
+			//发现时间
+			Date findTime = riskDO.getFindTime();
+			ShowData.setFindTime(findTime);
+			//级别
+			String level = riskDO.getLevel();
+			ShowData.setLevel(level);
+			//类型
+			String type = riskDO.getType();
+			ShowData.setType(type);
+			String riskMinImgUrl = riskDO.getRiskMinImgUrl();
+			ShowData.setRiskMinImgUrl(riskMinImgUrl);
+		}else {
+			ShowData.setPeopleFindName("-");
+			//发现时间
+			//级别
+			ShowData.setLevel("-");
+			//类型-
+			ShowData.setType("-");
+			ShowData.setRiskMinImgUrl("img/1.jpg");
+		}
+
 
 		// 消防设备
 		FiredeviceDO firedeviceDO = firedeviceService.getData(enterpriseId);
-		//设备名称
-		String fireequipmentName = firedeviceDO.getEquipmentName();
-		ShowData.setFireequipmentName(fireequipmentName);
-		//设备编码
-		String fireequipmentCode = firedeviceDO.getEquipmentCode();
-		ShowData.setFireequipmentCode(fireequipmentCode);
-		//型号
-		String firemodel = firedeviceDO.getModel();
-		ShowData.setFiremodel(firemodel);
-		//采购时间
-		Date buyTime = firedeviceDO.getBuyTime();
-		ShowData.setBuyTime(buyTime);
-		String firedeviceMinImgUrl = firedeviceDO.getFiredeviceMinImgUrl();
-		ShowData.setFiredeviceMinImgUrl(firedeviceMinImgUrl);
+		if(null != firedeviceDO){
+			//设备名称
+			String fireequipmentName = firedeviceDO.getEquipmentName();
+			ShowData.setFireequipmentName(fireequipmentName);
+			//设备编码
+			String fireequipmentCode = firedeviceDO.getEquipmentCode();
+			ShowData.setFireequipmentCode(fireequipmentCode);
+			//型号
+			String firemodel = firedeviceDO.getModel();
+			ShowData.setFiremodel(firemodel);
+			//采购时间
+			Date buyTime = firedeviceDO.getBuyTime();
+			ShowData.setBuyTime(buyTime);
+			String firedeviceMinImgUrl = firedeviceDO.getFiredeviceMinImgUrl();
+			ShowData.setFiredeviceMinImgUrl(firedeviceMinImgUrl);
+		}else {
+			ShowData.setFireequipmentName("-");
+			//设备编码-
+			ShowData.setFireequipmentCode("-");
+			//型号-
+			ShowData.setFiremodel("-");
+			//采购时间
+			ShowData.setFiredeviceMinImgUrl("img/1.jpg");
+		}
+
 		return MessageResult.success("200","", ShowData);
 	}
 }
