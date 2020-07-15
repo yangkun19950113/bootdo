@@ -3,6 +3,7 @@ package com.bootdo.ecosys.controller;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.ecosys.dao.CodeDao;
+import com.bootdo.ecosys.dao.EnterpriseDao;
 import com.bootdo.ecosys.domain.*;
 import com.bootdo.ecosys.service.*;
 import com.bootdo.tool.MessageResult;
@@ -16,10 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 
@@ -54,6 +52,8 @@ public class ShowDataController {
 	private FiredeviceService firedeviceService;
 	@Autowired
 	private CodeDao codeDao;
+	@Autowired
+	private EnterpriseDao enterpriseDao;
 
 	// 获取前台显示信息
 
@@ -386,4 +386,22 @@ public class ShowDataController {
 
 		return MessageResult.success("200","", ShowData);
 	}
+	@GetMapping("/enterpriseList")
+	public ResponseData getCoordinates(){
+		List<CoordinatesDO> coordinatesList = new ArrayList<>();
+		List<EnterpriseDO> enterpriseList= enterpriseDao.getCoordinates();
+		for(EnterpriseDO enterpriseDO :enterpriseList){
+			CoordinatesDO coordinatesDO = new CoordinatesDO();
+			String coordinates = enterpriseDO.getCoordinates();
+			String[] member = coordinates.split(":");
+			String x = member[0];
+			coordinatesDO.setX(x);
+			String y = member[1];
+			coordinatesDO.setY(y);
+			coordinatesList.add(coordinatesDO);
+		}
+		return MessageResult.success("200","", coordinatesList);
+	}
+
+
 }
