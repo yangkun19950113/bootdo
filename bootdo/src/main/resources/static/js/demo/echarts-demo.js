@@ -66,27 +66,27 @@ $(function () {
     //     ]
     // };
     $.getJSON('/echarts/pie',function(lineoption){
-        // lineoption = {
-        //     title: {
-        //         text: 'ECharts 入门示例'
-        //     },
-        //     tooltip : {
-        //         trigger: 'axis'
-        //     },
-        //     legend: {
-        //         data:['销量']
-        //     },
-        //     calculable : true,
-        //     xAxis: {
-        //         data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-        //     },
-        //     yAxis: {data:null},
-        //     series: [{
-        //         name: '销量',
-        //         type: 'pie',
-        //         data: [5, 20, 36, 10, 10, 20]
-        //     }]
-        // };
+         lineoption = {
+             title: {
+                 text: 'ECharts 入门示例'
+             },
+             tooltip : {
+                 trigger: 'axis'
+             },
+             legend: {
+                 data:['销量']
+             },
+             calculable : true,
+             xAxis: {
+                 data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+             },
+             yAxis: {data:null},
+             series: [{
+                 name: '销量',
+                 type: 'pie',
+                 data: [5, 20, 36, 10, 10, 20]
+             }]
+         };
         var lineChart = echarts.init(document.getElementById("echarts-line-chart"));
         lineChart.setOption(lineoption);
         $(window).resize(lineChart.resize);
@@ -536,10 +536,11 @@ $(function () {
     kChart.setOption(koption);
     $(window).resize(kChart.resize);
 
-    var pieChart = echarts.init(document.getElementById("echarts-pie-chart"));
+    //饼图1
+    var pieChart = echarts.init(document.getElementById("echarts-pie-chart1"));
     var pieoption = {
         title : {
-            text: '某站点用户访问来源',
+            text: '标题1',
             subtext: '纯属虚构',
             x:'center'
         },
@@ -571,6 +572,95 @@ $(function () {
     };
     pieChart.setOption(pieoption);
     $(window).resize(pieChart.resize);
+
+    //饼图2
+    var pieChart = echarts.init(document.getElementById("echarts-pie-chart2"));
+    var pieoption = {
+        title : {
+            text: '标题2',
+            subtext: '纯属虚构',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient : 'vertical',
+            x : 'left',
+            data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+        },
+        calculable : true,
+        series : [
+            {
+                name:'访问来源',
+                type:'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:335, name:'直接访问'},
+                    {value:310, name:'邮件营销'},
+                    {value:234, name:'联盟广告'},
+                    {value:135, name:'视频广告'},
+                    {value:1548, name:'搜索引擎'}
+                ]
+            }
+        ]
+    };
+    pieChart.setOption(pieoption);
+    $(window).resize(pieChart.resize);
+
+
+    //饼图3
+    var pieChart = echarts.init(document.getElementById("echarts-pie-chart3"));
+    var pieoption = {
+        title : {
+            text: '标题3',
+            subtext: '纯属虚构',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient : 'vertical',
+            x : 'left',
+            data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+        },
+        calculable : true,
+        series : [
+            {
+                name:'访问来源',
+                type:'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:335, name:'直接访问'},
+                    {value:310, name:'邮件营销'},
+                    {value:234, name:'联盟广告'},
+                    {value:135, name:'视频广告'},
+                    {value:1548, name:'搜索引擎'}
+                ]
+            }
+        ]
+    };
+    pieChart.setOption(pieoption);
+    $(window).resize(pieChart.resize);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     var radarChart = echarts.init(document.getElementById("echarts-radar-chart"));
     var radaroption = {

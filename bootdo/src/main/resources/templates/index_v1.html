@@ -36,12 +36,12 @@
                     </div>
                     <div class="dropdown profile-element hidden">
 
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <!--<a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear">
                             <span class="block m-t-xs"><strong class="font-bold" th:text="${username}">admin</strong></span>
                             <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
                              </span>
-                        </a>
+                        </a>-->
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a @click="personal" href="#">修改头像</a>
                             </li>
@@ -74,12 +74,17 @@
                     </ul>
                 </li>-->
 
-                <li><a href="#"> <i class="fa fa-home"></i> <span class="nav-label">企业管理</span> <span class="fa arrow"></span>
+                <!--<li><a href="#"> <i class="fa fa-home"></i> <span class="nav-label">企业管理</span> <span class="fa arrow"></span>-->
                 </a>
                     <ul class="nav nav-second-level">
                         <li><a id="index001" class="J_menuItem" href="index_v1.html" data-index="0" th:href="@{ecosys/enterprise}">企业信息管理</a></li>
                     </ul>
-                </li>
+                </a>
+                <a>
+                    <ul class="nav nav-second-level">
+                        <li><a id="index002" class="J_menuItem" href="mainAllCharts.html" data-index="0" th:href="@{/chart/graph_echarts.html}">综合大数据</a></li>
+                    </ul>
+                </a>
 
 
 
@@ -138,24 +143,20 @@
             </nav>
         </div>
         <div class="row content-tabs">
-            <button class="roll-nav roll-left J_tabLeft">
+            <!--<button class="roll-nav roll-left J_tabLeft">
                 <i class="fa fa-backward"></i>
-            </button>
-
-
-
+            </button>-->
             <nav class="page-tabs J_menuTabs">
                 <div class="page-tabs-content">
                     <a href="javascript:;" class="active J_menuTab"
                        data-id="index_v1.html">首页</a>
                 </div>
             </nav>
-            <button class="roll-nav roll-right J_tabRight">
+            <!--<button class="roll-nav roll-right J_tabRight">
                 <i class="fa fa-forward"></i>
-            </button>
-            <div class="btn-group roll-nav roll-right">
-                <button class="dropdown J_tabClose" data-toggle="dropdown">
-                    关闭操作<span class="caret"></span>
+            </button>-->
+            <!--<div class="btn-group roll-nav roll-right">
+                <button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作<span class="caret"></span>
                 </button>
                 <ul role="menu" class="dropdown-menu dropdown-menu-right">
                     <li class="J_tabShowActive"><a>定位当前选项卡</a></li>
@@ -163,17 +164,14 @@
                     <li class="J_tabCloseAll"><a>关闭全部选项卡</a></li>
                     <li class="J_tabCloseOther"><a>关闭其他选项卡</a></li>
                 </ul>
-            </div>
-            <a href="/logout" class="roll-nav roll-right J_tabExit"><i
-                    class="fa fa fa-sign-out"></i> 退出</a>
+            </div>-->
+            <a href="/login" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
         </div>
         <div class="row J_mainContent" id="content-main">
-            <iframe class="J_iframe" name="iframe0" width="100%" height="100%"
-                    src="" th:src="@{/main}" frameborder="0" data-id="index_v1.html"
-                    seamless></iframe>
+            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="" th:src="@{/main}" frameborder="0" data-id="index_v1.html" seamless></iframe>
         </div>
         <div class="footer">
-            <div class="pull-right">BootDo面向学习型的开源框架</div>
+            <div class="pull-right"></div>
         </div>
     </div>
     <!--右侧部分结束-->
