@@ -386,14 +386,14 @@ public class ShowDataController {
 
 		return MessageResult.success("200","", ShowData);
 	}
-	@GetMapping("/enterpriseList")
+	@GetMapping("/getCoordinates")
 	public ResponseData getCoordinates(){
 		List<CoordinatesDO> coordinatesList = new ArrayList<>();
 		List<EnterpriseDO> enterpriseList= enterpriseDao.getCoordinates();
 		for(EnterpriseDO enterpriseDO :enterpriseList){
 			CoordinatesDO coordinatesDO = new CoordinatesDO();
 			String coordinates = enterpriseDO.getCoordinates();
-			String[] member = coordinates.split(":");
+			String[] member = coordinates.split(",");
 			String x = member[0];
 			coordinatesDO.setX(x);
 			String y = member[1];

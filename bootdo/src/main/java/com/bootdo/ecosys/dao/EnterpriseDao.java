@@ -18,7 +18,7 @@ import org.apache.ibatis.annotations.Param;
 public interface EnterpriseDao {
 
 	EnterpriseDO get(Integer enterpriseId);
-	
+	List<EnterpriseDO> getCoordinates();
 	List<EnterpriseDO> list(Map<String, Object> map);
 	
 	int count(Map<String, Object> map);
