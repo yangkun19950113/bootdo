@@ -60,9 +60,9 @@ function validateRule() {
 			protectionPerson : {
 				required : true
 			},
-			phoneNumber : {
+			/*phoneNumber : {
 				required : true
-			},
+			},*/
 			surveytedPersonName : {
 				required : true
 			},
@@ -72,9 +72,9 @@ function validateRule() {
 			fullFormTime : {
 				required : true
 			},
-			surveyPersonName : {
+			/*surveyPersonName : {
 				required : true
-			},
+			},*/
 		},
 		messages : {
 			equipmentName : {
@@ -98,9 +98,9 @@ function validateRule() {
 			protectionPerson : {
 				required : icon + "请输入设备负责人"
 			},
-			phoneNumber : {
+			/*phoneNumber : {
 				required : icon + "请输入联系电话"
-			},
+			},*/
 			surveytedPersonName : {
 				required : icon + "请输入被调查人姓名"
 			},
@@ -110,9 +110,9 @@ function validateRule() {
 			fullFormTime : {
 				required : icon + "请选择填表时间"
 			},
-			surveyPersonName : {
+			/*surveyPersonName : {
 				required : icon + "请输入调查人姓名"
-			},
+			},*/
 		}
 	})
 }

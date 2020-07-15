@@ -78,6 +78,12 @@ public class FiredeviceDO implements Serializable {
 
 	private String equipmentType;
 
+	private String checkFire;
+
+	private String checkWind;
+
+	private String merge;
+
 	public String getFiredeviceMinImgUrl() {
 		return firedeviceMinImgUrl;
 	}
@@ -425,5 +431,29 @@ public class FiredeviceDO implements Serializable {
 
 	public void setCountryName(String countryName) {
 		this.countryName = countryName;
+	}
+
+	public String getCheckFire() {
+		return checkFire;
+	}
+
+	public void setCheckFire(String checkFire) {
+		this.checkFire = checkFire;
+	}
+
+	public String getCheckWind() {
+		return checkWind;
+	}
+
+	public void setCheckWind(String checkWind) {
+		this.checkWind = checkWind;
+	}
+
+	public String getMerge() {
+		return merge;
+	}
+
+	public void setMerge(String merge) {
+		this.merge = merge;
 	}
 }

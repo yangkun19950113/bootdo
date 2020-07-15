@@ -86,6 +86,45 @@ function load() {
 									field : 'phoneNumber', 
 									title : '联系电话' 
 								},
+								{
+									field : 'checkFire',
+									title : '是否有消防通道',
+									formatter : function(value, row, index) {
+										if(value == '0'){
+											return "是";
+										}else if(value == '1') {
+											return "否";
+										}else{
+											return "-";
+										}
+									}
+								},
+								{
+									field : 'checkWind',
+									title : '车间是否通风',
+									formatter : function(value, row, index) {
+										if(value == '0'){
+											return "是";
+										}else if(value == '1') {
+											return "否";
+										}else{
+											return "-";
+										}
+									}
+								},
+								{
+									field : 'merge',
+									title : '三合一企业',
+									formatter : function(value, row, index) {
+										if(value == '0'){
+											return "是";
+										}else if(value == '1') {
+											return "否";
+										}else{
+											return "-";
+										}
+									}
+								},
 
 
 										/*						{
