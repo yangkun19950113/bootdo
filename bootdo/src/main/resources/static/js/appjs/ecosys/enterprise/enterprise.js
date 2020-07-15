@@ -76,7 +76,8 @@ function load() {
 								{
 								title : '企业相关',
 								field : 'id',
-								align : 'center',
+								/*align : 'center',*/
+								width:'550',
 								formatter : function(value, row, index) {
 									var a = '<a class="btn btn-danger" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixFire +'\',\'' + prefixFire +'/'+row.enterpriseId+'\',\'' + '消防设备管理' + '\')">'+'消'+'</a>';
 									var b = '<a class="btn btn-primary" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixElectric +'\',\'' + prefixElectric +'/'+row.enterpriseId+'\',\'' + '用电设备管理' + '\')">'+'电'+'</a>';

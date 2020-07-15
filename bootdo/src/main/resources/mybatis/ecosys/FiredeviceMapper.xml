@@ -4,7 +4,7 @@
 <mapper namespace="com.bootdo.ecosys.dao.FiredeviceDao">
 
 	<select id="get" resultType="com.bootdo.ecosys.domain.FiredeviceDO">
-		select `equipment_id`,`equipment_name`,`equipment_type`,`equipment_code`,`enterprise_id`,`model`,`buy_time`,`effect_time`,`brand`,`install_position`,`product_id`,`protection_person`,`phone_number`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural`,`country` from eco_firedevice where equipment_id = #{value}
+		select `equipment_id`,`equipment_name`,`equipment_type`,`equipment_code`,`enterprise_id`,`model`,`buy_time`,`effect_time`,`brand`,`install_position`,`product_id`,`protection_person`,`phone_number`,`surveyted_person_name`,`surveyted_person_position`,`full_form_time`,`survey_person_name`,`create_time`,`create_user_name`,`create_by`,`modify_time`,`modify_user_name`,`modify_by`,`delete_flag`,`administrative_division`,`urbanorrural`,`country`,`check_fire`,`check_wind`,`merge` from eco_firedevice where equipment_id = #{value}
 	</select>
 	<select id="getData" resultType="com.bootdo.ecosys.domain.FiredeviceDO">
 		SELECT
@@ -22,7 +22,7 @@
 		select fi.equipment_id,fi.equipment_name,fi.equipment_code,fi.enterprise_id,fi.model,fi.buy_time,fi.effect_time,
 		fi.brand,fi.install_position,fi.product_id,fi.protection_person,fi.phone_number,fi.surveyted_person_name,fi.surveyted_person_position,
 		fi.full_form_time,fi.survey_person_name,fi.create_time,fi.create_user_name,fi.create_by,fi.modify_time,
-		fi.modify_user_name,fi.modify_by,fi.delete_flag,fi.administrative_division,fi.urbanorrural,fi.equipment_type,fi.country,
+		fi.modify_user_name,fi.modify_by,fi.delete_flag,fi.administrative_division,fi.urbanorrural,fi.equipment_type,fi.country,fi.check_fire,fi.check_wind,fi.merge,
 		en.enterprise_name
 		from eco_firedevice fi left join eco_enterprise en on en.enterprise_id = fi.enterprise_id
         <where>
@@ -127,7 +127,10 @@
 			`delete_flag`, 
 			`administrative_division`, 
 			`urbanorrural`,
-			`country`
+			`country`,
+			`check_fire`,
+			`check_wind`,
+			`merge`
 		)
 		values
 		(
@@ -157,7 +160,10 @@
 			'0',
 			#{administrativeDivision}, 
 			#{urbanorrural},
-			#{country}
+			#{country},
+			#{checkFire},
+			#{checkWind},
+			#{merge}
 		)
 	</insert>
 	 
@@ -189,7 +195,10 @@
 			<if test="deleteFlag != null">`delete_flag` = #{deleteFlag}, </if>
 			<if test="administrativeDivision != null">`administrative_division` = #{administrativeDivision}, </if>
 			<if test="urbanorrural != null">`urbanorrural` = #{urbanorrural},</if>
-			<if test="country != null">`country` = #{country}</if>
+			<if test="country != null">`country` = #{country},</if>
+			<if test="checkFire != null">`check_fire` = #{checkFire},</if>
+			<if test="checkWind != null">`check_wind` = #{checkWind},</if>
+			<if test="merge != null">`merge` = #{merge}</if>
 		</set>
 		where equipment_id = #{equipmentId}
 	</update>

@@ -1,10 +1,12 @@
 $().ready(function() {
 	radioTransfer();
 	getPollutionCategoryCode();//加载污染类别
+	getIndustryCode();
 	getAreaCode();//加载所在区域
 	getMainEnergyCode();//加载主要能源
 	getNormalFactorsCode();//加载常规因子
 	getSpecialFactorsCode();//加载特征因子
+	getProjectManageCode();
 	validateRule();
 });
 
@@ -56,9 +58,9 @@ function validateRule() {
 					}
 				},
 			},*/
-			parkFlg : {
+			/*parkFlg : {
 				required : true
-			},
+			},*/
 			ecoStandardFlg : {
 				required : true
 			},
@@ -83,18 +85,18 @@ function validateRule() {
 			annualInspectionFlg : {
 				required : true
 			},
-			areaCode : {
+			/*areaCode : {
 				required : true
-			},
+			},*/
 			mainEnergyCode: {
 				required : true
 			},
 			dosage: {
 				required : true
 			},
-			measures: {
+			/*measures: {
 				required : true
-			},
+			},*/
 			surveytedPersonName : {
 				required : true
 			},
@@ -104,9 +106,9 @@ function validateRule() {
 			fullFormTime : {
 				required : true
 			},
-			surveyPersonName : {
+			/*surveyPersonName : {
 				required : true
-			},
+			},*/
 		},
 		messages : {
 			ecoEstimateFlg : {
@@ -115,9 +117,9 @@ function validateRule() {
 			/*ecoLicence: {
 				callback : icon + "请选择是否属于园区"
 			},*/
-			parkFlg : {
+			/*parkFlg : {
 				required : icon + "请选择是否属于园区"
-			},
+			},*/
 			ecoStandardFlg : {
 				required : icon + "请选择是否有环保制度"
 			},
@@ -142,18 +144,18 @@ function validateRule() {
 			annualInspectionFlg : {
 				required : icon + "请选择年检监测是否有效"
 			},
-			areaCode : {
+			/*areaCode : {
 				required : icon + "请选择所在区域"
-			},
+			},*/
 			mainEnergyCode: {
 				required : icon + "请选择主要能源"
 			},
 			dosage: {
 				required : icon + "请填写年消耗量"
 			},
-			measures: {
+			/*measures: {
 				required : icon + "请填写污染治理措施"
-			},
+			},*/
 			surveytedPersonName : {
 				required : icon + "请输入被调查人姓名"
 			},
@@ -163,9 +165,36 @@ function validateRule() {
 			fullFormTime : {
 				required : icon + "请选择填表时间"
 			},
-			surveyPersonName : {
+			/*surveyPersonName : {
 				required : icon + "请输入调查人姓名"
-			},
+			},*/
+		}
+	})
+}
+//加载行业类别
+function getIndustryCode(){
+	var industryCode = $("#industryCode1").val();
+	$.ajax({
+		type: "get",
+		url: "/ecosys/code/list",
+		dataType: "json",
+		data: {
+			parentId: 26
+		},
+		success: function (data) {
+			var code_list = data.rows;
+			for (var i = 0; i < code_list.length; i++) {
+				$("#industryCode").append("<label style='margin-left: 15px;' class='radio-inline'><input type='radio' name='industryCode' id=" + code_list[i].codeId + " class='lopiu' value=" + code_list[i].codeId + "/>&nbsp;&nbsp;" + code_list[i].name + "</label>");
+				if(code_list[i].codeId == industryCode ){
+					$("#"+ code_list[i].codeId +"").prop("checked",true);
+				}
+			}
+			if(industryCode == '076'){
+				$("#other").removeAttr("disabled");
+			}else{
+				$("#other").attr("disabled","disabled");
+			}
+			layer.closeAll('loading');//关闭loading
 		}
 	})
 }
@@ -187,8 +216,10 @@ function radioTransfer(){
 
 	if(parkFlg == '0'){
 		$("#parkFlg0").attr("checked","checked");
+		$("#ecoLicence").removeAttr("disabled");
 	}else {
 		$("#parkFlg1").attr("checked","checked");
+		$("#ecoLicence").attr("disabled","disabled");
 	}
 
 	if(ecoStandardFlg == '0'){
@@ -355,3 +386,48 @@ $(document).on('click', '.hhhbb', function() {
 	//清空
 	$('input:input[name="dosage"]').val("");
 })
+
+//行业类别监听
+$(document).on('click', '.lopiu', function() {
+	var checkValue = $('input:radio[name="industryCode"]:checked').val();
+	if(checkValue == '076'){//其他
+		$("#other").removeAttr("disabled");
+	}else{
+		$("#other").val("");
+		$("#other").attr("disabled","disabled");
+	}
+})
+//监听是否有环评文号
+$("#ecoEstimateFlg2 :radio").on('click', function () {
+	   var item = $('input:radio[name="ecoEstimateFlg"]:checked').val();
+	   if(item == '0'){
+		   $("#ecoLicence").removeAttr("disabled");
+	   }else{
+		   $("#ecoLicence").val("");
+		   $("#ecoLicence").attr("disabled","disabled");
+	   }
+})
+
+//加载项目管理类别
+function getProjectManageCode(){
+	var member = $("#projectManageCode1").val();
+	$.ajax({
+		type: "get",
+		url: "/ecosys/code/list",
+		dataType: "json",
+		data: {
+			parentId: 33
+		},
+		success: function (data) {
+			var code_list = data.rows;
+			for (var i = 0; i < code_list.length; i++) {
+				$("#projectManageCode").append("<label style='margin-left: 15px;' class='radio-inline'><input type='radio' name='projectManageCode' id=" + code_list[i].codeId + " value=" + code_list[i].codeId + " />&nbsp;&nbsp;" + code_list[i].name + "</label>");
+				if(code_list[i].codeId == member){
+					$("#"+ code_list[i].codeId +"").prop("checked",true);
+				}
+
+			}
+			layer.closeAll('loading');//关闭loading
+		}
+	})
+}

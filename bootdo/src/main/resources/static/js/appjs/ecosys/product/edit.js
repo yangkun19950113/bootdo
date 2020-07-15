@@ -57,9 +57,9 @@ function validateRule() {
 			fullFormTime : {
 				required : true
 			},
-			surveyPersonName : {
+			/*surveyPersonName : {
 				required : true
-			},
+			},*/
 		},
 		messages : {
 			prodectName : {
@@ -83,9 +83,9 @@ function validateRule() {
 			fullFormTime : {
 				required : icon + "请选择填表时间"
 			},
-			surveyPersonName : {
+			/*surveyPersonName : {
 				required : icon + "请输入调查人姓名"
-			},
+			},*/
 		}
 	})
 }

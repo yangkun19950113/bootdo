@@ -84,6 +84,30 @@
 								</div>
 							</div>
 							<div class="form-group">
+								<label class="col-sm-3 control-label">是否有消防通道：</label>
+								<input id="checkFire" th:value="${firedevice.checkFire}" type="hidden" >
+								<div class="col-sm-8">
+									<label class="radio-inline"> <input type="radio" name="checkFire" value="0" id="checkFire0"/> 是</label>
+									<label class="radio-inline"> <input type="radio" name="checkFire" value="1" id="checkFire1"/> 否</label>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">车间是否通风：</label>
+								<input id="checkWind" th:value="${firedevice.checkWind}" type="hidden" >
+								<div class="col-sm-8">
+									<label class="radio-inline"> <input type="radio" name="checkWind" value="0" id="checkWind0"/> 是</label>
+									<label class="radio-inline"> <input type="radio" name="checkWind" value="1" id="checkWind1"/> 否</label>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">三合一企业：</label>
+								<input id="merge" th:value="${firedevice.merge}" type="hidden" >
+								<div class="col-sm-8">
+									<label class="radio-inline"> <input type="radio" name="merge" value="0" id="merge0"/> 是</label>
+									<label class="radio-inline"> <input type="radio" name="merge" value="1" id="merge1"/> 否</label>
+								</div>
+							</div>
+							<div class="form-group">
 								<label class="col-sm-3 control-label">被调查人姓名：</label>
 								<div class="col-sm-8">
 									<input id="surveytedPersonName" name="surveytedPersonName" th:value="${firedevice.surveytedPersonName}" class="form-control" type="text">

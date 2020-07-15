@@ -60,9 +60,9 @@ function validateRule() {
 			registeredTime : {
 				required : true
 			},
-			registeredFund : {
+			/*registeredFund : {
 				required : true
-			},
+			},*/
 			employeeNum : {
 				required : true
 			},
@@ -118,9 +118,9 @@ function validateRule() {
 			fullFormTime : {
 				required : true
 			},
-			surveyPersonName : {
+			/*surveyPersonName : {
 				required : true
-			},
+			},*/
 			administrativeDivision: {
 				required : true
 			},
@@ -141,9 +141,9 @@ function validateRule() {
 			registeredTime : {
 				required : icon + "请选择注册时间"
 			},
-			registeredFund : {
+			/*registeredFund : {
 				required : icon + "请输入注册资金"
-			},
+			},*/
 			employeeNum : {
 				required : icon + "请输入员工数"
 			},
@@ -200,9 +200,9 @@ function validateRule() {
 			fullFormTime : {
 				required : icon + "请选择填表时间"
 			},
-			surveyPersonName : {
+			/*surveyPersonName : {
 				required : icon + "请输入调查人姓名"
-			},
+			},*/
 			administrativeDivision: {
 				required : icon + "请选择乡镇"
 			},

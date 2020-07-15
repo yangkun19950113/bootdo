@@ -93,6 +93,8 @@ public class EnvprotectionDO implements Serializable {
 
 	private String envprotectionMinImgUrl;
 
+	private String other;
+
 	public String getEnvprotectionMinImgUrl() {
 		return envprotectionMinImgUrl;
 	}
@@ -556,5 +558,13 @@ public class EnvprotectionDO implements Serializable {
 
 	public void setCountryName(String countryName) {
 		this.countryName = countryName;
+	}
+
+	public String getOther() {
+		return other;
+	}
+
+	public void setOther(String other) {
+		this.other = other;
 	}
 }

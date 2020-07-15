@@ -52,9 +52,9 @@ function validateRule() {
 			/*ecoLicence : {
 				call: true
 			},*/
-			parkFlg : {
+			/*parkFlg : {
 				required : true
-			},
+			},*/
 			ecoStandardFlg : {
 				required : true
 			},
@@ -79,18 +79,18 @@ function validateRule() {
 			annualInspectionFlg : {
 				required : true
 			},
-			areaCode : {
+			/*areaCode : {
 				required : true
-			},
+			},*/
 			mainEnergyCode: {
 				required : true
 			},
 			dosage: {
 				required : true
 			},
-			measures: {
+			/*measures: {
 				required : true
-			},
+			},*/
 			surveytedPersonName : {
 				required : true
 			},
@@ -100,9 +100,9 @@ function validateRule() {
 			fullFormTime : {
 				required : true
 			},
-			surveyPersonName : {
+			/*surveyPersonName : {
 				required : true
-			},
+			},*/
 		},
 		messages : {
 			ecoEstimateFlg : {
@@ -117,9 +117,9 @@ function validateRule() {
 					}
 				}
 			},*/
-			parkFlg : {
+			/*parkFlg : {
 				required : icon + "请选择是否属于园区"
-			},
+			},*/
 			ecoStandardFlg : {
 				required : icon + "请选择是否有环保制度"
 			},
@@ -144,18 +144,18 @@ function validateRule() {
 			annualInspectionFlg : {
 				required : icon + "请选择年检监测是否有效"
 			},
-			areaCode : {
+			/*areaCode : {
 				required : icon + "请选择所在区域"
-			},
+			},*/
 			mainEnergyCode: {
 				required : icon + "请选择主要能源"
 			},
 			dosage: {
 				required : icon + "请填写年消耗量"
 			},
-			measures: {
+			/*measures: {
 				required : icon + "请填写污染治理措施"
-			},
+			},*/
 			surveytedPersonName : {
 				required : icon + "请输入被调查人姓名"
 			},
@@ -165,9 +165,9 @@ function validateRule() {
 			fullFormTime : {
 				required : icon + "请选择填表时间"
 			},
-			surveyPersonName : {
+			/*surveyPersonName : {
 				required : icon + "请输入调查人姓名"
-			},
+			},*/
 		}
 	})
 }
@@ -211,7 +211,7 @@ function getIndustryCode(){
 		success: function (data) {
 			var code_list = data.rows;
 			for (var i = 0; i < code_list.length; i++) {
-				$("#industryCode").append("<label style='margin-left: 15px;' class='radio-inline'><input type='radio' name='industryCode' value=" + code_list[i].codeId + " />&nbsp;&nbsp;" + code_list[i].name + "</label>");
+				$("#industryCode").append("<label style='margin-left: 15px;' class='radio-inline'><input type='radio' name='industryCode' class='lopiu' value=" + code_list[i].codeId + " />&nbsp;&nbsp;" + code_list[i].name + "</label>");
 			}
 			layer.closeAll('loading');//关闭loading
 		}
@@ -335,3 +335,15 @@ $(document).on('click', '.hhhbb', function() {
 	//清空
 	$('input:input[name="dosage"]').val("");
 })
+
+//行业类别监听
+$(document).on('click', '.lopiu', function() {
+	var checkValue = $('input:radio[name="industryCode"]:checked').val();
+	if(checkValue == '076'){//其他
+		$("#other").removeAttr("disabled");
+	}else{
+		$("#other").val("");
+		$("#other").attr("disabled","disabled");
+	}
+})
+

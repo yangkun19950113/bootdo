@@ -81,12 +81,14 @@ function load() {
 								},
 								{
 									field : 'parkFlg', 
-									title : '是够属于园区' ,
+									title : '是否属于园区' ,
 									formatter : function(value, row, index) {
 										if(value == '0'){
 											return row.parkFlg = "是";
 										}else if(value == '1') {
 											return row.parkFlg = "否";
+										}else{
+											return row.parkFlg = "-";
 										}
 									}
 								},
@@ -98,6 +100,8 @@ function load() {
 											return row.ecoStandardFlg = "是";
 										}else if(value == '1') {
 											return row.ecoStandardFlg = "否";
+										}else{
+											return row.ecoStandardFlg = "-";
 										}
 									}
 								},
@@ -117,6 +121,8 @@ function load() {
 											return row.isOrNotAcceptance = "是";
 										}else if(value == '1') {
 											return row.isOrNotAcceptance = "否";
+										}else{
+											return row.isOrNotAcceptance = "-";
 										}
 									}
 								},
@@ -130,6 +136,8 @@ function load() {
 											return row.tradablePermitsCode = "简化管理";
 										}else if(value == '093') {
 											return row.tradablePermitsCode = "重点管理";
+										}else{
+											return row.tradablePermitsCode = "-";
 										}
 									}
 								},
@@ -141,6 +149,8 @@ function load() {
 											return row.pollutionLicenseFlg = "是";
 										}else if(value == '1') {
 											return row.pollutionLicenseFlg = "否";
+										}else{
+											return row.pollutionLicenseFlg = "-";
 										}
 									}
 								},
@@ -170,6 +180,8 @@ function load() {
 											return row.annualInspectionFlg = "是";
 										}else if(value == '1') {
 											return row.annualInspectionFlg = "否";
+										}else{
+											return row.annualInspectionFlg = "-";
 										}
 									}
 								},
@@ -190,9 +202,11 @@ function load() {
 									field : 'mainEnergyCode', 
 									title : '主要能源',
 									formatter : function(value, row, index) {
-										for(var i = 0;i<mainEnergyCodeList.length;i++){
-											if(value == mainEnergyCodeList[i].codeId){
-												return mainEnergyCodeList[i].name;
+										if(value != "" && value != null && value != undefined){
+											for(var i = 0;i<mainEnergyCodeList.length;i++){
+												if(value == mainEnergyCodeList[i].codeId){
+													return mainEnergyCodeList[i].name;
+												}
 											}
 										}
 									}
