@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <title>地图</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <style type="text/css">
+        body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+    </style>
+
+    <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=CXeM773FvTVH8MCAYEcZbEtdhCCcc6iy"></script>
+    <title>地图展示</title>
+</head>
+<body>
+<div id="allmap"></div>
+111
+</body>
+</html>
+<script type="text/javascript">
+
+    function getdata() {
+        $.ajax({
+            type: 'GET',
+            url: '/showData/showData/getCoordinates',
+            success: function (res) {
+                if(200 == res.code) {
+                    var data = res.data;
+                    for(var i = 0; i < data.length; i ++){
+                        var x = data[i].x ;
+                        var y = data[i].y;
+                        var point = new BMap.Point(x, y);
+                        console.log(x);
+                        addMarker(point);
+                        var marker = new BMap.Marker(new BMap.Point(x, y));
+                        // marker.addEventListener("click",attribute);
+                        console.log("111");
+                    }
+                }
+            }
+        });
+    }
+    //获取覆盖物位置
+    function attribute(e){
+        var p = e.target;
+        alert("marker的位置是" + p.getPosition().lng + "," + p.getPosition().lat);
+    }
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");    // 创建Map实例
+    map.centerAndZoom(new BMap.Point(116.358007, 39.10178), 8);  // 初始化地图,设置中心点坐标和地图级别
+    map.enableScrollWheelZoom();
+
+    //添加地图类型控件
+    // map.addControl(new BMap.MapTypeControl({
+    //     mapTypes:[
+    //         BMAP_NORMAL_MAP,
+    //         BMAP_HYBRID_MAP
+    //     ]}));
+    map.setCurrentCity("河北省廊坊市");          // 设置地图显示的城市 此项是必须设置的
+    map.enableScrollWheelZoom(true);
+    function addMarker(point){
+        var marker = new BMap.Marker(point);
+        map.addOverlay(marker);
+    }
+    // 随机向地图添加25个标注
+
+    function getBoundary(){
+
+        var bdary = new BMap.Boundary();
+        bdary.get("河北省廊坊市霸州", function(rs){       //获取行政区域
+            map.clearOverlays();        //清除地图覆盖物
+            var count = rs.boundaries.length; //行政区域的点有多少个
+            if (count === 0) {
+                alert('未能获取当前输入行政区域');
+                return ;
+            }
+            var pointArray = [];
+            for (var i = 0; i < count; i++) {
+                var ply = new BMap.Polygon(rs.boundaries[i], {strokeWeight: 2, strokeColor: "#ff0000",fillColor:""}); //建立多边形覆盖物
+                map.addOverlay(ply);  //添加覆盖物
+                pointArray = pointArray.concat(ply.getPath());
+            }
+            map.setViewport(pointArray);    //调整视野
+            addlabel();
+            // var points =["116.388908,39.127834","116.4556,39.3956"];
+            // for (var i = 0; i < points.length; i ++) {
+            //     var point = points[i];
+            //     addMarker(point);
+            //
+            // }
+            getdata();
+            // var bounds = map.getBounds();
+            // var sw = bounds.getSouthWest();
+            // var ne = bounds.getNorthEast();
+            // var lngSpan = Math.abs(sw.lng - ne.lng);
+            // var latSpan = Math.abs(ne.lat - sw.lat);
+            // var pointq = 116.44893344016226;
+            // var pointz = 39.05846389558942;
+            // var points =["116.44893344016226,39.05846389558942"];
+            // for (var i = 0; i < points.length; i ++) {
+            //     var pointa = points[i];
+            //     var pointb = new BMap.Point(pointq, pointz);
+            //     addMarker(pointb);
+            //
+            // }
+
+        });
+    }
+
+    setTimeout(function(){
+        getBoundary();
+
+    }, 1000);
+
+    function addlabel() {
+        var pointArray = [
+            new BMap.Point(121.716076,23.703799),
+            new BMap.Point(112.121885,14.570616),
+            new BMap.Point(123.776573,25.695422)];
+        var optsArray = [{},{},{}];
+        var labelArray = [];
+        var contentArray = [
+            "台湾是中国的！",
+            "南海是中国的！",
+            "钓鱼岛是中国的！"];
+        for(var i = 0;i < pointArray.length; i++) {
+            optsArray[i].position = pointArray[i];
+            labelArray[i] = new BMap.Label(contentArray[i],optsArray[i]);
+            labelArray[i].setStyle({
+                color : "red",
+                fontSize : "12px",
+                height : "20px",
+                lineHeight : "20px",
+                fontFamily:"微软雅黑"
+            });
+            map.addOverlay(labelArray[i]);
+        }
+    }
+
+
+</script>
+

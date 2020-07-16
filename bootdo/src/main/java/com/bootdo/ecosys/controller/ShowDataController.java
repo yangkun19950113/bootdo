@@ -72,8 +72,7 @@ public class ShowDataController {
 		// 轮播图片
 		ShowData.setImgUrls(strArray);
 		// 卡片图片路径
-		String minImgUrl = enterprise.getMinImgUrl();
-		ShowData.setMinImgUrl(minImgUrl);
+		ShowData.setMinImgUrl("img/enterprise.png");
 		// 企业id
 		Integer enterpriseId = enterprise.getEnterpriseId();
 		ShowData.setEnterpriseId(enterpriseId);
@@ -117,13 +116,12 @@ public class ShowDataController {
 			// 是否有环保制度
 			String ecoStandardFlg = EnvprotectionDO.getEcoEstimateFlg();
 			ShowData.setEcoEstimateFlg(ecoStandardFlg);
-			String envprotectionMinImgUrl = EnvprotectionDO.getEnvprotectionMinImgUrl();
-			ShowData.setEnvprotectionMinImgUrl(envprotectionMinImgUrl);
+			ShowData.setEnvprotectionMinImgUrl("img/envprotection.png");
 			// 行业类别
-			String industryCode = EnvprotectionDO.getIndustryCode();
-			CodeDO EnvprotectionDOCodeDO = codeDao.getName(industryCode,"26");
-			industryCode = EnvprotectionDOCodeDO.getName();
-			ShowData.setIndustryCode(industryCode);
+//			String industryCode = EnvprotectionDO.getIndustryCode();
+//			CodeDO EnvprotectionDOCodeDO = codeDao.getName(industryCode,"26");
+//			industryCode = EnvprotectionDOCodeDO.getName();
+//			ShowData.setIndustryCode(industryCode);
 		}else {
 			// 是否有环评文号
 
@@ -135,7 +133,7 @@ public class ShowDataController {
 			ShowData.setParkFlg("-");
 			// 是否有环保制度
 			ShowData.setEcoEstimateFlg("-");
-			ShowData.setEnvprotectionMinImgUrl("img/1.jpg");
+			ShowData.setEnvprotectionMinImgUrl("img/envprotection.png");
 			ShowData.setIndustryCode("-");
 		}
 
@@ -155,8 +153,7 @@ public class ShowDataController {
 			//生产工艺
 			String produtProcess = productDO.getProdutProcess();
 			ShowData.setProdutProcess(produtProcess);
-			String productMinImgUrl = productDO.getProductMinImgUrl();
-			ShowData.setProductMinImgUrl(productMinImgUrl);
+			ShowData.setProductMinImgUrl("img/product.png");
 			// 月产量
 			BigDecimal monthProduction = productDO.getMonthProduction();
 			ShowData.setMonthProduction(monthProduction);
@@ -168,7 +165,7 @@ public class ShowDataController {
 			ShowData.setModel("-");
 			//生产工艺
 			ShowData.setProdutProcess("-");
-			ShowData.setProductMinImgUrl("img/1.jpg");
+			ShowData.setProductMinImgUrl("img/product.png");
 			// 月产量
 			ShowData.setMonthProduction(new BigDecimal(0));
 		}
@@ -189,15 +186,14 @@ public class ShowDataController {
 			//月使用量
 			BigDecimal monthConsumption = materialDO.getMonthConsumption();
 			ShowData.setMonthConsumption(monthConsumption);
-			String materialMinImgUrl = materialDO.getMaterialMinImgUrl();
-			ShowData.setMaterialMinImgUrl(materialMinImgUrl);
+			ShowData.setMaterialMinImgUrl("img/material.png");
 		}else {
 			ShowData.setMaterialType("-");
 			// 原材料名称
 			ShowData.setMaterialName("-");
 			//月使用量
 			ShowData.setMonthConsumption(new BigDecimal(0));
-			ShowData.setMaterialMinImgUrl("img/1.jpg");
+			ShowData.setMaterialMinImgUrl("img/material.png");
 		}
 
 		//
@@ -217,8 +213,7 @@ public class ShowDataController {
 			//联系电话
 			String phoneNumber = ecoequipmentDO.getPhoneNumber();
 			ShowData.setPhoneNumber(phoneNumber);
-			String ecoequipmentMinImgUrl = ecoequipmentDO.getEcoequipmentMinImgUrl();
-			ShowData.setEcoequipmentMinImgUrl(ecoequipmentMinImgUrl);
+			ShowData.setEcoequipmentMinImgUrl("img/ecoequipment.png");
 		}else {
 			ShowData.setEquipmentName("-");
 			//设备编码
@@ -227,7 +222,7 @@ public class ShowDataController {
 			ShowData.setProtectionPerson("-");
 			//联系电话
 			ShowData.setPhoneNumber("-");
-			ShowData.setEcoequipmentMinImgUrl("img/1.jpg");
+			ShowData.setEcoequipmentMinImgUrl("img/ecoequipment.png");
 		}
 
 
@@ -252,8 +247,7 @@ public class ShowDataController {
 			//危险责任人
 			String dangerprotectionPerson = dangersourceDO.getProtectionPerson();
 			ShowData.setDangerprotectionPerson(dangerprotectionPerson);
-			String dangersourceMinImgUrl = dangersourceDO.getDangersourceMinImgUrl();
-			ShowData.setDangersourceMinImgUrl(dangersourceMinImgUrl);
+			ShowData.setDangersourceMinImgUrl("img/dangersource.png");
 		}else {
 			ShowData.setDangerSourceName("-");
 			//具体位置-
@@ -266,7 +260,7 @@ public class ShowDataController {
 			ShowData.setMonit("-");
 			//危险责任人-
 			ShowData.setDangerprotectionPerson("-");
-			ShowData.setDangersourceMinImgUrl("img/1.jpg");
+			ShowData.setDangersourceMinImgUrl("img/dangersource.png");
 		}
 
 
@@ -289,15 +283,14 @@ public class ShowDataController {
 			//参加人数
 			Long personNumber = trainingDO.getPersonNumber();
 			ShowData.setPersonNumber(personNumber);
-			String trainingMinImgUrl = trainingDO.getTrainingMinImgUrl();
-			ShowData.setTrainingMinImgUrl(trainingMinImgUrl);
+			ShowData.setTrainingMinImgUrl("img/training.png");
 		}else{
 			ShowData.setTraningSystemFlg("-");
 			ShowData.setLaProvideFlg("-");
 			ShowData.setTrainName("-");
 			ShowData.setTrainType("-");
 			ShowData.setPersonNumber( Long.parseLong("0"));
-			ShowData.setTrainingMinImgUrl("img/1.jpg");
+			ShowData.setTrainingMinImgUrl("img/training.png");
 		}
 
 		// 用电设备
@@ -315,8 +308,7 @@ public class ShowDataController {
 			//台数
 			Integer number = electricDO.getNumber();
 			ShowData.setNumber(number);
-			String electricMinImgUrl = electricDO.getElectricMinImgUrl();
-			ShowData.setElectricMinImgUrl(electricMinImgUrl);
+			ShowData.setElectricMinImgUrl("img/electric.png");
 		}else {
 			ShowData.setEleequipmentName("-");
 			//设备编码-
@@ -325,7 +317,7 @@ public class ShowDataController {
 			ShowData.setPhaseNumber(0);
 			//台数-
 			ShowData.setNumber(0);
-			ShowData.setElectricMinImgUrl("img/1.jpg");
+			ShowData.setElectricMinImgUrl("img/electric.png");
 		}
 
 
@@ -344,8 +336,7 @@ public class ShowDataController {
 			//类型
 			String type = riskDO.getType();
 			ShowData.setType(type);
-			String riskMinImgUrl = riskDO.getRiskMinImgUrl();
-			ShowData.setRiskMinImgUrl(riskMinImgUrl);
+			ShowData.setRiskMinImgUrl("img/risk.png");
 		}else {
 			ShowData.setPeopleFindName("-");
 			//发现时间
@@ -353,7 +344,7 @@ public class ShowDataController {
 			ShowData.setLevel("-");
 			//类型-
 			ShowData.setType("-");
-			ShowData.setRiskMinImgUrl("img/1.jpg");
+			ShowData.setRiskMinImgUrl("img/risk.png");
 		}
 
 
@@ -372,8 +363,7 @@ public class ShowDataController {
 			//采购时间
 			Date buyTime = firedeviceDO.getBuyTime();
 			ShowData.setBuyTime(buyTime);
-			String firedeviceMinImgUrl = firedeviceDO.getFiredeviceMinImgUrl();
-			ShowData.setFiredeviceMinImgUrl(firedeviceMinImgUrl);
+			ShowData.setFiredeviceMinImgUrl("img/firedevice.png");
 		}else {
 			ShowData.setFireequipmentName("-");
 			//设备编码-
@@ -381,7 +371,7 @@ public class ShowDataController {
 			//型号-
 			ShowData.setFiremodel("-");
 			//采购时间
-			ShowData.setFiredeviceMinImgUrl("img/1.jpg");
+			ShowData.setFiredeviceMinImgUrl("img/firedevice.png");
 		}
 
 		return MessageResult.success("200","", ShowData);
