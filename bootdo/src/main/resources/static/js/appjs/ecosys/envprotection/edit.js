@@ -173,7 +173,7 @@ function validateRule() {
 }
 //加载行业类别
 function getIndustryCode(){
-	var industryCode = $("#industryCode1").val();
+	var industryCodeList = $("#industryCode1").val().split(",");
 	$.ajax({
 		type: "get",
 		url: "/ecosys/code/list",
@@ -184,9 +184,11 @@ function getIndustryCode(){
 		success: function (data) {
 			var code_list = data.rows;
 			for (var i = 0; i < code_list.length; i++) {
-				$("#industryCode").append("<label style='margin-left: 15px;' class='radio-inline'><input type='radio' name='industryCode' id=" + code_list[i].codeId + " class='lopiu' value=" + code_list[i].codeId + "/>&nbsp;&nbsp;" + code_list[i].name + "</label>");
-				if(code_list[i].codeId == industryCode ){
-					$("#"+ code_list[i].codeId +"").prop("checked",true);
+				$("#industryCode").append("<label style='margin-left: 15px;' class='radio-inline'><input type='checkbox' name='industryCode' id=" + code_list[i].codeId + " class='lopiu' value=" + code_list[i].codeId + "/>&nbsp;&nbsp;" + code_list[i].name + "</label>");
+				for(var j = 0; j < industryCodeList.length; j++ ){
+					if(code_list[i].codeId == industryCodeList[j]){
+						$("#"+ code_list[i].codeId +"").prop("checked",true);
+					}
 				}
 			}
 			if(industryCode == '076'){

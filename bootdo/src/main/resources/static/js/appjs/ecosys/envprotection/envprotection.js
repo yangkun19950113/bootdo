@@ -9,11 +9,11 @@ var normalFactorsCodeList;
 var specialFactorCodeList;
 $(function() {
 	enterpriseId = $("#enterpriseId").val();
-	getSpecialFactorsCode();//加载特征因子
-	getPollutionCategoryCode();//加载污染类别
-	getAreaCode();//加载所在区域
+	/*getSpecialFactorsCode();//加载特征因子*/
+	/*getPollutionCategoryCode();//加载污染类别*/
+	/*getAreaCode();//加载所在区域*/
 	getMainEnergyCode();//加载主要能源
-	getNormalFactorsCode();//加载常规因子
+	/*getNormalFactorsCode();//加载常规因子*/
 	load();
 });
 
@@ -141,7 +141,7 @@ function load() {
 										}
 									}
 								},
-								{
+								/*{
 									field : 'pollutionLicenseFlg', 
 									title : '是否核发排污许可证',
 									formatter : function(value, row, index) {
@@ -153,8 +153,8 @@ function load() {
 											return row.pollutionLicenseFlg = "-";
 										}
 									}
-								},
-								{
+								},*/
+								/*{
 									field : 'pollutionCategoryCode', 
 									title : '污染类别',
 									formatter : function(value, row, index) {
@@ -171,8 +171,8 @@ function load() {
 										}
 										return pollutionName;
 									}
-								},
-								{
+								},*/
+								/*{
 									field : 'annualInspectionFlg', 
 									title : '年检监测是否有效',
 									formatter : function(value, row, index) {
@@ -184,8 +184,8 @@ function load() {
 											return row.annualInspectionFlg = "-";
 										}
 									}
-								},
-								{
+								},*/
+								/*{
 									field : 'areaCode', 
 									title : '所在区域',
 									formatter : function(value, row, index) {
@@ -197,7 +197,7 @@ function load() {
 											}
 										}
 									}
-								},
+								},*/
 								{
 									field : 'mainEnergyCode', 
 									title : '主要能源',
@@ -215,7 +215,7 @@ function load() {
 									field : 'measures', 
 									title : '污染治理措施' 
 								},
-								{
+								/*{
 									field : 'normalFactorsCode', 
 									title : '常规因子',
 									formatter : function(value, row, index) {
@@ -232,8 +232,8 @@ function load() {
 										}
 										return normalFactorsName;
 									}
-								},
-								{
+								},*/
+								/*{
 									field : 'specialFactorsCode', 
 									title : '特征因子',
 									formatter : function(value, row, index) {
@@ -250,15 +250,15 @@ function load() {
 										}
 										return specialFactorsName;
 									}
-								},
-																{
+								},*/
+								/*{
 									field : 'nomalWaste', 
 									title : '一般固体废物' 
 								},
-																{
+								{
 									field : 'dangerWaste', 
 									title : '危险废物' 
-								},
+								},*/
 									/*							{
 									field : 'surveytedPersonName', 
 									title : '被调查人姓名' 

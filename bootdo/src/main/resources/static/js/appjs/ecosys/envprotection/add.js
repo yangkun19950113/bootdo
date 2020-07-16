@@ -211,7 +211,7 @@ function getIndustryCode(){
 		success: function (data) {
 			var code_list = data.rows;
 			for (var i = 0; i < code_list.length; i++) {
-				$("#industryCode").append("<label style='margin-left: 15px;' class='radio-inline'><input type='radio' name='industryCode' class='lopiu' value=" + code_list[i].codeId + " />&nbsp;&nbsp;" + code_list[i].name + "</label>");
+				$("#industryCode").append("<label style='margin-left: 15px;' class='radio-inline'><input type='checkbox' name='industryCode' class='lopiu' value=" + code_list[i].codeId + " />&nbsp;&nbsp;" + code_list[i].name + "</label>");
 			}
 			layer.closeAll('loading');//关闭loading
 		}
@@ -338,7 +338,7 @@ $(document).on('click', '.hhhbb', function() {
 
 //行业类别监听
 $(document).on('click', '.lopiu', function() {
-	var checkValue = $('input:radio[name="industryCode"]:checked').val();
+	var checkValue = $('input:checkbox[name="industryCode"]:checked').val();
 	if(checkValue == '076'){//其他
 		$("#other").removeAttr("disabled");
 	}else{

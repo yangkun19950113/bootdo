@@ -39,7 +39,7 @@ function validateRule() {
 			prodectName : {
 				required : true
 			},
-			produtProcess : {
+			/*produtProcess : {
 				required : true
 			},
 			deviceName : {
@@ -47,7 +47,7 @@ function validateRule() {
 			},
 			monthProduction : {
 				required : true
-			},
+			},*/
 			surveytedPersonName : {
 				required : true
 			},
@@ -65,7 +65,7 @@ function validateRule() {
 			prodectName : {
 				required : icon + "请输入产品名称"
 			},
-			produtProcess : {
+			/*produtProcess : {
 				required : icon + "请输入生产工艺"
 			},
 			deviceName : {
@@ -73,7 +73,7 @@ function validateRule() {
 			},
 			monthProduction : {
 				required : icon + "请输入月产量"
-			},
+			},*/
 			surveytedPersonName : {
 				required : icon + "请输入被调查人姓名"
 			},

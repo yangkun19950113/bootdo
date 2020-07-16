@@ -36,4 +36,6 @@ public interface CodeDao {
 	List<CodeDO> listSon(Map<String, Object> map);
 
 	CodeDO getCode(Map<String, Object> map);
+
+	List<CodeDO> getList(Map<String, Object> map);
 }
