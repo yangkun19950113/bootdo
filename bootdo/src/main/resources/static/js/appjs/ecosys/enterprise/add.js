@@ -12,10 +12,6 @@ $.validator.setDefaults({
 		/*if($('#enterpriseName').val().trim() == "" || $('#enterpriseName').val().trim() == null || $('#enterpriseName').val().trim() == undefined){
 			return layer.msg("请输入企业名称");
 		}*/
-
-
-
-
 		save();
 	}
 });
@@ -325,8 +321,12 @@ $("#administrativeDivision").bind("change", function(){
 			layer.closeAll('loading');//关闭loading
 		}
 	})
-
 })
+
+function cancalColse(){
+	var index = parent.layer.getFrameIndex(window.name);
+	parent.layer.close(index);//关闭当前页
+}
 
 
 
