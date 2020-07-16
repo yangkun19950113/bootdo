@@ -5,6 +5,7 @@ $().ready(function() {
 	loadEnterpriseNatureCode();
 	taxpayerCode();
 	marketCode();
+	administrativeDivision();
 	/*transRegisteredTime();*/
 });
 
@@ -115,6 +116,12 @@ function validateRule() {
 			/*surveyPersonName : {
 				required : true
 			},*/
+			administrativeDivision: {
+				required : true
+			},
+			country: {
+				required : true
+			},
 		},
 		messages : {
 			enterpriseName : {
@@ -190,6 +197,12 @@ function validateRule() {
 			/*surveyPersonName : {
 				required : icon + "请输入调查人姓名"
 			},*/
+			administrativeDivision: {
+				required : icon + "请选择乡镇"
+			},
+			country: {
+				required : icon + "请选择街道"
+			},
 		}
 	})
 }
@@ -281,20 +294,83 @@ function marketCode(){
 		}
 	})
 }
-//转换注册时间
-function transRegisteredTime(){
-	var registeredTime = $("#registeredTime").val();
-	$('#datetimepicker1').datetimepicker({
-		format: 'YYYY-MM-DD',
-		locale: moment.locale('zh-cn'),
-		weekStart: 0, //一周从哪一天开始
-		todayBtn:  1, //
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		forceParse: 0,
-		showMeridian: 1
+//加载行政区划
+function administrativeDivision(){
+	var member = $("#administrativeDivision").val();
+	$.ajax({
+		type: "get",
+		url: "/ecosys/code/list",
+		dataType: "json",
+		data: {
+			parentId: 113
+		},
+		success: function (data) {
+			var code_list = data.rows;
+			var opts = "<option value=''>" +"请选择 "+"</option>";
+			for (var i = 0; i < code_list.length; i++) {
+				var code = code_list[i];
+				if(code.codeId == member){
+					opts += "<option value='" + code.codeId + "' selected = \"selected\" id='" + code.id + "'>" + code.name + "</option>";
+				}else {
+					opts += "<option value='" + code.codeId + "' id='" + code.id + "'>" + code.name + "</option>";
+				}
+			}
+			$("#administrativeDivision1").append(opts);
+			layer.closeAll('loading');//关闭loading
+			var parentId = $("#administrativeDivision1 option:selected").attr("id");
+			$("#country").find("option").remove();//清空option
+			var member1 = $("#country").val();
+			//根据乡镇获取村
+			$.ajax({
+				type: "get",
+				url: "/ecosys/code/list",
+				dataType: "json",
+				data: {
+					parentId: parentId
+				},
+				success: function (data) {
+					var code_list = data.rows;
+					var opts1 = "<option value=''>" +"请选择 "+"</option>";
+					for (var i = 0; i < code_list.length; i++) {
+						var code = code_list[i];
+						if(code.orderNum == member1){
+							opts1 += "<option value='" + code.orderNum + "' selected = \"selected\">" + code.name + "</option>";
+						}else {
+							opts1 += "<option value='" + code.orderNum + "'>" + code.name + "</option>";
+						}
+					}
+					$("#country1").append(opts1);
+					layer.closeAll('loading');//关闭loading
+				}
+			})
+		}
 	});
-	$('#datetimepicker1').datetimepicker('update');
-
 }
+//行政区划更改监听
+$("#administrativeDivision1").bind("change", function(){
+	//获取
+	var option = $("#administrativeDivision1 option:selected").val();
+	var parentId = $("#administrativeDivision1 option:selected").attr("id");
+	$("#country1").find("option").remove();//清空option
+	//根据乡镇获取村
+	$.ajax({
+		type: "get",
+		url: "/ecosys/code/list",
+		dataType: "json",
+		data: {
+			parentId: parentId
+		},
+		success: function (data) {
+			var code_list = data.rows;
+			var opts = "<option value=''>" +"请选择 "+"</option>";
+			for (var i = 0; i < code_list.length; i++) {
+				var code = code_list[i];
+				opts += "<option value='" + code.orderNum + "'>" + code.name + "</option>";
+			}
+			$("#country1").append(opts);
+			layer.closeAll('loading');//关闭loading
+		}
+	})
+})
+
+

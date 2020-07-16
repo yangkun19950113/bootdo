@@ -70,24 +70,28 @@ function load() {
 									title : '注册地址' 
 								},
 								{
+									field : 'employeeNum',
+									title : '企业规模'
+								},
+								/*{
 									field : 'registeredTime',
 									title : '注册时间' 
-								},
+								},*/
 								{
 								title : '企业相关',
 								field : 'id',
 								/*align : 'center',*/
-								width:'550',
+								width:'470',
 								formatter : function(value, row, index) {
-									var a = '<a class="btn btn-danger" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixFire +'\',\'' + prefixFire +'/'+row.enterpriseId+'\',\'' + '消防设备管理' + '\')">'+'消'+'</a>';
-									var b = '<a class="btn btn-primary" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixElectric +'\',\'' + prefixElectric +'/'+row.enterpriseId+'\',\'' + '用电设备管理' + '\')">'+'电'+'</a>';
-									var c = '<a class="btn btn-success" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixEnvprotection +'\',\'' + prefixEnvprotection +'/'+row.enterpriseId+'\',\'' + '环保信息管理' + '\')">'+'环'+'</a>';
-									var d = '<a class="btn btn-danger" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixDangerSource +'\',\'' + prefixDangerSource +'/'+row.enterpriseId+'\',\'' + '危险源信息管理' + '\')">'+'危'+'</a>';
-									var e = '<a class="btn btn-info" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixMaterial +'\',\'' + prefixMaterial +'/'+row.enterpriseId+'\',\'' + '物料信息管理' + '\')">'+'物'+'</a>';
-									var f = '<a class="btn btn-warning" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixProduct +'\',\'' + prefixProduct +'/'+row.enterpriseId+'\',\'' + '产品信息管理' + '\')">'+'产'+'</a>';
-									var g = '<a class="btn btn-default" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixEcoEquipment +'\',\'' + prefixEcoEquipment +'/'+row.enterpriseId+'\',\'' + '防治设备管理' + '\')">'+'防'+'</a>';
-									var h = '<a class="btn btn-success" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixTraining +'\',\'' + prefixTraining +'/'+row.enterpriseId+'\',\'' + '安全生产培训管理' + '\')">'+'培'+'</a>';
-									var i = '<a class="btn btn-info" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixRisk +'\',\'' + prefixRisk +'/'+row.enterpriseId+'\',\'' + '安全隐患管理' + '\')">'+'患'+'</a>';
+									var a = '<a class="btn btn-danger btn-sm" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixFire +'\',\'' + prefixFire +'/'+row.enterpriseId+'\',\'' + '消防设备管理' + '\')">'+'消'+'</a>';
+									var b = '<a class="btn btn-primary btn-sm" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixElectric +'\',\'' + prefixElectric +'/'+row.enterpriseId+'\',\'' + '用电设备管理' + '\')">'+'电'+'</a>';
+									var c = '<a class="btn btn-success btn-sm" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixEnvprotection +'\',\'' + prefixEnvprotection +'/'+row.enterpriseId+'\',\'' + '环保信息管理' + '\')">'+'环'+'</a>';
+									var d = '<a class="btn btn-danger btn-sm" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixDangerSource +'\',\'' + prefixDangerSource +'/'+row.enterpriseId+'\',\'' + '危险源信息管理' + '\')">'+'危'+'</a>';
+									var e = '<a class="btn btn-info btn-sm" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixMaterial +'\',\'' + prefixMaterial +'/'+row.enterpriseId+'\',\'' + '物料信息管理' + '\')">'+'物'+'</a>';
+									var f = '<a class="btn btn-warning btn-sm" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixProduct +'\',\'' + prefixProduct +'/'+row.enterpriseId+'\',\'' + '产品信息管理' + '\')">'+'产'+'</a>';
+									var g = '<a class="btn btn-default btn-sm" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixEcoEquipment +'\',\'' + prefixEcoEquipment +'/'+row.enterpriseId+'\',\'' + '防治设备管理' + '\')">'+'防'+'</a>';
+									var h = '<a class="btn btn-success btn-sm" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixTraining +'\',\'' + prefixTraining +'/'+row.enterpriseId+'\',\'' + '安全生产培训管理' + '\')">'+'培'+'</a>';
+									var i = '<a class="btn btn-info btn-sm" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixRisk +'\',\'' + prefixRisk +'/'+row.enterpriseId+'\',\'' + '安全隐患管理' + '\')">'+'患'+'</a>';
 									return a + b + c + d + e + f + g + h + i ;
 								}
 							},
@@ -245,15 +249,9 @@ function load() {
 									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
-										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
-												+ row.enterpriseId
-												+ '\')"><i class="fa fa-edit"></i></a> ';
-										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
-												+ row.enterpriseId
-												+ '\')"><i class="fa fa-remove"></i></a> ';
-										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.enterpriseId
-												+ '\')"><i class="fa fa-key"></i></a> ';
+										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\'' + row.enterpriseId + '\')"><i class="fa fa-edit"></i></a> ';
+										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\'' + row.enterpriseId + '\')"><i class="fa fa-remove"></i></a> ';
+										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\'' + row.enterpriseId + '\')"><i class="fa fa-key"></i></a> ';
 										return e + d ;
 									}
 								} ]
