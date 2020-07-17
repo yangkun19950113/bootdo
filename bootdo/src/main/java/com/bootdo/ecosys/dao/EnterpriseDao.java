@@ -19,6 +19,7 @@ public interface EnterpriseDao {
 
 	EnterpriseDO get(Integer enterpriseId);
 	List<EnterpriseDO> getCoordinates();
+	EnterpriseDO getdatabycoordinates(String coordinates);
 	List<EnterpriseDO> list(Map<String, Object> map);
 	
 	int count(Map<String, Object> map);
@@ -31,4 +32,5 @@ public interface EnterpriseDao {
 	
 	int batchRemove(Integer[] enterpriseIds);
 	EnterpriseDO getenterprise (@Param("enterpriseName") String  enterpriseName,@Param("socialCreditCode") String socialCreditCode);
+
 }

@@ -15,17 +15,23 @@
     <style type="text/css">
         body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
     </style>
-
     <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=CXeM773FvTVH8MCAYEcZbEtdhCCcc6iy"></script>
+    <script type="text/javascript" src="//api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+    <link rel="stylesheet" href="//api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
     <title>地图展示</title>
 </head>
 <body>
 <div id="allmap"></div>
-111
+<div id="myAlert2" style="margin-left: 500px;width: 300px;position: absolute;" >
+
+</div>
 </body>
 </html>
 <script type="text/javascript">
-
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");    // 创建Map实例
+    map.centerAndZoom(new BMap.Point(116.358007, 39.10178), 8);  // 初始化地图,设置中心点坐标和地图级别
+    map.enableScrollWheelZoom();
     function getdata() {
         $.ajax({
             type: 'GET',
@@ -37,40 +43,73 @@
                         var x = data[i].x ;
                         var y = data[i].y;
                         var point = new BMap.Point(x, y);
-                        console.log(x);
                         addMarker(point);
-                        var marker = new BMap.Marker(new BMap.Point(x, y));
-                        // marker.addEventListener("click",attribute);
-                        console.log("111");
                     }
                 }
             }
         });
     }
-    //获取覆盖物位置
-    function attribute(e){
-        var p = e.target;
-        alert("marker的位置是" + p.getPosition().lng + "," + p.getPosition().lat);
+    // 通过坐标获取企业信息
+    function getdatabycoordinates(point) {
+        $.ajax({
+            type: 'GET',
+            url: '/showData/showData/getdatabycoordinates',
+            data:{coordinates:point},
+            success: function (res) {
+                if(200 == res.code) {
+                    var data = res.data;
+                    var enterpriseName = data.enterpriseName;
+                    var socialCreditCode = data.socialCreditCode;
+                    var registeredAddress = data.registeredAddress;
+                    var employeeNum = data.employeeNum;
+                    var minImgUrl = data.minImgUrl;
+                    var content = '<div style="margin:0;line-height:20px;padding:2px;">' +
+                        '<img src= '+ minImgUrl+ '  + alt="" style="float:right;zoom:1;overflow:hidden;width:100px;height:100px;margin-left:3px;"/>' +
+                        '地址：'+ registeredAddress+ ' <br/>社会信用编码：'+ socialCreditCode+ '<br/>员工人数：'+ employeeNum+ '人' +
+                        '</div>';
+                    var marker = new BMap.Marker(point);
+                    //创建检索信息窗口对象
+                    var searchInfoWindow = null;
+                    searchInfoWindow = new BMapLib.SearchInfoWindow(map, content, {
+                        title  : "百度大厦",      //标题
+                        width  : 290,             //宽度
+                        height : 105,              //高度
+                        panel  : "panel",         //检索结果面板
+                        enableAutoPan : true,     //自动平移
+                        searchTypes   :[
+                        ]
+                    });
+                    searchInfoWindow.open(marker);
+                }
+            }
+        });
     }
-    // 百度地图API功能
-    var map = new BMap.Map("allmap");    // 创建Map实例
-    map.centerAndZoom(new BMap.Point(116.358007, 39.10178), 8);  // 初始化地图,设置中心点坐标和地图级别
-    map.enableScrollWheelZoom();
+    //获取覆盖物位置
+    // function attribute(e){
+    //     var p = e.target;
+    //     alert("marker的位置是" + p.getPosition().lng + "," + p.getPosition().lat);
+    //
+    // }
 
-    //添加地图类型控件
-    // map.addControl(new BMap.MapTypeControl({
-    //     mapTypes:[
-    //         BMAP_NORMAL_MAP,
-    //         BMAP_HYBRID_MAP
-    //     ]}));
+
+
+
+
     map.setCurrentCity("河北省廊坊市");          // 设置地图显示的城市 此项是必须设置的
     map.enableScrollWheelZoom(true);
     function addMarker(point){
         var marker = new BMap.Marker(point);
+        marker.addEventListener("click", function(e){
+            var p = e.target;
+            var coordinates = p.getPosition().lng + "," + p.getPosition().lat;
+            // 调用通过经纬度获取企业信息函数
+            getdatabycoordinates(point);
+            console.log(point);
+
+
+        })
         map.addOverlay(marker);
     }
-    // 随机向地图添加25个标注
-
     function getBoundary(){
 
         var bdary = new BMap.Boundary();
@@ -89,27 +128,8 @@
             }
             map.setViewport(pointArray);    //调整视野
             addlabel();
-            // var points =["116.388908,39.127834","116.4556,39.3956"];
-            // for (var i = 0; i < points.length; i ++) {
-            //     var point = points[i];
-            //     addMarker(point);
-            //
-            // }
             getdata();
-            // var bounds = map.getBounds();
-            // var sw = bounds.getSouthWest();
-            // var ne = bounds.getNorthEast();
-            // var lngSpan = Math.abs(sw.lng - ne.lng);
-            // var latSpan = Math.abs(ne.lat - sw.lat);
-            // var pointq = 116.44893344016226;
-            // var pointz = 39.05846389558942;
-            // var points =["116.44893344016226,39.05846389558942"];
-            // for (var i = 0; i < points.length; i ++) {
-            //     var pointa = points[i];
-            //     var pointb = new BMap.Point(pointq, pointz);
-            //     addMarker(pointb);
-            //
-            // }
+
 
         });
     }

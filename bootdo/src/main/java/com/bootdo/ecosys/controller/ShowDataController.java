@@ -1,22 +1,14 @@
 package com.bootdo.ecosys.controller;
 
-import com.bootdo.common.utils.PageUtils;
-import com.bootdo.common.utils.Query;
 import com.bootdo.ecosys.dao.CodeDao;
 import com.bootdo.ecosys.dao.EnterpriseDao;
 import com.bootdo.ecosys.domain.*;
 import com.bootdo.ecosys.service.*;
 import com.bootdo.tool.MessageResult;
-import com.bootdo.tool.R;
 import com.bootdo.tool.ResponseData;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -391,6 +383,11 @@ public class ShowDataController {
 			coordinatesList.add(coordinatesDO);
 		}
 		return MessageResult.success("200","", coordinatesList);
+	}
+	@GetMapping("/getdatabycoordinates")
+	public ResponseData getdatabycoordinates(String coordinates){
+		EnterpriseDO enterprise= enterpriseDao.getdatabycoordinates(coordinates);
+		return MessageResult.success("200","", enterprise);
 	}
 
 
