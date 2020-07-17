@@ -59,8 +59,8 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 	}
 
 	@Override
-	public EnterpriseDO getenterprise(String enterpriseName ,String socialCreditCode) {
-		return enterpriseDao.getenterprise(enterpriseName,socialCreditCode);
+	public EnterpriseDO getenterprise(String enterpriseName ,String socialCreditCode,Integer enterpriseId) {
+		return enterpriseDao.getenterprise(enterpriseName,socialCreditCode, enterpriseId);
 	}
 
 }

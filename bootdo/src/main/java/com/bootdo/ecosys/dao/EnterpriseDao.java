@@ -31,6 +31,6 @@ public interface EnterpriseDao {
 	int remove(Integer enterprise_id);
 	
 	int batchRemove(Integer[] enterpriseIds);
-	EnterpriseDO getenterprise (@Param("enterpriseName") String  enterpriseName,@Param("socialCreditCode") String socialCreditCode);
+	EnterpriseDO getenterprise (@Param("enterpriseName") String  enterpriseName,@Param("socialCreditCode") String socialCreditCode,@Param("enterpriseId")Integer enterpriseId);
 
 }

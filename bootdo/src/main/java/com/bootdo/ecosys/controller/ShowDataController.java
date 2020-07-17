@@ -50,10 +50,15 @@ public class ShowDataController {
 	// 获取前台显示信息
 
 	@GetMapping("/enterpriseList")
-	public ResponseData enterpriseList(String enterpriseName,String socialCreditCode){
+	public ResponseData enterpriseList(String enterpriseName,String socialCreditCode,Integer enterpriseId){
+		if((null == enterpriseName&&null == socialCreditCode&&null==enterpriseId)||("".equals(enterpriseName)&&"".equals(socialCreditCode)&&null==enterpriseId)){
+			return MessageResult.success("200","", null);
+		}else {
+
+
 		ShowDataDO ShowData = new ShowDataDO();
 		// 企业信息
-		EnterpriseDO enterprise = enterpriseService.getenterprise(enterpriseName,socialCreditCode);
+		EnterpriseDO enterprise = enterpriseService.getenterprise(enterpriseName,socialCreditCode,enterpriseId);
 		String imgUrl = enterprise.getImgUrl();
 		String[] strArray = imgUrl.split(",");
 		System.out.println(strArray);
@@ -64,9 +69,9 @@ public class ShowDataController {
 		// 轮播图片
 		ShowData.setImgUrls(strArray);
 		// 卡片图片路径
-		ShowData.setMinImgUrl("img/enterprise.png");
+		ShowData.setMinImgUrl("../img/enterprise.png");
 		// 企业id
-		Integer enterpriseId = enterprise.getEnterpriseId();
+		enterpriseId = enterprise.getEnterpriseId();
 		ShowData.setEnterpriseId(enterpriseId);
 		// 企业名称
 		enterpriseName = enterprise.getEnterpriseName();
@@ -108,7 +113,7 @@ public class ShowDataController {
 			// 是否有环保制度
 			String ecoStandardFlg = EnvprotectionDO.getEcoEstimateFlg();
 			ShowData.setEcoEstimateFlg(ecoStandardFlg);
-			ShowData.setEnvprotectionMinImgUrl("img/envprotection.png");
+			ShowData.setEnvprotectionMinImgUrl("../img/envprotection.png");
 			// 行业类别
 //			String industryCode = EnvprotectionDO.getIndustryCode();
 //			CodeDO EnvprotectionDOCodeDO = codeDao.getName(industryCode,"26");
@@ -125,7 +130,7 @@ public class ShowDataController {
 			ShowData.setParkFlg("-");
 			// 是否有环保制度
 			ShowData.setEcoEstimateFlg("-");
-			ShowData.setEnvprotectionMinImgUrl("img/envprotection.png");
+			ShowData.setEnvprotectionMinImgUrl("../img/envprotection.png");
 			ShowData.setIndustryCode("-");
 		}
 
@@ -145,7 +150,7 @@ public class ShowDataController {
 			//生产工艺
 			String produtProcess = productDO.getProdutProcess();
 			ShowData.setProdutProcess(produtProcess);
-			ShowData.setProductMinImgUrl("img/product.png");
+			ShowData.setProductMinImgUrl("../img/product.png");
 			// 月产量
 			BigDecimal monthProduction = productDO.getMonthProduction();
 			ShowData.setMonthProduction(monthProduction);
@@ -157,7 +162,7 @@ public class ShowDataController {
 			ShowData.setModel("-");
 			//生产工艺
 			ShowData.setProdutProcess("-");
-			ShowData.setProductMinImgUrl("img/product.png");
+			ShowData.setProductMinImgUrl("../img/product.png");
 			// 月产量
 			ShowData.setMonthProduction(new BigDecimal(0));
 		}
@@ -170,22 +175,27 @@ public class ShowDataController {
 			// 原材料类型
 			String materialType = materialDO.getMaterialType();
 			CodeDO materialDOCodeDO = codeDao.getName(materialType,"103");
-			materialType = materialDOCodeDO.getName();
-			ShowData.setMaterialType(materialType);
+			if(null ==materialDOCodeDO){
+				ShowData.setMaterialType("-");
+			}else {
+				materialType = materialDOCodeDO.getName();
+				ShowData.setMaterialType(materialType);
+			}
+
 			// 原材料名称
 			String materialName = materialDO.getMaterialName();
 			ShowData.setMaterialName(materialName);
 			//月使用量
 			BigDecimal monthConsumption = materialDO.getMonthConsumption();
 			ShowData.setMonthConsumption(monthConsumption);
-			ShowData.setMaterialMinImgUrl("img/material.png");
+			ShowData.setMaterialMinImgUrl("../img/material.png");
 		}else {
 			ShowData.setMaterialType("-");
 			// 原材料名称
 			ShowData.setMaterialName("-");
 			//月使用量
 			ShowData.setMonthConsumption(new BigDecimal(0));
-			ShowData.setMaterialMinImgUrl("img/material.png");
+			ShowData.setMaterialMinImgUrl("../img/material.png");
 		}
 
 		//
@@ -205,7 +215,7 @@ public class ShowDataController {
 			//联系电话
 			String phoneNumber = ecoequipmentDO.getPhoneNumber();
 			ShowData.setPhoneNumber(phoneNumber);
-			ShowData.setEcoequipmentMinImgUrl("img/ecoequipment.png");
+			ShowData.setEcoequipmentMinImgUrl("../img/ecoequipment.png");
 		}else {
 			ShowData.setEquipmentName("-");
 			//设备编码
@@ -214,7 +224,7 @@ public class ShowDataController {
 			ShowData.setProtectionPerson("-");
 			//联系电话
 			ShowData.setPhoneNumber("-");
-			ShowData.setEcoequipmentMinImgUrl("img/ecoequipment.png");
+			ShowData.setEcoequipmentMinImgUrl("../img/ecoequipment.png");
 		}
 
 
@@ -239,7 +249,7 @@ public class ShowDataController {
 			//危险责任人
 			String dangerprotectionPerson = dangersourceDO.getProtectionPerson();
 			ShowData.setDangerprotectionPerson(dangerprotectionPerson);
-			ShowData.setDangersourceMinImgUrl("img/dangersource.png");
+			ShowData.setDangersourceMinImgUrl("../img/dangersource.png");
 		}else {
 			ShowData.setDangerSourceName("-");
 			//具体位置-
@@ -252,7 +262,7 @@ public class ShowDataController {
 			ShowData.setMonit("-");
 			//危险责任人-
 			ShowData.setDangerprotectionPerson("-");
-			ShowData.setDangersourceMinImgUrl("img/dangersource.png");
+			ShowData.setDangersourceMinImgUrl("../img/dangersource.png");
 		}
 
 
@@ -275,14 +285,14 @@ public class ShowDataController {
 			//参加人数
 			Long personNumber = trainingDO.getPersonNumber();
 			ShowData.setPersonNumber(personNumber);
-			ShowData.setTrainingMinImgUrl("img/training.png");
+			ShowData.setTrainingMinImgUrl("../img/training.png");
 		}else{
 			ShowData.setTraningSystemFlg("-");
 			ShowData.setLaProvideFlg("-");
 			ShowData.setTrainName("-");
 			ShowData.setTrainType("-");
 			ShowData.setPersonNumber( Long.parseLong("0"));
-			ShowData.setTrainingMinImgUrl("img/training.png");
+			ShowData.setTrainingMinImgUrl("../img/training.png");
 		}
 
 		// 用电设备
@@ -300,7 +310,7 @@ public class ShowDataController {
 			//台数
 			Integer number = electricDO.getNumber();
 			ShowData.setNumber(number);
-			ShowData.setElectricMinImgUrl("img/electric.png");
+			ShowData.setElectricMinImgUrl("../img/electric.png");
 		}else {
 			ShowData.setEleequipmentName("-");
 			//设备编码-
@@ -309,7 +319,7 @@ public class ShowDataController {
 			ShowData.setPhaseNumber(0);
 			//台数-
 			ShowData.setNumber(0);
-			ShowData.setElectricMinImgUrl("img/electric.png");
+			ShowData.setElectricMinImgUrl("../img/electric.png");
 		}
 
 
@@ -328,7 +338,7 @@ public class ShowDataController {
 			//类型
 			String type = riskDO.getType();
 			ShowData.setType(type);
-			ShowData.setRiskMinImgUrl("img/risk.png");
+			ShowData.setRiskMinImgUrl("../img/risk.png");
 		}else {
 			ShowData.setPeopleFindName("-");
 			//发现时间
@@ -336,7 +346,7 @@ public class ShowDataController {
 			ShowData.setLevel("-");
 			//类型-
 			ShowData.setType("-");
-			ShowData.setRiskMinImgUrl("img/risk.png");
+			ShowData.setRiskMinImgUrl("../img/risk.png");
 		}
 
 
@@ -355,7 +365,7 @@ public class ShowDataController {
 			//采购时间
 			Date buyTime = firedeviceDO.getBuyTime();
 			ShowData.setBuyTime(buyTime);
-			ShowData.setFiredeviceMinImgUrl("img/firedevice.png");
+			ShowData.setFiredeviceMinImgUrl("../img/firedevice.png");
 		}else {
 			ShowData.setFireequipmentName("-");
 			//设备编码-
@@ -363,10 +373,11 @@ public class ShowDataController {
 			//型号-
 			ShowData.setFiremodel("-");
 			//采购时间
-			ShowData.setFiredeviceMinImgUrl("img/firedevice.png");
+			ShowData.setFiredeviceMinImgUrl("../img/firedevice.png");
 		}
 
 		return MessageResult.success("200","", ShowData);
+		}
 	}
 	@GetMapping("/getCoordinates")
 	public ResponseData getCoordinates(){
@@ -389,6 +400,15 @@ public class ShowDataController {
 		EnterpriseDO enterprise= enterpriseDao.getdatabycoordinates(coordinates);
 		return MessageResult.success("200","", enterprise);
 	}
+
+//	@GetMapping("/getalldatabycoordinates")
+//	public ResponseData getalldatabycoordinates(String coordinates){
+//		EnterpriseDO enterprise= enterpriseDao.getdatabycoordinates(coordinates);
+//		String enterpriseName = null;
+//		String socialCreditCode = null;
+//		ResponseData ShowDataDO = enterpriseList(enterpriseName,socialCreditCode,coordinates);
+//		return MessageResult.success("200","", null);
+//	}
 
 
 }

@@ -19,6 +19,7 @@
 		delete_flag = '0'
 		<if test="enterpriseName != null and enterpriseName != ''"> and enterprise_name = #{enterpriseName} </if>
 		<if test="socialCreditCode != null and socialCreditCode != ''"> and social_credit_code = #{socialCreditCode} </if>
+		<if test="enterpriseId != null and enterpriseId != ''"> and enterprise_id = #{enterpriseId} </if>
 	</select>
 
 	<select id="list" resultType="com.bootdo.ecosys.domain.EnterpriseDO">
