@@ -96,10 +96,21 @@ public class EnterpriseDO implements Serializable {
 	private String country;
 	//城乡分类
 	private Integer urbanorrural;
+
 	private String imgUrl;
 
 	private String[] imgUrls;
+
 	private String minImgUrl;
+
+	private String enterpriseNatureName;
+
+	private String year;
+
+	private String num;
+
+	private String month;
+
 
 	public String getMinImgUrl() {
 		return minImgUrl;
@@ -552,5 +563,37 @@ public class EnterpriseDO implements Serializable {
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	public String getEnterpriseNatureName() {
+		return enterpriseNatureName;
+	}
+
+	public void setEnterpriseNatureName(String enterpriseNatureName) {
+		this.enterpriseNatureName = enterpriseNatureName;
+	}
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+	public String getNum() {
+		return num;
+	}
+
+	public void setNum(String num) {
+		this.num = num;
+	}
+
+	public String getMonth() {
+		return month;
+	}
+
+	public void setMonth(String month) {
+		this.month = month;
 	}
 }

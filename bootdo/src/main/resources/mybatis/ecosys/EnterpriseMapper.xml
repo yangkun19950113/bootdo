@@ -59,6 +59,7 @@
 		  		  <if test="modifyUserName != null and modifyUserName != ''"> and modify_user_name = #{modifyUserName} </if>
 		  		  <if test="modifyBy != null and modifyBy != ''"> and modify_by = #{modifyBy} </if>
 		  		  <if test="administrativeDivision != null and administrativeDivision != ''"> and administrative_division = #{administrativeDivision} </if>
+				  <if test="country != null and country != ''"> and country = #{country} </if>
 		  		  <if test="urbanorrural != null and urbanorrural != ''"> and urbanorrural = #{urbanorrural} </if>
 			     <if test="imgUrl != null and imgUrl != ''"> and img_url = #{imgUrl} </if>
 		  		</where>
@@ -112,6 +113,7 @@
 		  		  <if test="modifyUserName != null and modifyUserName != ''"> and modify_user_name = #{modifyUserName} </if>
 		  		  <if test="modifyBy != null and modifyBy != ''"> and modify_by = #{modifyBy} </if>
 		  		  <if test="administrativeDivision != null and administrativeDivision != ''"> and administrative_division = #{administrativeDivision} </if>
+			 	  <if test="country != null and country != ''"> and country = #{country} </if>
 		  		  <if test="urbanorrural != null and urbanorrural != ''"> and urbanorrural = #{urbanorrural} </if>
 			     <if test="imgUrl != null and imgUrl != ''"> and img_url = #{imgUrl} </if>
 		  		</where>
@@ -255,5 +257,52 @@
 			#{enterpriseId}
 		</foreach>
 	</update>
+
+	<select id="getListByAdminStr" resultType="com.bootdo.ecosys.domain.EnterpriseDO">
+		select * from eco_enterprise where delete_flag = '0'
+		and administrative_division in
+		<foreach collection="adminArray" item="code" index="index" open="(" close=")" separator=",">
+			#{code}
+		</foreach>
+	</select>
+
+	<select id="loadEnterpriseNatureCode" resultType="com.bootdo.ecosys.domain.CommonDO">
+		SELECT
+			count( * ) AS value,
+			de.`name` as name
+		FROM
+			eco_enterprise co join eco_code de on co.enterprise_nature_code = de.code_id
+		WHERE
+			co.delete_flag = '0'
+		GROUP BY
+			co.enterprise_nature_code
+	</select>
+
+	<select id="getEnterpriseFive" resultType="com.bootdo.ecosys.domain.EnterpriseDO">
+		SELECT
+			COUNT(*) as num,
+			de.`name` as enterpriseNatureName,
+			en.enterprise_nature_code,
+			EXTRACT( YEAR FROM en.registered_time ) as year
+		FROM
+			eco_enterprise en join eco_code de on en.enterprise_nature_code = de.code_id and en.enterprise_nature_code = #{codeId}
+		WHERE
+			EXTRACT( YEAR FROM en.registered_time ) > year(now())  - 5
+			GROUP BY en.enterprise_nature_code,EXTRACT( YEAR FROM en.registered_time )
+			ORDER BY EXTRACT( YEAR FROM en.registered_time ) ASC
+	</select>
+
+
+	<select id="getCountEvn" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			eco_enterprise t1
+		WHERE
+			t1.delete_flag = '0'
+			and ( SELECT count( * ) FROM eco_envprotection t2 WHERE t1.enterprise_id = t2.enterprise_id AND t2.delete_flag = '0' )  > 0
+			<if test="administrativeDivision != null and administrativeDivision != ''"> and t1.administrative_division = #{administrativeDivision} </if>
+			<if test="country != null and country != ''"> and t1.country = #{country} </if>
+	</select>
 
 </mapper>

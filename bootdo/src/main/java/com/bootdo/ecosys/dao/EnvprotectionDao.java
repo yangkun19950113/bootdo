@@ -28,5 +28,6 @@ public interface EnvprotectionDao {
 	int remove(Integer envirProtectionId);
 	
 	int batchRemove(Integer[] envirProtectionIds);
+
 	EnvprotectionDO getData(Integer envirProtectionId);
 }

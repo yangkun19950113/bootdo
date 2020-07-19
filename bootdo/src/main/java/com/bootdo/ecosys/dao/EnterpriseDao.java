@@ -4,6 +4,7 @@ package com.bootdo.ecosys.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.ecosys.domain.CommonDO;
 import com.bootdo.ecosys.domain.EnterpriseDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -18,8 +19,10 @@ import org.apache.ibatis.annotations.Param;
 public interface EnterpriseDao {
 
 	EnterpriseDO get(Integer enterpriseId);
+
 	List<EnterpriseDO> getCoordinates();
 	EnterpriseDO getdatabycoordinates(String coordinates);
+
 	List<EnterpriseDO> list(Map<String, Object> map);
 	
 	int count(Map<String, Object> map);
@@ -31,6 +34,18 @@ public interface EnterpriseDao {
 	int remove(Integer enterprise_id);
 	
 	int batchRemove(Integer[] enterpriseIds);
+
+	EnterpriseDO getenterprise (@Param("enterpriseName") String  enterpriseName,@Param("socialCreditCode") String socialCreditCode);
+
+	List<EnterpriseDO>getListByAdminStr(Map<String, Object> map);
+
+	List<CommonDO> loadEnterpriseNatureCode(Map<String, Object> params);
+	//查询最近五年的企业
+	List<EnterpriseDO> getEnterpriseFive(Map<String, Object> map);
+
 	EnterpriseDO getenterprise (@Param("enterpriseName") String  enterpriseName,@Param("socialCreditCode") String socialCreditCode,@Param("enterpriseId")Integer enterpriseId);
 
+	List<EnterpriseDO> fireEquipHigh(Map<String, Object> params);
+
+	int getCountEvn(Map<String, Object> map);
 }

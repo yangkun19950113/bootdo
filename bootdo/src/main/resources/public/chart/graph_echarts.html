@@ -21,10 +21,25 @@
 
 <body class="gray-bg">
     <div class="row  border-bottom white-bg dashboard-header">
-        <div class="col-sm-12">
-            <p></p>
-            <p></p>
+        <div class="col-sm-8" style="width: 100px;margin-top: 5px">
+            <label>乡镇：</label>
         </div>
+        <div class="col-sm-8" style="width: 250px">
+            <select class="selectpicker form-control" data-live-search="true" name="administrativeDivision" id="administrativeDivision">
+            </select>
+        </div>
+        <div class="col-sm-8" style="width: 100px;margin-top: 5px">
+            <label>村子：</label>
+        </div>
+        <div class="col-sm-8" style="width: 250px">
+            <select class="selectpicker form-control" data-live-search="true" name="country" id="country">
+            </select>
+        </div>
+
+    </div>
+
+
+
     </div>
     <div style="width: 25%;margin-top: 5px">
         <div style="width: 95%;height: 5%;">
@@ -53,14 +68,14 @@
         <div style="width: 95%;height: 5%;">
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
-                    <div class="echarts" id="echarts-bar-chart"></div>
+                    <div class="echarts" id="enterpriseHigh"></div>
                 </div>
             </div>
         </div>
         <div style="width: 95%;height: 5%;">
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
-                    <div class="echarts" id="echarts-scatter-chart"></div>
+                    <div class="echarts" id="fireEquipHigh"></div>
                 </div>
             </div>
         </div>
@@ -98,7 +113,7 @@
         <div style="width: 25%;height: 5%;margin-left: 79%;margin-top: -301px">
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
-                    <div class="echarts" id="echarts-k-chart"></div>
+                    <div class="echarts" id="envprotectionChart"></div>
                 </div>
             </div>
         </div>
@@ -261,14 +276,10 @@
     <!-- 全局js -->
     <script src="/js/jquery.min.js?v=2.1.4"></script>
     <script src="/js/bootstrap.min.js?v=3.3.6"></script>
-
     <!-- ECharts -->
     <script src="/js/plugins/echarts/echarts-all.js"></script>
-
     <!-- 自定义js -->
     <script src="/js/content.js?v=1.0.0"></script>
-
-
     <!-- ECharts demo data -->
     <script src="/js/demo/echarts-demo.js"></script>
 

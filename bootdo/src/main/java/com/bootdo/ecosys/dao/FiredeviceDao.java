@@ -4,6 +4,7 @@ package com.bootdo.ecosys.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.ecosys.domain.EnterpriseDO;
 import com.bootdo.ecosys.domain.FiredeviceDO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -30,4 +31,6 @@ public interface FiredeviceDao {
 	int remove(Integer equipment_id);
 	
 	int batchRemove(Integer[] equipmentIds);
+
+	List<EnterpriseDO> getFireLine(Map<String, Object> map);
 }

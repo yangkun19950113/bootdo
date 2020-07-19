@@ -9,6 +9,7 @@ import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.bootdo.ecosys.domain.CommonDO;
 import com.bootdo.ecosys.domain.EnterpriseDO;
 import com.bootdo.ecosys.domain.EnvprotectionDO;
 import com.bootdo.ecosys.domain.ShowDataDO;
@@ -149,6 +150,8 @@ public class EnterpriseController {
 		EnterpriseDO enterprise = enterpriseService.get(enterpriseId);
 		return enterprise;
 	}
+
+
 
 
 }

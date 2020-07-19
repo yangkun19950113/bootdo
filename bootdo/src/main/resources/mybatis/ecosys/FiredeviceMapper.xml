@@ -220,4 +220,21 @@
 		</foreach>
 	</update>
 
+	<select id="getFireLine" resultType="com.bootdo.ecosys.domain.EnterpriseDO">
+		SELECT
+			COUNT(*) as num ,
+			EXTRACT( MONTH FROM buy_time ) as month
+		FROM
+			eco_firedevice
+		WHERE
+			delete_flag = '0'
+			AND EXTRACT( MONTH FROM buy_time ) > MONTH(now())  - 5
+			AND enterprise_id in
+			<foreach collection="idArray" item="id" index="index" open="(" close=")" separator=",">
+				#{id}
+			</foreach>
+			GROUP BY EXTRACT( MONTH FROM buy_time )
+			ORDER BY EXTRACT( MONTH FROM buy_time ) ASC
+	</select>
+
 </mapper>
