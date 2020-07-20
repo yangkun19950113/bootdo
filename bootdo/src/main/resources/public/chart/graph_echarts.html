@@ -10,12 +10,53 @@
     <title>综合数据图表</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
-
     <link rel="shortcut icon" href="favicon.ico"> <link href="/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
-
     <link href="/css/animate.css" rel="stylesheet">
     <link href="/css/style.css?v=4.1.0" rel="stylesheet">
+    <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul, li {
+            list-style-type: none;
+        }
+        body {
+            font: 12px/180% Arial, Helvetica, sans-serif;
+        }
+        a {
+            color: #333;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #3366cc;
+            text-decoration: underline;
+        }
+        .demopage {
+            width: 730px;
+            margin: 0 auto;
+        }
+        .demopage h2 {
+            font-size: 14px;
+            margin: 20px 0;
+        }
+        /* scrollDiv */
+        .scrollDiv {
+            height: 200px;/* 必要元素 */
+            line-height: 25px;
+            border: hidden ;
+            overflow: hidden;/* 必要元素 */
+        }
+        .scrollDiv li {
+            height: 50px;
+            padding-left: 5px;
+        }
+        #s2,s1 {
+            height: 200px;
+        }
+    </style>
 
 </head>
 
@@ -99,14 +140,43 @@
         <div style="width: 25%;height: 5%;margin-left: 26%;margin-top: -301px">
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
-                    <div class="echarts" id="echarts-chord-chart"></div>
+                    <div class="echarts">
+                        <h3 style="color: black">灭火器过期的企业</h3>
+                        <div class="scrollDiv" id="s1" style="margin-top: 25px">
+                            <div id="fireData">
+                                <!--<ul>
+                                    <li><a href="#" style="pointer-events:none;margin-left: 15px">灭火器1</a></li>
+                                    <li><a href="#" style="pointer-events:none">灭火器2</a></li>
+                                    <li><a href="#" style="pointer-events:none">灭火器3</a></li>
+                                    <li><a href="#" style="pointer-events:none">灭火器4</a></li>
+                                    <li><a href="#" style="pointer-events:none">灭火器5</a></li>
+                                    <li><a href="#" style="pointer-events:none">灭火器6</a></li>
+                                    <li><a href="#" style="pointer-events:none">灭火器7</a></li>
+                                    <li><a href="#" style="pointer-events:none">灭火器8</a></li>
+                                </ul>-->
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div style="width: 25%;height: 5%;margin-left: 53%;margin-top: -301px">
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
-                    <div class="echarts" id="echarts-radar-chart"></div>
+                    <div class="echarts">
+                        <!--<div class="scrollDiv" id="s2">
+                            <ul>
+                                <li><a href="#">jquery Xslider 插件焦点图片特效图片淡隐淡现、图片上下滚动、图片左右滚动、选项卡</a></li>
+                                <li><a href="#">jquery 文字连续滚动 节奏感十足的齿轮式滚动图片展示与文字内容特效展示</a></li>
+                                <li><a href="#">jquery cycle 循环幻灯片插件多功能幻灯片插件支持多种幻灯片特效</a></li>
+                                <li><a href="#">jquery轻量级进度条 progressbar 带动画显示的进度过程的jquery进度条特效</a></li>
+                                <li><a href="#">jquery菜单特效 鼠标滑过菜单区域图标和文本类似flash动画酷炫移动展示</a></li>
+                                <li><a href="#">jquery 图片切换 自动切换显示隐藏show/hide带左右按钮与分页索引按钮控制图片自动切换显示隐藏show/hide</a></li>
+                                <li><a href="#">jquery图片特效 slide banner焦点图片切换图片上下翻滚、图片左右翻滚、图片淡隐淡现3种图片滚动特效</a></li>
+                                <li><a href="#">javascript jscolor colorpicker js颜色选择器插件10多种调用颜色方法与取值</a></li>
+                            </ul>
+                        </div>-->
+                    </div>
                 </div>
             </div>
         </div>
@@ -282,6 +352,7 @@
     <script src="/js/content.js?v=1.0.0"></script>
     <!-- ECharts demo data -->
     <script src="/js/demo/echarts-demo.js"></script>
+
 
 
 </body>

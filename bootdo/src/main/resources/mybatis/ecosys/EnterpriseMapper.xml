@@ -309,4 +309,22 @@
 			<if test="country != null and country != ''"> and t1.country = #{country} </if>
 	</select>
 
+	<select id="getEffectFireEquip" resultType="com.bootdo.ecosys.domain.FiredeviceDO">
+		SELECT
+			fi.equipment_id,
+			fi.equipment_name,
+			fi.effect_time,
+			fi.enterprise_id,
+			en.enterprise_name
+		FROM
+			eco_enterprise en
+			JOIN eco_firedevice fi ON fi.enterprise_id = en.enterprise_id
+			AND fi.delete_flag = '0'
+		WHERE
+			DATE_FORMAT(fi.effect_time,'%Y-%m-%d') <![CDATA[< ]]>  DATE_FORMAT( SYSDATE(),'%Y-%m-%d')
+			AND en.delete_flag = '0'
+			<if test="administrativeDivision != null and administrativeDivision != ''"> and en.administrative_division = #{administrativeDivision} </if>
+			<if test="country != null and country != ''"> and en.country = #{country} </if>
+	</select>
+
 </mapper>

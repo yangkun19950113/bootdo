@@ -4,18 +4,14 @@ import com.bootdo.ecosys.dao.CodeDao;
 import com.bootdo.ecosys.dao.EnterpriseDao;
 import com.bootdo.ecosys.dao.EnvprotectionDao;
 import com.bootdo.ecosys.dao.FiredeviceDao;
-import com.bootdo.ecosys.domain.CodeDO;
-import com.bootdo.ecosys.domain.CommonDO;
-import com.bootdo.ecosys.domain.EnterpriseDO;
-import com.bootdo.ecosys.domain.EnvprotectionDO;
+import com.bootdo.ecosys.domain.*;
 import com.bootdo.ecosys.service.EnterpriseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -202,6 +198,27 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 		double numResult = num * 1.0 / count * 100;
 
 		return numResult;
+	}
+
+	@Override
+	public List<FiredeviceDO> getEffectFireEquip(Map<String, Object> params) {
+		SimpleDateFormat sim = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat sim1 = new SimpleDateFormat("yyyyMMdd");
+		List<FiredeviceDO> list = enterpriseDao.getEffectFireEquip(params);
+		if(list.size()>0){
+			for(int i = 0;i<list.size();i++){
+				FiredeviceDO firedevice = list.get(i);
+				String str = sim.format(firedevice.getEffectTime());
+				Date operateTime = null;
+				try {
+					operateTime = sim1.parse(str);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				firedevice.setEffectTime(operateTime);
+			}
+		}
+		return list;
 	}
 
 }

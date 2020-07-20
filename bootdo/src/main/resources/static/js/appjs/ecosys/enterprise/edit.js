@@ -209,6 +209,8 @@ function validateRule() {
 //check企业规模
 function transferEnterpriseScope(){
 	var enterpriseScope = $("#enterpriseScope").val();
+	var businessAreaNatureCode = $("#businessAreaNatureCode").val();
+
 	if(enterpriseScope == '1'){
 		$("#enterpriseScopeRadio1").attr("checked","checked");
 	}else if(enterpriseScope == '2'){
@@ -216,6 +218,7 @@ function transferEnterpriseScope(){
 	}else if(enterpriseScope == '3'){
 		$("#enterpriseScopeRadio3").attr("checked","checked");
 	}
+	$("#"+'businessAreaNatureCode'+businessAreaNatureCode).attr("checked","checked");
 }
 //check企业性质
 function loadEnterpriseNatureCode() {
@@ -341,6 +344,9 @@ function administrativeDivision(){
 					}
 					$("#country1").append(opts1);
 					layer.closeAll('loading');//关闭loading
+					//禁用
+					$("#administrativeDivision1").attr("disabled","disabled");
+					$("#country1").attr("disabled","disabled");
 				}
 			})
 		}

@@ -249,5 +249,14 @@ public class ChartController {
 		return MessageResult.success("200","", num);
 	}
 
+	@ResponseBody
+	@GetMapping("/getEffectFireEquip")
+	public ResponseData getEffectFireEquip(@RequestParam Map<String, Object> params){
+		List<FiredeviceDO> List =  enterpriseService.getEffectFireEquip(params);
+		return MessageResult.success("200","", List);
+	}
+
+
+
 	
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.bootdo.ecosys.domain.CommonDO;
 import com.bootdo.ecosys.domain.EnterpriseDO;
+import com.bootdo.ecosys.domain.FiredeviceDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -48,4 +49,6 @@ public interface EnterpriseDao {
 	List<EnterpriseDO> fireEquipHigh(Map<String, Object> params);
 
 	int getCountEvn(Map<String, Object> map);
+
+	List<FiredeviceDO> getEffectFireEquip(Map<String, Object> params);
 }

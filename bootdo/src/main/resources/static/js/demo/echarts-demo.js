@@ -13,7 +13,14 @@ $(function () {
     fireEquipHigh();
     //仪表盘（环保信息办理）
     envprotectionChart();
+    //加载灭火器过期的企业
+    getEffectFireEquip();
 
+    $("#s1").Scroll({
+        line: 4,
+        speed: 500,
+        timer: 4000
+    });
 
 
 
@@ -414,6 +421,7 @@ $("#country").bind("change", function(){
     loadPollutionCode();
     enterpriseHigh();
     fireEquipHigh();
+    getEffectFireEquip();
 
 })
 
@@ -793,3 +801,79 @@ function envprotectionChart(){
         }
     })
 }
+
+//滚动特效
+(function($) {
+    $.fn.extend({
+        Scroll: function(opt, callback) {
+            //参数初始化
+            if (!opt) var opt = {};
+            var _this = this.eq(0).find("ul:first");
+            var lineH = _this.find("li:first").height(), //获取行高
+                line = opt.line ? parseInt(opt.line, 10) : parseInt(this.height() / lineH, 10), //每次滚动的行数，默认为一屏，即父容器高度
+                speed = opt.speed ? parseInt(opt.speed, 10) : 500, //卷动速度，数值越大，速度越慢（毫秒）
+                timer = opt.timer ? parseInt(opt.timer, 10) : 3000; //滚动的时间间隔（毫秒）
+            if (line == 0) line = 1;
+            var upHeight = 0 - line * lineH;
+            //滚动函数
+            scrollUp = function() {
+                _this.animate({
+                    marginTop: upHeight
+                }, speed, function() {
+                    for (i = 1; i <= line; i++) {
+                        _this.find("li:first").appendTo(_this);
+                    }
+                    _this.css({
+                        marginTop: 0
+                    });
+                });
+            }
+            //鼠标事件绑定
+            _this.hover(function() {
+                clearInterval(timerID);
+            }, function() {
+                timerID = setInterval("scrollUp()", timer);
+            }).mouseout();
+        }
+    });
+})(jQuery);
+
+//加载灭火器过期的企业
+function getEffectFireEquip(){
+    var admin = $("#administrativeDivision option:selected").val();//行政区划
+    var parentId = $("#administrativeDivision option:selected").attr("id");//行政区划id
+    var countryCode = $("#country option:selected").val();//村子的编码
+    $.ajax({
+        type: "get",
+        url: "/ecosys/chart/getEffectFireEquip",
+        dataType: "json",
+        data: {
+            administrativeDivision:admin,
+            country:countryCode
+        },
+        success: function (data) {
+            var dataStr = "";
+            if(data.data.length == 0){
+                dataStr = "暂无"
+                $("#fireData").html(dataStr);
+            }else{
+                var strStrat = "<ul>";
+                var strEnd = "</ul>";
+                for(var i = 0;i<data.data.length;i++){
+                    dataStr = "<li><a href=\"#\" style=\"pointer-events:none\">"+ data.data[i].enterpriseName +"</a>" +
+                        "<a style=\"pointer-events:none;margin-left: 15px\">"+ data.data[i].equipmentName +"</a>" +
+                        "<a style=\"pointer-events:none;margin-left: 15px\">"+ data.data[i].effectTime +"</a></li>" + dataStr;
+                }
+                var dataStrNew = strStrat + dataStr + strEnd;
+                $("#fireData").html(dataStrNew);
+            }
+        }
+    })
+
+}
+
+
+
+
+
+
