@@ -61,6 +61,14 @@ public class ChartController {
 	@ResponseBody
 	@GetMapping("/enterpriseHigh")
 	public ResponseData enterpriseHigh(@RequestParam Map<String, Object> params){
+		String administrativeDivision = null;
+		String country = null;
+		if(null != params.get("administrativeDivision") && !params.get("administrativeDivision").equals("")){
+			administrativeDivision = params.get("administrativeDivision").toString();
+		}
+		if(null != params.get("country") && !params.get("country").equals("")){
+			country = params.get("country").toString();
+		}
 		List<LineDO> lineList = new ArrayList<>();
 		String [] yearArray = null;//x轴
 		//取最近五年按从小到达排列
@@ -81,6 +89,8 @@ public class ChartController {
 			CodeDO code = codeList.get(i);
 			Map<String, Object> map1 = new HashMap<>();
 			map1.put("codeId",code.getCodeId());
+			map1.put("administrativeDivision",administrativeDivision);
+			map1.put("country",country);
 			List<EnterpriseDO> enterpriseList = enterpriseService.enterpriseHigh(map1);
 			if(enterpriseList.size() > 0) {
 				String dataStr = "";
@@ -139,6 +149,14 @@ public class ChartController {
 	@ResponseBody
 	@GetMapping("/fireEquipHigh")
 	public ResponseData fireEquipHigh(@RequestParam Map<String, Object> params){
+		String administrativeDivision = null;
+		String country = null;
+		if(null != params.get("administrativeDivision") && !params.get("administrativeDivision").equals("")){
+			administrativeDivision = params.get("administrativeDivision").toString();
+		}
+		if(null != params.get("country") && !params.get("country").equals("")){
+			country = params.get("country").toString();
+		}
 		List<LineDO> lineList = new ArrayList<>();
 		String [] monthArray = null;//x轴
 		String [] monthArray1 = null;
@@ -164,6 +182,8 @@ public class ChartController {
 			CodeDO code = codeList.get(i);
 			Map<String, Object> map1 = new HashMap<>();
 			map1.put("enterpriseNatureCode", code.getCodeId());
+			map1.put("administrativeDivision",administrativeDivision);
+			map1.put("country",country);
 			List<EnterpriseDO> fireList = enterpriseService.getEnterpriselist(map1);
 			if(fireList.size()>0){
 				String dataStr = "";

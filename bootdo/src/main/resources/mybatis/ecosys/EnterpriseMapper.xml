@@ -274,6 +274,8 @@
 			eco_enterprise co join eco_code de on co.enterprise_nature_code = de.code_id
 		WHERE
 			co.delete_flag = '0'
+			<if test="administrativeDivision != null and administrativeDivision != ''"> and co.administrative_division = #{administrativeDivision} </if>
+			<if test="country != null and country != ''"> and co.country = #{country} </if>
 		GROUP BY
 			co.enterprise_nature_code
 	</select>
@@ -288,6 +290,8 @@
 			eco_enterprise en join eco_code de on en.enterprise_nature_code = de.code_id and en.enterprise_nature_code = #{codeId}
 		WHERE
 			EXTRACT( YEAR FROM en.registered_time ) > year(now())  - 5
+			<if test="administrativeDivision != null and administrativeDivision != ''"> and en.administrative_division = #{administrativeDivision} </if>
+			<if test="country != null and country != ''"> and en.country = #{country} </if>
 			GROUP BY en.enterprise_nature_code,EXTRACT( YEAR FROM en.registered_time )
 			ORDER BY EXTRACT( YEAR FROM en.registered_time ) ASC
 	</select>

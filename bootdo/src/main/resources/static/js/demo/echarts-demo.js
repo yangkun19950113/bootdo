@@ -408,18 +408,28 @@ $("#administrativeDivision").bind("change", function(){
 
 //监听村子
 $("#country").bind("change", function(){
-    /*loadEnterpriseProportion();*/
+    loadEnterpriseProportion();
     envprotectionChart();
+    loadEnterpriseNatureCode();
+    loadPollutionCode();
+    enterpriseHigh();
+    fireEquipHigh();
 
 })
 
 //1、加载各村街企业占比
 function loadEnterpriseProportion(){
+    var admin = $("#administrativeDivision option:selected").val();//行政区划
+    var parentId = $("#administrativeDivision option:selected").attr("id");//行政区划id
+    var countryCode = $("#country option:selected").val();//村子的编码
     $.ajax({
         type: "get",
         url: "/ecosys/chart/loadEnterpriseProportion",
         dataType: "json",
-        data: {},
+        data: {
+            administrativeDivision:admin,
+            country:countryCode
+        },
         success: function (data) {
             //饼图1
             var pieChart = echarts.init(document.getElementById("echarts-pie-chart1"));
@@ -474,11 +484,17 @@ function loadEnterpriseProportion(){
 }
 //饼图2，加载企业性质占比
 function loadEnterpriseNatureCode(){
+    var admin = $("#administrativeDivision option:selected").val();//行政区划
+    var parentId = $("#administrativeDivision option:selected").attr("id");//行政区划id
+    var countryCode = $("#country option:selected").val();//村子的编码
     $.ajax({
         type: "get",
         url: "/ecosys/chart/loadEnterpriseNatureCode",
         dataType: "json",
-        data: {},
+        data: {
+            administrativeDivision:admin,
+            country:countryCode
+        },
         success: function (data) {
             //饼图1
             var pieChart = echarts.init(document.getElementById("echarts-pie-chart2"));
@@ -534,11 +550,17 @@ function loadEnterpriseNatureCode(){
 
 //饼图3，加载污染类别占比
 function loadPollutionCode(){
+    var admin = $("#administrativeDivision option:selected").val();//行政区划
+    var parentId = $("#administrativeDivision option:selected").attr("id");//行政区划id
+    var countryCode = $("#country option:selected").val();//村子的编码
     $.ajax({
         type: "get",
         url: "/ecosys/chart/loadPollutionCode",
         dataType: "json",
-        data: {},
+        data: {
+            administrativeDivision:admin,
+            country:countryCode
+        },
         success: function (data) {
             //饼图1
             var pieChart = echarts.init(document.getElementById("echarts-pie-chart3"));
@@ -593,11 +615,17 @@ function loadPollutionCode(){
 }
 //各类企业增长分析
 function enterpriseHigh(){
+    var admin = $("#administrativeDivision option:selected").val();//行政区划
+    var parentId = $("#administrativeDivision option:selected").attr("id");//行政区划id
+    var countryCode = $("#country option:selected").val();//村子的编码
     $.ajax({
         type: "get",
         url: "/ecosys/chart/enterpriseHigh",
         dataType: "json",
-        data: {},
+        data: {
+            administrativeDivision:admin,
+            country:countryCode
+        },
         success: function (data) {
             var pieChart = echarts.init(document.getElementById("enterpriseHigh"));
             option = {
@@ -649,11 +677,17 @@ function enterpriseHigh(){
 }
 //各类企业消防设备分析
 function fireEquipHigh(){
+    var admin = $("#administrativeDivision option:selected").val();//行政区划
+    var parentId = $("#administrativeDivision option:selected").attr("id");//行政区划id
+    var countryCode = $("#country option:selected").val();//村子的编码
     $.ajax({
         type: "get",
         url: "/ecosys/chart/fireEquipHigh",
         dataType: "json",
-        data: {},
+        data: {
+            administrativeDivision:admin,
+            country:countryCode
+        },
         success: function (data) {
             var pieChart = echarts.init(document.getElementById("fireEquipHigh"));
             option = {
