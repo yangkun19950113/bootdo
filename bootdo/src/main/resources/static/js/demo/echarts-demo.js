@@ -16,11 +16,6 @@ $(function () {
     //加载灭火器过期的企业
     getEffectFireEquip();
 
-    $("#s1").Scroll({
-        line: 4,
-        speed: 500,
-        timer: 4000
-    });
 
 
 
@@ -854,19 +849,25 @@ function getEffectFireEquip(){
         success: function (data) {
             var dataStr = "";
             if(data.data.length == 0){
-                dataStr = "暂无"
+                dataStr = "<li><a href=\"#\" class=\"btn\" style=\"pointer-events:none;background-color: #92B8B1;border: #92B8B1;width: 100%;color: white;font-size:16px\">" +
+                    "暂无" + "</a></li>"
                 $("#fireData").html(dataStr);
             }else{
                 var strStrat = "<ul>";
                 var strEnd = "</ul>";
-                for(var i = 0;i<data.data.length;i++){
-                    dataStr = "<li><a href=\"#\" style=\"pointer-events:none\">"+ data.data[i].enterpriseName +"</a>" +
-                        "<a style=\"pointer-events:none;margin-left: 15px\">"+ data.data[i].equipmentName +"</a>" +
-                        "<a style=\"pointer-events:none;margin-left: 15px\">"+ data.data[i].effectTime +"</a></li>" + dataStr;
+                for(var i = 0;i<data.data.length;i++) {
+                    dataStr = "<li><a href=\"#\" class=\"btn\" style=\"pointer-events:none;background-color: #92B8B1;border: #92B8B1;width: 100%;color: white;font-size:12px\">" +
+                        data.data[i].enterpriseName + "&nbsp;&nbsp;&nbsp;"
+                        + data.data[i].equipmentName + "&nbsp;&nbsp;&nbsp;" + data.data[i].effectTime + "</a></li>" + dataStr;
                 }
                 var dataStrNew = strStrat + dataStr + strEnd;
                 $("#fireData").html(dataStrNew);
             }
+            $("#s1").Scroll({
+                line: 4,
+                speed: 500,
+                timer: 4000
+            });
         }
     })
 
