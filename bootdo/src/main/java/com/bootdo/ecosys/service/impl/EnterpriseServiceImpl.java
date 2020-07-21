@@ -218,4 +218,9 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 		return list;
 	}
 
+	@Override
+	public List<DangersourceDO> getDangerData(Map<String, Object> params) {
+		return enterpriseDao.getDangerData(params);
+	}
+
 }

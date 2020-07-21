@@ -16,6 +16,8 @@ $(function () {
     //加载灭火器过期的企业
     getEffectFireEquip();
 
+    getDangerData();
+
 
 
 
@@ -435,7 +437,7 @@ function loadEnterpriseProportion(){
         },
         success: function (data) {
             //饼图1
-            var pieChart = echarts.init(document.getElementById("echarts-pie-chart1"));
+            var pieChart = echarts.init(document.getElementById("echarts-pie-chart1"), 'customed');
             var pieoption = {
                 title : {
                     text: '各村街企业占比分析',
@@ -453,7 +455,7 @@ function loadEnterpriseProportion(){
                         radius : '55%',
                         center: ['50%', '60%'],
                         data:data.data,
-                        itemStyle: {
+                        /*itemStyle: {
                             normal: {
                                 color: function(params) {
                                     var colorList = [
@@ -471,12 +473,12 @@ function loadEnterpriseProportion(){
                                 },
                                 labelLine: {    //指示线状态
                                     show: true,
-                                    smooth: 0.2/*,
+                                    smooth: 0.2/!*,
                                     length: 10,
-                                    length2: 20*/
+                                    length2: 20*!/
                                 }
                             }
-                        },
+                        },*/
                     }
                 ]
             };
@@ -500,7 +502,7 @@ function loadEnterpriseNatureCode(){
         },
         success: function (data) {
             //饼图1
-            var pieChart = echarts.init(document.getElementById("echarts-pie-chart2"));
+            var pieChart = echarts.init(document.getElementById("echarts-pie-chart2"), 'customed');
             var pieoption = {
                 title : {
                     text: '企业类型占比分析',
@@ -518,7 +520,7 @@ function loadEnterpriseNatureCode(){
                         radius : '55%',
                         center: ['50%', '60%'],
                         data:data.data,
-                        itemStyle: {
+                        /*itemStyle: {
                             normal: {
                                 color: function(params) {
                                     var colorList = [
@@ -536,12 +538,12 @@ function loadEnterpriseNatureCode(){
                                 },
                                 labelLine: {    //指示线状态
                                     show: true,
-                                    smooth: 0.2/*,
+                                    smooth: 0.2/!*,
                                     length: 10,
-                                    length2: 20*/
+                                    length2: 20*!/
                                 }
                             }
-                        },
+                        },*/
                     }
                 ]
             };
@@ -566,7 +568,7 @@ function loadPollutionCode(){
         },
         success: function (data) {
             //饼图1
-            var pieChart = echarts.init(document.getElementById("echarts-pie-chart3"));
+            var pieChart = echarts.init(document.getElementById("echarts-pie-chart3"), 'customed');
             var pieoption = {
                 title : {
                     text: '污染类别占比分析',
@@ -584,7 +586,7 @@ function loadPollutionCode(){
                         radius : '55%',
                         center: ['50%', '60%'],
                         data:data.data,
-                        itemStyle: {
+                        /*itemStyle: {
                             normal: {
                                 color: function(params) {
                                     var colorList = [
@@ -602,12 +604,12 @@ function loadPollutionCode(){
                                 },
                                 labelLine: {    //指示线状态
                                     show: true,
-                                    smooth: 0.2/*,
+                                    smooth: 0.2/!*,
                                     length: 10,
-                                    length2: 20*/
+                                    length2: 20*!/
                                 }
                             }
-                        },
+                        },*/
                     }
                 ]
             };
@@ -630,7 +632,7 @@ function enterpriseHigh(){
             country:countryCode
         },
         success: function (data) {
-            var pieChart = echarts.init(document.getElementById("enterpriseHigh"));
+            var pieChart = echarts.init(document.getElementById("enterpriseHigh"), 'customed');
             option = {
                 title: {
                     text: '各类企业增长分析'
@@ -659,7 +661,7 @@ function enterpriseHigh(){
                     type: 'value'
                 },
                 series:data.data.lineList,
-                itemStyle: {
+                /*itemStyle: {
                     normal: {
                         lineStyle:{
                             color: function(params) {
@@ -671,7 +673,7 @@ function enterpriseHigh(){
                             },
                         },
                     }
-                },
+                },*/
             };
             pieChart.setOption(option);
             $(window).resize(pieChart.resize);
@@ -692,7 +694,7 @@ function fireEquipHigh(){
             country:countryCode
         },
         success: function (data) {
-            var pieChart = echarts.init(document.getElementById("fireEquipHigh"));
+            var pieChart = echarts.init(document.getElementById("fireEquipHigh"), 'customed');
             option = {
                 title: {
                     text: '各类企业消防设备分析'
@@ -721,7 +723,7 @@ function fireEquipHigh(){
                     type: 'value'
                 },
                 series:data.data.lineList,
-                itemStyle: {
+                /*itemStyle: {
                     normal: {
                         lineStyle:{
                             color: function(params) {
@@ -733,7 +735,7 @@ function fireEquipHigh(){
                             },
                         },
                     }
-                },
+                },*/
             };
             pieChart.setOption(option);
             $(window).resize(pieChart.resize);
@@ -754,7 +756,7 @@ function envprotectionChart(){
             country:countryCode
         },
         success: function (data) {
-            var pieChart = echarts.init(document.getElementById("envprotectionChart"));
+            var pieChart = echarts.init(document.getElementById("envprotectionChart"), 'customed');
             option = {
                 title: {
                     text: '环保信息办理'
@@ -776,13 +778,12 @@ function envprotectionChart(){
                         radius: "100%", //仪表大小
                         /*startAngle: 200, //开始角度
                         endAngle: -20, //结束角度*/
-                        axisLine:{
+                        /*axisLine:{
                             lineStyle:{
                                 width:30,
                                 color:[[0.2,'#40E0D0'],[0.4,'#008080'],[0.6,'#87CECB'],[0.8,'#DAA520'],[1,'#8B0000'],]
-
                             }
-                        },
+                        },*/
                         detail: {formatter: '{value}%'},
                         data: [{value: data.data.toFixed(2) - 0, name: '完成率'}]
                     }
@@ -798,39 +799,32 @@ function envprotectionChart(){
 }
 
 //滚动特效
-(function($) {
-    $.fn.extend({
-        Scroll: function(opt, callback) {
-            //参数初始化
-            if (!opt) var opt = {};
-            var _this = this.eq(0).find("ul:first");
-            var lineH = _this.find("li:first").height(), //获取行高
-                line = opt.line ? parseInt(opt.line, 10) : parseInt(this.height() / lineH, 10), //每次滚动的行数，默认为一屏，即父容器高度
-                speed = opt.speed ? parseInt(opt.speed, 10) : 500, //卷动速度，数值越大，速度越慢（毫秒）
-                timer = opt.timer ? parseInt(opt.timer, 10) : 3000; //滚动的时间间隔（毫秒）
-            if (line == 0) line = 1;
-            var upHeight = 0 - line * lineH;
-            //滚动函数
-            scrollUp = function() {
-                _this.animate({
-                    marginTop: upHeight
-                }, speed, function() {
-                    for (i = 1; i <= line; i++) {
-                        _this.find("li:first").appendTo(_this);
-                    }
-                    _this.css({
-                        marginTop: 0
-                    });
-                });
-            }
-            //鼠标事件绑定
-            _this.hover(function() {
-                clearInterval(timerID);
-            }, function() {
-                timerID = setInterval("scrollUp()", timer);
+(function($){
+    $.fn.newsScroll = function(options){
+        var defaults = {
+            spacetime:2000,
+            hoverstop:false
+        }
+        var myData = $.extend({},defaults,options);
+        var $this=$(this);
+        var height=$this.find("li").height();
+        function autoScroll(){
+            $this.find("ul").animate({"marginTop":-height},500,function(){
+                $this.find("ul").css({marginTop:"0px"}).find("li:first").appendTo(this);
+            })
+        }
+        var timer=null;
+        timer = setInterval(autoScroll,myData.spacetime);
+        //鼠标经过停止
+        if(myData.hoverstop){
+            $this.hover(function(){
+                clearInterval(timer);
+            },function(){
+                timer = setInterval(autoScroll,myData.spacetime);
             }).mouseout();
         }
-    });
+    }
+
 })(jQuery);
 
 //加载灭火器过期的企业
@@ -863,15 +857,54 @@ function getEffectFireEquip(){
                 var dataStrNew = strStrat + dataStr + strEnd;
                 $("#fireData").html(dataStrNew);
             }
-            $("#s1").Scroll({
-                line: 4,
+            $("#s1").newsScroll({
+                line: 1,
                 speed: 500,
-                timer: 4000
+                timer: 4000,
             });
         }
     })
-
 }
+
+function getDangerData(){
+    var admin = $("#administrativeDivision option:selected").val();//行政区划
+    var parentId = $("#administrativeDivision option:selected").attr("id");//行政区划id
+    var countryCode = $("#country option:selected").val();//村子的编码
+    $.ajax({
+        type: "get",
+        url: "/ecosys/chart/getDangerData",
+        dataType: "json",
+        data: {
+            administrativeDivision:admin,
+            country:countryCode
+        },
+        success: function (data) {
+            var dataStr = "";
+            if(data.data.length == 0){
+                dataStr = "<li><a href=\"#\" class=\"btn\" style=\"pointer-events:none;background-color: #92B8B1;border: #92B8B1;width: 100%;color: white;font-size:16px\">" +
+                    "暂无" + "</a></li>"
+                $("#dangerData").html(dataStr);
+            }else{
+                var strStrat = "<ul>";
+                var strEnd = "</ul>";
+                for(var i = 0;i<data.data.length;i++) {
+                    dataStr = "<li><a href=\"#\" class=\"btn\" style=\"pointer-events:none;background-color: #92B8B1;border: #92B8B1;width: 100%;color: white;font-size:12px\">" +
+                        data.data[i].enterpriseName + "&nbsp;&nbsp;&nbsp;"
+                        + data.data[i].dangerSourceName + "</a></li>" + dataStr;
+                }
+                var dataStrNew = strStrat + dataStr + strEnd;
+                $("#dangerData").html(dataStrNew);
+            }
+            $("#s2").newsScroll({
+                line: 1,
+                speed: 500,
+                timer: 4000,
+            });
+        }
+    })
+}
+
+
 
 
 

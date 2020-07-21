@@ -256,7 +256,14 @@ public class ChartController {
 		return MessageResult.success("200","", List);
 	}
 
+	//获取有危险源企业的信息
+	@ResponseBody
+	@GetMapping("/getDangerData")
+	public ResponseData getDangerData(@RequestParam Map<String, Object> params){
+		List<DangersourceDO> List =  enterpriseService.getDangerData(params);
+		return MessageResult.success("200","", List);
+	}
 
 
-	
+
 }

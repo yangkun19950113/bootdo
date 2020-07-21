@@ -329,4 +329,19 @@
 			<if test="country != null and country != ''"> and en.country = #{country} </if>
 	</select>
 
+	<select id="getDangerData" resultType="com.bootdo.ecosys.domain.DangersourceDO">
+		SELECT
+			en.enterprise_id,
+			en.enterprise_name,
+			dan.danger_source_name
+		FROM
+			eco_enterprise en
+			JOIN eco_dangersource dan ON en.enterprise_id = dan.enterprise_id
+			AND dan.delete_flag = '0'
+		WHERE
+			en.delete_flag = '0'
+			<if test="administrativeDivision != null and administrativeDivision != ''"> and en.administrative_division = #{administrativeDivision} </if>
+			<if test="country != null and country != ''"> and en.country = #{country} </if>
+	</select>
+
 </mapper>

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.bootdo.ecosys.domain.CommonDO;
+import com.bootdo.ecosys.domain.DangersourceDO;
 import com.bootdo.ecosys.domain.EnterpriseDO;
 import com.bootdo.ecosys.domain.FiredeviceDO;
 import org.apache.ibatis.annotations.Mapper;
@@ -49,4 +50,6 @@ public interface EnterpriseDao {
 	int getCountEvn(Map<String, Object> map);
 
 	List<FiredeviceDO> getEffectFireEquip(Map<String, Object> params);
+
+	List<DangersourceDO> getDangerData(Map<String, Object> params);
 }

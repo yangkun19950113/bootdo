@@ -2,6 +2,7 @@ package com.bootdo.ecosys.service;
 
 
 import com.bootdo.ecosys.domain.CommonDO;
+import com.bootdo.ecosys.domain.DangersourceDO;
 import com.bootdo.ecosys.domain.EnterpriseDO;
 import com.bootdo.ecosys.domain.FiredeviceDO;
 
@@ -50,5 +51,8 @@ public interface EnterpriseService {
 	double getEnvprotectionChart(Map<String, Object> params);
 
 	List<FiredeviceDO> getEffectFireEquip(Map<String, Object> params);
+
+	List<DangersourceDO> getDangerData(Map<String, Object> params);
+
 
 }
