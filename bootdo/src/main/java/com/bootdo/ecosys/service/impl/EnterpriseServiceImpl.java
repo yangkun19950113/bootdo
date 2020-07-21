@@ -68,10 +68,6 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 		return enterpriseDao.batchRemove(enterpriseIds);
 	}
 
-	@Override
-	public EnterpriseDO getenterprise(String enterpriseName ,String socialCreditCode) {
-		return enterpriseDao.getenterprise(enterpriseName,socialCreditCode);
-	}
 
 	@Autowired
 	public List<CommonDO> loadEnterpriseProportion(Map<String, Object> params){

@@ -3,13 +3,12 @@ $('#demo').carousel({
 })
 $(function() {
     var enterpriseId = $('#enterpriseId').val();
-    console.log(enterpriseId);
-    console.log(null != enterpriseId);
     if(null != enterpriseId || undefined !=enterpriseId){
         reLoad(enterpriseId);
     }
-
 });
+
+
 
 
 function reLoad(enterpriseId) {
@@ -20,15 +19,26 @@ function reLoad(enterpriseId) {
         data:{enterpriseName:$('#enterpriseName').val(),socialCreditCode:$('#socialCreditCode').val(),enterpriseId:enterpriseId},
         success: function (res) {
             if(200 == res.code){
-                console.log(res);
+                $("#lunbotu").empty();
+                $("#enterprise").empty();
+                $("#envprotection").empty();
+                $("#product").empty();
+                $("#material").empty();
+                $("#ecoequipment").empty();
+                $("#dangersource").empty();
+                $("#training").empty();
+                $("#electric").empty();
+                $("#risk").empty();
+                $("#firedevice").empty();
+                $("#myAlert2").empty();
                 var data = res.data;
-                var enterpriseId = data.enterpriseId;
+                var enterpriseId = enterpriseId;
                 var proimgsurl = data.imgUrls;
-                var minImgUrl = data.minImgUrl;
+                // var minImgUrl = "../img/enterprise.png";
                 var enterpriseName = data.enterpriseName;
                 var socialCreditCode = data.socialCreditCode;
                 var registeredAddress = data.registeredAddress;
-                var registeredTime = data.registeredTime;
+                // var registeredTime = data.registeredTime;
                 var enterpriseNatureCode = data.enterpriseNatureCode;
                 var ecoEstimateFlg = data.ecoEstimateFlg;
                 if(0==ecoEstimateFlg){
@@ -48,28 +58,28 @@ function reLoad(enterpriseId) {
                 }else{
                     ecoStandardFlg = '否'
                 };
-                var envprotectionMinImgUrl = data.envprotectionMinImgUrl;
-                var productMinImgUrl =data.productMinImgUrl;
+                // var envprotectionMinImgUrl = data.envprotectionMinImgUrl;
+                // var productMinImgUrl =data.productMinImgUrl;
                 var prodectName = data.prodectName;
                 var specifical = data.specifical;
                 var model = data.model;
-                var materialMinImgUrl = data.materialMinImgUrl;
+                // var materialMinImgUrl = data.materialMinImgUrl;
                 var materialType = data.materialType;
                 var materialName = data.materialName;
                 var monthConsumption = data.monthConsumption;
-                var ecoequipmentMinImgUrl = data.ecoequipmentMinImgUrl;
+                // var ecoequipmentMinImgUrl = data.ecoequipmentMinImgUrl;
                 var equipmentName = data.equipmentName;
                 var protectionPerson = data.protectionPerson;
                 var phoneNumber = data.phoneNumber;
                 var dangerSourceName= data.dangerSourceName;
                 var partDetail = data.partDetail;
                 var dangerprotectionPerson = data.dangerprotectionPerson;
-                var dangersourceMinImgUrl = data.dangersourceMinImgUrl;
+                // var dangersourceMinImgUrl = data.dangersourceMinImgUrl;
                 var trainName = data.trainName;
                 var trainType = data.trainType;
                 var personNumber = data.personNumber;
-                var trainingMinImgUrl = data.trainingMinImgUrl;
-                var electricMinImgUrl = data.electricMinImgUrl;
+                // var trainingMinImgUrl = data.trainingMinImgUrl;
+                // var electricMinImgUrl = data.electricMinImgUrl;
                 var eleequipmentName = data.eleequipmentName;
                 var eleequipmentCode = data.eleequipmentCode;
                 var number = data.number;
@@ -79,44 +89,38 @@ function reLoad(enterpriseId) {
                     var findTime = "";
                 }
                 var type = data.type;
-                var riskMinImgUrl = data.riskMinImgUrl;
+                // var riskMinImgUrl = data.riskMinImgUrl;
                 var fireequipmentName = data.fireequipmentName;
                 var fireequipmentCode = data.fireequipmentCode;
                 var buyTime = data.buyTime;
                 if(null == buyTime){
                     var buyTime = "";
                 }
-                var firedeviceMinImgUrl = data.firedeviceMinImgUrl;
+                // var firedeviceMinImgUrl = data.firedeviceMinImgUrl;
                 var industryCode = data.industryCode;
                 var monthProduction = data.monthProduction;
                 var level = data.level;
 
-                $("#lunbotu").empty();
-                $("#enterprise").empty();
-                $("#envprotection").empty();
-                $("#product").empty();
-                $("#material").empty();
-                $("#ecoequipment").empty();
-                $("#dangersource").empty();
-                $("#training").empty();
-                $("#electric").empty();
-                $("#risk").empty();
-                $("#firedevice").empty();
-                $("#myAlert2").empty();
+
                 //填充每幅图像的具体信息
-                for(var i = 0; i < proimgsurl.length; i++) {
-                    if(i == 0) {
-                        $("#lunbotu").append("<div class='carousel-item active'>" +
-                            "<img src='" + proimgsurl[i] + "' alt=''>" +
-                            "</div>");
-                    } else {
-                        $("#lunbotu").append("<div class='carousel-item'>" +
-                            "<img src='" + proimgsurl[i] + "' alt=''>" +
-                            "</div>");
+                if(null == proimgsurl){
+
+                }else {
+                    for(var i = 0; i < proimgsurl.length; i++) {
+                        if(i == 0) {
+                            $("#lunbotu").append("<div class='carousel-item active'>" +
+                                "<img src='" + proimgsurl[i] + "' alt=''>" +
+                                "</div>");
+                        } else {
+                            $("#lunbotu").append("<div class='carousel-item'>" +
+                                "<img src='" + proimgsurl[i] + "' alt=''>" +
+                                "</div>");
+                        }
                     }
                 }
+
                 $("#enterprise").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='" + minImgUrl + "' alt='' class='card-img-top'>" +
+                    "<img src='../img/enterprise.png' alt='' class='card-img-top'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>" + enterpriseName + "</h5>" +
                     "<p class='card-text'> 社会信用编码:" + socialCreditCode + "</p>" +
@@ -126,7 +130,7 @@ function reLoad(enterpriseId) {
                     "</div>"
                 );
                 $("#envprotection").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='" + envprotectionMinImgUrl + "' alt='' class='card-img-top'>" +
+                    "<img src='../img/envprotection.png' alt='' class='card-img-top'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>环保基本信息</h5>" +
                     "<p class='card-text'> 是否有环评文号:" + ecoEstimateFlg + "</p>" +
@@ -136,7 +140,7 @@ function reLoad(enterpriseId) {
                     "</div>"
                 );
                 $("#product").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='" + productMinImgUrl + "' alt='' class='card-img-top'>" +
+                    "<img src='../img/product.png' alt='' class='card-img-top'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>企业产品及产能</h5>" +
                     "<p class='card-text'> 产品名称:" + prodectName + "</p>" +
@@ -146,7 +150,7 @@ function reLoad(enterpriseId) {
                     "</div>"
                 );
                 $("#material").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='" + materialMinImgUrl + "' alt='' class='card-img-top'>" +
+                    "<img src='../img/material.png' alt='' class='card-img-top'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>产品原材料</h5>" +
                     "<p class='card-text'> 原材料类型:" + materialType + "</p>" +
@@ -156,7 +160,7 @@ function reLoad(enterpriseId) {
                     "</div>"
                 );
                 $("#ecoequipment").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='" + ecoequipmentMinImgUrl + "' alt='' class='card-img-top'>" +
+                    "<img src='../img/ecoequipment.png' alt='' class='card-img-top'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>防治设备</h5>" +
                     "<p class='card-text'> 设备名称:" + equipmentName + "</p>" +
@@ -166,7 +170,7 @@ function reLoad(enterpriseId) {
                     "</div>"
                 );
                 $("#dangersource").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='" + dangersourceMinImgUrl + "' alt='' class='card-img-top'>" +
+                    "<img src='../img/dangersource.png' alt='' class='card-img-top'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>重点部位</h5>" +
                     "<p class='card-text'> 危险源信息名称:" + dangerSourceName + "</p>" +
@@ -176,7 +180,7 @@ function reLoad(enterpriseId) {
                     "</div>"
                 );
                 $("#training").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='" + trainingMinImgUrl + "' alt='' class='card-img-top'>" +
+                    "<img src='../img/training.png' alt='' class='card-img-top'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>安全生产培训</h5>" +
                     "<p class='card-text'> 培训主题:" + trainName + "</p>" +
@@ -186,7 +190,7 @@ function reLoad(enterpriseId) {
                     "</div>"
                 );
                 $("#electric").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='" + electricMinImgUrl + "' alt='' class='card-img-top'>" +
+                    "<img src='../img/electric.png' alt='' class='card-img-top'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>用电设备</h5>" +
                     "<p class='card-text'> 设备名称:" + eleequipmentName + "</p>" +
@@ -196,7 +200,7 @@ function reLoad(enterpriseId) {
                     "</div>"
                 );
                 $("#risk").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='" + riskMinImgUrl + "' alt='' class='card-img-top'>" +
+                    "<img src='../img/risk.png' alt='' class='card-img-top'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>安全隐患</h5>" +
                     "<p class='card-text'> 发现人员:" + peopleFindName + "</p>" +
@@ -206,7 +210,7 @@ function reLoad(enterpriseId) {
                     "</div>"
                 );
                 $("#firedevice").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='" + firedeviceMinImgUrl + "' alt='' class='card-img-top'>" +
+                    "<img src='../img/firedevice.png' alt='' class='card-img-top'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>消防设备</h5>" +
                     "<p class='card-text'> 设备名称:" + fireequipmentName + "</p>" +
@@ -224,10 +228,4 @@ function reLoad(enterpriseId) {
             }
         }
     });
-}
-
-function setenterpriseName(enterpriseId) {
-    // console.log(enterpriseId+"xxxx");
-    // document.getElementById('enterpriseId').innerText = enterpriseId;
-
 }

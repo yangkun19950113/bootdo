@@ -18,26 +18,115 @@
     <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=CXeM773FvTVH8MCAYEcZbEtdhCCcc6iy"></script>
     <script type="text/javascript" src="//api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
     <link rel="stylesheet" href="//api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+    <link rel="shortcut icon" href="favicon.ico"> <link href="/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <script src="/js/jquery.min.js?v=2.1.4"></script>
+    <script src="/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="/js/enterprisemsg.js"></script>
     <script type="text/javascript" src="/js/openTabJump.js"></script>
-    <script type="text/javascript" src="/js/enterprisemsg.js"></script>
+
+
+<!--    <script src="/js/demo/echarts-demo.js"></script>-->
     <title>地图展示</title>
 </head>
 <body>
-<div id="allmap"></div>
-<div id="myAlert2" style="margin-left: 500px;width: 300px;position: absolute;" >
+<br>
+<div class="row  border-bottom white-bg dashboard-header">
+    <div class="col-sm-8" style="width: 100px;margin-top: 5px">
+        <label>乡镇：</label>
+    </div>
+    <div class="col-sm-8" style="width: 250px">
+        <select class="selectpicker form-control" data-live-search="true" name="administrativeDivision" id="administrativeDivision">
+        </select>
+    </div>
+    <div class="col-sm-8" style="width: 100px;margin-top: 5px">
+        <label>村子：</label>
+    </div>
+    <div class="col-sm-8" style="width: 250px">
+        <select class="selectpicker form-control" data-live-search="true" name="country" id="country">
+        </select>
+    </div>
 
 </div>
+<br>
+<div id="allmap"></div>
+
 </body>
 </html>
 <script type="text/javascript">
+    //加载行政区划
+    //一级
+    function administrativeDivision(){
+        $.ajax({
+            type: "get",
+            url: "/ecosys/code/list",
+            dataType: "json",
+            data: {
+                parentId: 113
+            },
+            success: function (data) {
+                var code_list = data.rows;
+                var opts = "<option value=''>" +"请选择 "+"</option>";
+                var optSon = "<option value=''>" +"请选择 "+"</option>";
+                for (var i = 0; i < code_list.length; i++) {
+                    var code = code_list[i];
+                    opts += "<option value='" + code.codeId + "' id='" + code.id + "'>" + code.name + "</option>";
+                }
+                $("#administrativeDivision").append(opts);
+
+                $("#country").append(optSon);
+
+            }
+        })
+    }
+
+    //行政区划，监听一级乡镇，联动村子
+    $("#administrativeDivision").bind("change", function(){
+        var administrativeDivision = $("#administrativeDivision").val();
+        var country = null;
+        deletePoint();
+        getdata(administrativeDivision,country);
+        //获取
+        var option = $("#administrativeDivision option:selected").val();
+        var parentId = $("#administrativeDivision option:selected").attr("id");
+        $("#country").find("option").remove();//清空option
+        //根据乡镇获取村
+        $.ajax({
+            type: "get",
+            url: "/ecosys/code/list",
+            dataType: "json",
+            data: {
+                parentId: parentId
+            },
+            success: function (data) {
+                var code_list = data.rows;
+                var opts = "<option value=''>" +"请选择 "+"</option>";
+                for (var i = 0; i < code_list.length; i++) {
+                    var code = code_list[i];
+                    opts += "<option value='" + code.orderNum + "'>" + code.name + "</option>";
+                }
+                $("#country").append(opts);
+                console.log($("#country").val());
+            }
+        })
+    })
+    $("#country").bind("change", function(){
+        var country = $("#country").val();
+        var administrativeDivision = $("#administrativeDivision").val();
+        deletePoint();
+        getdata(administrativeDivision,country);
+
+    })
+
     // 百度地图API功能
     var map = new BMap.Map("allmap");    // 创建Map实例
     map.centerAndZoom(new BMap.Point(116.358007, 39.10178), 8);  // 初始化地图,设置中心点坐标和地图级别
     map.enableScrollWheelZoom();
-    function getdata() {
+    function getdata(administrativeDivision,country) {
         $.ajax({
             type: 'GET',
             url: '/showData/showData/getCoordinates',
+            dataType: "json",
+            data:{administrativeDivision:administrativeDivision,country:country},
             success: function (res) {
                 if(200 == res.code) {
                     var data = res.data;
@@ -50,6 +139,31 @@
                 }
             }
         });
+    }
+    function deletePoint(){
+        map.clearOverlays();
+        // var allOverlay = map.getOverlays();
+        // for(var i = 0;i<allOverlay.length;i++) {
+        //     console.log(allOverlay[i]);
+        //    map.removeOverlay(allOverlay[i]);
+        // }
+        var bdary = new BMap.Boundary();
+        bdary.get("河北省廊坊市霸州", function(rs){       //获取行政区域
+            var count = rs.boundaries.length; //行政区域的点有多少个
+            if (count === 0) {
+                alert('未能获取当前输入行政区域');
+                return ;
+            }
+            var pointArray = [];
+            for (var i = 0; i < count; i++) {
+                var ply = new BMap.Polygon(rs.boundaries[i], {strokeWeight: 2, strokeColor: "#ff0000",fillColor:""}); //建立多边形覆盖物
+                map.addOverlay(ply);  //添加覆盖物
+                pointArray = pointArray.concat(ply.getPath());
+            }
+            map.setViewport(pointArray);    //调整视野
+            addlabel();
+        });
+
     }
     // 通过坐标获取企业信息
     function getdatabycoordinates(coordinates,point) {
@@ -93,56 +207,21 @@
         });
     }
     function click1(enterpriseId){
-        // var socialCreditCode = socialCreditCode;
         var mainhtml = '/public/enterprisemsg';
-        console.log(enterpriseId);
         openPageJump(mainhtml, mainhtml+'/'+enterpriseId,"企业信息");
-        setenterpriseName(enterpriseId);
-        // setenterpriseName(enterpriseName);
-        // reLoad(enterpriseId);
-        console.log("22");
-
     }
-
-    // function getalldatabycoordinates(coordinates) {
-    //     $.ajax({
-    //         type: 'GET',
-    //         url: '/showData/showData/getalldatabycoordinates',
-    //         data:{coordinates:coordinates},
-    //         success: function (res) {
-    //             if(200 == res.code) {
-    //                 reLoad(coordinates);
-    //             }
-    //         }
-    //     });
-    // }
-    //获取覆盖物位置
-    // function attribute(e){
-    //     var p = e.target;
-    //     alert("marker的位置是" + p.getPosition().lng + "," + p.getPosition().lat);
-    //
-    // }
-
-
-
-
 
     map.setCurrentCity("河北省廊坊市");          // 设置地图显示的城市 此项是必须设置的
     map.enableScrollWheelZoom(true);
     function addMarker(point){
         var marker = new BMap.Marker(point);
+
         marker.addEventListener("click", function(e){
             var p = e.target;
             var coordinates = p.getPosition().lng + "," + p.getPosition().lat;
             // 调用通过经纬度获取企业信息函数
             getdatabycoordinates(coordinates,point);
         })
-        // marker.addEventListener("dblclick", function(e){
-        //     var p = e.target;
-        //     var coordinates = p.getPosition().lng + "," + p.getPosition().lat;
-        //     // window.location.href="enterprisemsg.html";
-        //     getalldatabycoordinates(coordinates);
-        // })
         map.addOverlay(marker);
     }
     function getBoundary(){
@@ -164,7 +243,7 @@
             map.setViewport(pointArray);    //调整视野
             addlabel();
             getdata();
-
+            administrativeDivision();// 加载乡镇
 
         });
     }

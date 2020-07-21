@@ -31,7 +31,7 @@ public interface EnterpriseService {
 	
 	int batchRemove(Integer[] enterpriseIds);
 
-	EnterpriseDO getenterprise (String  enterpriseName,String socialCreditCode);
+
 
 	List<CommonDO> loadEnterpriseProportion(Map<String, Object> params);
 
