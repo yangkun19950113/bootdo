@@ -156,7 +156,8 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 
 	@Override
 	public EnterpriseDO getenterprise(String enterpriseName, String socialCreditCode, Integer enterpriseId) {
-		return null;
+		EnterpriseDO getenterprise = enterpriseDao.getenterprise(enterpriseName,socialCreditCode,enterpriseId);
+		return getenterprise;
 	}
 
 	@Override

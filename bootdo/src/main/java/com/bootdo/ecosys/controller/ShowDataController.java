@@ -308,7 +308,11 @@ public class ShowDataController {
 			ShowData.setEleequipmentName(eleequipmentName);
 			//设备编码
 			String eleequipmentCode = electricDO.getEquipmentCode();
-			ShowData.setEleequipmentCode(eleequipmentCode);
+			if(null ==eleequipmentCode || "".equals(eleequipmentCode)){
+				ShowData.setEleequipmentCode("-");
+			}else {
+				ShowData.setEleequipmentCode(eleequipmentCode);
+			}
 			//相数
 			Integer phaseNumber = electricDO.getPhaseNumber();
 			ShowData.setPhaseNumber(phaseNumber);
