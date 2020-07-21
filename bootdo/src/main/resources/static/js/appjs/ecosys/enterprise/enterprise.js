@@ -173,7 +173,7 @@ function load() {
 									title : '经营场所取得',
 									formatter : function(value, row, index) {
 										if(value == '021'){
-											return "自由";
+											return "自有";
 										}else if(value == '022'){
 											return "租赁";
 										}
