@@ -647,11 +647,11 @@ function enterpriseHigh(){
                     y2:20,
                     containLabel: true
                 },
-                toolbox: {
+                /*toolbox: {
                     feature: {
                         saveAsImage: {}
                     }
-                },
+                },*/
                 xAxis: {
                     type: 'category',
                     boundaryGap: false,
@@ -709,11 +709,11 @@ function fireEquipHigh(){
                     y2:20,
                     containLabel: true
                 },
-                toolbox: {
+                /*toolbox: {
                     feature: {
                         saveAsImage: {}
                     }
-                },
+                },*/
                 xAxis: {
                     type: 'category',
                     boundaryGap: false,
@@ -764,12 +764,12 @@ function envprotectionChart(){
                 tooltip: {
                     formatter: '{a} <br/>{b} : {c}%'
                 },
-                toolbox: {
+                /*toolbox: {
                     feature: {
                         restore: {},
                         saveAsImage: {}
                     }
-                },
+                },*/
                 series: [
                     {
                         name: '环保信息处理',
