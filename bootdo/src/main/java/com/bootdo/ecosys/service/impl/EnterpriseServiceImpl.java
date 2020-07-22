@@ -191,9 +191,10 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 		int count = enterpriseDao.count(params);
 		//环保信息大于0的企业
 		int num = enterpriseDao.getCountEvn(params);
-
-		double numResult = num * 1.0 / count * 100;
-
+		double numResult = 0;
+		if(count > 0 && num > 0){
+			numResult = num * 1.0 / count * 100;
+		}
 		return numResult;
 	}
 

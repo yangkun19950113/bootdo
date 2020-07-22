@@ -419,6 +419,7 @@ $("#country").bind("change", function(){
     enterpriseHigh();
     fireEquipHigh();
     getEffectFireEquip();
+    getDangerData();
 
 })
 

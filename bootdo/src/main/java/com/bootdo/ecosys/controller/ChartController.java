@@ -39,6 +39,12 @@ public class ChartController {
 	@GetMapping("/loadEnterpriseProportion")
 	public ResponseData loadEnterpriseProportion(@RequestParam Map<String, Object> params){
 		List<CommonDO> valueList = enterpriseService.loadEnterpriseProportion(params);
+		if(valueList.size() == 0){
+			CommonDO common = new CommonDO();
+			common.setName("无");
+			common.setValue("0");
+			valueList.add(common);
+		}
 		return MessageResult.success("200","", valueList);
 	}
 
@@ -47,6 +53,12 @@ public class ChartController {
 	@GetMapping("/loadEnterpriseNatureCode")
 	public ResponseData loadEnterpriseNatureCode(@RequestParam Map<String, Object> params){
 		List<CommonDO> valueList = enterpriseService.loadEnterpriseNatureCode(params);
+		if(valueList.size() == 0){
+			CommonDO common = new CommonDO();
+			common.setName("无");
+			common.setValue("0");
+			valueList.add(common);
+		}
 		return MessageResult.success("200","", valueList);
 	}
 
@@ -55,6 +67,12 @@ public class ChartController {
 	@GetMapping("/loadPollutionCode")
 	public ResponseData loadPollutionCode(@RequestParam Map<String, Object> params){
 		List<CommonDO> valueList = enterpriseService.loadPollutionCode(params);
+		if(valueList.size() == 0){
+			CommonDO common = new CommonDO();
+			common.setName("无");
+			common.setValue("0");
+			valueList.add(common);
+		}
 		return MessageResult.success("200","", valueList);
 	}
 	//各类企业增长分析
@@ -138,6 +156,17 @@ public class ChartController {
 					line.setData(dataStr.split(","));
 					lineList.add(line);
 				}
+			}
+		}
+		if(lineList.size()==0){
+			String dataStr = "0,0,0,0,0,";
+			for(int i = 0;i<codeList.size();i++){
+				LineDO line = new LineDO();
+				line.setName(codeList.get(i).getName());
+				line.setType("line");
+				line.setStack("总量");
+				line.setData(dataStr.split(","));
+				lineList.add(line);
 			}
 		}
 		LineDDO lineDDO = new LineDDO();
@@ -232,6 +261,17 @@ public class ChartController {
 					line.setData(dataStr.split(","));
 					lineList.add(line);
 				}
+			}
+		}
+		if(lineList.size()==0){
+			String dataStr = "0,0,0,0,0,";
+			for(int i = 0;i<codeList.size();i++){
+				LineDO line = new LineDO();
+				line.setName(codeList.get(i).getName());
+				line.setType("line");
+				line.setStack("总量");
+				line.setData(dataStr.split(","));
+				lineList.add(line);
 			}
 		}
 		LineDDO lineDDO = new LineDDO();
