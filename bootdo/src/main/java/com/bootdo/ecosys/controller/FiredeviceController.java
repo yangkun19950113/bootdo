@@ -10,6 +10,7 @@ import com.bootdo.ecosys.domain.FiredeviceDO;
 import com.bootdo.ecosys.service.CodeService;
 import com.bootdo.ecosys.service.EnterpriseService;
 import com.bootdo.ecosys.service.FiredeviceService;
+import com.sun.xml.internal.bind.v2.TODO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -68,6 +69,8 @@ public class FiredeviceController {
 	@RequiresPermissions("ecosys:firedevice:add")
 	String add(@PathVariable("enterpriseId") Long enterpriseId,Model model){
 		EnterpriseDO enterprise = enterpriseService.get(enterpriseId.intValue());
+		//TODO
+		//行政区划与乡村编码截取
 		//乡镇
 		Map<String, Object> map = new HashMap<>();
 		map.put("codeId",enterprise.getAdministrativeDivision());
