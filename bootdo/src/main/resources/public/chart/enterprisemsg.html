@@ -20,7 +20,7 @@
 
 </head>
 <body>
-<div style=" height: 2000px;width: 1290px;" >
+<div style=" height: 1500px;width: 1290px;" >
 
     <div style="margin-top: 20px">
         <form class="form-inline" id="form1">
@@ -34,7 +34,7 @@
             </div>
             <div class="form-group" style="padding-left: 30px;">
                 <label >社会信用编码:</label>&nbsp;
-                <input  id="socialCreditCode"type="text" class="form-control"  placeholder="请输入完整社会信用编码">
+                <input  id="socialCreditCode"type="text" class="form-control" th:value="${socialCreditCode}" placeholder="请输入完整社会信用编码">
             </div>
             <button type="button" class="btn btn-success" style="margin-top: -40px;margin-left: 700px" onclick="reLoad()">查询</button>
         </form>
@@ -42,18 +42,6 @@
         <div id="myAlert2" style="margin-left: 500px;width: 300px" >
 
         </div>
-        <!--        <div class="form-group">-->
-        <!--            <label class="col-sm-3 control-label">企业名称：</label>-->
-        <!--            <div class="col-sm-8">-->
-        <!--                <input id="enterpriseName" style="margin-top: -40px;margin-left: 80px;width: 200px" class="form-control" type="text" placeholder="请输入完整企业名称">-->
-        <!--                <label style="margin-top: -70px;margin-left: 300px;width: 330px">社会信用编码：</label>-->
-        <!--                <div class="col-sm-8">-->
-        <!--                    <input id="socialCreditCode" style="margin-top: -70px;margin-left: 400px;width: 200px" class="form-control" type="text" placeholder="请输入完整社会信用编码">-->
-        <!--                </div>-->
-        <!--                <button class="btn btn-success" style="margin-top: -70px;margin-left: 700px" onclick="reLoad()">查询</button>-->
-        <!--            </div>-->
-
-        <!--        </div>-->
     </div>
     <div id="demo" class="carousel slide" data-ride="carousel" style="width: 1290px;" >
         <!-- 轮播图片 -->
@@ -69,7 +57,7 @@
     </div>
     <br />
     <div  >
-        <div class="row" style="height: 100px;">
+        <div class="row" style="height: 80px;">
             <div class="col-md-3" id ="enterprise">
             </div>
             <div class="col-md-3" id ="envprotection">
@@ -82,15 +70,9 @@
 
     </div>
     <br /><br /><br /><br /><br/><br /><br /><br /><br /><br />
-    <br /><br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <div  >
-        <div class="row" style="height: 100px;">
+    <br /><br /><br /><br />
+
+        <div class="row" style="height: 80px;">
             <div class="col-md-3"id="ecoequipment">
             </div>
             <div class="col-md-3" id="dangersource">
@@ -105,18 +87,9 @@
         </div>
 
     </div>
-    <br /><br /><br /><br /> <br /><br /><br /><br /><br /><br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br /><br />
 
-
-    <div  >
-        <div class="row" style="height: 100px;">
+    <div style="margin-top: -240px" >
+        <div class="row" style="height: 80px;">
             <div class="col-md-3" id ="risk" >
             </div>
             <div class="col-md-3" id="firedevice" >

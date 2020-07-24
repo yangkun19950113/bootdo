@@ -24,8 +24,6 @@
     <script src="/js/enterprisemsg.js"></script>
     <script type="text/javascript" src="/js/openTabJump.js"></script>
 
-
-<!--    <script src="/js/demo/echarts-demo.js"></script>-->
     <title>地图展示</title>
 </head>
 <body>
@@ -142,11 +140,6 @@
     }
     function deletePoint(){
         map.clearOverlays();
-        // var allOverlay = map.getOverlays();
-        // for(var i = 0;i<allOverlay.length;i++) {
-        //     console.log(allOverlay[i]);
-        //    map.removeOverlay(allOverlay[i]);
-        // }
         var bdary = new BMap.Boundary();
         bdary.get("河北省廊坊市霸州", function(rs){       //获取行政区域
             var count = rs.boundaries.length; //行政区域的点有多少个
@@ -177,6 +170,7 @@
                     var enterpriseName = data.enterpriseName;
                     var enterpriseId=  data.enterpriseId;
                     var socialCreditCode = data.socialCreditCode;
+
                     var registeredAddress = data.registeredAddress;
                     var employeeNum = data.employeeNum;
                     var minImgUrl = data.minImgUrl;
@@ -198,16 +192,14 @@
                         ]
                     });
                     var marker = new BMap.Marker(point);
-                    // marker.addEventListener("click", function(e){
-                    //     searchInfoWindow.open(marker);
-                    // })
+
                     searchInfoWindow.open(marker);
                 }
             }
         });
     }
     function click1(enterpriseId){
-        var mainhtml = '/public/enterprisemsg';
+        var mainhtml = '/ecosys/enterprisemsg';
         openPageJump(mainhtml, mainhtml+'/'+enterpriseId,"企业信息");
     }
 

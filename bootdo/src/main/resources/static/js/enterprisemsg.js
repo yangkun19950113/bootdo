@@ -2,21 +2,21 @@ $('#demo').carousel({
     interval: 3000
 })
 $(function() {
-    var enterpriseId = $('#enterpriseId').val();
-    if(null != enterpriseId || undefined !=enterpriseId){
-        reLoad(enterpriseId);
+    var socialCreditCode = $('#socialCreditCode').val();
+    if(null != socialCreditCode || undefined !=socialCreditCode){
+        reLoad(socialCreditCode);
     }
 });
 
 
 
 
-function reLoad(enterpriseId) {
+function reLoad(socialCreditCode) {
     $.ajax({
         type: 'GET',
         url: '/showData/showData/enterpriseList',
         dataType: "json",
-        data:{enterpriseName:$('#enterpriseName').val(),socialCreditCode:$('#socialCreditCode').val(),enterpriseId:enterpriseId},
+        data:{enterpriseName:$('#enterpriseName').val(),socialCreditCode:$('#socialCreditCode').val()},
         success: function (res) {
             if(200 == res.code){
                 $("#lunbotu").empty();
@@ -120,7 +120,7 @@ function reLoad(enterpriseId) {
                 }
 
                 $("#enterprise").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/enterprise.png' alt='' class='card-img-top'>" +
+                    "<img src='../img/enterprise.png' alt='' class='card-img-top'style='width: 100px;height: 100px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>" + enterpriseName + "</h5>" +
                     "<p class='card-text'> 社会信用编码:" + socialCreditCode + "</p>" +
@@ -130,7 +130,7 @@ function reLoad(enterpriseId) {
                     "</div>"
                 );
                 $("#envprotection").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/envprotection.png' alt='' class='card-img-top'>" +
+                    "<img src='../img/envprotection.png' alt='' class='card-img-top' style='width: 100px;height: 100px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>环保基本信息</h5>" +
                     "<p class='card-text'> 是否有环评文号:" + ecoEstimateFlg + "</p>" +
@@ -139,8 +139,8 @@ function reLoad(enterpriseId) {
                     "<a href='#' class='btn btn-primary'>表格信息</a>" +
                     "</div>"
                 );
-                $("#product").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/product.png' alt='' class='card-img-top'>" +
+                $("#product").append("<div class='card' style='width: 18rem;' >" +
+                    "<img src='../img/product.png' alt='' class='card-img-top' style='width: 100px;height: 100px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>企业产品及产能</h5>" +
                     "<p class='card-text'> 产品名称:" + prodectName + "</p>" +
@@ -150,7 +150,7 @@ function reLoad(enterpriseId) {
                     "</div>"
                 );
                 $("#material").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/material.png' alt='' class='card-img-top'>" +
+                    "<img src='../img/material.png' alt='' class='card-img-top' style='width: 100px;height: 100px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>产品原材料</h5>" +
                     "<p class='card-text'> 原材料类型:" + materialType + "</p>" +
@@ -160,7 +160,7 @@ function reLoad(enterpriseId) {
                     "</div>"
                 );
                 $("#ecoequipment").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/ecoequipment.png' alt='' class='card-img-top'>" +
+                    "<img src='../img/ecoequipment.png' alt='' class='card-img-top'style='width: 100px;height: 100px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>防治设备</h5>" +
                     "<p class='card-text'> 设备名称:" + equipmentName + "</p>" +
@@ -170,7 +170,7 @@ function reLoad(enterpriseId) {
                     "</div>"
                 );
                 $("#dangersource").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/dangersource.png' alt='' class='card-img-top'>" +
+                    "<img src='../img/dangersource.png' alt='' class='card-img-top' style='width: 100px;height: 100px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>重点部位</h5>" +
                     "<p class='card-text'> 危险源信息名称:" + dangerSourceName + "</p>" +
@@ -180,7 +180,7 @@ function reLoad(enterpriseId) {
                     "</div>"
                 );
                 $("#training").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/training.png' alt='' class='card-img-top'>" +
+                    "<img src='../img/training.png' alt='' class='card-img-top'style='width: 100px;height: 100px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>安全生产培训</h5>" +
                     "<p class='card-text'> 培训主题:" + trainName + "</p>" +
@@ -190,7 +190,7 @@ function reLoad(enterpriseId) {
                     "</div>"
                 );
                 $("#electric").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/electric.png' alt='' class='card-img-top'>" +
+                    "<img src='../img/electric.png' alt='' class='card-img-top'style='width: 100px;height: 100px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>用电设备</h5>" +
                     "<p class='card-text'> 设备名称:" + eleequipmentName + "</p>" +
@@ -200,7 +200,7 @@ function reLoad(enterpriseId) {
                     "</div>"
                 );
                 $("#risk").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/risk.png' alt='' class='card-img-top'>" +
+                    "<img src='../img/risk.png' alt='' class='card-img-top'style='width: 100px;height: 100px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>安全隐患</h5>" +
                     "<p class='card-text'> 发现人员:" + peopleFindName + "</p>" +
@@ -210,7 +210,7 @@ function reLoad(enterpriseId) {
                     "</div>"
                 );
                 $("#firedevice").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/firedevice.png' alt='' class='card-img-top'>" +
+                    "<img src='../img/firedevice.png' alt='' class='card-img-top'style='width: 100px;height: 100px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>消防设备</h5>" +
                     "<p class='card-text'> 设备名称:" + fireequipmentName + "</p>" +
@@ -223,6 +223,18 @@ function reLoad(enterpriseId) {
             }
 
             else{
+                $("#lunbotu").empty();
+                $("#enterprise").empty();
+                $("#envprotection").empty();
+                $("#product").empty();
+                $("#material").empty();
+                $("#ecoequipment").empty();
+                $("#dangersource").empty();
+                $("#training").empty();
+                $("#electric").empty();
+                $("#risk").empty();
+                $("#firedevice").empty();
+                $("#myAlert2").empty();
                 $("#myAlert2").append("<a href='#' class='close' data-dismiss='alert'>&times;</a>"+
                     "<strong>输入的企业名称或社会信用编码不存在</strong>");
             }
