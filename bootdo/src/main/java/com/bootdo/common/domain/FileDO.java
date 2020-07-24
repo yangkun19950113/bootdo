@@ -21,7 +21,15 @@ public class FileDO implements Serializable {
     private String url;
     // 创建时间
     private Date createDate;
+    private String  socialCreditCode;
 
+    public String getSocialCreditCode() {
+        return socialCreditCode;
+    }
+
+    public void setSocialCreditCode(String socialCreditCode) {
+        this.socialCreditCode = socialCreditCode;
+    }
 
     public FileDO() {
         super();

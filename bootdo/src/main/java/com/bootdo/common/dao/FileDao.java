@@ -19,7 +19,7 @@ public interface FileDao {
 	FileDO get(Long id);
 	
 	List<FileDO> list(Map<String,Object> map);
-	
+	List<FileDO> geturl(String socialCreditCode);
 	int count(Map<String,Object> map);
 	
 	int save(FileDO file);

@@ -1,9 +1,12 @@
 package com.bootdo.ecosys.controller;
 
+import com.bootdo.common.dao.FileDao;
+import com.bootdo.common.domain.FileDO;
 import com.bootdo.tool.MessageResult;
 import com.bootdo.tool.ResponseData;
 import com.bootdo.tool.UploadUtil;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +19,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/ecosys/uploadFile")
 public class uploadFileController {
+    @Autowired
+    private FileDao fileDao;
     @PostMapping("upload")
     public ResponseData upload(MultipartFile file, String socialCreditCode){
         Map<String, Object> map = new HashMap<String, Object>();
@@ -27,6 +32,13 @@ public class uploadFileController {
                 String path = uploadPath;
                 String uploadFile = UploadUtil.uploadFile(file, path);
                 url = "/" + uploadPathOffice + uploadFile;
+                String fileurl = uploadPath+uploadFile;
+                FileDO fileDO = new FileDO();
+                fileDO.setSocialCreditCode(socialCreditCode);
+                fileDO.setUrl(fileurl);
+                fileDao.save(fileDO);
+
+                System.out.println(fileurl);
             }
             map.put("value", url);
 

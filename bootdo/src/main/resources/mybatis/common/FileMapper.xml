@@ -6,6 +6,9 @@
 	<select id="get" resultType="com.bootdo.common.domain.FileDO">
 		select `id`,`type`,`url`,`create_date` from sys_file where id = #{value}
 	</select>
+	<select id="geturl" resultType="com.bootdo.common.domain.FileDO">
+		select `id`,`type`,`url`,`create_date` from sys_file where social_credit_code = #{socialCreditCode}
+	</select>
 
 	<select id="list" resultType="com.bootdo.common.domain.FileDO">
 		select `id`,`type`,`url`,`create_date` from sys_file
@@ -43,13 +46,15 @@
 		(
 			`type`, 
 			`url`, 
-			`create_date`
+			`create_date`,
+			`social_credit_code`
 		)
 		values
 		(
 			#{type}, 
-			#{url}, 
-			#{createDate}
+			#{url},
+			CURRENT_TIMESTAMP(),
+			#{socialCreditCode}
 		)
 	</insert>
 	 

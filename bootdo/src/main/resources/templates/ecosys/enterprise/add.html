@@ -18,7 +18,7 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">社会信用编码：</label>
 								<div class="col-sm-8">
-									<input id="socialCreditCode" name="socialCreditCode" class="form-control" type="text">
+									<input id="socialCreditCode" name="socialCreditCode" class="form-control"  onpropertychange="OnPropChanged (event)"type="text">
 								</div>
 							</div>
 							<div class="form-group">
@@ -29,9 +29,6 @@
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">注册时间：</label>
-								<!--<div class="col-sm-8">
-									<input id="registeredTime" name="registeredTime" class="form-control" type="text">
-								</div>-->
 								<div class='input-group date col-sm-8' id='datetimepicker1' style="width:480px">
 									<input id="registeredTime" name="registeredTime" class="form-control" type="text" style="margin-left: 15px;">
 									<span class="input-group-addon">
@@ -70,17 +67,8 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">企业性质：</label>
 								<div class="col-sm-8">
-									<!--<input id="enterpriseNatureCode" name="enterpriseNatureCode" class="form-control" type="text">-->
 									<select class="selectpicker form-control" data-live-search="true" name="enterpriseNatureCode" id="enterpriseNatureCode">
 									</select>
-									<!--<select class="form-control">
-										<option></option>
-										<option value="PA">Pennsylvania</option>
-										<option value="CT">Connecticut</option>
-										<option value="NY">New York</option>
-										<option value="MD">Maryland</option>
-										<option value="VA">Virginia</option>
-									</select>-->
 								</div>
 							</div>
 
@@ -207,7 +195,6 @@
 							</div>
 
 
-
 							<div class="form-group">
 								<label class="col-sm-3 control-label">图片上传：</label>
 								<div class="col-sm-8">
@@ -227,13 +214,13 @@
 									</table>
 								</div>
 								</div>
-<!--								<button type="button" class="layui-btn" id="testListAction">开始上传</button>-->
+
 							</div>
 
 
 							<div class="form-group">
 								<div class="col-sm-8 col-sm-offset-3">
-									<button id ="testListAction" type="submit" class="btn btn-primary">提交</button>
+									<button id="testListAction"  type="submit" class="btn btn-primary">提交</button>
 									<button type="button" class="btn btn-danger"style="margin-left: 30px" onclick="cancalColse()">取消</button>
 								</div>
 							</div>
@@ -257,66 +244,75 @@
 	<script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 	<script src="/js/layui.js"></script>
 	<script type="text/javascript">
+
 		layui.use(['element','form','layedit','upload'], function () {
 			var upload = layui.upload;
 			var socialCreditCode = $("#socialCreditCode").val();
-			//多文件列表示例
-			var pictureListView = $('#pictureList')
-					,uploadListIns = upload.render({
-				elem: '#testList'
-				,url: '/ecosys/uploadFile/upload?socialCreditCode='+socialCreditCode
-				,accept: 'image/png,image/jpeg'
-				,acceptMime: 'image/*'
-				,multiple: true
-				,auto: false
-				,bindAction: '#testListAction'
-				,choose: function(obj){
-					var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
-					//读取本地文件
-					obj.preview(function(index, file, result){
-						var tr = $(['<tr id="upload-'+ index +'" lay-verify="uploadReq" name="uploadtr">'
-							,'<td>'+ file.name +'</td>'
-							,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
-							,'<td>等待上传</td>'
-							,'<td>'
-							,'<button type="button" class="btn btn-info btn-sm demo-reload">重传</button>'
-							,'<button type="button" class="btn btn-danger btn-sm  demo-delete">删除</button>'
-							,'</td>'
-							,'</tr>'].join(''));
 
-						//单个重传
-						tr.find('.demo-reload').on('click', function(){
-							obj.upload(index, file);
+			$('#socialCreditCode').bind('input propertychange', function() {
+				console.log($("#socialCreditCode").val())
+				socialCreditCode = $("#socialCreditCode").val();
+				var pictureListView = $('#pictureList')
+						,uploadListIns = upload.render({
+					elem: '#testList'
+					,url: '/ecosys/uploadFile/upload?socialCreditCode='+socialCreditCode
+					,accept: 'image/png,image/jpeg'
+					,acceptMime: 'image/*'
+					,multiple: true
+					,auto: false
+					,bindAction: '#testListAction'
+					,choose: function(obj){
+						var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+						//读取本地文件
+						obj.preview(function(index, file, result){
+							var tr = $(['<tr id="upload-'+ index +'" lay-verify="uploadReq" name="uploadtr">'
+								,'<td>'+ file.name +'</td>'
+								,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
+								,'<td>等待上传</td>'
+								,'<td>'
+								,'<button type="button" class="btn btn-info btn-sm demo-reload">重传</button>'
+								,'<button type="button" class="btn btn-danger btn-sm  demo-delete">删除</button>'
+								,'</td>'
+								,'</tr>'].join(''));
+
+							//单个重传
+							tr.find('.demo-reload').on('click', function(){
+								obj.upload(index, file);
+							});
+
+							//删除
+							tr.find('.demo-delete').on('click', function(){
+								delete files[index]; //删除对应的文件
+								tr.remove();
+								uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+							});
+
+							pictureListView.append(tr);
 						});
-
-						//删除
-						tr.find('.demo-delete').on('click', function(){
-							delete files[index]; //删除对应的文件
-							tr.remove();
-							uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
-						});
-
-						pictureListView.append(tr);
-					});
-				}
-				,done: function(res, index, upload){
-					if(res.code == 0){ //上传成功
+					}
+					,done: function(res, index, upload){
+						console.log(res);
+						if(res.code == 0){ //上传成功
+							var url = res.data.value;
+							var tr = pictureListView.find('tr#upload-'+ index)
+									,tds = tr.children();
+							tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+							tds.eq(3).html(''); //清空操作
+							tds.eq(4).html("<a href='#' style='color: #5FB878' onclick=\"view('"+ res.data.value +"')\"  >"+ res.data.value +"</a>"); //url
+							return delete this.files[index]; //删除文件队列已经上传成功的文件
+						}
+						this.error(index, upload);
+					}
+					,error: function(index, upload){
 						var tr = pictureListView.find('tr#upload-'+ index)
 								,tds = tr.children();
-						tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
-						tds.eq(3).html(''); //清空操作
-						tds.eq(4).html("<a href='#' style='color: #5FB878' onclick=\"view('"+ res.data.value +"')\"  >"+ res.data.value +"</a>"); //url
-						return delete this.files[index]; //删除文件队列已经上传成功的文件
+						tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+						tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
 					}
-					this.error(index, upload);
-				}
-				,error: function(index, upload){
-					var tr = pictureListView.find('tr#upload-'+ index)
-							,tds = tr.children();
-					tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
-					tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
-				}
+				});
 			});
+			//多文件列表示例
+
 		});
 		$(function () {
 			$('#datetimepicker1').datetimepicker({

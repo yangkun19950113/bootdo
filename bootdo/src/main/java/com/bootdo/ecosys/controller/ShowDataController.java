@@ -1,5 +1,7 @@
 package com.bootdo.ecosys.controller;
 
+import com.bootdo.common.dao.FileDao;
+import com.bootdo.common.domain.FileDO;
 import com.bootdo.ecosys.dao.CodeDao;
 import com.bootdo.ecosys.dao.EnterpriseDao;
 import com.bootdo.ecosys.domain.*;
@@ -8,6 +10,8 @@ import com.bootdo.tool.MessageResult;
 import com.bootdo.tool.ResponseData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -46,6 +50,8 @@ public class ShowDataController {
 	private CodeDao codeDao;
 	@Autowired
 	private EnterpriseDao enterpriseDao;
+	@Autowired
+	private FileDao fileDao;
 
 	// 获取前台显示信息
 
@@ -59,18 +65,20 @@ public class ShowDataController {
 		ShowDataDO ShowData = new ShowDataDO();
 		// 企业信息
 		EnterpriseDO enterprise = enterpriseService.getenterprise(enterpriseName,socialCreditCode,enterpriseId);
-		String imgUrl = enterprise.getImgUrl();
-		if(null == imgUrl || "".equals(imgUrl)){
+		// 社会信用编码
+		socialCreditCode = enterprise.getSocialCreditCode();
+		ShowData.setSocialCreditCode(socialCreditCode);
+		List<FileDO> fileList = fileDao.geturl(socialCreditCode);
+		List<String> list=new ArrayList<String>();
+		for(FileDO fileDO :fileList){
+			list.add(fileDO.getUrl());
+		}
+
+		if(null == list || "".equals(list)){
 
         }else {
-            String[] strArray = imgUrl.split(",");
-            System.out.println(strArray);
-            for(String s : strArray){
-                System.out.println(s);
-            }
-            enterprise.setImgUrls(strArray);
             // 轮播图片
-            ShowData.setImgUrls(strArray);
+            ShowData.setImgUrl(list.toString());
         }
 
 		// 卡片图片路径
@@ -81,9 +89,7 @@ public class ShowDataController {
 		// 企业名称
 		enterpriseName = enterprise.getEnterpriseName();
 		ShowData.setEnterpriseName(enterpriseName);
-		// 社会信用编码
-		socialCreditCode = enterprise.getSocialCreditCode();
-		ShowData.setSocialCreditCode(socialCreditCode);
+
 		// 注册地址
 		String registeredAddress = enterprise.getRegisteredAddress();
 		ShowData.setRegisteredAddress(registeredAddress);

@@ -18,6 +18,7 @@ function reLoad(socialCreditCode) {
         dataType: "json",
         data:{enterpriseName:$('#enterpriseName').val(),socialCreditCode:$('#socialCreditCode').val()},
         success: function (res) {
+            console.log(res);
             if(200 == res.code){
                 $("#lunbotu").empty();
                 $("#enterprise").empty();
@@ -33,7 +34,8 @@ function reLoad(socialCreditCode) {
                 $("#myAlert2").empty();
                 var data = res.data;
                 var enterpriseId = enterpriseId;
-                var proimgsurl = data.imgUrls;
+                var proimgsurl = data.imgUrl;
+                console.log(proimgsurl);
                 // var minImgUrl = "../img/enterprise.png";
                 var enterpriseName = data.enterpriseName;
                 var socialCreditCode = data.socialCreditCode;
