@@ -38,4 +38,6 @@ public interface CodeDao {
 	CodeDO getCode(Map<String, Object> map);
 
 	List<CodeDO> getList(Map<String, Object> map);
+
+	List<CodeDO> getListByIds(Map<String, Object> map);
 }

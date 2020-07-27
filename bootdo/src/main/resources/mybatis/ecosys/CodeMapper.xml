@@ -139,5 +139,13 @@
 		</foreach>
 	</select>
 
+	<select id="getListByIds" resultType="com.bootdo.ecosys.domain.CodeDO" >
+		select co.name  from eco_code co  where
+		co.code_id in
+		<foreach collection="idsArray" item="id" index="index" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</select>
+
 
 </mapper>

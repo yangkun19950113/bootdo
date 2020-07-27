@@ -1,3 +1,4 @@
+var enterpriseMsgMapping = "/ecosys/envprotection";
 $('#demo').carousel({
     interval: 3000
 })
@@ -138,7 +139,8 @@ function reLoad(socialCreditCode) {
                     "<p class='card-text'> 是否有环评文号:" + ecoEstimateFlg + "</p>" +
                     "<p class='card-text'> 是够属于园区:" + parkFlg + "</p>" +
                     "<p class='card-text'> 是否有环保制度:" + ecoStandardFlg + "</p>" +
-                    "<a href='#' class='btn btn-primary'>表格信息</a>" +
+                    // "<a href='#' class='btn btn-primary'>表格信息</a>" +
+                    '<a class="btn btn-primary"  href="#" onclick="openPageJump(\'' + enterpriseMsgMapping +'\',\'' + enterpriseMsgMapping +'/showExcelInfo/'+enterpriseId+'\',\'' + '环保表格信息' + '\')">'+'环保表格信息'+'</a>'+
                     "</div>"
                 );
                 $("#product").append("<div class='card' style='width: 18rem;' >" +

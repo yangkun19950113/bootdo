@@ -1,5 +1,6 @@
 package com.bootdo.ecosys.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -157,6 +158,32 @@ public class EnvprotectionController {
 	public R remove(@RequestParam("ids[]") Integer[] envirProtectionIds){
 		envprotectionService.batchRemove(envirProtectionIds);
 		return R.ok();
+	}
+
+	/**
+	 * 获取环保表格信息
+	 * @param enterpriseId
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/showExcelInfo/{enterpriseId}")
+	//@RequiresPermissions("ecosys:envprotection:excelInfo")
+	String envprotectionExcelInfo(@PathVariable("enterpriseId") Long enterpriseId,Model model) throws IOException {
+		model.addAttribute("enterpriseId", enterpriseId);
+
+		// 根据企业Id查询环保信息主数据
+		EnvprotectionDO envprotection = envprotectionService.getData(enterpriseId.intValue());
+
+		// 根据企业Id查询企业
+		EnterpriseDO enterprise = enterpriseService.get(envprotection.getEnterpriseId());
+		// 设置环保信息的企业名称
+		envprotection.setEnterpriseName(enterprise.getEnterpriseName());
+
+		// 设置环保表格信息
+		envprotectionService.showExcelInfo(envprotection);
+
+		// 跳转写成的html页面
+		return "ecosys/enterprisemsg/excelmsg";
 	}
 	
 }

@@ -3,6 +3,7 @@ package com.bootdo.ecosys.service;
 
 import com.bootdo.ecosys.domain.EnvprotectionDO;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
 
@@ -28,5 +29,7 @@ public interface EnvprotectionService {
 	int remove(Integer envirProtectionId);
 	
 	int batchRemove(Integer[] envirProtectionIds);
-	EnvprotectionDO getData(Integer enterpriseId);
+	EnvprotectionDO getData(Integer enterpriseId);void showExcelInfo(EnvprotectionDO envprotection) throws FileNotFoundException;
+
+
 }
