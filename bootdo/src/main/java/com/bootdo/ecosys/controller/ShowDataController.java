@@ -69,18 +69,22 @@ public class ShowDataController {
 		socialCreditCode = enterprise.getSocialCreditCode();
 		ShowData.setSocialCreditCode(socialCreditCode);
 		List<FileDO> fileList = fileDao.geturl(socialCreditCode);
-		List<String> list=new ArrayList<String>();
-		for(FileDO fileDO :fileList){
-			list.add(fileDO.getUrl());
+		String [] str = new  String [fileList.size()];
+		for(int i=0;i<fileList.size();i++){
+			FileDO FileDO = fileList.get(i);
+			String url = FileDO.getUrl();
+			str[i] = url;
 		}
 
-		if(null == list || "".equals(list)){
+		if(null == str || "".equals(str)){
 
         }else {
             // 轮播图片
-            ShowData.setImgUrl(list.toString());
+            ShowData.setImgUrls(str);
         }
-
+//		String imgUrl = enterprise.getImgUrl();
+//		String[] strArray = imgUrl.split(",");
+//		ShowData.setImgUrls(strArray);
 		// 卡片图片路径
 //		ShowData.setMinImgUrl("../img/enterprise.png");
 		// 企业id
