@@ -16,6 +16,9 @@
 		select * from eco_enterprise where  coordinates =#{coordinates} LIMIT 1
 </select>
 
+	<select id="getEnterpriseName" resultType="com.bootdo.ecosys.domain.EnterpriseDO">
+		select enterprise_name from eco_enterprise where  enterprise_name like CONCAT('%',#{enterpriseName},'%')
+	</select>
 	<select id="getenterprise" resultType="com.bootdo.ecosys.domain.EnterpriseDO">
 		select * from eco_enterprise where
 		delete_flag = '0'

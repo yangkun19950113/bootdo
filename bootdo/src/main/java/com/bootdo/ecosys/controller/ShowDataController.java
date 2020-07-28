@@ -53,8 +53,19 @@ public class ShowDataController {
 	@Autowired
 	private FileDao fileDao;
 
-	// 获取前台显示信息
+	@GetMapping("/enterpriseName")
+	public ResponseData enterpriseList(String enterpriseName){
+		List<EnterpriseDO> enterpriseList = enterpriseDao.getEnterpriseName(enterpriseName);
+		String [] str = new  String [enterpriseList.size()];
+		for(int i=0;i<enterpriseList.size();i++){
+			EnterpriseDO EnterpriseDO = enterpriseList.get(i);
+			String enterpriseNames = EnterpriseDO.getEnterpriseName();
+			str[i] = enterpriseNames;
+		}
 
+		return MessageResult.success("200","", str);
+	}
+	// 获取前台显示信息
 	@GetMapping("/enterpriseList")
 	public ResponseData enterpriseList(String enterpriseName,String socialCreditCode,Integer enterpriseId){
 		if((null == enterpriseName&&null == socialCreditCode&&null==enterpriseId)||("".equals(enterpriseName)&&"".equals(socialCreditCode)&&null==enterpriseId)){
