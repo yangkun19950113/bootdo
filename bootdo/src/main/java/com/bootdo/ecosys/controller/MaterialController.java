@@ -44,7 +44,7 @@ public class MaterialController {
 	private CodeService codeService;
 
 	@GetMapping("/{enterpriseId}")
-	@RequiresPermissions("ecosys:material:material")
+//	@RequiresPermissions("ecosys:material:material")
 	String Material(@PathVariable("enterpriseId") Long enterpriseId,Model model){
 		model.addAttribute("enterpriseId", enterpriseId);
 		return "ecosys/material/material";
@@ -52,7 +52,7 @@ public class MaterialController {
 	
 	@ResponseBody
 	@GetMapping("/list/{enterpriseId}")
-	@RequiresPermissions("ecosys:material:material")
+//	@RequiresPermissions("ecosys:material:material")
 	public PageUtils list(@RequestParam Map<String, Object> params,@PathVariable("enterpriseId") Long enterpriseId){
 		//查询列表数据
 		params.put("enterpriseId",enterpriseId);
@@ -64,7 +64,7 @@ public class MaterialController {
 	}
 	
 	@GetMapping("/add/{enterpriseId}")
-	@RequiresPermissions("ecosys:material:add")
+//	@RequiresPermissions("ecosys:material:add")
 	String add(@PathVariable("enterpriseId") Long enterpriseId,Model model){
 		EnterpriseDO enterprise = enterpriseService.get(enterpriseId.intValue());
 		//乡镇
@@ -93,7 +93,7 @@ public class MaterialController {
 	}
 
 	@GetMapping("/edit/{materialId}")
-	@RequiresPermissions("ecosys:material:edit")
+//	@RequiresPermissions("ecosys:material:edit")
 	String edit(@PathVariable("materialId") Integer materialId,Model model){
 		MaterialDO material = materialService.get(materialId);
 		EnterpriseDO enterprise = enterpriseService.get(material.getEnterpriseId());
@@ -119,7 +119,7 @@ public class MaterialController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("ecosys:material:add")
+//	@RequiresPermissions("ecosys:material:add")
 	public R save( MaterialDO material){
 		if(materialService.save(material)>0){
 			return R.ok();
@@ -131,7 +131,7 @@ public class MaterialController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("ecosys:material:edit")
+//	@RequiresPermissions("ecosys:material:edit")
 	public R update( MaterialDO material){
 		if(materialService.update(material)>0){
 			return R.ok();
@@ -144,7 +144,7 @@ public class MaterialController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("ecosys:material:remove")
+//	@RequiresPermissions("ecosys:material:remove")
 	public R remove( Integer materialId){
 		if(materialService.remove(materialId)>0){
 			return R.ok();
@@ -157,7 +157,7 @@ public class MaterialController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("ecosys:material:batchRemove")
+//	@RequiresPermissions("ecosys:material:batchRemove")
 	public R remove(@RequestParam("ids[]") Integer[] materialIds){
 		materialService.batchRemove(materialIds);
 		return R.ok();

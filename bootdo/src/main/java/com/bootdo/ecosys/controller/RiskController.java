@@ -10,7 +10,6 @@ import com.bootdo.ecosys.domain.RiskDO;
 import com.bootdo.ecosys.service.CodeService;
 import com.bootdo.ecosys.service.EnterpriseService;
 import com.bootdo.ecosys.service.RiskService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
@@ -44,7 +43,6 @@ public class RiskController {
 	private CodeService codeService;
 
 	@GetMapping("/{enterpriseId}")
-	@RequiresPermissions("ecosys:risk:risk")
 	String Risk(@PathVariable("enterpriseId") Long enterpriseId,Model model){
 		model.addAttribute("enterpriseId", enterpriseId);
 		return "ecosys/risk/risk";
@@ -52,7 +50,6 @@ public class RiskController {
 	
 	@ResponseBody
 	@GetMapping("/list/{enterpriseId}")
-	@RequiresPermissions("ecosys:risk:risk")
 	public PageUtils list(@RequestParam Map<String, Object> params,@PathVariable("enterpriseId") Long enterpriseId){
 		//查询列表数据
 		params.put("enterpriseId",enterpriseId);
@@ -64,7 +61,6 @@ public class RiskController {
 	}
 
 	@GetMapping("/add/{enterpriseId}")
-	@RequiresPermissions("ecosys:risk:add")
 	String add(@PathVariable("enterpriseId") Long enterpriseId,Model model){
 		EnterpriseDO enterprise = enterpriseService.get(enterpriseId.intValue());
 		//乡镇
@@ -93,7 +89,6 @@ public class RiskController {
 	}
 
 	@GetMapping("/edit/{safeTroubleId}")
-	@RequiresPermissions("ecosys:risk:edit")
 	String edit(@PathVariable("safeTroubleId") Integer safeTroubleId,Model model){
 		RiskDO risk = riskService.get(safeTroubleId);
 		EnterpriseDO enterprise = enterpriseService.get(risk.getEnterpriseId());
@@ -119,7 +114,6 @@ public class RiskController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("ecosys:risk:add")
 	public R save( RiskDO risk){
 		if(riskService.save(risk)>0){
 			return R.ok();
@@ -131,7 +125,6 @@ public class RiskController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("ecosys:risk:edit")
 	public R update( RiskDO risk){
 		if(riskService.update(risk)>0){
 			return R.ok();
@@ -144,7 +137,6 @@ public class RiskController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("ecosys:risk:remove")
 	public R remove( Integer safeTroubleId){
 		if(riskService.remove(safeTroubleId)>0){
 			return R.ok();
@@ -157,7 +149,6 @@ public class RiskController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("ecosys:risk:batchRemove")
 	public R remove(@RequestParam("ids[]") Integer[] safeTroubleIds){
 		riskService.batchRemove(safeTroubleIds);
 		return R.ok();

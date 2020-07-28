@@ -10,7 +10,6 @@ import com.bootdo.ecosys.domain.EnterpriseDO;
 import com.bootdo.ecosys.service.CodeService;
 import com.bootdo.ecosys.service.EcoequipmentService;
 import com.bootdo.ecosys.service.EnterpriseService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
@@ -45,7 +44,6 @@ public class EcoequipmentController {
 	private CodeService codeService;
 
 	@GetMapping("/{enterpriseId}")
-	@RequiresPermissions("ecosys:ecoequipment:ecoequipment")
 	String Ecoequipment(@PathVariable("enterpriseId") Long enterpriseId,Model model){
 		model.addAttribute("enterpriseId", enterpriseId);
 		return "ecosys/ecoequipment/ecoequipment";
@@ -53,7 +51,6 @@ public class EcoequipmentController {
 	
 	@ResponseBody
 	@GetMapping("/list/{enterpriseId}")
-	@RequiresPermissions("ecosys:ecoequipment:ecoequipment")
 	public PageUtils list(@RequestParam Map<String, Object> params,@PathVariable("enterpriseId") Long enterpriseId){
 		//查询列表数据
 		params.put("enterpriseId",enterpriseId);
@@ -65,7 +62,6 @@ public class EcoequipmentController {
 	}
 
 	@GetMapping("/add/{enterpriseId}")
-	@RequiresPermissions("ecosys:ecoequipment:add")
 	String add(@PathVariable("enterpriseId") Long enterpriseId,Model model){
 		EnterpriseDO enterprise = enterpriseService.get(enterpriseId.intValue());
 		//乡镇
@@ -93,7 +89,6 @@ public class EcoequipmentController {
 	}
 
 	@GetMapping("/edit/{equipmentId}")
-	@RequiresPermissions("ecosys:ecoequipment:edit")
 	String edit(@PathVariable("equipmentId") Integer equipmentId,Model model){
 		EcoequipmentDO ecoequipment = ecoequipmentService.get(equipmentId);
 		EnterpriseDO enterprise = enterpriseService.get(ecoequipment.getEnterpriseId());
@@ -119,7 +114,6 @@ public class EcoequipmentController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("ecosys:ecoequipment:add")
 	public R save( EcoequipmentDO ecoequipment){
 		if(ecoequipmentService.save(ecoequipment)>0){
 			return R.ok();
@@ -131,7 +125,6 @@ public class EcoequipmentController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("ecosys:ecoequipment:edit")
 	public R update( EcoequipmentDO ecoequipment){
 		if(ecoequipmentService.update(ecoequipment)>0){
 			return R.ok();
@@ -144,7 +137,6 @@ public class EcoequipmentController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("ecosys:ecoequipment:remove")
 	public R remove( Integer equipmentId){
 		if(ecoequipmentService.remove(equipmentId)>0){
 			return R.ok();
@@ -157,7 +149,6 @@ public class EcoequipmentController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("ecosys:ecoequipment:batchRemove")
 	public R remove(@RequestParam("ids[]") Integer[] equipmentIds){
 		ecoequipmentService.batchRemove(equipmentIds);
 		return R.ok();

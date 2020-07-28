@@ -65,36 +65,32 @@
                                data-index="0" th:href="@{/main}">了解BootDo</a></li>
                     </ul>
                 </li>-->
-<!--                <li th:each="menu : ${menus}"><a href="#"> <i-->
-<!--                        class="fa fa fa-bar-chart-o" th:class="${menu.attributes.icon}"></i>-->
-<!--                    <span class="nav-label" th:text="${menu.text}">基础信息</span> <span class="fa arrow"></span>-->
-<!--                </a>-->
-<!--                    <ul class="nav nav-second-level">-->
-<!--                        <li th:each="cmenu : ${menu.children}"><a class="J_menuItem" href="graph_echarts.html" th:text="${cmenu.text}" th:href="${cmenu.attributes.url}">系统管理</a></li>-->
-<!--                    </ul>-->
-<!--                </li>-->
+                <li th:each="menu : ${menus}"><a href="#"> <i
+                        class="fa fa fa-bar-chart-o" th:class="${menu.attributes.icon}"></i>
+                    <span class="nav-label" th:text="${menu.text}">基础信息</span> <span class="fa arrow"></span>
+                </a>
+                    <ul class="nav nav-second-level">
+                        <li th:each="cmenu : ${menu.children}"><a class="J_menuItem" href="graph_echarts.html" th:text="${cmenu.text}" th:href="${cmenu.attributes.url}">系统管理</a></li>
+                    </ul>
+                </li>
 
-                <!--<li><a href="#"> <i class="fa fa-home"></i> <span class="nav-label">企业管理</span> <span class="fa arrow"></span>-->
+
+                <li><a href="#"> <i class="fa fa-home"></i> <span class="nav-label">数据管理</span> <span class="fa arrow"></span>
                 </a>
+
                     <ul class="nav nav-second-level">
-                        <li><a id="index001" class="J_menuItem fa fa-map" href="index_v1.html" data-index="0" th:href="@{ecosys/enterprise}"> &nbsp;企业信息管理</a></li>
+                        <li><a id="index002" class="J_menuItem " href="mainAllCharts.html" data-index="0" th:href="@{/chart/graph_echarts.html}">&nbsp;综合大数据</a></li>
                     </ul>
-                </a>
-                <a>
                     <ul class="nav nav-second-level">
-                        <li><a id="index002" class="J_menuItem fa fa-bar-chart" href="mainAllCharts.html" data-index="0" th:href="@{/chart/graph_echarts.html}">&nbsp;综合大数据</a></li>
+                        <li><a id="index004" class="J_menuItem " href="index_v1.html" data-index="0" th:href="@{/chart/enterprisemsg.html}">&nbsp;企业信息</a></li>
                     </ul>
-                </a>
-                <a >
+
                     <ul class="nav nav-second-level">
-                        <li><a id="index003" class="J_menuItem fa fa-globe" href="index_v1.html" data-index="0" th:href="@{/chart/map.html}">&nbsp;地图</a></li>
+                        <li><a id="index003" class="J_menuItem " href="index_v1.html" data-index="0" th:href="@{/chart/map.html}">&nbsp;地图</a></li>
                     </ul>
-                </a>
-                <a >
-                    <ul class="nav nav-second-level">
-                        <li><a id="index004" class="J_menuItem fa fa-address-card" href="index_v1.html" data-index="0" th:href="@{/chart/enterprisemsg.html}">&nbsp;企业信息</a></li>
-                    </ul>
-                </a>
+                </li>
+
+
 
 
 

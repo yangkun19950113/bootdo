@@ -46,7 +46,7 @@ public class FiredeviceController {
 	private CodeService codeService;
 	
 	@GetMapping("/{enterpriseId}")
-	@RequiresPermissions("ecosys:firedevice:firedevice")
+//	@RequiresPermissions("ecosys:firedevice:firedevice")
 	String Firedevice(@PathVariable("enterpriseId") Long enterpriseId,Model model){
 		model.addAttribute("enterpriseId", enterpriseId);
 	    return "ecosys/firedevice/firedevice";
@@ -54,7 +54,7 @@ public class FiredeviceController {
 
 	@ResponseBody
 	@GetMapping("/list/{enterpriseId}")
-	@RequiresPermissions("ecosys:firedevice:firedevice")
+//	@RequiresPermissions("ecosys:firedevice:firedevice")
 	public PageUtils list(@RequestParam Map<String, Object> params,@PathVariable("enterpriseId") Long enterpriseId){
 		params.put("enterpriseId",enterpriseId);
 		Query query = new Query(params);
@@ -66,7 +66,7 @@ public class FiredeviceController {
 	}
 	
 	@GetMapping("/add/{enterpriseId}")
-	@RequiresPermissions("ecosys:firedevice:add")
+//	@RequiresPermissions("ecosys:firedevice:add")
 	String add(@PathVariable("enterpriseId") Long enterpriseId,Model model){
 		EnterpriseDO enterprise = enterpriseService.get(enterpriseId.intValue());
 		//TODO
@@ -94,7 +94,7 @@ public class FiredeviceController {
 	}
 
 	@GetMapping("/edit/{equipmentId}")
-	@RequiresPermissions("ecosys:firedevice:edit")
+//	@RequiresPermissions("ecosys:firedevice:edit")
 	String edit(@PathVariable("equipmentId") Integer equipmentId,Model model){
 		FiredeviceDO firedevice = firedeviceService.get(equipmentId);
 		EnterpriseDO enterprise = enterpriseService.get(firedevice.getEnterpriseId());
@@ -120,7 +120,7 @@ public class FiredeviceController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("ecosys:firedevice:add")
+//	@RequiresPermissions("ecosys:firedevice:add")
 	public R save( FiredeviceDO firedevice){
 		if(firedeviceService.save(firedevice)>0){
 			return R.ok();
@@ -132,7 +132,7 @@ public class FiredeviceController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("ecosys:firedevice:edit")
+//	@RequiresPermissions("ecosys:firedevice:edit")
 	public R update( FiredeviceDO firedevice){
 		if(firedeviceService.update(firedevice)>0){
 			return R.ok();
@@ -145,7 +145,7 @@ public class FiredeviceController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("ecosys:firedevice:remove")
+//	@RequiresPermissions("ecosys:firedevice:remove")
 	public R remove( Integer equipmentId){
 		if(firedeviceService.remove(equipmentId)>0){
 		return R.ok();
@@ -158,7 +158,7 @@ public class FiredeviceController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("ecosys:firedevice:batchRemove")
+//	@RequiresPermissions("ecosys:firedevice:batchRemove")
 	public R remove(@RequestParam("ids[]") Integer[] equipmentIds){
 		firedeviceService.batchRemove(equipmentIds);
 		return R.ok();
