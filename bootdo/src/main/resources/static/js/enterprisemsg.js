@@ -34,7 +34,7 @@ function reLoad(socialCreditCode) {
                 $("#firedevice").empty();
                 $("#myAlert2").empty();
                 var data = res.data;
-                var enterpriseId = enterpriseId;
+                var enterpriseId = data.enterpriseId;
                 var proimgsurl = data.imgUrls;
                 console.log(proimgsurl);
                 // var minImgUrl = "../img/enterprise.png";
