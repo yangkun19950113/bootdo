@@ -184,64 +184,6 @@ public class EnvprotectionServiceImpl implements EnvprotectionService {
 		}
 
 		return  convertContent;
-
 	}
-
-//	private String fileAccordingData(Map<String, String> dataMap) throws FileNotFoundException {
-//
-//		File path = new File(ResourceUtils.getURL("classpath:").getPath());
-//		String templateFileName = path.getAbsolutePath() + "\\static\\docs\\环保基本信息模板.docx";
-//		XWPFTemplate template = XWPFTemplate.compile(templateFileName).render(dataMap);
-//
-//		String targetDataFileName =  path.getAbsolutePath() + "\\static\\docs\\环保信息.docx";
-//		try {
-//			FileOutputStream out = new FileOutputStream(targetDataFileName);//要导出的文件名
-//			template.write(out);
-//			out.flush();
-//			out.close();
-//			template.close();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//
-//		return targetDataFileName;
-//	}
-//
-//	private void docxToHtml(String sourceDocFileName, String targetHtmlFileName) {
-//		OutputStreamWriter outputStreamWriter = null;
-//		try {
-//			XWPFDocument document = new XWPFDocument(new FileInputStream(sourceDocFileName));
-//			//XHTMLOptions options = XHTMLOptions.create();
-//			// 存放图片的文件夹
-//			//options.setExtractor(new FileImageExtractor(new File(imagePath)));
-//			// html中图片的路径
-//			//options.URIResolver(new BasicURIResolver("image"));
-//			outputStreamWriter = new OutputStreamWriter(new FileOutputStream(targetHtmlFileName), "utf-8");
-//			XHTMLConverter xhtmlConverter = (XHTMLConverter) XHTMLConverter.getInstance();
-//			xhtmlConverter.convert(document, outputStreamWriter, null);
-//
-////			InputStream in = new FileInputStream(new File("D:\\wordTemplet\\个人信息.docx"));//要转化的word
-////			XWPFDocument document = new XWPFDocument(in);
-////			OutputStream baos = new ByteArrayOutputStream();
-////			XHTMLConverter xhtmlConverter = (XHTMLConverter) XHTMLConverter.getInstance();
-////			xhtmlConverter.convert(document, baos,null);
-////			content = baos.toString();//转化好的html代码
-////
-////			baos.close();
-//			outputStreamWriter.flush();
-//
-//
-//		}
-//		catch (Exception e) {
-//			e.printStackTrace();
-//		}finally {
-//			try {
-//				outputStreamWriter.close();
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//
-//	}
 
 }

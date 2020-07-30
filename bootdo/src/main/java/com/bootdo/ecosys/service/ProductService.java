@@ -1,7 +1,9 @@
 package com.bootdo.ecosys.service;
 
+import com.bootdo.ecosys.domain.EnterpriseDO;
 import com.bootdo.ecosys.domain.ProductDO;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -28,4 +30,6 @@ public interface ProductService {
 	
 	int batchRemove(Integer[] productIds);
 	ProductDO getData(Integer enterpriseId);
+
+	void showExcelInfo(List<ProductDO> productList) throws IOException;
 }
