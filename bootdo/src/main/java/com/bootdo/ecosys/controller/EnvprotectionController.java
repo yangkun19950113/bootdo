@@ -158,16 +158,18 @@ public class EnvprotectionController {
 	 * @return
 	 */
 	@GetMapping("/showExcelInfo/{enterpriseId}")
-	String envprotectionExcelInfo(@PathVariable("enterpriseId") Long enterpriseId,Model model) throws IOException {
+	String envprotectionExcelInfo(@PathVariable("enterpriseId") Integer enterpriseId,Model model) throws IOException {
 		model.addAttribute("enterpriseId", enterpriseId);
 
 		// 根据企业Id查询环保信息主数据
-		EnvprotectionDO envprotection = envprotectionService.getData(enterpriseId.intValue());
+		EnvprotectionDO envprotection = envprotectionService.getData(enterpriseId);
 
 		// 根据企业Id查询企业
 		EnterpriseDO enterprise = enterpriseService.get(envprotection.getEnterpriseId());
 		// 设置环保信息的企业名称
-		envprotection.setEnterpriseName(enterprise.getEnterpriseName());
+		if(envprotection != null){
+			envprotection.setEnterpriseName(enterprise.getEnterpriseName());
+		}
 
 		// 设置环保表格信息
 		envprotectionService.showExcelInfo(envprotection);
