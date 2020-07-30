@@ -1,14 +1,21 @@
 package com.bootdo.ecosys.service.impl;
 
+import com.bootdo.common.utils.StringUtils;
 import com.bootdo.ecosys.dao.CodeDao;
 import com.bootdo.ecosys.dao.EnterpriseDao;
 import com.bootdo.ecosys.dao.EnvprotectionDao;
 import com.bootdo.ecosys.dao.FiredeviceDao;
 import com.bootdo.ecosys.domain.*;
 import com.bootdo.ecosys.service.EnterpriseService;
+import com.bootdo.tool.InformationUtil;
+import com.deepoove.poi.XWPFTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -223,5 +230,177 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 	public List<DangersourceDO> getDangerData(Map<String, Object> params) {
 		return enterpriseDao.getDangerData(params);
 	}
+
+	@Override
+	public void showExcelInfo(EnterpriseDO enterprise) throws IOException {
+
+		// 数据转换
+		Map<String,String> dataMap = convertData(enterprise);
+
+		// 根据动态数据生成word文件
+		File path = new File(ResourceUtils.getURL("classpath:").getPath());
+		String templateFileName = path.getAbsolutePath() + "\\static\\docs\\企业基本信息模板.docx";
+		String targetDataFileName =  path.getAbsolutePath() + "\\static\\docs\\企业基本信息.docx";
+		String sourceDocFileName = InformationUtil.fileAccordingData(templateFileName ,targetDataFileName ,dataMap);
+		String targetHtmlFileName = path.getAbsolutePath() + "\\templates\\ecosys\\enterprisemsg\\excelmsg.html";
+
+		// 根据word文件写成html文件
+		InformationUtil.docxToHtml(sourceDocFileName,targetHtmlFileName);
+
+	}
+
+	private Map<String, String> convertData(EnterpriseDO enterprise) {
+		Map<String,String> dataMap = new HashMap<String,String>();
+
+		// 被调查人姓名
+		dataMap.put("surveytedPersonName",enterprise.getSurveytedPersonName());
+		// 被调查人职务
+		dataMap.put("surveytedPersonPosition",enterprise.getSurveytedPersonPosition());
+		// 调查人
+		dataMap.put("surveyPersonName",enterprise.getSurveyPersonName());
+		// 填表日期
+		Date fullFormTime = enterprise.getFullFormTime();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String fullFormTimeContent = sdf.format(fullFormTime);
+		dataMap.put("fullFormTime",fullFormTimeContent);
+
+		// 企业名称
+		dataMap.put("enterpriseName",enterprise.getEnterpriseName());
+		// 社会信用编码
+		dataMap.put("socialCreditCode",enterprise.getSocialCreditCode());
+		// 注册地址
+		dataMap.put("registeredAddress",enterprise.getRegisteredAddress());
+		// 坐标位置
+		dataMap.put("coordinates",enterprise.getCoordinates());
+		// 企业规模(大中小) todo
+		String enterpriseScope = enterprise.getEnterpriseScope();
+		String enterpriseScopeContent = "";
+		if(enterpriseScope.equals("1")){
+			enterpriseScopeContent = "大";
+		} else if(enterpriseScope.equals("2")){
+			enterpriseScopeContent = "中";
+		} else if(enterpriseScope.equals("3")) {
+			enterpriseScopeContent = "小";
+		}
+		dataMap.put("enterpriseScope",enterpriseScopeContent);
+		// 员工数
+		dataMap.put("employeeNum",Long.toString(enterprise.getEmployeeNum()));
+		// 注册时间
+		dataMap.put("registeredTime",sdf.format(enterprise.getRegisteredTime()));
+		// 注册资金
+		dataMap.put("registeredFund",enterprise.getRegisteredFund() == null?"":Float.toString(enterprise.getRegisteredFund()));
+		// 企业性质
+		String enterpriseNatureContent = codeToString(enterprise.getEnterpriseNatureCode());
+		dataMap.put("enterpriseNatureCode",enterpriseNatureContent);
+		// 企业法人
+		dataMap.put("enterpriseLegalPerson",enterprise.getEnterpriseLegalPerson());
+		// 法人联系电话
+		dataMap.put("legalPersonPhoneNumber",enterprise.getLegalPersonPhoneNumber());
+		// 环保负责人
+		dataMap.put("enProtectionPerson",enterprise.getEnvironmentalProtectionPerson());
+		// 环保负责人联系电话
+		dataMap.put("enPersonPhoneNumber",enterprise.getEnPersonPhoneNumber());
+		// 安全生产负责人
+		dataMap.put("safeProdectPerson",enterprise.getSafeProdectPerson());
+		// 安全生产负责人联系电话
+		dataMap.put("safePerPhoneNumber",enterprise.getSafePerPhoneNumber());
+		// 经营范围
+		dataMap.put("businessScope",enterprise.getBusinessScope());
+		// 经营面积
+		dataMap.put("businessArea",Float.toString(enterprise.getBusinessArea()));
+		// 经营场所取得
+		String businessAreaNatureContent = codeToString(enterprise.getBusinessAreaNatureCode());
+		dataMap.put("businessAreaNatureCode",businessAreaNatureContent);
+		// 部门设置
+		dataMap.put("dept",enterprise.getDept());
+		// 纳税人性质
+		String taxpayerContent = codeToString(enterprise.getTaxpayerCode());
+		dataMap.put("taxpayerCode",taxpayerContent);
+		// 互联网营销
+		String marketContent = codeToString(enterprise.getMarketCode());
+		dataMap.put("marketCode",marketContent);
+
+		return dataMap;
+	}
+
+	private String codeToString(String codeIds) {
+		Map<String, Object> map = new HashMap<>();
+		String convertContent = "";
+		if (StringUtils.isNotEmpty(codeIds)){
+			List<String> idsArray = Arrays.asList(codeIds.split(","));
+
+			map.put("idsArray",idsArray);
+			List<CodeDO> codeDoList = codeDao.getListByIds(map);
+			for(int i = 0 ; i <codeDoList.size(); i++){
+				CodeDO currCodeDo = codeDoList.get(i);
+				if(i != (codeDoList.size() - 1)){
+					convertContent += (currCodeDo.getName()+",");
+				}else {
+					convertContent += currCodeDo.getName();
+				}
+			}
+
+		}
+
+		return  convertContent;
+
+	}
+
+//	private String fileAccordingData(Map<String, String> dataMap) throws FileNotFoundException {
+//
+//		File path = new File(ResourceUtils.getURL("classpath:").getPath());
+//		String templateFileName = path.getAbsolutePath() + "\\static\\docs\\企业基本信息模板.docx";
+//		XWPFTemplate template = XWPFTemplate.compile(templateFileName).render(dataMap);
+//
+//		String targetDataFileName =  path.getAbsolutePath() + "\\static\\docs\\企业基本信息.docx";
+//		try {
+//			FileOutputStream out = new FileOutputStream(targetDataFileName);//要导出的文件名
+//			template.write(out);
+//			out.flush();
+//			out.close();
+//			template.close();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//
+//		return targetDataFileName;
+//	}
+
+//	private void docxToHtml(String sourceDocFileName, String targetHtmlFileName) {
+//		OutputStreamWriter outputStreamWriter = null;
+//		try {
+//			XWPFDocument document = new XWPFDocument(new FileInputStream(sourceDocFileName));
+//			//XHTMLOptions options = XHTMLOptions.create();
+//			// 存放图片的文件夹
+//			//options.setExtractor(new FileImageExtractor(new File(imagePath)));
+//			// html中图片的路径
+//			//options.URIResolver(new BasicURIResolver("image"));
+//			outputStreamWriter = new OutputStreamWriter(new FileOutputStream(targetHtmlFileName), "utf-8");
+//			XHTMLConverter xhtmlConverter = (XHTMLConverter) XHTMLConverter.getInstance();
+//			xhtmlConverter.convert(document, outputStreamWriter, null);
+//
+////			InputStream in = new FileInputStream(new File("D:\\wordTemplet\\个人信息.docx"));//要转化的word
+////			XWPFDocument document = new XWPFDocument(in);
+////			OutputStream baos = new ByteArrayOutputStream();
+////			XHTMLConverter xhtmlConverter = (XHTMLConverter) XHTMLConverter.getInstance();
+////			xhtmlConverter.convert(document, baos,null);
+////			content = baos.toString();//转化好的html代码
+////
+////			baos.close();
+//			outputStreamWriter.flush();
+//
+//
+//		}
+//		catch (Exception e) {
+//			e.printStackTrace();
+//		}finally {
+//			try {
+//				outputStreamWriter.close();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//
+//	}
 
 }

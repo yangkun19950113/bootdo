@@ -6,6 +6,8 @@ import com.bootdo.ecosys.domain.DangersourceDO;
 import com.bootdo.ecosys.domain.EnterpriseDO;
 import com.bootdo.ecosys.domain.FiredeviceDO;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -53,6 +55,8 @@ public interface EnterpriseService {
 	List<FiredeviceDO> getEffectFireEquip(Map<String, Object> params);
 
 	List<DangersourceDO> getDangerData(Map<String, Object> params);
+
+	void showExcelInfo(EnterpriseDO enterprise) throws IOException;
 
 
 }

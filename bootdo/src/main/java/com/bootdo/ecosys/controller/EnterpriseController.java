@@ -1,5 +1,6 @@
 package com.bootdo.ecosys.controller;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -143,6 +144,26 @@ public class EnterpriseController {
 	}
 
 
+	/**
+	 * 获取企业表格信息
+	 * @param enterpriseId
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/showExcelInfo/{enterpriseId}")
+	//@RequiresPermissions("ecosys:envprotection:excelInfo")
+	String enterpriseExcelInfo(@PathVariable("enterpriseId") Integer enterpriseId,Model model) throws IOException {
+		model.addAttribute("enterpriseId", enterpriseId);
+
+		// 根据企业Id查询企业基本信息
+		EnterpriseDO enterprise = enterpriseService.get(enterpriseId);
+
+		// 设置环保表格信息
+		enterpriseService.showExcelInfo(enterprise);
+
+		// 跳转写成的html页面
+		return "ecosys/enterprisemsg/excelmsg";
+	}
 
 
 }

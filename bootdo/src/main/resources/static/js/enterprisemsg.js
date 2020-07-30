@@ -1,4 +1,9 @@
-var enterpriseMsgMapping = "/ecosys/envprotection";
+var enterpriseMsgMapping = "/ecosys/enterprise";
+var envprotectionMsgMapping = "/ecosys/envprotection";
+var productMsgMapping = "/ecosys/product";
+var materialMsgMapping = "/ecosys/material";
+var ecoequipmentMsgMapping = "/ecosys/ecoequipment";
+var dangersourceMsgMapping = "/ecosys/dangersource";
 $('#demo').carousel({
     interval: 3000
 })
@@ -129,7 +134,7 @@ function reLoad(socialCreditCode) {
                     "<p class='card-text'> 社会信用编码:" + socialCreditCode + "</p>" +
                     "<p class='card-text'> 注册地址:" + registeredAddress + "</p>" +
                     "<p class='card-text'> 企业性质:" + enterpriseNatureCode + "</p>" +
-                    "<a href='#' class='btn btn-primary'>表格信息</a>" +
+                    '<a class="btn btn-primary"  href="#" onclick="openPageJump(\'' + enterpriseMsgMapping +'\',\'' + enterpriseMsgMapping +'/showExcelInfo/'+enterpriseId+'\',\'' + '企业表格信息' + '\')">'+'企业表格信息'+'</a>'+
                     "</div>"
                 );
                 $("#envprotection").append("<div class='card' style='width: 18rem;'>" +
@@ -139,8 +144,7 @@ function reLoad(socialCreditCode) {
                     "<p class='card-text'> 是否有环评文号:" + ecoEstimateFlg + "</p>" +
                     "<p class='card-text'> 是够属于园区:" + parkFlg + "</p>" +
                     "<p class='card-text'> 是否有环保制度:" + ecoStandardFlg + "</p>" +
-                    // "<a href='#' class='btn btn-primary'>表格信息</a>" +
-                    '<a class="btn btn-primary"  href="#" onclick="openPageJump(\'' + enterpriseMsgMapping +'\',\'' + enterpriseMsgMapping +'/showExcelInfo/'+enterpriseId+'\',\'' + '环保表格信息' + '\')">'+'环保表格信息'+'</a>'+
+                    '<a class="btn btn-primary"  href="#" onclick="openPageJump(\'' + envprotectionMsgMapping +'\',\'' + envprotectionMsgMapping +'/showExcelInfo/'+enterpriseId+'\',\'' + '环保表格信息' + '\')">'+'环保表格信息'+'</a>'+
                     "</div>"
                 );
                 $("#product").append("<div class='card' style='width: 18rem;' >" +
@@ -150,7 +154,7 @@ function reLoad(socialCreditCode) {
                     "<p class='card-text'> 产品名称:" + prodectName + "</p>" +
                     "<p class='card-text'> 规格:" + specifical + "</p>" +
                     "<p class='card-text'> 月产量:" + monthProduction + "</p>" +
-                    "<a href='#' class='btn btn-primary'>表格信息</a>" +
+                    '<a class="btn btn-primary"  href="#" onclick="openPageJump(\'' + productMsgMapping +'\',\'' + productMsgMapping +'/showExcelInfo/'+enterpriseId+'\',\'' + '产品产能表格信息' + '\')">'+'产品产能表格信息'+'</a>'+
                     "</div>"
                 );
                 $("#material").append("<div class='card' style='width: 18rem;'>" +
@@ -160,7 +164,7 @@ function reLoad(socialCreditCode) {
                     "<p class='card-text'> 原材料类型:" + materialType + "</p>" +
                     "<p class='card-text'> 原材料名称:" + materialName + "</p>" +
                     "<p class='card-text'> 月使用量:" + monthConsumption + "</p>" +
-                    "<a href='#' class='btn btn-primary'>表格信息</a>" +
+                    '<a class="btn btn-primary"  href="#" onclick="openPageJump(\'' + materialMsgMapping +'\',\'' + materialMsgMapping +'/showExcelInfo/'+enterpriseId+'\',\'' + '原料表格信息' + '\')">'+'原料表格信息'+'</a>'+
                     "</div>"
                 );
                 $("#ecoequipment").append("<div class='card' style='width: 18rem;'>" +
@@ -170,7 +174,7 @@ function reLoad(socialCreditCode) {
                     "<p class='card-text'> 设备名称:" + equipmentName + "</p>" +
                     "<p class='card-text'> 设备负责人:" + protectionPerson + "</p>" +
                     "<p class='card-text'> 联系电话:" + phoneNumber + "</p>" +
-                    "<a href='#' class='btn btn-primary'>表格信息</a>" +
+                    '<a class="btn btn-primary"  href="#" onclick="openPageJump(\'' + ecoequipmentMsgMapping +'\',\'' + ecoequipmentMsgMapping +'/showExcelInfo/'+enterpriseId+'\',\'' + '防治设备表格信息' + '\')">'+'防治设备表格信息'+'</a>'+
                     "</div>"
                 );
                 $("#dangersource").append("<div class='card' style='width: 18rem;'>" +
@@ -180,7 +184,7 @@ function reLoad(socialCreditCode) {
                     "<p class='card-text'> 危险源信息名称:" + dangerSourceName + "</p>" +
                     "<p class='card-text'> 具体位置:" + partDetail + "</p>" +
                     "<p class='card-text'> 危险责任人:" + dangerprotectionPerson + "</p>" +
-                    "<a href='#' class='btn btn-primary'>表格信息</a>" +
+                    '<a class="btn btn-primary"  href="#" onclick="openPageJump(\'' + dangersourceMsgMapping +'\',\'' + dangersourceMsgMapping +'/showExcelInfo/'+enterpriseId+'\',\'' + '安全重点部位表格信息' + '\')">'+'安全重点部位表格信息'+'</a>'+
                     "</div>"
                 );
                 $("#training").append("<div class='card' style='width: 18rem;'>" +
