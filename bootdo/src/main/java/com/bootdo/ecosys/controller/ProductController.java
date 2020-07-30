@@ -45,7 +45,7 @@ public class ProductController {
 	private CodeService codeService;
 
 	@GetMapping("/{enterpriseId}")
-	@RequiresPermissions("ecosys:product:product")
+//	@RequiresPermissions("ecosys:product:product")
 	String Product(@PathVariable("enterpriseId") Long enterpriseId,Model model){
 		model.addAttribute("enterpriseId", enterpriseId);
 		return "ecosys/product/product";
@@ -53,7 +53,7 @@ public class ProductController {
 	
 	@ResponseBody
 	@GetMapping("/list/{enterpriseId}")
-	@RequiresPermissions("ecosys:product:product")
+//	@RequiresPermissions("ecosys:product:product")
 	public PageUtils list(@RequestParam Map<String, Object> params,@PathVariable("enterpriseId") Long enterpriseId){
 		//查询列表数据
 		params.put("enterpriseId",enterpriseId);
@@ -65,7 +65,7 @@ public class ProductController {
 	}
 
 	@GetMapping("/add/{enterpriseId}")
-	@RequiresPermissions("ecosys:product:add")
+//	@RequiresPermissions("ecosys:product:add")
 	String add(@PathVariable("enterpriseId") Long enterpriseId,Model model){
 		EnterpriseDO enterprise = enterpriseService.get(enterpriseId.intValue());
 		//乡镇
@@ -93,7 +93,7 @@ public class ProductController {
 	}
 
 	@GetMapping("/edit/{productId}")
-	@RequiresPermissions("ecosys:product:edit")
+//	@RequiresPermissions("ecosys:product:edit")
 	String edit(@PathVariable("productId") Integer productId,Model model){
 		ProductDO product = productService.get(productId);
 		EnterpriseDO enterprise = enterpriseService.get(product.getEnterpriseId());
@@ -120,7 +120,7 @@ public class ProductController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("ecosys:product:add")
+//	@RequiresPermissions("ecosys:product:add")
 	public R save( ProductDO product){
 		if(productService.save(product)>0){
 			return R.ok();
@@ -132,7 +132,7 @@ public class ProductController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("ecosys:product:edit")
+//	@RequiresPermissions("ecosys:product:edit")
 	public R update( ProductDO product){
 		if(productService.update(product)>0){
 			return R.ok();
@@ -145,7 +145,7 @@ public class ProductController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("ecosys:product:remove")
+//	@RequiresPermissions("ecosys:product:remove")
 	public R remove( Integer productId){
 		if(productService.remove(productId)>0){
 			return R.ok();
@@ -158,7 +158,7 @@ public class ProductController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("ecosys:product:batchRemove")
+//	@RequiresPermissions("ecosys:product:batchRemove")
 	public R remove(@RequestParam("ids[]") Integer[] productIds){
 		productService.batchRemove(productIds);
 		return R.ok();

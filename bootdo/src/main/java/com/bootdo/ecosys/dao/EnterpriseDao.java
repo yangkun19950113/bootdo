@@ -24,7 +24,7 @@ public interface EnterpriseDao {
 
 	List<EnterpriseDO> getCoordinates(@Param("administrativeDivision") String administrativeDivision,@Param("country")  String country);
 	EnterpriseDO getdatabycoordinates(String coordinates);
-
+	List<EnterpriseDO> getEnterpriseName(@Param("enterpriseName") String  enterpriseName);
 	List<EnterpriseDO> list(Map<String, Object> map);
 	
 	int count(Map<String, Object> map);

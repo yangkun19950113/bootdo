@@ -30,7 +30,9 @@
                 </div>
                 &nbsp;&nbsp;&nbsp;
                 <label >  企业名称:</label> &nbsp;	&nbsp;	&nbsp;
-                <input id="enterpriseName" type="text" class="form-control"  placeholder="请输入完整企业名称">
+                <input id="enterpriseName" type="text" class="form-control" list="batch_list" autocomplete="off"  placeholder="请输入完整企业名称">
+                <datalist id="batch_list" style="width: 100px;">
+                </datalist>
             </div>
             <div class="form-group" style="padding-left: 30px;">
                 <label >社会信用编码:</label>&nbsp;
@@ -70,7 +72,7 @@
 
     </div>
     <br /><br /><br /><br /><br/><br /><br /><br /><br /><br />
-    <br /><br /><br /><br />
+    <br /><br />
 
         <div class="row" style="height: 80px;">
             <div class="col-md-3"id="ecoequipment">
@@ -88,7 +90,7 @@
 
     </div>
 
-    <div style="margin-top: -580px" >
+    <div style="margin-top: -280px" >
         <div class="row" style="height: 80px;">
             <div class="col-md-3" id ="risk" >
             </div>
@@ -102,3 +104,24 @@
 
 </body>
 </html>
+<script type="text/javascript">
+    $("#enterpriseName").bind("change", function(){
+        var enterpriseName = $("#enterpriseName").val();
+        $.ajax({
+            type: "get",
+            url: "/showData/showData/enterpriseName",
+            dataType: "json",
+            data: {
+                enterpriseName: enterpriseName
+            },
+            success: function (data) {
+                var data = data.data;
+                $('datalist#batch_list').empty();
+                for (var i = 0; i < data.length; i++) {
+                     var add_options = '<option value="' + data[i] + '">'+ data[i] + '</option>';
+                     $('datalist#batch_list').append(add_options);
+                 }
+            }
+        })
+    })
+    </script>

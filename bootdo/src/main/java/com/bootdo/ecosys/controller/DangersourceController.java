@@ -10,7 +10,6 @@ import com.bootdo.ecosys.domain.EnterpriseDO;
 import com.bootdo.ecosys.service.CodeService;
 import com.bootdo.ecosys.service.DangersourceService;
 import com.bootdo.ecosys.service.EnterpriseService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
@@ -44,7 +43,6 @@ public class DangersourceController {
 	private CodeService codeService;
 
 	@GetMapping("/{enterpriseId}")
-	@RequiresPermissions("ecosys:dangersource:dangersource")
 	String Dangersource(@PathVariable("enterpriseId") Long enterpriseId,Model model){
 		model.addAttribute("enterpriseId", enterpriseId);
 		return "ecosys/dangersource/dangersource";
@@ -52,7 +50,6 @@ public class DangersourceController {
 	
 	@ResponseBody
 	@GetMapping("/list/{enterpriseId}")
-	@RequiresPermissions("ecosys:dangersource:dangersource")
 	public PageUtils list(@RequestParam Map<String, Object> params,@PathVariable("enterpriseId") Long enterpriseId){
 		//查询列表数据
 		params.put("enterpriseId",enterpriseId);
@@ -64,7 +61,6 @@ public class DangersourceController {
 	}
 	
 	@GetMapping("/add/{enterpriseId}")
-	@RequiresPermissions("ecosys:dangersource:add")
 	String add(@PathVariable("enterpriseId") Long enterpriseId,Model model){
 		EnterpriseDO enterprise = enterpriseService.get(enterpriseId.intValue());
 		//乡镇
@@ -92,7 +88,6 @@ public class DangersourceController {
 	}
 
 	@GetMapping("/edit/{dangerSourceId}")
-	@RequiresPermissions("ecosys:dangersource:edit")
 	String edit(@PathVariable("dangerSourceId") Integer dangerSourceId,Model model){
 		DangersourceDO dangersource = dangersourceService.get(dangerSourceId);
 		EnterpriseDO enterprise = enterpriseService.get(dangersource.getEnterpriseId());
@@ -119,7 +114,6 @@ public class DangersourceController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("ecosys:dangersource:add")
 	public R save( DangersourceDO dangersource){
 		if(dangersourceService.save(dangersource)>0){
 			return R.ok();
@@ -131,7 +125,6 @@ public class DangersourceController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("ecosys:dangersource:edit")
 	public R update( DangersourceDO dangersource){
 		dangersourceService.update(dangersource);
 		return R.ok();
@@ -142,7 +135,6 @@ public class DangersourceController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("ecosys:dangersource:remove")
 	public R remove( Integer dangerSourceId){
 		if(dangersourceService.remove(dangerSourceId)>0){
 		return R.ok();
@@ -155,7 +147,6 @@ public class DangersourceController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("ecosys:dangersource:batchRemove")
 	public R remove(@RequestParam("ids[]") Integer[] dangerSourceIds){
 		dangersourceService.batchRemove(dangerSourceIds);
 		return R.ok();

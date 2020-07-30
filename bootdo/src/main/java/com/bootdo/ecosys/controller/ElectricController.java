@@ -10,7 +10,6 @@ import com.bootdo.ecosys.domain.EnterpriseDO;
 import com.bootdo.ecosys.service.CodeService;
 import com.bootdo.ecosys.service.ElectricService;
 import com.bootdo.ecosys.service.EnterpriseService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
@@ -45,7 +44,6 @@ public class ElectricController {
 	private CodeService codeService;
 	
 	@GetMapping("/{enterpriseId}")
-	@RequiresPermissions("ecosys:electric:electric")
 	String Electric(@PathVariable("enterpriseId") Long enterpriseId,Model model){
 		model.addAttribute("enterpriseId", enterpriseId);
 		return "ecosys/electric/electric";
@@ -53,7 +51,6 @@ public class ElectricController {
 	
 	@ResponseBody
 	@GetMapping("/list/{enterpriseId}")
-	@RequiresPermissions("ecosys:electric:electric")
 	public PageUtils list(@RequestParam Map<String, Object> params,@PathVariable("enterpriseId") Long enterpriseId){
 		//查询列表数据
 		params.put("enterpriseId",enterpriseId);
@@ -65,7 +62,6 @@ public class ElectricController {
 	}
 	
 	@GetMapping("/add/{enterpriseId}")
-	@RequiresPermissions("ecosys:electric:add")
 	String add(@PathVariable("enterpriseId") Long enterpriseId,Model model){
 		EnterpriseDO enterprise = enterpriseService.get(enterpriseId.intValue());
 		//乡镇
@@ -90,7 +86,6 @@ public class ElectricController {
 	}
 
 	@GetMapping("/edit/{equipmentId}")
-	@RequiresPermissions("ecosys:electric:edit")
 	String edit(@PathVariable("equipmentId") Integer equipmentId,Model model){
 		ElectricDO electric = electricService.get(equipmentId);
 		EnterpriseDO enterprise = enterpriseService.get(electric.getEnterpriseId());
@@ -116,7 +111,6 @@ public class ElectricController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("ecosys:electric:add")
 	public R save( ElectricDO electric){
 		if(electricService.save(electric)>0){
 			return R.ok();
@@ -128,7 +122,6 @@ public class ElectricController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("ecosys:electric:edit")
 	public R update( ElectricDO electric){
 		if(electricService.update(electric)>0){
 			return R.ok();
@@ -141,7 +134,6 @@ public class ElectricController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("ecosys:electric:remove")
 	public R remove( Integer equipmentId){
 		if(electricService.remove(equipmentId)>0){
 			return R.ok();
@@ -154,7 +146,6 @@ public class ElectricController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("ecosys:electric:batchRemove")
 	public R remove(@RequestParam("ids[]") Integer[] equipmentIds){
 		electricService.batchRemove(equipmentIds);
 		return R.ok();

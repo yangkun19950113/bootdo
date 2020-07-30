@@ -16,6 +16,9 @@
 		select * from eco_enterprise where  coordinates =#{coordinates} LIMIT 1
 </select>
 
+	<select id="getEnterpriseName" resultType="com.bootdo.ecosys.domain.EnterpriseDO">
+		select enterprise_name from eco_enterprise where  enterprise_name like CONCAT('%',#{enterpriseName},'%')
+	</select>
 	<select id="getenterprise" resultType="com.bootdo.ecosys.domain.EnterpriseDO">
 		select * from eco_enterprise where
 		delete_flag = '0'
@@ -29,7 +32,7 @@
         <where>
 				  delete_flag = '0'
 		  		  <if test="enterpriseId != null and enterpriseId != ''"> and enterprise_id = #{enterpriseId} </if>
-		  		  <if test="enterpriseName != null and enterpriseName != ''"> and enterprise_name = #{enterpriseName} </if>
+		  		  <if test="enterpriseName != null and enterpriseName != ''"> and enterprise_name like CONCAT('%',#{enterpriseName},'%') </if>
 		  		  <if test="socialCreditCode != null and socialCreditCode != ''"> and social_credit_code = #{socialCreditCode} </if>
 		  		  <if test="registeredAddress != null and registeredAddress != ''"> and registered_address = #{registeredAddress} </if>
 		  		  <if test="registeredTime != null and registeredTime != ''"> and registered_time = #{registeredTime} </if>
@@ -83,7 +86,7 @@
 		 <where>
 			 	  delete_flag = '0'
 		  		  <if test="enterpriseId != null and enterpriseId != ''"> and enterprise_id = #{enterpriseId} </if>
-		  		  <if test="enterpriseName != null and enterpriseName != ''"> and enterprise_name = #{enterpriseName} </if>
+				  <if test="enterpriseName != null and enterpriseName != ''"> and enterprise_name like CONCAT('%',#{enterpriseName},'%') </if>
 		  		  <if test="socialCreditCode != null and socialCreditCode != ''"> and social_credit_code = #{socialCreditCode} </if>
 		  		  <if test="registeredAddress != null and registeredAddress != ''"> and registered_address = #{registeredAddress} </if>
 		  		  <if test="registeredTime != null and registeredTime != ''"> and registered_time = #{registeredTime} </if>

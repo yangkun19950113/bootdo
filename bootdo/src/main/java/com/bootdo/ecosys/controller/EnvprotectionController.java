@@ -11,7 +11,6 @@ import com.bootdo.ecosys.domain.EnvprotectionDO;
 import com.bootdo.ecosys.service.CodeService;
 import com.bootdo.ecosys.service.EnterpriseService;
 import com.bootdo.ecosys.service.EnvprotectionService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
@@ -46,7 +45,6 @@ public class EnvprotectionController {
 	private EnterpriseService enterpriseService;
 	
 	@GetMapping("/{enterpriseId}")
-	@RequiresPermissions("ecosys:envprotection:envprotection")
 	String Envprotection(@PathVariable("enterpriseId") Long enterpriseId,Model model){
 		model.addAttribute("enterpriseId", enterpriseId);
 		return "ecosys/envprotection/envprotection";
@@ -54,7 +52,6 @@ public class EnvprotectionController {
 	
 	@ResponseBody
 	@GetMapping("/list/{enterpriseId}")
-	@RequiresPermissions("ecosys:envprotection:envprotection")
 	public PageUtils list(@RequestParam Map<String, Object> params,@PathVariable("enterpriseId") Long enterpriseId){
 		//查询列表数据
 		params.put("enterpriseId",enterpriseId);
@@ -66,7 +63,6 @@ public class EnvprotectionController {
 	}
 	
 	@GetMapping("/add/{enterpriseId}")
-	@RequiresPermissions("ecosys:envprotection:add")
 	String add(@PathVariable("enterpriseId") Long enterpriseId,Model model){
 		EnterpriseDO enterprise = enterpriseService.get(enterpriseId.intValue());
 		//乡镇
@@ -92,7 +88,6 @@ public class EnvprotectionController {
 	}
 
 	@GetMapping("/edit/{envirProtectionId}")
-	@RequiresPermissions("ecosys:envprotection:edit")
 	String edit(@PathVariable("envirProtectionId") Integer envirProtectionId,Model model){
 		EnvprotectionDO envprotection = envprotectionService.get(envirProtectionId);
 		EnterpriseDO enterprise = enterpriseService.get(envprotection.getEnterpriseId());
@@ -118,7 +113,6 @@ public class EnvprotectionController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("ecosys:envprotection:add")
 	public R save( EnvprotectionDO envprotection){
 		if(envprotectionService.save(envprotection)>0){
 			return R.ok();
@@ -130,7 +124,6 @@ public class EnvprotectionController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("ecosys:envprotection:edit")
 	public R update( EnvprotectionDO envprotection){
 		envprotectionService.update(envprotection);
 		return R.ok();
@@ -141,7 +134,6 @@ public class EnvprotectionController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("ecosys:envprotection:remove")
 	public R remove( Integer envirProtectionId){
 		if(envprotectionService.remove(envirProtectionId)>0){
 		return R.ok();
@@ -154,7 +146,6 @@ public class EnvprotectionController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("ecosys:envprotection:batchRemove")
 	public R remove(@RequestParam("ids[]") Integer[] envirProtectionIds){
 		envprotectionService.batchRemove(envirProtectionIds);
 		return R.ok();
@@ -167,7 +158,6 @@ public class EnvprotectionController {
 	 * @return
 	 */
 	@GetMapping("/showExcelInfo/{enterpriseId}")
-	//@RequiresPermissions("ecosys:envprotection:excelInfo")
 	String envprotectionExcelInfo(@PathVariable("enterpriseId") Long enterpriseId,Model model) throws IOException {
 		model.addAttribute("enterpriseId", enterpriseId);
 
