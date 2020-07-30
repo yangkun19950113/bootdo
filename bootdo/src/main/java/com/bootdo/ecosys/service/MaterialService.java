@@ -2,7 +2,9 @@ package com.bootdo.ecosys.service;
 
 
 import com.bootdo.ecosys.domain.MaterialDO;
+import com.bootdo.ecosys.domain.ProductDO;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -29,4 +31,6 @@ public interface MaterialService {
 	
 	int batchRemove(Integer[] materialIds);
 	MaterialDO getData(Integer enterpriseId);
+
+	void showExcelInfo(List<MaterialDO> materialList) throws IOException;
 }

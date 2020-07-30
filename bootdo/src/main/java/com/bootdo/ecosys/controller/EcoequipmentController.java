@@ -1,5 +1,6 @@
 package com.bootdo.ecosys.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Map;
 import com.bootdo.ecosys.domain.CodeDO;
 import com.bootdo.ecosys.domain.EcoequipmentDO;
 import com.bootdo.ecosys.domain.EnterpriseDO;
+import com.bootdo.ecosys.domain.MaterialDO;
 import com.bootdo.ecosys.service.CodeService;
 import com.bootdo.ecosys.service.EcoequipmentService;
 import com.bootdo.ecosys.service.EnterpriseService;
@@ -153,5 +155,34 @@ public class EcoequipmentController {
 		ecoequipmentService.batchRemove(equipmentIds);
 		return R.ok();
 	}
-	
+
+	/**
+	 * 获取产污及防治设备表格信息
+	 * @param enterpriseId
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/showExcelInfo/{enterpriseId}")
+	//@RequiresPermissions("ecosys:envprotection:excelInfo")
+	String ecoequipmentExcelInfo(@RequestParam Map<String, Object> params,@PathVariable("enterpriseId") Long enterpriseId,Model model) throws IOException {
+		model.addAttribute("enterpriseId", enterpriseId);
+
+		params.put("enterpriseId",enterpriseId);
+		params.put("limit", 10);
+		params.put("offset", 0);
+		Query query = new Query(params);
+		List<EcoequipmentDO> ecoequipmentList = ecoequipmentService.list(query);
+
+		if(ecoequipmentList.size() > 0) {
+			EnterpriseDO enterprise = enterpriseService.get(enterpriseId.intValue());
+			ecoequipmentList.get(0).setEnterpriseName(enterprise.getEnterpriseName());
+		}
+
+		// 设置环保表格信息
+		ecoequipmentService.showExcelInfo(ecoequipmentList);
+
+		// 跳转写成的html页面
+		return "ecosys/enterprisemsg/excelmsg";
+	}
+
 }

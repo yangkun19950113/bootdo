@@ -115,7 +115,7 @@ public class ProductServiceImpl implements ProductService {
 			// 价格区间
 			dataMap.put("minPrice" + i,currProductDO.getMinPrice());
 			// 生产设施
-			dataMap.put("{deviceName" + i,currProductDO.getDeviceName());
+			dataMap.put("deviceName" + i,currProductDO.getDeviceName());
 			// 月产量
 			BigDecimal monthProductionContent = currProductDO.getMonthProduction();
 			dataMap.put("monProduction" + i,monthProductionContent.toString());

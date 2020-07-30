@@ -2,7 +2,9 @@ package com.bootdo.ecosys.service;
 
 
 import com.bootdo.ecosys.domain.DangersourceDO;
+import com.bootdo.ecosys.domain.MaterialDO;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -29,4 +31,6 @@ public interface DangersourceService {
 	int remove(Integer dangerSourceId);
 	
 	int batchRemove(Integer[] dangerSourceIds);
+
+	void showExcelInfo(List<DangersourceDO> dangersourceList) throws IOException;
 }
