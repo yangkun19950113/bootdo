@@ -47,12 +47,7 @@ function load() {
 								administrativeDivision:$('#administrativeDivision').val()
 							};
 						},
-						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
-						// queryParamsType = 'limit' ,返回参数必须包含
-						// limit, offset, search, sort, order 否则, 需要包含:
-						// pageSize, pageNumber, searchText, sortName,
-						// sortOrder.
-						// 返回false将会终止请求
+
 						columns : [
 								{
 									checkbox : true
@@ -71,187 +66,38 @@ function load() {
 								},
 								{
 									field : 'employeeNum',
-									title : '企业规模'
+									title : '企业规模',
+									width:'80',
+									align : 'center',
 								},
-								/*{
-									field : 'registeredTime',
-									title : '注册时间' 
-								},*/
+
 								{
 								title : '企业相关',
 								field : 'id',
 								/*align : 'center',*/
-								width:'470',
+								width:'400',
 								formatter : function(value, row, index) {
-									var a = '<a class="btn btn-danger btn-sm" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixFire +'\',\'' + prefixFire +'/'+row.enterpriseId+'\',\'' + '消防设备管理' + '\')">'+'消'+'</a>';
-									var b = '<a class="btn btn-primary btn-sm" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixElectric +'\',\'' + prefixElectric +'/'+row.enterpriseId+'\',\'' + '用电设备管理' + '\')">'+'电'+'</a>';
-									var c = '<a class="btn btn-success btn-sm" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixEnvprotection +'\',\'' + prefixEnvprotection +'/'+row.enterpriseId+'\',\'' + '环保信息管理' + '\')">'+'环'+'</a>';
-									var d = '<a class="btn btn-danger btn-sm" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixDangerSource +'\',\'' + prefixDangerSource +'/'+row.enterpriseId+'\',\'' + '危险源信息管理' + '\')">'+'危'+'</a>';
-									var e = '<a class="btn btn-info btn-sm" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixMaterial +'\',\'' + prefixMaterial +'/'+row.enterpriseId+'\',\'' + '物料信息管理' + '\')">'+'物'+'</a>';
-									var f = '<a class="btn btn-warning btn-sm" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixProduct +'\',\'' + prefixProduct +'/'+row.enterpriseId+'\',\'' + '产品信息管理' + '\')">'+'产'+'</a>';
-									var g = '<a class="btn btn-default btn-sm" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixEcoEquipment +'\',\'' + prefixEcoEquipment +'/'+row.enterpriseId+'\',\'' + '防治设备管理' + '\')">'+'防'+'</a>';
-									var h = '<a class="btn btn-success btn-sm" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixTraining +'\',\'' + prefixTraining +'/'+row.enterpriseId+'\',\'' + '安全生产培训管理' + '\')">'+'培'+'</a>';
-									var i = '<a class="btn btn-info btn-sm" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixRisk +'\',\'' + prefixRisk +'/'+row.enterpriseId+'\',\'' + '安全隐患管理' + '\')">'+'患'+'</a>';
+									var a = '<a class="btn btn-danger btn-xs" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixFire +'\',\'' + prefixFire +'/'+row.enterpriseId+'\',\'' + '消防设备管理' + '\')">'+'消'+'</a>';
+									var b = '<a class="btn btn-primary btn-xs" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixElectric +'\',\'' + prefixElectric +'/'+row.enterpriseId+'\',\'' + '用电设备管理' + '\')">'+'电'+'</a>';
+									var c = '<a class="btn btn-success btn-xs" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixEnvprotection +'\',\'' + prefixEnvprotection +'/'+row.enterpriseId+'\',\'' + '环保信息管理' + '\')">'+'环'+'</a>';
+									var d = '<a class="btn btn-danger btn-xs" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixDangerSource +'\',\'' + prefixDangerSource +'/'+row.enterpriseId+'\',\'' + '危险源信息管理' + '\')">'+'危'+'</a>';
+									var e = '<a class="btn btn-info btn-xs" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixMaterial +'\',\'' + prefixMaterial +'/'+row.enterpriseId+'\',\'' + '物料信息管理' + '\')">'+'物'+'</a>';
+									var f = '<a class="btn btn-warning btn-xs" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixProduct +'\',\'' + prefixProduct +'/'+row.enterpriseId+'\',\'' + '产品信息管理' + '\')">'+'产'+'</a>';
+									var g = '<a class="btn btn-default btn-xs" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixEcoEquipment +'\',\'' + prefixEcoEquipment +'/'+row.enterpriseId+'\',\'' + '防治设备管理' + '\')">'+'防'+'</a>';
+									var h = '<a class="btn btn-success btn-xs" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixTraining +'\',\'' + prefixTraining +'/'+row.enterpriseId+'\',\'' + '安全生产培训管理' + '\')">'+'培'+'</a>';
+									var i = '<a class="btn btn-info btn-xs" style="margin-left: 15px;" href="#" onclick="openPageJump(\'' + prefixRisk +'\',\'' + prefixRisk +'/'+row.enterpriseId+'\',\'' + '安全隐患管理' + '\')">'+'患'+'</a>';
 									return a + b + c + d + e + f + g + h + i ;
 								}
 							},
 
-
-							/*
-																{
-									field : 'registeredFund', 
-									title : '注册资金' 
-								},
-																{
-									field : 'employeeNum', 
-									title : '员工数' 
-								},
-																{
-									field : 'enterpriseScope', 
-									title : '企业规模',
-									formatter : function(value, row, index) {
-										if(value == 1){
-											return row.enterpriseScope = "大";
-										}else if(value == 2){
-											return row.enterpriseScope = "中";
-										}else if(value == 3){
-											return row.enterpriseScope = "小";
-										}else{
-											return row.enterpriseScope = "";
-										}
-									}
-								},
-																{
-									field : 'coordinates', 
-									title : '坐标位置' 
-								},
-																{
-									field : 'enterpriseNatureCode', 
-									title : '企业性质',
-									formatter : function(value, row, index) {
-										for(var i = 0;i<enterpriseNatureCodeList.length;i++){
-											if(value == enterpriseNatureCodeList[i].codeId){
-												return enterpriseNatureCodeList[i].name;
-											}
-										}
-									}
-								},
-																{
-									field : 'enterpriseLegalPerson',
-									title : '企业法人'
-								},
-																{
-									field : 'legalPersonPhoneNumber',
-									title : '法人电话'
-								},
-																{
-									field : 'environmentalProtectionPerson',
-									title : '环保负责人'
-								},
-																{
-									field : 'enPersonPhoneNumber',
-									title : '环保负责人电话'
-								},
-																{
-									field : 'safeProdectPerson',
-									title : '安全生产责任人'
-								},
-																{
-									field : 'safePerPhoneNumber',
-									title : '安全生产责任人电话'
-								},
-																{
-									field : 'businessScope',
-									title : '经营范围'
-								},
-																{
-									field : 'businessArea',
-									title : '经营面积'
-								},
-																{
-									field : 'businessAreaNatureCode',
-									title : '经营场所取得',
-									formatter : function(value, row, index) {
-										if(value == '021'){
-											return "自有";
-										}else if(value == '022'){
-											return "租赁";
-										}
-									}
-								}, {
-									field : 'dept',
-									title : '部门设置'
-								},
-																{
-									field : 'taxpayerCode',
-									title : '纳税人性质',
-									formatter : function(value, row, index) {
-										for(var i = 0;i<taxpayerCodeList.length;i++){
-											if(value == taxpayerCodeList[i].codeId){
-												return taxpayerCodeList[i].name;
-											}
-										}
-									}
-								},
-																{
-									field : 'marketCode',
-									title : '互联网营销方式',
-									formatter : function(value, row, index) {
-										var marketName = '' ;
-										//拆分
-										if(value != "" && value != null && value != undefined){
-											var codeList = value.split(",");
-											for(var i = 0;i<codeList.length;i++){
-												for(var j = 0;j<marketCodeList.length;j++){
-													if(codeList[i] == marketCodeList[j].codeId){
-														marketName = marketCodeList[j].name + "," + marketName;
-													}
-												}
-											}
-										}
-										return marketName;
-									}
-								},
-																{
-									field : 'surveytedPersonName',
-									title : '被调查人姓名'
-								},
-																{
-									field : 'surveytedPersonPosition',
-									title : '被调查人职务'
-								},
-																{
-									field : 'fullFormTime',
-									title : '填表日期'
-								},
-																{
-									field : 'surveyPersonName',
-									title : '调查人'
-								},
-																{
-									field : 'createTime',
-									title : '创建时间'
-								},
-																{
-									field : 'createUserName',
-									title : '创建人'
-								},
-																{
-									field : 'administrativeDivision',
-									title : '行政区划'
-								},
-																{
-									field : 'urbanorrural',
-									title : '城乡分类'
-								},*/
 								{
 									title : '操作',
 									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
-										var e = '<a class="btn btn-primary btn-sm '+'" href="#" mce_href="#" title="编辑" onclick="edit(\'' + row.enterpriseId + '\')"><i class="fa fa-edit"></i></a> ';
-										var d = '<a class="btn btn-warning btn-sm '+'" href="#" title="删除"  mce_href="#" onclick="remove(\'' + row.enterpriseId + '\')"><i class="fa fa-remove"></i></a> ';
-										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\'' + row.enterpriseId + '\')"><i class="fa fa-key"></i></a> ';
+										var e = '<a class="btn btn-primary btn-xs '+'" href="#" mce_href="#" title="编辑" onclick="edit(\'' + row.enterpriseId + '\')"><i class="fa fa-edit"></i></a> ';
+										var d = '<a class="btn btn-warning btn-xs '+'" href="#" title="删除"  mce_href="#" onclick="remove(\'' + row.enterpriseId + '\')"><i class="fa fa-remove"></i></a> ';
+										var f = '<a class="btn btn-success btn-xs" href="#" title="备用"  mce_href="#" onclick="resetPwd(\'' + row.enterpriseId + '\')"><i class="fa fa-key"></i></a> ';
 										return e + d ;
 									}
 								} ]
@@ -386,7 +232,7 @@ function marketCode(){
 }
 
 function doSubmit(){
-	/*window.location.href='/ecosys/firedevice/';*/
+
 
 
 

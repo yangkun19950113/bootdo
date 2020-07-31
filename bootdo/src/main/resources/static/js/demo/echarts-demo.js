@@ -441,12 +441,12 @@ function envprotectionChart(){
                         radius: "100%", //仪表大小
                         /*startAngle: 200, //开始角度
                         endAngle: -20, //结束角度*/
-                        /*axisLine:{
+                        axisLine:{
                             lineStyle:{
                                 width:30,
-                                color:[[0.2,'#40E0D0'],[0.4,'#008080'],[0.6,'#87CECB'],[0.8,'#DAA520'],[1,'#8B0000'],]
+                                color:[[0.2,'#40e0d0'],[0.4,'#008080'],[0.6,'#87CECB'],[0.8,'#72da39'],[1,'#8B0000'],]
                             }
-                        },*/
+                        },
                         detail: {formatter: '{value}%'},
                         data: [{value: data.data.toFixed(2) - 0, name: '完成率'}]
                     }

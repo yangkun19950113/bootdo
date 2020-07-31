@@ -165,7 +165,7 @@
                 <div class="echarts">
                     <h3 style="color: black">各乡镇企业数量</h3>
                     <div class="scrollDiv" id="ensum" style="margin-top: 25px;height:575px;height: 600px">
-                        <div class="scrollDiv" id="ensum1" style="margin-top: -30px;height:575px;">
+                        <div class="scrollDiv" id="ensum1" style="margin-top: -30px;height:500px;">
                         </div>
                     </div>
                 </div>
@@ -218,7 +218,16 @@
                                     // saveAsImage: {}
                                 }
                             },
-
+                            visualMap: {
+                                min: 1,
+                                max: 500,
+                                text: ['High', 'Low'],
+                                realtime: false,
+                                calculable: true,
+                                inRange: {
+                                    color: ['lightskyblue', 'yellow', 'orangered']
+                                }
+                            },
                             series: [
                                 {
                                     name: '各乡镇企业数量',
