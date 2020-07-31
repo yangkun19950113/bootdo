@@ -121,9 +121,15 @@ public class EcoequipmentServiceImpl implements EcoequipmentService {
 			// 排放形式
 			dataMap.put("emissionWay" + i,currEcoequipmentDO.getEmissionWay());
 			// 安装时间
-			dataMap.put("installTime" + i,sdf.format(currEcoequipmentDO.getInstallTime()));
+			Date installTime = currEcoequipmentDO.getInstallTime();
+			if(installTime != null){
+				dataMap.put("installTime" + i,sdf.format(installTime));
+			}
 			// 监测时间
-			dataMap.put("monitTime" + i,sdf.format(currEcoequipmentDO.getMonitTime()));
+			Date monitTime = currEcoequipmentDO.getMonitTime();
+			if(monitTime != null){
+				dataMap.put("monitTime" + i,sdf.format(monitTime));
+			}
 			// 维护周期
 			dataMap.put("cycle" + i,currEcoequipmentDO.getMaintenanceCycle());
 			// 易损耗材

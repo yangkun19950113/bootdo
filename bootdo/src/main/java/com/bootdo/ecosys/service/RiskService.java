@@ -1,7 +1,9 @@
 package com.bootdo.ecosys.service;
 
+import com.bootdo.ecosys.domain.EcoequipmentDO;
 import com.bootdo.ecosys.domain.RiskDO;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -28,4 +30,6 @@ public interface RiskService {
 	int remove(Integer safeTroubleId);
 	
 	int batchRemove(Integer[] safeTroubleIds);
+
+	void showExcelInfo(List<RiskDO> riskList) throws IOException;
 }

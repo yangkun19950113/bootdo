@@ -1,5 +1,6 @@
 package com.bootdo.ecosys.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Map;
 import com.bootdo.ecosys.domain.CodeDO;
 import com.bootdo.ecosys.domain.EnterpriseDO;
 import com.bootdo.ecosys.domain.FiredeviceDO;
+import com.bootdo.ecosys.domain.RiskDO;
 import com.bootdo.ecosys.service.CodeService;
 import com.bootdo.ecosys.service.EnterpriseService;
 import com.bootdo.ecosys.service.FiredeviceService;
@@ -161,5 +163,31 @@ public class FiredeviceController {
 		firedeviceService.batchRemove(equipmentIds);
 		return R.ok();
 	}
-	
+
+	/**
+	 * 获取消防设备表格信息
+	 * @param enterpriseId
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/showExcelInfo/{enterpriseId}")
+	//@RequiresPermissions("ecosys:envprotection:excelInfo")
+	String firedeviceExcelInfo(@RequestParam Map<String, Object> params,@PathVariable("enterpriseId") Long enterpriseId,Model model) throws IOException {
+		model.addAttribute("enterpriseId", enterpriseId);
+
+		params.put("enterpriseId",enterpriseId);
+		params.put("limit", 10);
+		params.put("offset", 0);
+		Query query = new Query(params);
+		List<FiredeviceDO> firedeviceList = firedeviceService.list(query);
+
+
+		// 设置消防设备表格信息
+		firedeviceService.showExcelInfo(firedeviceList);
+
+		// 跳转写成的html页面
+		return "ecosys/enterprisemsg/excelmsg";
+	}
+
+
 }

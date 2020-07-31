@@ -1,7 +1,9 @@
 package com.bootdo.ecosys.service;
 
+import com.bootdo.ecosys.domain.EcoequipmentDO;
 import com.bootdo.ecosys.domain.ElectricDO;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -28,4 +30,6 @@ public interface ElectricService {
 	int remove(Integer equipmentId);
 	
 	int batchRemove(Integer[] equipmentIds);
+
+	void showExcelInfo(List<ElectricDO> electricList) throws IOException;
 }

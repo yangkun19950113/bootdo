@@ -4,6 +4,10 @@ var productMsgMapping = "/ecosys/product";
 var materialMsgMapping = "/ecosys/material";
 var ecoequipmentMsgMapping = "/ecosys/ecoequipment";
 var dangersourceMsgMapping = "/ecosys/dangersource";
+var trainingMsgMapping = "/ecosys/training";
+var electricMsgMapping = "/ecosys/electric";
+var riskMsgMapping = "/ecosys/risk";
+var firedeviceMsgMapping = "/ecosys/firedevice";
 $('#demo').carousel({
     interval: 3000
 })
@@ -194,7 +198,7 @@ function reLoad(socialCreditCode) {
                     "<p class='card-text'> 培训主题:" + trainName + "</p>" +
                     "<p class='card-text'> 培训类型:" + trainType + "</p>" +
                     "<p class='card-text'> 参加人数:" + personNumber + "</p>" +
-                    "<a href='#' class='btn btn-primary'>表格信息</a>" +
+                    '<a class="btn btn-primary"  href="#" onclick="openPageJump(\'' + trainingMsgMapping +'\',\'' + trainingMsgMapping +'/showExcelInfo/'+enterpriseId+'\',\'' + '安全生产培训表格信息' + '\')">'+'安全生产培训表格信息'+'</a>'+
                     "</div>"
                 );
                 $("#electric").append("<div class='card' style='width: 18rem;'>" +
@@ -204,7 +208,7 @@ function reLoad(socialCreditCode) {
                     "<p class='card-text'> 设备名称:" + eleequipmentName + "</p>" +
                     "<p class='card-text'> 设备编码:" + eleequipmentCode + "</p>" +
                     "<p class='card-text'> 台数:" + number + "</p>" +
-                    "<a href='#' class='btn btn-primary'>表格信息</a>" +
+                    '<a class="btn btn-primary"  href="#" onclick="openPageJump(\'' + electricMsgMapping +'\',\'' + electricMsgMapping +'/showExcelInfo/'+enterpriseId+'\',\'' + '用电设施表格信息' + '\')">'+'用电设施表格信息'+'</a>'+
                     "</div>"
                 );
                 $("#risk").append("<div class='card' style='width: 18rem;'>" +
@@ -214,7 +218,7 @@ function reLoad(socialCreditCode) {
                     "<p class='card-text'> 发现人员:" + peopleFindName + "</p>" +
                     "<p class='card-text'> 发现时间:" + findTime + "</p>" +
                     "<p class='card-text'> 级别:" + level + "</p>" +
-                    "<a href='#' class='btn btn-primary'>表格信息</a>" +
+                    '<a class="btn btn-primary"  href="#" onclick="openPageJump(\'' + riskMsgMapping +'\',\'' + riskMsgMapping +'/showExcelInfo/'+enterpriseId+'\',\'' + '安全隐患表格信息' + '\')">'+'安全隐患表格信息'+'</a>'+
                     "</div>"
                 );
                 $("#firedevice").append("<div class='card' style='width: 18rem;'>" +
@@ -224,7 +228,7 @@ function reLoad(socialCreditCode) {
                     "<p class='card-text'> 设备名称:" + fireequipmentName + "</p>" +
                     "<p class='card-text'> 设备编码:" + fireequipmentCode + "</p>" +
                     "<p class='card-text'> 采购时间:" + buyTime + "</p>" +
-                    "<a href='#' class='btn btn-primary'>表格信息</a>" +
+                    '<a class="btn btn-primary"  href="#" onclick="openPageJump(\'' + firedeviceMsgMapping +'\',\'' + firedeviceMsgMapping +'/showExcelInfo/'+enterpriseId+'\',\'' + '消防设备表格信息' + '\')">'+'消防设备表格信息'+'</a>'+
                     "</div>"
                 );
 

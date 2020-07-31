@@ -1,8 +1,10 @@
 package com.bootdo.ecosys.service;
 
 
+import com.bootdo.ecosys.domain.EcoequipmentDO;
 import com.bootdo.ecosys.domain.TrainingDO;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -29,4 +31,6 @@ public interface TrainingService {
 	int remove(Integer trainingId);
 	
 	int batchRemove(Integer[] trainingIds);
+
+	void showExcelInfo(List<TrainingDO> trainingList) throws IOException;
 }

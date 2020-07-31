@@ -178,7 +178,7 @@ public class EcoequipmentController {
 			ecoequipmentList.get(0).setEnterpriseName(enterprise.getEnterpriseName());
 		}
 
-		// 设置环保表格信息
+		// 设置产污及防治设备表格信息
 		ecoequipmentService.showExcelInfo(ecoequipmentList);
 
 		// 跳转写成的html页面

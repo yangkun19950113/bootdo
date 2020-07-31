@@ -2,7 +2,9 @@ package com.bootdo.ecosys.service;
 
 
 import com.bootdo.ecosys.domain.FiredeviceDO;
+import com.bootdo.ecosys.domain.RiskDO;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -29,4 +31,6 @@ public interface FiredeviceService {
 	int remove(Integer equipmentId);
 	
 	int batchRemove(Integer[] equipmentIds);
+
+	void showExcelInfo(List<FiredeviceDO> firedeviceList) throws IOException;
 }

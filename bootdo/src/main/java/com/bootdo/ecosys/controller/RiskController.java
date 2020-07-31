@@ -1,5 +1,6 @@
 package com.bootdo.ecosys.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Map;
 import com.bootdo.ecosys.domain.CodeDO;
 import com.bootdo.ecosys.domain.EnterpriseDO;
 import com.bootdo.ecosys.domain.RiskDO;
+import com.bootdo.ecosys.domain.TrainingDO;
 import com.bootdo.ecosys.service.CodeService;
 import com.bootdo.ecosys.service.EnterpriseService;
 import com.bootdo.ecosys.service.RiskService;
@@ -153,5 +155,31 @@ public class RiskController {
 		riskService.batchRemove(safeTroubleIds);
 		return R.ok();
 	}
-	
+
+	/**
+	 * 获取安全隐患表格信息
+	 * @param enterpriseId
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/showExcelInfo/{enterpriseId}")
+	//@RequiresPermissions("ecosys:envprotection:excelInfo")
+	String riskExcelInfo(@RequestParam Map<String, Object> params,@PathVariable("enterpriseId") Long enterpriseId,Model model) throws IOException {
+		model.addAttribute("enterpriseId", enterpriseId);
+
+		params.put("enterpriseId",enterpriseId);
+		params.put("limit", 10);
+		params.put("offset", 0);
+		Query query = new Query(params);
+		List<RiskDO> riskList = riskService.list(query);
+
+
+		// 设置安全隐患表格信息
+		riskService.showExcelInfo(riskList);
+
+		// 跳转写成的html页面
+		return "ecosys/enterprisemsg/excelmsg";
+	}
+
+
 }

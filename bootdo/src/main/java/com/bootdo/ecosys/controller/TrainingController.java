@@ -1,10 +1,12 @@
 package com.bootdo.ecosys.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.bootdo.ecosys.domain.CodeDO;
+import com.bootdo.ecosys.domain.EcoequipmentDO;
 import com.bootdo.ecosys.domain.EnterpriseDO;
 import com.bootdo.ecosys.domain.TrainingDO;
 import com.bootdo.ecosys.service.CodeService;
@@ -152,6 +154,35 @@ public class TrainingController {
 	public R remove(@RequestParam("ids[]") Integer[] trainingIds){
 		trainingService.batchRemove(trainingIds);
 		return R.ok();
+	}
+
+	/**
+	 * 获取安全生产培训表格信息
+	 * @param enterpriseId
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/showExcelInfo/{enterpriseId}")
+	//@RequiresPermissions("ecosys:envprotection:excelInfo")
+	String trainingExcelInfo(@RequestParam Map<String, Object> params,@PathVariable("enterpriseId") Long enterpriseId,Model model) throws IOException {
+		model.addAttribute("enterpriseId", enterpriseId);
+
+		params.put("enterpriseId",enterpriseId);
+		params.put("limit", 10);
+		params.put("offset", 0);
+		Query query = new Query(params);
+		List<TrainingDO> trainingList = trainingService.list(query);
+
+		if(trainingList.size() > 0) {
+			EnterpriseDO enterprise = enterpriseService.get(enterpriseId.intValue());
+			trainingList.get(0).setEnterpriseName(enterprise.getEnterpriseName());
+		}
+
+		// 设置安全生产培训表格信息
+		trainingService.showExcelInfo(trainingList);
+
+		// 跳转写成的html页面
+		return "ecosys/enterprisemsg/excelmsg";
 	}
 	
 }

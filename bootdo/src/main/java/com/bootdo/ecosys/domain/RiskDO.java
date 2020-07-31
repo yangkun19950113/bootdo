@@ -36,7 +36,7 @@ public class RiskDO implements Serializable {
 	//整改情况
 	private String rectificat;
 	//整改人
-	private Date rectUserName;
+	private String rectUserName;
 	//
 	private String surveytedPersonName;
 	//
@@ -196,13 +196,13 @@ public class RiskDO implements Serializable {
 	/**
 	 * 设置：整改人
 	 */
-	public void setRectUserName(Date rectUserName) {
+	public void setRectUserName(String rectUserName) {
 		this.rectUserName = rectUserName;
 	}
 	/**
 	 * 获取：整改人
 	 */
-	public Date getRectUserName() {
+	public String getRectUserName() {
 		return rectUserName;
 	}
 	/**

@@ -1,5 +1,6 @@
 package com.bootdo.ecosys.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Map;
 import com.bootdo.ecosys.domain.CodeDO;
 import com.bootdo.ecosys.domain.ElectricDO;
 import com.bootdo.ecosys.domain.EnterpriseDO;
+import com.bootdo.ecosys.domain.TrainingDO;
 import com.bootdo.ecosys.service.CodeService;
 import com.bootdo.ecosys.service.ElectricService;
 import com.bootdo.ecosys.service.EnterpriseService;
@@ -149,6 +151,30 @@ public class ElectricController {
 	public R remove(@RequestParam("ids[]") Integer[] equipmentIds){
 		electricService.batchRemove(equipmentIds);
 		return R.ok();
+	}
+
+	/**
+	 * 获取用电设施表格信息
+	 * @param enterpriseId
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/showExcelInfo/{enterpriseId}")
+	//@RequiresPermissions("ecosys:envprotection:excelInfo")
+	String trainingExcelInfo(@RequestParam Map<String, Object> params,@PathVariable("enterpriseId") Long enterpriseId,Model model) throws IOException {
+		model.addAttribute("enterpriseId", enterpriseId);
+
+		params.put("enterpriseId",enterpriseId);
+		params.put("limit", 10);
+		params.put("offset", 0);
+		Query query = new Query(params);
+		List<ElectricDO> electricList = electricService.list(query);
+
+		// 设置安全生产培训表格信息
+		electricService.showExcelInfo(electricList);
+
+		// 跳转写成的html页面
+		return "ecosys/enterprisemsg/excelmsg";
 	}
 	
 }
