@@ -15,7 +15,19 @@
 	<select id="getdatabycoordinates" resultType="com.bootdo.ecosys.domain.EnterpriseDO">
 		select * from eco_enterprise where  coordinates =#{coordinates} LIMIT 1
 </select>
-
+	<select id="loadEnterpriseSum" resultType="com.bootdo.ecosys.domain.EnterpriseDTO">
+	SELECT
+		ee.administrative_division,
+		ec.name,
+		count(1) as value
+	FROM
+		eco_enterprise ee,
+		eco_code ec
+		where ec.parent_id ='113'
+		and ee.administrative_division = ec.code_id
+	GROUP BY
+		administrative_division
+</select>
 	<select id="getEnterpriseName" resultType="com.bootdo.ecosys.domain.EnterpriseDO">
 		select enterprise_name from eco_enterprise where  enterprise_name like CONCAT('%',#{enterpriseName},'%')
 	</select>

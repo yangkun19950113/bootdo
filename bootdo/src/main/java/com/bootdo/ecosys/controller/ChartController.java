@@ -3,6 +3,7 @@ package com.bootdo.ecosys.controller;
 import com.alibaba.fastjson.JSON;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.R;
+import com.bootdo.ecosys.dao.EnterpriseDao;
 import com.bootdo.ecosys.domain.*;
 import com.bootdo.ecosys.service.CodeService;
 import com.bootdo.ecosys.service.EnterpriseService;
@@ -33,6 +34,8 @@ public class ChartController {
 	private CodeService codeService;
 	@Autowired
 	private EnterpriseService enterpriseService;
+	@Autowired
+	private EnterpriseDao enterpriseDao;
 
 	//各村街企业占比（初始化）
 	@ResponseBody
@@ -45,6 +48,13 @@ public class ChartController {
 			common.setValue("0");
 			valueList.add(common);
 		}
+		return MessageResult.success("200","", valueList);
+	}
+
+	@ResponseBody
+	@GetMapping("/loadEnterpriseSum")
+	public ResponseData loadEnterpriseSum(@RequestParam Map<String, Object> params){
+		List<EnterpriseDTO> valueList = enterpriseDao.loadEnterpriseSum(params);
 		return MessageResult.success("200","", valueList);
 	}
 

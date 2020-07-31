@@ -4,10 +4,7 @@ package com.bootdo.ecosys.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.bootdo.ecosys.domain.CommonDO;
-import com.bootdo.ecosys.domain.DangersourceDO;
-import com.bootdo.ecosys.domain.EnterpriseDO;
-import com.bootdo.ecosys.domain.FiredeviceDO;
+import com.bootdo.ecosys.domain.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -26,7 +23,7 @@ public interface EnterpriseDao {
 	EnterpriseDO getdatabycoordinates(String coordinates);
 	List<EnterpriseDO> getEnterpriseName(@Param("enterpriseName") String  enterpriseName);
 	List<EnterpriseDO> list(Map<String, Object> map);
-	
+	List<EnterpriseDTO> loadEnterpriseSum(Map<String, Object> map);
 	int count(Map<String, Object> map);
 	
 	int save(EnterpriseDO enterprise);

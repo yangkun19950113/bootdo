@@ -159,6 +159,21 @@
         </div>
     </div>
 
+    <div style="width: 48.5%;margin-left: 25%;margin-top: -905px;height: 25%">
+        <div class="ibox float-e-margins" >
+            <div class="ibox-content"style="height:575px">
+                <div class="echarts">
+                    <h3 style="color: black">各乡镇企业数量</h3>
+                    <div class="scrollDiv" id="ensum" style="margin-top: 25px;height:575px;height: 600px">
+                        <div class="scrollDiv" id="ensum1" style="margin-top: -30px;height:575px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     </div>
     <!-- 全局js -->
@@ -169,6 +184,58 @@
     <script src="/js/demo/vintage.js"></script>
     <script src="/js/demo/echarts-css.js"></script>
     <script src="/js/demo/echarts-demo.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+            $.ajax({
+                type: "get",
+                url: "/ecosys/chart/loadEnterpriseSum",
+                success: function (res) {
+                    console.log(res);
+                    var myChart = echarts.init(document.getElementById('ensum1'));
+                    myChart.showLoading();
+                    $.get('bazhou.json',function(geoJson){
+                        myChart.hideLoading();
+                        echarts.registerMap('bazhou', geoJson);
+                        myChart.setOption(option = {
+                            title: {
+                                text: '',
+                                subtext: '',
+                                sublink: ''
+                            },
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: '{b}<br/>{c} (家)'
+                            },
+                            toolbox: {
+                                show: true,
+                                orient: 'vertical',
+                                left: 'right',
+                                top: 'center',
+                                feature: {
+                                    // dataView: {readOnly: false},
+                                    // restore: {},
+                                    // saveAsImage: {}
+                                }
+                            },
+
+                            series: [
+                                {
+                                    name: '各乡镇企业数量',
+                                    type: 'map',
+                                    mapType: 'bazhou', // 自定义扩展图表类型
+                                    label: {
+                                        show: true
+                                    },
+                                    data:res.data,
+                                }
+                            ]
+                        });
+                    });
+                }
+            })
+        });
+    </script>
 
 
 
