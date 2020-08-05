@@ -80,7 +80,7 @@ function load() {
 								},
 																{
 									field : 'protectionPerson', 
-									title : '设备负责人' 
+									title : '负责人'
 								},
 																{
 									field : 'phoneNumber', 
@@ -88,7 +88,7 @@ function load() {
 								},
 								{
 									field : 'checkFire',
-									title : '是否有消防通道',
+									title : '是否有<br/>消防通道',
 									formatter : function(value, row, index) {
 										if(value == '0'){
 											return "是";
@@ -101,7 +101,7 @@ function load() {
 								},
 								{
 									field : 'checkWind',
-									title : '车间是否通风',
+									title : '车间是否<br/>通风',
 									formatter : function(value, row, index) {
 										if(value == '0'){
 											return "是";

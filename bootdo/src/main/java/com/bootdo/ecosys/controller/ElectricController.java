@@ -1,14 +1,12 @@
 package com.bootdo.ecosys.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.bootdo.ecosys.domain.CodeDO;
-import com.bootdo.ecosys.domain.ElectricDO;
-import com.bootdo.ecosys.domain.EnterpriseDO;
-import com.bootdo.ecosys.domain.TrainingDO;
+import com.bootdo.ecosys.domain.*;
 import com.bootdo.ecosys.service.CodeService;
 import com.bootdo.ecosys.service.ElectricService;
 import com.bootdo.ecosys.service.EnterpriseService;
@@ -165,16 +163,39 @@ public class ElectricController {
 		model.addAttribute("enterpriseId", enterpriseId);
 
 		params.put("enterpriseId",enterpriseId);
-		params.put("limit", 10);
+		params.put("limit", 15);
 		params.put("offset", 0);
 		Query query = new Query(params);
 		List<ElectricDO> electricList = electricService.list(query);
+		if(electricList.size()>0){
+			ElectricDO electric = new ElectricDO();
+			for(ElectricDO ElectricDO :electricList){
+				String surveytedPersonName = ElectricDO.getSurveytedPersonName();
+				String surveytedPersonPosition = ElectricDO.getSurveytedPersonPosition();
+				String surveyPersonName = ElectricDO.getSurveyPersonName();
+				Date fullFormTime = ElectricDO.getFullFormTime();
+				electric.setSurveytedPersonName(surveytedPersonName);
+				electric.setSurveytedPersonPosition(surveytedPersonPosition);
+				electric.setFullFormTime(fullFormTime);
+				electric.setSurveyPersonName(surveyPersonName);
+				break;
+			}
+			model.addAttribute("electric", electric);
+			model.addAttribute("electricList", electricList);
+			// 设置环保表格信息
+//		productService.showExcelInfo(productList);
+
+			// 跳转写成的html页面
+			return "ecosys/enterprisemsg/electricexcel";
+		}else {
+			return "ecosys/enterprisemsg/msg";
+		}
 
 		// 设置安全生产培训表格信息
-		electricService.showExcelInfo(electricList);
+//		electricService.showExcelInfo(electricList);
 
 		// 跳转写成的html页面
-		return "ecosys/enterprisemsg/excelmsg";
+//		return "ecosys/enterprisemsg/excelmsg";
 	}
 	
 }

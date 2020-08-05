@@ -1,14 +1,12 @@
 package com.bootdo.ecosys.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.bootdo.ecosys.domain.CodeDO;
-import com.bootdo.ecosys.domain.EnterpriseDO;
-import com.bootdo.ecosys.domain.RiskDO;
-import com.bootdo.ecosys.domain.TrainingDO;
+import com.bootdo.ecosys.domain.*;
 import com.bootdo.ecosys.service.CodeService;
 import com.bootdo.ecosys.service.EnterpriseService;
 import com.bootdo.ecosys.service.RiskService;
@@ -168,17 +166,39 @@ public class RiskController {
 		model.addAttribute("enterpriseId", enterpriseId);
 
 		params.put("enterpriseId",enterpriseId);
-		params.put("limit", 10);
+		params.put("limit", 15);
 		params.put("offset", 0);
 		Query query = new Query(params);
 		List<RiskDO> riskList = riskService.list(query);
+		if(riskList.size()>0){
+			RiskDO risk = new RiskDO();
+			for(RiskDO RiskDO :riskList){
+				String surveytedPersonName = RiskDO.getSurveytedPersonName();
+				String surveytedPersonPosition = RiskDO.getSurveytedPersonPosition();
+				String surveyPersonName = RiskDO.getSurveyPersonName();
+				Date fullFormTime = RiskDO.getFullFormTime();
+				risk.setSurveytedPersonName(surveytedPersonName);
+				risk.setSurveytedPersonPosition(surveytedPersonPosition);
+				risk.setFullFormTime(fullFormTime);
+				risk.setSurveyPersonName(surveyPersonName);
+				break;
+			}
+			model.addAttribute("risk", risk);
+			model.addAttribute("riskList", riskList);
+			// 设置环保表格信息
+//		productService.showExcelInfo(productList);
 
+			// 跳转写成的html页面
+			return "ecosys/enterprisemsg/riskexcel";
+		}else {
+			return "ecosys/enterprisemsg/msg";
+		}
 
 		// 设置安全隐患表格信息
-		riskService.showExcelInfo(riskList);
-
-		// 跳转写成的html页面
-		return "ecosys/enterprisemsg/excelmsg";
+//		riskService.showExcelInfo(riskList);
+//
+//		// 跳转写成的html页面
+//		return "ecosys/enterprisemsg/excelmsg";
 	}
 
 

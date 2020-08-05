@@ -1,14 +1,12 @@
 package com.bootdo.ecosys.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.bootdo.ecosys.domain.CodeDO;
-import com.bootdo.ecosys.domain.DangersourceDO;
-import com.bootdo.ecosys.domain.EcoequipmentDO;
-import com.bootdo.ecosys.domain.EnterpriseDO;
+import com.bootdo.ecosys.domain.*;
 import com.bootdo.ecosys.service.CodeService;
 import com.bootdo.ecosys.service.DangersourceService;
 import com.bootdo.ecosys.service.EnterpriseService;
@@ -166,16 +164,34 @@ public class DangersourceController {
 		model.addAttribute("enterpriseId", enterpriseId);
 
 		params.put("enterpriseId",enterpriseId);
-		params.put("limit", 10);
+		params.put("limit", 15);
 		params.put("offset", 0);
 		Query query = new Query(params);
 		List<DangersourceDO> dangersourceList = dangersourceService.list(query);
+		DangersourceDO dangersource = new DangersourceDO();
+		if(dangersourceList.size() > 0){
+			for(DangersourceDO Dangersource :dangersourceList){
+				String surveytedPersonName = Dangersource.getSurveytedPersonName();
+				String surveytedPersonPosition = Dangersource.getSurveytedPersonPosition();
+				String surveyPersonName = Dangersource.getSurveyPersonName();
+				Date fullFormTime = Dangersource.getFullFormTime();
+				dangersource.setSurveytedPersonName(surveytedPersonName);
+				dangersource.setSurveytedPersonPosition(surveytedPersonPosition);
+				dangersource.setFullFormTime(fullFormTime);
+				dangersource.setSurveyPersonName(surveyPersonName);
+				break;
+			}
+			model.addAttribute("dangersource", dangersource);
+			model.addAttribute("dangersourceList", dangersourceList);
+			// 设置环保表格信息
+//		dangersourceService.showExcelInfo(dangersourceList);
 
-		// 设置环保表格信息
-		dangersourceService.showExcelInfo(dangersourceList);
+			// 跳转写成的html页面
+			return "ecosys/enterprisemsg/dangersourceexcel";
+		}else {
+			return "ecosys/enterprisemsg/msg";
+		}
 
-		// 跳转写成的html页面
-		return "ecosys/enterprisemsg/excelmsg";
 	}
 
 

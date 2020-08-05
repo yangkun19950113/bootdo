@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>安全生产培训调查表</title>
+    <style type="text/css">
+        body,td,th {
+            font-size: 16PX;
+            color: #000;
+        }
+        p{
+            margin-top: 9px;
+        }
+    </style>
+</head>
+<head th:include="include :: header"></head>
+<body>
+<br/>
+<center >
+
+    <div id="print">
+        <h3 align="center">安全生产培训调查表</h3>
+        <!-- <input id="id" name="id" th:value="${paResult.id}"  type="hidden"> -->
+        <table cellpadding="0" cellspacing="0" border="1"  >
+            <tr>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">被调查人姓名</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${training.surveytedPersonName}"></p>
+                </td>
+                <td width="120"colspan="2" align="center">
+                    <p style ="padding-top: 9px;">被调查人职务</p>
+                </td>
+                <td colspan="3" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${training.surveytedPersonPosition}"></p>
+                </td>
+
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">填表日期</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${#dates.format(training.fullFormTime,'yyyy-MM-dd')}"></p>
+                </td>
+                <td width="120"colspan="2" align="center">
+                    <p style ="padding-top: 9px;">调查人</p>
+                </td>
+                <td colspan="3" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${training.surveyPersonName}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" width="71" align="center">
+                    <p style ="padding-top: 9px;">企业名称</p>
+                </td>
+                <td  colspan="7"width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${training.enterpriseName}"></p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">是否建立安全培训制度</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${training.trainingFlg==0}?'否':'是'"></p>
+                </td>
+                <td width="120"colspan="2" align="center">
+                    <p style ="padding-top: 9px;">是否为劳动者提供防护用品</p>
+                </td>
+                <td colspan="3" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${training.laProvideFlg==0}?'否':'是'"></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">序号</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" >培训时间</p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">培训主题</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" >培训类型</p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">参加人数</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" >参加部门</p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">是否有培训资料</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" >联系电话</p>
+                </td>
+
+            </tr>
+            <tr th:each="TrainingDO,userStat:${trainingList}">
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px; "th:text="${userStat.count}"></p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;"th:text="${#dates.format(TrainingDO.trainTime,'yyyy-MM-dd')}" ></p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;"th:text="${TrainingDO.trainName}"></p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${TrainingDO.trainType}"></p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;"th:text="${TrainingDO.personNumber}"></p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;"th:text="${TrainingDO.deptCode}" ></p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;"th:text="${TrainingDO.traningFileFlg==0}?'否':'是'"></p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;"th:text="${TrainingDO.phoneNumber}"></p>
+                </td>
+
+
+            </tr>
+
+
+
+
+
+        </table>
+        <h6 id="showDate" align="left"></h6>
+    </div>
+</center>
+</body>
+</head>
+</html>

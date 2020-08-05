@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>环保基本信息登记表</title>
+    <style type="text/css">
+        body,td,th {
+            font-size: 16PX;
+            color: #000;
+        }
+        p{
+            margin-top: 9px;
+        }
+    </style>
+</head>
+<head th:include="include :: header"></head>
+<body>
+<br/>
+<center >
+
+    <div id="print">
+        <h3 align="center">环保基本信息登记表</h3>
+        <!-- <input id="id" name="id" th:value="${paResult.id}"  type="hidden"> -->
+        <table cellpadding="0" cellspacing="0" border="1"  >
+            <tr>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">被调查人姓名</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${envprotection.surveytedPersonName}"></p>
+                </td>
+                <td width="120"colspan="2" align="center">
+                    <p style ="padding-top: 9px;">被调查人职务</p>
+                </td>
+                <td colspan="3" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${envprotection.surveytedPersonPosition}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">填表日期</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${#dates.format(envprotection.fullFormTime,'yyyy-MM-dd')}"></p>
+                </td>
+                <td width="120"colspan="2" align="center">
+                    <p style ="padding-top: 9px;">调查人</p>
+                </td>
+                <td colspan="3" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${envprotection.surveyPersonName}"></p>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" width="71" align="center">
+                    <p style ="padding-top: 9px;">企业名称</p>
+                </td>
+                <td  colspan="7"width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${envprotection.enterpriseName}"></p>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" height="28" width="120" align="center" >
+                    <p style ="margin-top: 9px;" >是否有环评</p>
+                </td>
+                <td width="120" height="28" align="center">
+                    <p style ="margin-top: 9px;" th:text="${envprotection.ecoEstimateFlg==0}?'是':'否'"></p>
+                </td>
+                <td width="120" height="28" align="center">
+                    <p style ="padding-top: 9px;">是否属于园区</p>
+                </td>
+                <td  width="120"  height="28" align="center">
+                    <p style ="margin-top: 9px;" th:text="${envprotection.parkFlg==0}?'是':'否'"></p>
+                </td>
+                <td colspan="2"   height="28" width="120" align="center">
+                    <p style ="margin-top: 9px;">环保制度</p>
+                </td>
+                <td width="120 "  height="28" align="center">
+                    <p style ="margin-top: 9px;" th:text="${envprotection.ecoStandardFlg==0}?'是':'否'"></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" width="71" align="center">
+                    <p style ="padding-top: 9px;">行业类别</p>
+                </td>
+                <td  colspan="7"width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${envprotection.industryCode}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">项目管理类别</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${envprotection.projectManageCode}"></p>
+                </td>
+                <td width="120" align="center">
+                    <p style ="padding-top: 9px;">竣工验收</p>
+                </td>
+                <td colspan="3" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${envprotection.isOrNotAcceptance==0}?'是':'否'"></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">排污许可管理类别</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${envprotection.tradablePermitsCode}"></p>
+                </td>
+                <td width="120" align="center">
+                    <p style ="padding-top: 9px;">是否核发排污许可证</p>
+                </td>
+                <td colspan="3" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${envprotection.pollutionLicenseFlg==0}?'是':'否'"></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">污染类别</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${envprotection.pollutionCategoryCode}"></p>
+                </td>
+                <td width="120" align="center">
+                    <p style ="padding-top: 9px;">年检监测及有效性</p>
+                </td>
+                <td colspan="3" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${envprotection.annualInspectionFlg==0}?'是':'否'"></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" width="71" align="center">
+                    <p style ="padding-top: 9px;">所在区域</p>
+                </td>
+                <td  colspan="7"width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${envprotection.areaCode}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" width="71" align="center">
+                    <p style ="padding-top: 9px;">主要能源</p>
+                </td>
+                <td  colspan="7"width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${envprotection.mainEnergyCode}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="8" width="71" align="center">
+                    <p style ="padding-top: 9px;">污染因子</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">常规因子</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${envprotection.normalFactorsCode}"></p>
+                </td>
+                <td width="120" align="center">
+                    <p style ="padding-top: 9px;">特征因子</p>
+                </td>
+                <td colspan="3" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${envprotection.specialFactorsCode}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">一般固体废物</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${envprotection.nomalWaste}"></p>
+                </td>
+                <td width="120" align="center">
+                    <p style ="padding-top: 9px;">危险废物</p>
+                </td>
+                <td colspan="3" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${envprotection.dangerWaste}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="8" width="71" align="center">
+                    <p style ="padding-top: 9px;">污染治理措施</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="8" width="71" align="center">
+                    <p style ="padding-top: 9px;" th:text="${envprotection.measures}"></p>
+                </td>
+            </tr>
+
+
+        </table>
+        <h6 id="showDate" align="left"></h6>
+    </div>
+</center>
+</body>
+</head>
+</html>

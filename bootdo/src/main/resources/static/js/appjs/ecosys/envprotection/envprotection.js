@@ -66,7 +66,7 @@ function load() {
 								},
 								{
 									field : 'ecoEstimateFlg', 
-									title : '是否有环评文号' ,
+									title : '是否有<br/>环评文号' ,
 									formatter : function(value, row, index) {
 										if(value == '0'){
 											return row.ecoEstimateFlg = "是";
@@ -81,7 +81,7 @@ function load() {
 								},
 								{
 									field : 'parkFlg', 
-									title : '是否属于园区' ,
+									title : '是否属于<br/>园区' ,
 									formatter : function(value, row, index) {
 										if(value == '0'){
 											return row.parkFlg = "是";
@@ -94,7 +94,7 @@ function load() {
 								},
 								{
 									field : 'ecoStandardFlg', 
-									title : '是否有环保制度',
+									title : '是否有<br/>环保制度',
 									formatter : function(value, row, index) {
 										if(value == '0'){
 											return row.ecoStandardFlg = "是";
@@ -115,7 +115,7 @@ function load() {
 								},
 								{
 									field : 'isOrNotAcceptance', 
-									title : '是否竣工验收',
+									title : '是否<br/>竣工验收',
 									formatter : function(value, row, index) {
 										if(value == '0'){
 											return row.isOrNotAcceptance = "是";
@@ -141,63 +141,7 @@ function load() {
 										}
 									}
 								},
-								/*{
-									field : 'pollutionLicenseFlg', 
-									title : '是否核发排污许可证',
-									formatter : function(value, row, index) {
-										if(value == '0'){
-											return row.pollutionLicenseFlg = "是";
-										}else if(value == '1') {
-											return row.pollutionLicenseFlg = "否";
-										}else{
-											return row.pollutionLicenseFlg = "-";
-										}
-									}
-								},*/
-								/*{
-									field : 'pollutionCategoryCode', 
-									title : '污染类别',
-									formatter : function(value, row, index) {
-										var pollutionName = '' ;
-										if(value != "" && value != null && value != undefined){
-											var codeList = value.split(",");
-											for(var i = 0;i<codeList.length;i++){
-												for(var j = 0;j<pollutionCategoryCodeList.length;j++){
-													if(codeList[i] == pollutionCategoryCodeList[j].codeId){
-														pollutionName = pollutionCategoryCodeList[j].name + "," + pollutionName;
-													}
-												}
-											}
-										}
-										return pollutionName;
-									}
-								},*/
-								/*{
-									field : 'annualInspectionFlg', 
-									title : '年检监测是否有效',
-									formatter : function(value, row, index) {
-										if(value == '0'){
-											return row.annualInspectionFlg = "是";
-										}else if(value == '1') {
-											return row.annualInspectionFlg = "否";
-										}else{
-											return row.annualInspectionFlg = "-";
-										}
-									}
-								},*/
-								/*{
-									field : 'areaCode', 
-									title : '所在区域',
-									formatter : function(value, row, index) {
-										if (value != "" && value != null && value != undefined) {
-											for (var i = 0; i < areaCodeList.length; i++) {
-												if (value == areaCodeList[i].codeId) {
-													return areaCodeList[i].name;
-												}
-											}
-										}
-									}
-								},*/
+
 								{
 									field : 'mainEnergyCode', 
 									title : '主要能源',
@@ -215,75 +159,7 @@ function load() {
 									field : 'measures', 
 									title : '污染治理措施' 
 								},
-								/*{
-									field : 'normalFactorsCode', 
-									title : '常规因子',
-									formatter : function(value, row, index) {
-										var normalFactorsName = '' ;
-										if(value != "" && value != null && value != undefined){
-											var codeList = value.split(",");
-											for(var i = 0;i<codeList.length;i++){
-												for(var j = 0;j<normalFactorsCodeList.length;j++){
-													if(codeList[i] == normalFactorsCodeList[j].codeId){
-														normalFactorsName = normalFactorsCodeList[j].name + "," + normalFactorsName;
-													}
-												}
-											}
-										}
-										return normalFactorsName;
-									}
-								},*/
-								/*{
-									field : 'specialFactorsCode', 
-									title : '特征因子',
-									formatter : function(value, row, index) {
-										var specialFactorsName = '' ;
-										if(value != "" && value != null && value != undefined){
-											var codeList = value.split(",");
-											for(var i = 0;i<codeList.length;i++){
-												for(var j = 0;j<specialFactorCodeList.length;j++){
-													if(codeList[i] == specialFactorCodeList[j].codeId){
-														specialFactorsName = specialFactorCodeList[j].name + "," + specialFactorsName;
-													}
-												}
-											}
-										}
-										return specialFactorsName;
-									}
-								},*/
-								/*{
-									field : 'nomalWaste', 
-									title : '一般固体废物' 
-								},
-								{
-									field : 'dangerWaste', 
-									title : '危险废物' 
-								},*/
-									/*							{
-									field : 'surveytedPersonName', 
-									title : '被调查人姓名' 
-								},
-																{
-									field : 'surveytedPersonPosition', 
-									title : '被调查人职务' 
-								},
-																{
-									field : 'fullFormTime', 
-									title : '填表日期' 
-								},
-																{
-									field : 'surveyPersonName', 
-									title : '调查人' 
-								},*/
-								/*								{
-									field : 'administrativeDivision', 
-									title : '行政区划' 
-								},
-																{
-									field : 'urbanorrural', 
-									title : '城乡分类' 
-								},*/
-																{
+												{
 									title : '操作',
 									field : 'id',
 									align : 'center',

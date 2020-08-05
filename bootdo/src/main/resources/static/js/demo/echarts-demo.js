@@ -34,8 +34,8 @@ function administrativeDivision(){
         },
         success: function (data) {
             var code_list = data.rows;
-            var opts = "<option value=''>" +"请选择 "+"</option>";
-            var optSon = "<option value=''>" +"请选择 "+"</option>";
+            var opts = "<option value=''>" +"全部 "+"</option>";
+            var optSon = "<option value=''>" +"全部 "+"</option>";
             for (var i = 0; i < code_list.length; i++) {
                 var code = code_list[i];
                 opts += "<option value='" + code.codeId + "' id='" + code.id + "'>" + code.name + "</option>";
@@ -62,7 +62,7 @@ $("#administrativeDivision").bind("change", function(){
         },
         success: function (data) {
             var code_list = data.rows;
-            var opts = "<option value=''>" +"请选择 "+"</option>";
+            var opts = "<option value=''>" +"全部 "+"</option>";
             for (var i = 0; i < code_list.length; i++) {
                 var code = code_list[i];
                 opts += "<option value='" + code.orderNum + "'>" + code.name + "</option>";
@@ -183,30 +183,6 @@ function loadEnterpriseNatureCode(){
                         radius : '55%',
                         center: ['50%', '60%'],
                         data:data.data,
-                        /*itemStyle: {
-                            normal: {
-                                color: function(params) {
-                                    var colorList = [
-                                        '#8B0000','#2F4F4F','#008080','#F4A460','#87CECB',
-                                        '#5F9EA0','#DAA520','#20B2AA','#40E0D0','#FA8072'
-                                    ];
-                                    return colorList[params.dataIndex]
-                                },
-                                label: {        //此处为指示线文字
-                                    show: true,
-                                    textStyle: {
-                                        fontWeight: 200,
-                                        fontSize: 10    //文字的字体大小
-                                    }
-                                },
-                                labelLine: {    //指示线状态
-                                    show: true,
-                                    smooth: 0.2/!*,
-                                    length: 10,
-                                    length2: 20*!/
-                                }
-                            }
-                        },*/
                     }
                 ]
             };
@@ -444,7 +420,7 @@ function envprotectionChart(){
                         axisLine:{
                             lineStyle:{
                                 width:30,
-                                color:[[0.2,'#40e0d0'],[0.4,'#008080'],[0.6,'#87CECB'],[0.8,'#72da39'],[1,'#8B0000'],]
+                                color:[[0.2,'#40e0d0'],[0.4,'#008080'],[0.6,'#87CECB'],[0.8,'#C1DA39'],[1,'#72da39'],]
                             }
                         },
                         detail: {formatter: '{value}%'},
@@ -515,7 +491,7 @@ function getEffectFireEquip(){
                 for(var i = 0;i<data.data.length;i++) {
                     dataStr = "<li><a href=\"#\" class=\"btn\" style=\"pointer-events:none;background-color: #92B8B1;border: #92B8B1;width: 100%;color: white;font-size:12px\">" +
                         data.data[i].enterpriseName + "&nbsp;&nbsp;&nbsp;"
-                        + data.data[i].equipmentName + "&nbsp;&nbsp;&nbsp;" + data.data[i].effectTime + "</a></li>" + dataStr;
+                        + data.data[i].equipmentName + "&nbsp;&nbsp;&nbsp;" + "</a></li>" + dataStr;
                 }
                 var dataStrNew = strStrat + dataStr + strEnd;
                 $("#fireData").html(dataStrNew);

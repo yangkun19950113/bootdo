@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>产污及防治设备信息</title>
+    <style type="text/css">
+        body,td,th {
+            font-size: 16PX;
+            color: #000;
+        }
+        p{
+            margin-top: 9px;
+        }
+    </style>
+</head>
+<head th:include="include :: header"></head>
+<body>
+<br/>
+<center >
+
+    <div id="print">
+        <h3 align="center">产污及防治设备信息</h3>
+        <!-- <input id="id" name="id" th:value="${paResult.id}"  type="hidden"> -->
+        <table cellpadding="0" cellspacing="0" border="1"  >
+            <tr>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">被调查人姓名</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${ecoequipment.surveytedPersonName}"></p>
+                </td>
+                <td width="120"colspan="2" align="center">
+                    <p style ="padding-top: 9px;">被调查人职务</p>
+                </td>
+                <td colspan="3" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${ecoequipment.surveytedPersonPosition}"></p>
+                </td>
+
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">填表日期</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${#dates.format(ecoequipment.fullFormTime,'yyyy-MM-dd')}"></p>
+                </td>
+                <td width="120"colspan="2" align="center">
+                    <p style ="padding-top: 9px;">调查人</p>
+                </td>
+                <td colspan="3" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${ecoequipment.surveyPersonName}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" width="71" align="center">
+                    <p style ="padding-top: 9px;">企业名称</p>
+                </td>
+                <td  colspan="7"width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${ecoequipment.enterpriseName}"></p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">设备负责人</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${ecoequipment.protectionPerson}"></p>
+                </td>
+                <td width="120"colspan="2" align="center">
+                    <p style ="padding-top: 9px;">联系电话</p>
+                </td>
+                <td colspan="3" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${ecoequipment.phoneNumber}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">序号</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" >生产设施名称</p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">对应产污环节名称</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" >污染物种类</p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">排放形式</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" >安装时间</p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">监测时间</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" >维护周期</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" >易损耗材</p>
+                </td>
+            </tr>
+            <tr th:each="EcoequipmentDO,userStat:${ecoequipmentList}">
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px; "th:text="${userStat.count}"></p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;"th:text="${EcoequipmentDO.equipmentName}" ></p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;"th:text="${EcoequipmentDO.pollutionName}"></p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${EcoequipmentDO.pollutionType}"></p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;"th:text="${EcoequipmentDO.emissionWay}"></p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;"th:text="${#dates.format(EcoequipmentDO.installTime,'yyyy-MM-dd')}" ></p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;"th:text="${#dates.format(EcoequipmentDO.monitTime,'yyyy-MM-dd')}"></p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;"th:text="${EcoequipmentDO.maintenanceCycle}"></p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;"th:text="${EcoequipmentDO.lossMaterial}"></p>
+                </td>
+
+            </tr>
+
+
+
+
+
+        </table>
+        <h6 id="showDate" align="left"></h6>
+    </div>
+</center>
+</body>
+</head>
+</html>

@@ -63,8 +63,8 @@
             },
             success: function (data) {
                 var code_list = data.rows;
-                var opts = "<option value=''>" +"请选择 "+"</option>";
-                var optSon = "<option value=''>" +"请选择 "+"</option>";
+                var opts = "<option value=''>" +"全部 "+"</option>";
+                var optSon = "<option value=''>" +"全部 "+"</option>";
                 for (var i = 0; i < code_list.length; i++) {
                     var code = code_list[i];
                     opts += "<option value='" + code.codeId + "' id='" + code.id + "'>" + code.name + "</option>";
@@ -97,7 +97,7 @@
             },
             success: function (data) {
                 var code_list = data.rows;
-                var opts = "<option value=''>" +"请选择 "+"</option>";
+                var opts = "<option value=''>" +"全部 "+"</option>";
                 for (var i = 0; i < code_list.length; i++) {
                     var code = code_list[i];
                     opts += "<option value='" + code.orderNum + "'>" + code.name + "</option>";
@@ -149,7 +149,7 @@
             }
             var pointArray = [];
             for (var i = 0; i < count; i++) {
-                var ply = new BMap.Polygon(rs.boundaries[i], {strokeWeight: 2, strokeColor: "#ff0000",fillColor:""}); //建立多边形覆盖物
+                var ply = new BMap.Polygon(rs.boundaries[i], {strokeWeight: 2, strokeColor: "#FF3AE4",fillColor:""}); //建立多边形覆盖物
                 map.addOverlay(ply);  //添加覆盖物
                 pointArray = pointArray.concat(ply.getPath());
             }
@@ -228,7 +228,7 @@
             }
             var pointArray = [];
             for (var i = 0; i < count; i++) {
-                var ply = new BMap.Polygon(rs.boundaries[i], {strokeWeight: 2, strokeColor: "#ff0000",fillColor:""}); //建立多边形覆盖物
+                var ply = new BMap.Polygon(rs.boundaries[i], {strokeWeight: 2, strokeColor: "#FF1ABC",fillColor:""}); //建立多边形覆盖物
                 map.addOverlay(ply);  //添加覆盖物
                 pointArray = pointArray.concat(ply.getPath());
             }

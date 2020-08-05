@@ -1,6 +1,7 @@
 package com.bootdo.ecosys.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -168,21 +169,39 @@ public class EcoequipmentController {
 		model.addAttribute("enterpriseId", enterpriseId);
 
 		params.put("enterpriseId",enterpriseId);
-		params.put("limit", 10);
+		params.put("limit", 15);
 		params.put("offset", 0);
 		Query query = new Query(params);
 		List<EcoequipmentDO> ecoequipmentList = ecoequipmentService.list(query);
-
+		EcoequipmentDO ecoequipment = new EcoequipmentDO();
 		if(ecoequipmentList.size() > 0) {
 			EnterpriseDO enterprise = enterpriseService.get(enterpriseId.intValue());
 			ecoequipmentList.get(0).setEnterpriseName(enterprise.getEnterpriseName());
+			ecoequipment.setEnterpriseName(enterprise.getEnterpriseName());
+			String surveytedPersonName = enterprise.getSurveytedPersonName();
+			String surveytedPersonPosition = enterprise.getSurveytedPersonPosition();
+			String surveyPersonName = enterprise.getSurveyPersonName();
+			Date fullFormTime = enterprise.getFullFormTime();
+			ecoequipment.setSurveytedPersonName(surveytedPersonName);
+			ecoequipment.setSurveytedPersonPosition(surveytedPersonPosition);
+			ecoequipment.setFullFormTime(fullFormTime);
+			ecoequipment.setSurveyPersonName(surveyPersonName);
+			String protectionPerson = ecoequipmentList.get(0).getProtectionPerson();
+			ecoequipment.setProtectionPerson(protectionPerson);
+			String phoneNumber = ecoequipmentList.get(0).getPhoneNumber();
+			ecoequipment.setPhoneNumber(phoneNumber);
+			model.addAttribute("ecoequipment", ecoequipment);
+			model.addAttribute("ecoequipmentList", ecoequipmentList);
+			return "ecosys/enterprisemsg/ecoequipmentexcel";
+		}else {
+			return "ecosys/enterprisemsg/msg";
 		}
 
 		// 设置产污及防治设备表格信息
-		ecoequipmentService.showExcelInfo(ecoequipmentList);
+//		ecoequipmentService.showExcelInfo(ecoequipmentList);
 
 		// 跳转写成的html页面
-		return "ecosys/enterprisemsg/excelmsg";
+
 	}
 
 }

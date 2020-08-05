@@ -1,5 +1,8 @@
 package com.bootdo.ecosys.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -38,8 +41,12 @@ public class EcoequipmentDO implements Serializable {
 	//排放方式
 	private String emissionWay;
 	//安装时间
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date installTime;
 	//监测时间
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date monitTime;
 	//维护周期
 	private String maintenanceCycle;

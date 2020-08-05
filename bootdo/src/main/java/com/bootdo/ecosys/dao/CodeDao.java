@@ -20,7 +20,7 @@ public interface CodeDao {
 	CodeDO get(Long id);
 	
 	List<CodeDO> list(Map<String, Object> map);
-	
+	List<CodeDO> getNames(Map<String, Object> map);
 	int count(Map<String, Object> map);
 	
 	int save(CodeDO code);

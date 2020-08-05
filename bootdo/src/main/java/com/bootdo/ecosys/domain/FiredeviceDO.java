@@ -1,5 +1,8 @@
 package com.bootdo.ecosys.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -26,8 +29,12 @@ public class FiredeviceDO implements Serializable {
 	//型号
 	private String model;
 	//采购时间
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date buyTime;
 	//有效时间
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date effectTime;
 	//品牌
 	private String brand;

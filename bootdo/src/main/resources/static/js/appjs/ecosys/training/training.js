@@ -87,7 +87,7 @@ function load() {
 								},
 								{
 									field : 'trainingFlg',
-									title : '是否建立安全培训制度',
+									title : '是否建立<br/>安全培训制度',
 									formatter : function(value, row, index) {
 										if(value == '0'){
 											return "有";
@@ -100,7 +100,7 @@ function load() {
 								},
 								{
 									field : 'laProvideFlg', 
-									title : '是否为劳动者提供防护用品',
+									title : '是否为<br/>劳动者提供防护用品',
 									formatter : function(value, row, index) {
 										if(value == '0'){
 											return "有";

@@ -1,6 +1,7 @@
 package com.bootdo.ecosys.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -180,13 +181,36 @@ public class FiredeviceController {
 		params.put("offset", 0);
 		Query query = new Query(params);
 		List<FiredeviceDO> firedeviceList = firedeviceService.list(query);
+		if(firedeviceList.size()>0){
+			FiredeviceDO firedevice = new FiredeviceDO();
+			for(FiredeviceDO FiredeviceDO :firedeviceList){
+				String surveytedPersonName = FiredeviceDO.getSurveytedPersonName();
+				String surveytedPersonPosition = FiredeviceDO.getSurveytedPersonPosition();
+				String surveyPersonName = FiredeviceDO.getSurveyPersonName();
+				Date fullFormTime = FiredeviceDO.getFullFormTime();
+				firedevice.setSurveytedPersonName(surveytedPersonName);
+				firedevice.setSurveytedPersonPosition(surveytedPersonPosition);
+				firedevice.setFullFormTime(fullFormTime);
+				firedevice.setSurveyPersonName(surveyPersonName);
+				break;
+			}
+			model.addAttribute("firedevice", firedevice);
+			model.addAttribute("firedeviceList", firedeviceList);
+			// 设置环保表格信息
+//		productService.showExcelInfo(productList);
+
+			// 跳转写成的html页面
+			return "ecosys/enterprisemsg/firedeviceexcel";
+		}else {
+			return "ecosys/enterprisemsg/msg";
+		}
 
 
 		// 设置消防设备表格信息
-		firedeviceService.showExcelInfo(firedeviceList);
-
-		// 跳转写成的html页面
-		return "ecosys/enterprisemsg/excelmsg";
+//		firedeviceService.showExcelInfo(firedeviceList);
+//
+//		// 跳转写成的html页面
+//		return "ecosys/enterprisemsg/excelmsg";
 	}
 
 

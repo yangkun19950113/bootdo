@@ -110,7 +110,15 @@ public class EnterpriseDO implements Serializable {
 	private String num;
 
 	private String month;
+	private String marketCodeStr[];
 
+	public String[] getMarketCodeStr() {
+		return marketCodeStr;
+	}
+
+	public void setMarketCodeStr(String[] marketCodeStr) {
+		this.marketCodeStr = marketCodeStr;
+	}
 
 	public String getMinImgUrl() {
 		return minImgUrl;

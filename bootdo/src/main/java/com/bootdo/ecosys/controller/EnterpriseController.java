@@ -3,23 +3,20 @@ package com.bootdo.ecosys.controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.bootdo.ecosys.domain.CommonDO;
-import com.bootdo.ecosys.domain.EnterpriseDO;
-import com.bootdo.ecosys.domain.EnvprotectionDO;
-import com.bootdo.ecosys.domain.ShowDataDO;
+import com.bootdo.common.domain.FileDO;
+import com.bootdo.ecosys.dao.CodeDao;
+import com.bootdo.ecosys.domain.*;
 import com.bootdo.ecosys.service.EnterpriseService;
 import com.bootdo.ecosys.service.EnvprotectionService;
 import com.bootdo.ecosys.service.ProductService;
 import com.bootdo.tool.MessageResult;
 import com.bootdo.tool.R;
 import com.bootdo.tool.ResponseData;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
@@ -45,6 +42,8 @@ public class EnterpriseController {
 	private EnvprotectionService envprotectionService;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private CodeDao codeDao;
 	
 	@GetMapping()
 	String Enterprise(){
@@ -151,17 +150,42 @@ public class EnterpriseController {
 	 * @return
 	 */
 	@GetMapping("/showExcelInfo/{enterpriseId}")
-	//@RequiresPermissions("ecosys:envprotection:excelInfo")
 	String enterpriseExcelInfo(@PathVariable("enterpriseId") Integer enterpriseId,Model model) throws IOException {
-		model.addAttribute("enterpriseId", enterpriseId);
 
 		// 根据企业Id查询企业基本信息
 		EnterpriseDO enterprise = enterpriseService.get(enterpriseId);
+		// 纳税人性质
+		String taxpayerCode = enterprise.getTaxpayerCode();
+		CodeDO codeDO = codeDao.getName(taxpayerCode,"10");
+		taxpayerCode = codeDO.getName();
+		enterprise.setTaxpayerCode(taxpayerCode);
+		// 企业性质
+		String enterpriseNatureCode = enterprise.getEnterpriseNatureCode();
+		CodeDO code = codeDao.getName(enterpriseNatureCode,"1");
+		enterpriseNatureCode = code.getName();
+		enterprise.setEnterpriseNatureCode(enterpriseNatureCode);
+		String marketCode = enterprise.getMarketCode();
+		if(null ==marketCode ||"".equals(marketCode)){
+		}else {
+			Map<String, Object> productPackIdsmap = new HashMap<String, Object>();
+			productPackIdsmap.put("productPackIds", marketCode);
+			productPackIdsmap.put("parent_id","14");
+			List<CodeDO> codeList = codeDao.getNames(productPackIdsmap);
+			String [] str = new  String [codeList.size()];
+			for(int i=0;i<codeList.size();i++){
+				CodeDO CodeDO = codeList.get(i);
+				String name = CodeDO.getName();
+				str[i] = name;
+			}
+			marketCode = StringUtils.join(str,",");
+			enterprise.setMarketCode(marketCode);
 
+
+		}
 		// 设置环保表格信息
-		enterpriseService.showExcelInfo(enterprise);
-
+//		enterpriseService.showExcelInfo(enterprise);
 		// 跳转写成的html页面
+		model.addAttribute("enterprise", enterprise);
 		return "ecosys/enterprisemsg/excelmsg";
 	}
 

@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>安全隐患调查表</title>
+    <style type="text/css">
+        body,td,th {
+            font-size: 16PX;
+            color: #000;
+        }
+        p{
+            margin-top: 9px;
+        }
+    </style>
+</head>
+<head th:include="include :: header"></head>
+<body>
+<br/>
+<center >
+
+    <div id="print">
+        <h3 align="center">安全隐患调查表</h3>
+        <!-- <input id="id" name="id" th:value="${paResult.id}"  type="hidden"> -->
+        <table cellpadding="0" cellspacing="0" border="1"  >
+            <tr>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">被调查人姓名</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${risk.surveytedPersonName}"></p>
+                </td>
+                <td width="120"colspan="2" align="center">
+                    <p style ="padding-top: 9px;">被调查人职务</p>
+                </td>
+                <td colspan="3" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${risk.surveytedPersonPosition}"></p>
+                </td>
+
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">填表日期</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${#dates.format(risk.fullFormTime,'yyyy-MM-dd')}"></p>
+                </td>
+                <td width="120"colspan="2" align="center">
+                    <p style ="padding-top: 9px;">调查人</p>
+                </td>
+                <td colspan="3" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${risk.surveyPersonName}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">序号</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" >发现人员</p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">发现时间</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" >隐患级别</p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">隐患类型</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" >隐患描述</p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">隐患部位</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" >整改情况</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" >整改人</p>
+                </td>
+
+            </tr>
+            <tr th:each="RiskDO,userStat:${riskList}">
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px; "th:text="${userStat.count}"></p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;"th:text="${RiskDO.peopleFindName}" ></p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;"th:text="${#dates.format(RiskDO.findTime,'yyyy-MM-dd')}"></p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${RiskDO.level}"></p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;"th:text="${RiskDO.type}"></p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;"th:text="${RiskDO.remark}" ></p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;"th:text="${RiskDO.apart}"></p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${RiskDO.rectificat}"></p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${RiskDO.rectUserName}"></p>
+                </td>
+
+            </tr>
+
+
+
+
+
+        </table>
+        <h6 id="showDate" align="left"></h6>
+    </div>
+</center>
+</body>
+</head>
+</html>

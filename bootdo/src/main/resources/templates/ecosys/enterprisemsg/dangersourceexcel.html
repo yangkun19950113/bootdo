@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>安全重点部位（危险源）信息调查表</title>
+    <style type="text/css">
+        body,td,th {
+            font-size: 16PX;
+            color: #000;
+        }
+        p{
+            margin-top: 9px;
+        }
+    </style>
+</head>
+<head th:include="include :: header"></head>
+<body>
+<br/>
+<center >
+
+    <div id="print">
+        <h3 align="center">安全重点部位（危险源）信息调查表</h3>
+        <!-- <input id="id" name="id" th:value="${paResult.id}"  type="hidden"> -->
+        <table cellpadding="0" cellspacing="0" border="1"  >
+            <tr>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">被调查人姓名</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${dangersource.surveytedPersonName}"></p>
+                </td>
+                <td width="120"colspan="2" align="center">
+                    <p style ="padding-top: 9px;">被调查人职务</p>
+                </td>
+                <td colspan="3" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${dangersource.surveytedPersonPosition}"></p>
+                </td>
+
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">填表日期</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${#dates.format(dangersource.fullFormTime,'yyyy-MM-dd')}"></p>
+                </td>
+                <td width="120"colspan="2" align="center">
+                    <p style ="padding-top: 9px;">调查人</p>
+                </td>
+                <td colspan="3" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${dangersource.surveyPersonName}"></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">序号</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" >危险源名称</p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">具体位置</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" >危险程度</p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">可发生的事故</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" >监控措施</p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">责任人</p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" >联系电话</p>
+                </td>
+            </tr>
+            <tr th:each="DangersourceDO,userStat:${dangersourceList}">
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px; "th:text="${userStat.count}"></p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;"th:text="${DangersourceDO.dangerSourceName}" ></p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;"th:text="${DangersourceDO.partDetail}"></p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;" th:text="${DangersourceDO.degreeCode}"></p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;"th:text="${DangersourceDO.accidentType}"></p>
+                </td>
+                <td  colspan="2" width="120" align="center">
+                    <p style ="padding-top: 9px;"th:text="${DangersourceDO.monit}" ></p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;"th:text="${DangersourceDO.protectionPerson}"></p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;"th:text="${DangersourceDO.phoneNumber}"></p>
+                </td>
+
+            </tr>
+
+
+
+
+
+        </table>
+        <h6 id="showDate" align="left"></h6>
+    </div>
+</center>
+</body>
+</head>
+</html>

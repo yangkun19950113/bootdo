@@ -1,6 +1,7 @@
 package com.bootdo.ecosys.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -168,21 +169,39 @@ public class TrainingController {
 		model.addAttribute("enterpriseId", enterpriseId);
 
 		params.put("enterpriseId",enterpriseId);
-		params.put("limit", 10);
+		params.put("limit", 15);
 		params.put("offset", 0);
 		Query query = new Query(params);
 		List<TrainingDO> trainingList = trainingService.list(query);
-
+		TrainingDO training = new TrainingDO();
 		if(trainingList.size() > 0) {
 			EnterpriseDO enterprise = enterpriseService.get(enterpriseId.intValue());
 			trainingList.get(0).setEnterpriseName(enterprise.getEnterpriseName());
+			training.setEnterpriseName(enterprise.getEnterpriseName());
+			String surveytedPersonName = enterprise.getSurveytedPersonName();
+			String surveytedPersonPosition = enterprise.getSurveytedPersonPosition();
+			String surveyPersonName = enterprise.getSurveyPersonName();
+			Date fullFormTime = enterprise.getFullFormTime();
+			training.setSurveytedPersonName(surveytedPersonName);
+			training.setSurveytedPersonPosition(surveytedPersonPosition);
+			training.setFullFormTime(fullFormTime);
+			training.setSurveyPersonName(surveyPersonName);
+			String trainingFlg = trainingList.get(0).getTrainingFlg();
+			training.setTrainingFlg(trainingFlg);
+			String laProvideFlg = trainingList.get(0).getLaProvideFlg();
+			training.setLaProvideFlg(laProvideFlg);
+			model.addAttribute("training", training);
+			model.addAttribute("trainingList", trainingList);
+			return "ecosys/enterprisemsg/trainingexcel";
+		}else {
+			return "ecosys/enterprisemsg/msg";
 		}
 
 		// 设置安全生产培训表格信息
-		trainingService.showExcelInfo(trainingList);
+//		trainingService.showExcelInfo(trainingList);
 
 		// 跳转写成的html页面
-		return "ecosys/enterprisemsg/excelmsg";
+
 	}
 	
 }
