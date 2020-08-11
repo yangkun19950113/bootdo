@@ -195,33 +195,36 @@
 							</div>
 
 
-<!--							<div class="form-group">-->
-<!--								<label class="col-sm-3 control-label">图片上传：</label>-->
-<!--								<div class="col-sm-8">-->
-<!--								<button type="button" class="layui-btn layui-btn-normal"-->
-<!--										id="testList">选择多文件</button>-->
-<!--&lt;!&ndash;									<button type="button" class="layui-btn" id="testListAction">开始上传</button>&ndash;&gt;-->
-<!--								<div class="layui-upload-list">-->
-<!--									<table class="layui-table">-->
-<!--										<thead>-->
-<!--										<tr>-->
-<!--											<th>文件名</th>-->
-<!--											<th>大小</th>-->
-<!--											<th>状态</th>-->
-<!--											<th>操作</th>-->
-<!--										</tr>-->
-<!--										</thead>-->
-<!--										<tbody id="pictureList"></tbody>-->
-<!--									</table>-->
-<!--								</div>-->
-<!--								</div>-->
+							<div class="form-group">
+								<label class="col-sm-3 control-label">图片上传：</label>
+								<div class="col-sm-8">
+								<button type="button" class="layui-btn layui-btn-normal"
+										id="testList">选择多文件</button>
+									<button type="button" class="layui-btn" id="testListAction">开始上传</button>
+								<div class="layui-upload-list">
+									<table class="layui-table">
+										<thead>
+										<tr>
 
-<!--							</div>-->
+											<th style="text-align: center;">图片预览</th>
+											<th>文件名</th>
+											<th>状态</th>
+											<th>大小</th>
+
+											<th>操作</th>
+										</tr>
+										</thead>
+										<tbody id="pictureList"></tbody>
+									</table>
+								</div>
+								</div>
+
+							</div>
 
 
 							<div class="form-group">
 								<div class="col-sm-8 col-sm-offset-3">
-									<button id="testListAction"  type="submit" class="btn btn-primary">提交</button>
+									<button   type="submit" class="btn btn-primary">提交</button>
 									<button type="button" class="btn btn-danger"style="margin-left: 30px" onclick="cancalColse()">取消</button>
 								</div>
 							</div>
@@ -267,9 +270,10 @@
 						//读取本地文件
 						obj.preview(function(index, file, result){
 							var tr = $(['<tr id="upload-'+ index +'" lay-verify="uploadReq" name="uploadtr">'
+								, '<td><img src="' + result + '" alt="' + file.name + '" class="layui-upload-img" style="height: 66px;width:100px;"></td>'
 								,'<td>'+ file.name +'</td>'
-								,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
 								,'<td>等待上传</td>'
+								,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
 								,'<td>'
 								,'<button type="button" class="btn btn-info btn-sm demo-reload">重传</button>'
 								,'<button type="button" class="btn btn-danger btn-sm  demo-delete">删除</button>'
@@ -293,12 +297,11 @@
 					}
 					,done: function(res, index, upload){
 						if(res.code == 0){ //上传成功
-							var url = res.data.value;
+							console.log(res+"1111");
 							var tr = pictureListView.find('tr#upload-'+ index)
 									,tds = tr.children();
 							tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
 							tds.eq(3).html(''); //清空操作
-							tds.eq(4).html("<a href='#' style='color: #5FB878' onclick=\"view('"+ res.data.value +"')\"  >"+ res.data.value +"</a>"); //url
 							return delete this.files[index]; //删除文件队列已经上传成功的文件
 						}
 						this.error(index, upload);

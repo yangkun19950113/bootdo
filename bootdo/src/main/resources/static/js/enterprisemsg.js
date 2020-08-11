@@ -132,7 +132,7 @@ function reLoad(socialCreditCode) {
                 }
 
                 $("#enterprise").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/enterprise.png' alt='' class='card-img-top'style='width: 100px;height: 100px;margin-left: 90px'>" +
+                    "<img src='../img/enterprise.png' alt='' class='card-img-top'style='width: 80px;height: 80px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>" + enterpriseName + "</h5>" +
                     "<p class='card-text'> 社会信用编码:" + socialCreditCode + "</p>" +
@@ -142,7 +142,7 @@ function reLoad(socialCreditCode) {
                     "</div>"
                 );
                 $("#envprotection").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/envprotection.png' alt='' class='card-img-top' style='width: 100px;height: 100px;margin-left: 90px'>" +
+                    "<img src='../img/envprotection.png' alt='' class='card-img-top' style='width: 80px;height: 80px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>环保基本信息</h5>" +
                     "<p class='card-text'> 是否有环评文号:" + ecoEstimateFlg + "</p>" +
@@ -152,7 +152,7 @@ function reLoad(socialCreditCode) {
                     "</div>"
                 );
                 $("#product").append("<div class='card' style='width: 18rem;' >" +
-                    "<img src='../img/product.png' alt='' class='card-img-top' style='width: 100px;height: 100px;margin-left: 90px'>" +
+                    "<img src='../img/product.png' alt='' class='card-img-top' style='width: 80px;height: 80px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>企业产品及产能</h5>" +
                     "<p class='card-text'> 产品名称:" + prodectName + "</p>" +
@@ -162,7 +162,7 @@ function reLoad(socialCreditCode) {
                     "</div>"
                 );
                 $("#material").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/material.png' alt='' class='card-img-top' style='width: 100px;height: 100px;margin-left: 90px'>" +
+                    "<img src='../img/material.png' alt='' class='card-img-top' style='width: 80px;height: 80px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>产品原材料</h5>" +
                     "<p class='card-text'> 原材料类型:" + materialType + "</p>" +
@@ -172,7 +172,7 @@ function reLoad(socialCreditCode) {
                     "</div>"
                 );
                 $("#ecoequipment").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/ecoequipment.png' alt='' class='card-img-top'style='width: 100px;height: 100px;margin-left: 90px'>" +
+                    "<img src='../img/ecoequipment.png' alt='' class='card-img-top'style='width: 80px;height: 80px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>防治设备</h5>" +
                     "<p class='card-text'> 设备名称:" + equipmentName + "</p>" +
@@ -182,7 +182,7 @@ function reLoad(socialCreditCode) {
                     "</div>"
                 );
                 $("#dangersource").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/dangersource.png' alt='' class='card-img-top' style='width: 100px;height: 100px;margin-left: 90px'>" +
+                    "<img src='../img/dangersource.png' alt='' class='card-img-top' style='width: 80px;height: 80px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>重点部位</h5>" +
                     "<p class='card-text'> 危险源信息名称:" + dangerSourceName + "</p>" +
@@ -192,7 +192,7 @@ function reLoad(socialCreditCode) {
                     "</div>"
                 );
                 $("#training").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/training.png' alt='' class='card-img-top'style='width: 100px;height: 100px;margin-left: 90px'>" +
+                    "<img src='../img/training.png' alt='' class='card-img-top'style='width: 80px;height: 80px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>安全生产培训</h5>" +
                     "<p class='card-text'> 培训主题:" + trainName + "</p>" +
@@ -202,7 +202,7 @@ function reLoad(socialCreditCode) {
                     "</div>"
                 );
                 $("#electric").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/electric.png' alt='' class='card-img-top'style='width: 100px;height: 100px;margin-left: 90px'>" +
+                    "<img src='../img/electric.png' alt='' class='card-img-top'style='width: 80px;height: 80px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>用电设备</h5>" +
                     "<p class='card-text'> 设备名称:" + eleequipmentName + "</p>" +
@@ -212,7 +212,7 @@ function reLoad(socialCreditCode) {
                     "</div>"
                 );
                 $("#risk").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/risk.png' alt='' class='card-img-top'style='width: 100px;height: 100px;margin-left: 90px'>" +
+                    "<img src='../img/risk.png' alt='' class='card-img-top'style='width: 80px;height: 80px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>安全隐患</h5>" +
                     "<p class='card-text'> 发现人员:" + peopleFindName + "</p>" +
@@ -222,7 +222,7 @@ function reLoad(socialCreditCode) {
                     "</div>"
                 );
                 $("#firedevice").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/firedevice.png' alt='' class='card-img-top'style='width: 100px;height: 100px;margin-left: 90px'>" +
+                    "<img src='../img/firedevice.png' alt='' class='card-img-top'style='width: 80px;height: 80px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h5 class='card-title'>消防设备</h5>" +
                     "<p class='card-text'> 设备名称:" + fireequipmentName + "</p>" +

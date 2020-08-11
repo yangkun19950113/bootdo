@@ -53,23 +53,28 @@ $("#administrativeDivision").bind("change", function(){
     var parentId = $("#administrativeDivision option:selected").attr("id");
     $("#country").find("option").remove();//清空option
     //根据乡镇获取村
-    $.ajax({
-        type: "get",
-        url: "/ecosys/code/list",
-        dataType: "json",
-        data: {
-            parentId: parentId
-        },
-        success: function (data) {
-            var code_list = data.rows;
-            var opts = "<option value=''>" +"全部 "+"</option>";
-            for (var i = 0; i < code_list.length; i++) {
-                var code = code_list[i];
-                opts += "<option value='" + code.orderNum + "'>" + code.name + "</option>";
+    if("" == administrativeDivision){
+
+    }else {
+        $.ajax({
+            type: "get",
+            url: "/ecosys/code/list",
+            dataType: "json",
+            data: {
+                parentId: parentId
+            },
+            success: function (data) {
+                var code_list = data.rows;
+                var opts = "<option value=''>" +"全部 "+"</option>";
+                for (var i = 0; i < code_list.length; i++) {
+                    var code = code_list[i];
+                    opts += "<option value='" + code.orderNum + "'>" + code.name + "</option>";
+                }
+                $("#country").append(opts);
             }
-            $("#country").append(opts);
-        }
-    })
+        })
+    }
+
 })
 
 //监听村子
