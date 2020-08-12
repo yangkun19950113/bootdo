@@ -19,6 +19,7 @@ $(function() {
 	taxpayerCode();
 	marketCode();*/
 	load();
+	administrativeDivision();//加载乡镇
 });
 
 function load() {
@@ -44,7 +45,8 @@ function load() {
 								limit: params.limit,
 								offset:params.offset,
 								enterpriseName:$('#searchName').val(),
-								administrativeDivision:$('#administrativeDivision').val()
+								administrativeDivision:$('#administrativeDivision').val(),
+								country:$('#country').val(),
 							};
 						},
 
@@ -106,6 +108,60 @@ function load() {
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
+//加载行政区划
+//一级
+function administrativeDivision(){
+	$.ajax({
+		type: "get",
+		url: "/ecosys/code/list",
+		dataType: "json",
+		data: {
+			parentId: 113
+		},
+		success: function (data) {
+			var code_list = data.rows;
+			var opts = "<option value=''>" +"全部 "+"</option>";
+			var optSon = "<option value=''>" +"全部 "+"</option>";
+			for (var i = 0; i < code_list.length; i++) {
+				var code = code_list[i];
+				opts += "<option value='" + code.codeId + "' id='" + code.id + "'>" + code.name + "</option>";
+			}
+			$("#administrativeDivision").append(opts);
+			$("#country").append(optSon);
+		}
+	})
+}
+
+//行政区划，监听一级乡镇，联动村子
+$("#administrativeDivision").bind("change", function(){
+	//获取
+	var option = $("#administrativeDivision option:selected").val();
+	var parentId = $("#administrativeDivision option:selected").attr("id");
+	$("#country").find("option").remove();//清空option
+	//根据乡镇获取村
+	if("" == administrativeDivision){
+
+	}else {
+		$.ajax({
+			type: "get",
+			url: "/ecosys/code/list",
+			dataType: "json",
+			data: {
+				parentId: parentId
+			},
+			success: function (data) {
+				var code_list = data.rows;
+				var opts = "<option value=''>" +"全部 "+"</option>";
+				for (var i = 0; i < code_list.length; i++) {
+					var code = code_list[i];
+					opts += "<option value='" + code.orderNum + "'>" + code.name + "</option>";
+				}
+				$("#country").append(opts);
+			}
+		})
+	}
+
+})
 function add() {
 	layer.open({
 		type : 2,
