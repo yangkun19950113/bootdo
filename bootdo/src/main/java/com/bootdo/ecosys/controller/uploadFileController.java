@@ -42,37 +42,23 @@ public class uploadFileController {
         } catch (Exception e) {
             return MessageResult.error("500","上传失败");
         }
-
-
-
-
-
-
-//        Map<String, Object> map = new HashMap<String, Object>();
-//        try {
-//            String uploadPath = "D:/abc/";
-//            String uploadPathOffice = "abc/";
-//            String url = "";
-//            if (file != null) {
-//                String path = uploadPath;
-//                String uploadFile = UploadUtil.uploadFile(file, path);
-//                url = "/" + uploadPathOffice + uploadFile;
-//                String fileurl = "/files/"+uploadFile;
-//                FileDO fileDO = new FileDO();
-//                fileDO.setSocialCreditCode(socialCreditCode);
-//                fileDO.setUrl(fileurl);
-//                fileDao.save(fileDO);
-//
-//                System.out.println(fileurl);
-//            }
-//            map.put("value", url);
-//
-//
-//        } catch (Exception e) {
-//
-//            e.printStackTrace();
-//            return MessageResult.error("500","上传失败");
-//        }
+        return MessageResult.success("0","上传成功");
+    }
+    @PostMapping("reupload")
+    public ResponseData reupload(MultipartFile file, String socialCreditCode){
+        fileDao.delete(socialCreditCode);
+        String fileName = file.getOriginalFilename();
+        fileName = FileUtil.renameToUUID(fileName);
+        FileDO fileDO = new FileDO();
+        fileDO.setSocialCreditCode(socialCreditCode);
+        fileDO.setUrl("/files/" + fileName);
+        fileDao.save(fileDO);
+//        FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/" + fileName, new Date());
+        try {
+            FileUtil.uploadFile(file.getBytes(), bootdoConfig.getUploadPath(), fileName);
+        } catch (Exception e) {
+            return MessageResult.error("500","上传失败");
+        }
         return MessageResult.success("0","上传成功");
     }
 

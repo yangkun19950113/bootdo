@@ -46,7 +46,7 @@ function reLoad(socialCreditCode) {
                 var enterpriseId = data.enterpriseId;
                 var proimgsurl = data.imgUrls;
                 console.log(proimgsurl);
-                // var minImgUrl = "../img/enterprise.png";
+                var minImgUrl = data.minImgUrl;
                 var enterpriseName = data.enterpriseName;
                 var socialCreditCode = data.socialCreditCode;
                 var registeredAddress = data.registeredAddress;
@@ -70,28 +70,28 @@ function reLoad(socialCreditCode) {
                 }else{
                     ecoStandardFlg = '否'
                 };
-                // var envprotectionMinImgUrl = data.envprotectionMinImgUrl;
-                // var productMinImgUrl =data.productMinImgUrl;
+                var envprotectionMinImgUrl = data.envprotectionMinImgUrl;
+                var productMinImgUrl =data.productMinImgUrl;
                 var prodectName = data.prodectName;
                 var specifical = data.specifical;
                 var model = data.model;
-                // var materialMinImgUrl = data.materialMinImgUrl;
+                var materialMinImgUrl = data.materialMinImgUrl;
                 var materialType = data.materialType;
                 var materialName = data.materialName;
                 var monthConsumption = data.monthConsumption;
-                // var ecoequipmentMinImgUrl = data.ecoequipmentMinImgUrl;
+                var ecoequipmentMinImgUrl = data.ecoequipmentMinImgUrl;
                 var equipmentName = data.equipmentName;
                 var protectionPerson = data.protectionPerson;
                 var phoneNumber = data.phoneNumber;
                 var dangerSourceName= data.dangerSourceName;
                 var partDetail = data.partDetail;
                 var dangerprotectionPerson = data.dangerprotectionPerson;
-                // var dangersourceMinImgUrl = data.dangersourceMinImgUrl;
+                var dangersourceMinImgUrl = data.dangersourceMinImgUrl;
                 var trainName = data.trainName;
                 var trainType = data.trainType;
                 var personNumber = data.personNumber;
-                // var trainingMinImgUrl = data.trainingMinImgUrl;
-                // var electricMinImgUrl = data.electricMinImgUrl;
+                var trainingMinImgUrl = data.trainingMinImgUrl;
+                var electricMinImgUrl = data.electricMinImgUrl;
                 var eleequipmentName = data.eleequipmentName;
                 var eleequipmentCode = data.eleequipmentCode;
                 var number = data.number;
@@ -101,14 +101,14 @@ function reLoad(socialCreditCode) {
                     var findTime = "";
                 }
                 var type = data.type;
-                // var riskMinImgUrl = data.riskMinImgUrl;
+                var riskMinImgUrl = data.riskMinImgUrl;
                 var fireequipmentName = data.fireequipmentName;
                 var fireequipmentCode = data.fireequipmentCode;
                 var buyTime = data.buyTime;
                 if(null == buyTime){
                     var buyTime = "";
                 }
-                // var firedeviceMinImgUrl = data.firedeviceMinImgUrl;
+                var firedeviceMinImgUrl = data.firedeviceMinImgUrl;
                 var industryCode = data.industryCode;
                 var monthProduction = data.monthProduction;
                 var level = data.level;
@@ -132,7 +132,7 @@ function reLoad(socialCreditCode) {
                 }
 
                 $("#enterprise").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/enterprise.png' alt='' class='card-img-top'style='width: 80px;height: 80px;margin-left: 90px'>" +
+                    "<img src='"+minImgUrl+"' alt='' class='card-img-top'style='width: 80px;height: 80px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h6 class='card-title'>" + enterpriseName + "</h6>" +
                     "<p class='card-text'> 信用编码:" + socialCreditCode + "</p>" +
@@ -142,7 +142,7 @@ function reLoad(socialCreditCode) {
                     "</div>"
                 );
                 $("#envprotection").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/envprotection.png' alt='' class='card-img-top' style='width: 80px;height: 80px;margin-left: 90px'>" +
+                    "<img src='"+envprotectionMinImgUrl+"' alt='' class='card-img-top' style='width: 80px;height: 80px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h6 class='card-title'>环保基本信息</h6>" +
                     "<p class='card-text'> 是否有环评文号:" + ecoEstimateFlg + "</p>" +
@@ -152,7 +152,7 @@ function reLoad(socialCreditCode) {
                     "</div>"
                 );
                 $("#product").append("<div class='card' style='width: 18rem;' >" +
-                    "<img src='../img/product.png' alt='' class='card-img-top' style='width: 80px;height: 80px;margin-left: 90px'>" +
+                    "<img src='"+productMinImgUrl+"' alt='' class='card-img-top' style='width: 80px;height: 80px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h6 class='card-title'>企业产品及产能</h6>" +
                     "<p class='card-text'> 产品名称:" + prodectName + "</p>" +
@@ -162,7 +162,7 @@ function reLoad(socialCreditCode) {
                     "</div>"
                 );
                 $("#material").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/material.png' alt='' class='card-img-top' style='width: 80px;height: 80px;margin-left: 90px'>" +
+                    "<img src='"+materialMinImgUrl+"' alt='' class='card-img-top' style='width: 80px;height: 80px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h6 class='card-title'>产品原材料</h6>" +
                     "<p class='card-text'> 原材料类型:" + materialType + "</p>" +
@@ -172,7 +172,7 @@ function reLoad(socialCreditCode) {
                     "</div>"
                 );
                 $("#ecoequipment").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/ecoequipment.png' alt='' class='card-img-top'style='width: 80px;height: 80px;margin-left: 90px'>" +
+                    "<img src='"+ecoequipmentMinImgUrl+"' alt='' class='card-img-top'style='width: 80px;height: 80px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h6 class='card-title'>防治设备</h6>" +
                     "<p class='card-text'> 设备名称:" + equipmentName + "</p>" +
@@ -182,7 +182,7 @@ function reLoad(socialCreditCode) {
                     "</div>"
                 );
                 $("#dangersource").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/dangersource.png' alt='' class='card-img-top' style='width: 80px;height: 80px;margin-left: 90px'>" +
+                    "<img src='"+dangersourceMinImgUrl+"' alt='' class='card-img-top' style='width: 80px;height: 80px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h6 class='card-title'>重点部位</h6>" +
                     "<p class='card-text'> 危险源信息名称:" + dangerSourceName + "</p>" +
@@ -192,7 +192,7 @@ function reLoad(socialCreditCode) {
                     "</div>"
                 );
                 $("#training").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/training.png' alt='' class='card-img-top'style='width: 80px;height: 80px;margin-left: 90px'>" +
+                    "<img src='"+trainingMinImgUrl+"' alt='' class='card-img-top'style='width: 80px;height: 80px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h6 class='card-title'>安全生产培训</h6>" +
                     "<p class='card-text'> 培训主题:" + trainName + "</p>" +
@@ -202,7 +202,7 @@ function reLoad(socialCreditCode) {
                     "</div>"
                 );
                 $("#electric").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/electric.png' alt='' class='card-img-top'style='width: 80px;height: 80px;margin-left: 90px'>" +
+                    "<img src='"+electricMinImgUrl+"' alt='' class='card-img-top'style='width: 80px;height: 80px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h6 class='card-title'>用电设备</h6>" +
                     "<p class='card-text'> 设备名称:" + eleequipmentName + "</p>" +
@@ -212,7 +212,7 @@ function reLoad(socialCreditCode) {
                     "</div>"
                 );
                 $("#risk").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/risk.png' alt='' class='card-img-top'style='width: 80px;height: 80px;margin-left: 90px'>" +
+                    "<img src='"+riskMinImgUrl+"' alt='' class='card-img-top'style='width: 80px;height: 80px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h6 class='card-title'>安全隐患</h6>" +
                     "<p class='card-text'> 发现人员:" + peopleFindName + "</p>" +
@@ -222,7 +222,7 @@ function reLoad(socialCreditCode) {
                     "</div>"
                 );
                 $("#firedevice").append("<div class='card' style='width: 18rem;'>" +
-                    "<img src='../img/firedevice.png' alt='' class='card-img-top'style='width: 80px;height: 80px;margin-left: 90px'>" +
+                    "<img src='"+firedeviceMinImgUrl+"' alt='' class='card-img-top'style='width: 80px;height: 80px;margin-left: 90px'>" +
                     "<div class='card-body'> " +
                     "<h6 class='card-title'>消防设备</h6>" +
                     "<p class='card-text'> 设备名称:" + fireequipmentName + "</p>" +

@@ -21,7 +21,7 @@ public interface FileDao {
 	List<FileDO> list(Map<String,Object> map);
 	List<FileDO> geturl(String socialCreditCode);
 	int count(Map<String,Object> map);
-	
+	int delete(String socialCreditCode);
 	int save(FileDO file);
 	
 	int update(FileDO file);

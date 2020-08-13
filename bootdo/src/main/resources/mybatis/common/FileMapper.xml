@@ -71,6 +71,9 @@
 	<delete id="remove">
 		delete from sys_file where id = #{value}
 	</delete>
+	<delete id="delete">
+		delete from sys_file where social_credit_code = #{value}
+	</delete>
 	
 	<delete id="batchRemove">
 		delete from sys_file where id in 
