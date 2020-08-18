@@ -144,7 +144,7 @@ function reLoad() {
 function add() {
 	layer.open({
 		type : 2,
-		title : '增加',
+		title : '新增安全生产培训',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
@@ -154,7 +154,7 @@ function add() {
 function edit(id) {
 	layer.open({
 		type : 2,
-		title : '编辑',
+		title : '修改安全生产培训',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],

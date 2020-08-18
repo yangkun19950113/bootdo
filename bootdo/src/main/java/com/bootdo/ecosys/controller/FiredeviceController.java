@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.ecosys.dao.EnterpriseDao;
 import com.bootdo.ecosys.domain.CodeDO;
 import com.bootdo.ecosys.domain.EnterpriseDO;
 import com.bootdo.ecosys.domain.FiredeviceDO;
@@ -45,6 +46,8 @@ public class FiredeviceController {
 	private EnterpriseService enterpriseService;
 	@Autowired
 	private CodeService codeService;
+	@Autowired
+	private EnterpriseDao enterpriseDao;
 	
 	@GetMapping("/{enterpriseId}")
 //	@RequiresPermissions("ecosys:firedevice:firedevice")
@@ -212,6 +215,40 @@ public class FiredeviceController {
 //		// 跳转写成的html页面
 //		return "ecosys/enterprisemsg/excelmsg";
 	}
+	//综合大数据  灭火器过期的企业 详情
+	@GetMapping("/showFiredeviceInfo/{adminCountryCode}")
+	String showFiredeviceInfo(@PathVariable("adminCountryCode") String adminCountryCode,Model model){
+		if(adminCountryCode.length()>6){
+			String admin = adminCountryCode.substring(0,12);
+			System.out.println(admin);
+			String countryCode = adminCountryCode.substring(12,adminCountryCode.length());
+			Map<String, Object> params = new HashMap<>();
+			if("000".equals(countryCode)){
+				params.put("administrativeDivision",admin);
+			}else {
+				params.put("administrativeDivision",admin);
+				params.put("country",countryCode);
+			}
 
+			List<FiredeviceDO> firedeviceList = enterpriseDao.getEffectFireEquip(params);
+			if(firedeviceList.size()>0){
+				model.addAttribute("firedeviceList",firedeviceList);
+				return "ecosys/enterprisemsg/showFiredeviceInfo";
+			}else {
+				return "ecosys/enterprisemsg/msg";
+			}
+		}else {
+			Map<String, Object> params = new HashMap<>();
+			List<FiredeviceDO> firedeviceList = enterpriseDao.getEffectFireEquip(params);
+			if(firedeviceList.size()>0){
+				model.addAttribute("firedeviceList",firedeviceList);
+				return "ecosys/enterprisemsg/showFiredeviceInfo";
+			}else {
+				return "ecosys/enterprisemsg/msg";
+			}
+		}
+
+
+	}
 
 }

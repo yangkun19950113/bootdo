@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.ecosys.dao.EnterpriseDao;
 import com.bootdo.ecosys.domain.*;
 import com.bootdo.ecosys.service.CodeService;
 import com.bootdo.ecosys.service.DangersourceService;
@@ -41,6 +42,8 @@ public class DangersourceController {
 	private EnterpriseService enterpriseService;
 	@Autowired
 	private CodeService codeService;
+	@Autowired
+	private EnterpriseDao enterpriseDao;
 
 	@GetMapping("/{enterpriseId}")
 	String Dangersource(@PathVariable("enterpriseId") Long enterpriseId,Model model){
@@ -193,6 +196,39 @@ public class DangersourceController {
 		}
 
 	}
+	//综合大数据  灭火器过期的企业 详情
+	@GetMapping("/showdangerInfo/{adminCountryCode}")
+	String showdangerInfo(@PathVariable("adminCountryCode") String adminCountryCode,Model model){
+		if(adminCountryCode.length()>6){
+			String admin = adminCountryCode.substring(0,12);
+			System.out.println(admin);
+			String countryCode = adminCountryCode.substring(12,adminCountryCode.length());
+			Map<String, Object> params = new HashMap<>();
+			if("000".equals(countryCode)){
+				params.put("administrativeDivision",admin);
+			}else {
+				params.put("administrativeDivision",admin);
+				params.put("country",countryCode);
+			}
+			List<DangersourceDO> firedeviceList = enterpriseDao.getDangerData(params);
+			if(firedeviceList.size()>0){
+				model.addAttribute("firedeviceList",firedeviceList);
+				return "ecosys/enterprisemsg/showDangerInfo";
+			}else {
+				return "ecosys/enterprisemsg/msg";
+			}
+		}else {
+			Map<String, Object> params = new HashMap<>();
+			List<DangersourceDO>  firedeviceList = enterpriseDao.getDangerData(params);
+			if(firedeviceList.size()>0){
+				model.addAttribute("firedeviceList",firedeviceList);
+				return "ecosys/enterprisemsg/showDangerInfo";
+			}else {
+				return "ecosys/enterprisemsg/msg";
+			}
+		}
 
+
+	}
 
 }

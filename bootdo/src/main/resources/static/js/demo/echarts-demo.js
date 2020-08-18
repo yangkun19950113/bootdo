@@ -34,8 +34,8 @@ function administrativeDivision(){
         },
         success: function (data) {
             var code_list = data.rows;
-            var opts = "<option value=''>" +"全部 "+"</option>";
-            var optSon = "<option value=''>" +"全部 "+"</option>";
+            var opts = "<option value='00'>" +"全部 "+"</option>";
+            var optSon = "<option value='000'>" +"全部 "+"</option>";
             for (var i = 0; i < code_list.length; i++) {
                 var code = code_list[i];
                 opts += "<option value='" + code.codeId + "' id='" + code.id + "'>" + code.name + "</option>";
@@ -65,7 +65,7 @@ $("#administrativeDivision").bind("change", function(){
             },
             success: function (data) {
                 var code_list = data.rows;
-                var opts = "<option value=''>" +"全部 "+"</option>";
+                var opts = "<option value='000'>" +"全部 "+"</option>";
                 for (var i = 0; i < code_list.length; i++) {
                     var code = code_list[i];
                     opts += "<option value='" + code.orderNum + "'>" + code.name + "</option>";
@@ -470,6 +470,26 @@ function envprotectionChart(){
     }
 
 })(jQuery);
+//  综合大数据  灭火器过期的企业 详情 showdangerInfo
+function showFiredeviceInfo() {
+    var mainhtml = "/ecosys/firedevice";
+    var admin = $("#administrativeDivision option:selected").val();//行政区划
+    var parentId = $("#administrativeDivision option:selected").attr("id");//行政区划id
+    var countryCode = $("#country option:selected").val();//村子的编码
+    var data =admin+countryCode;
+    console.log(data);
+    openPageJump(mainhtml, mainhtml+'/showFiredeviceInfo/'+data,"消防设备过期的企业");
+}
+//  综合大数据  危险源的企业 详情
+function showdangerInfo() {
+    var mainhtml = "/ecosys/dangersource";
+    var admin = $("#administrativeDivision option:selected").val();//行政区划
+    var parentId = $("#administrativeDivision option:selected").attr("id");//行政区划id
+    var countryCode = $("#country option:selected").val();//村子的编码
+    var data =admin+countryCode;
+    console.log(data);
+    openPageJump(mainhtml, mainhtml+'/showdangerInfo/'+data,"有危险源的企业");
+}
 
 //加载灭火器过期的企业
 function getEffectFireEquip(){

@@ -163,24 +163,26 @@ $("#administrativeDivision").bind("change", function(){
 
 })
 function add() {
-	layer.open({
+	var add_full = layer.open({
 		type : 2,
-		title : '增加',
+		title : '新增企业',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
 		content : prefix + '/add' // iframe的url
 	});
+	layer.full(add_full);
 }
 function edit(id) {
-	layer.open({
+	var edit_full = layer.open({
 		type : 2,
-		title : '编辑',
+		title : '修改企业信息',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
 		content : prefix + '/edit/' + id // iframe的url
 	});
+	layer.full(edit_full);
 }
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {

@@ -348,7 +348,8 @@
 		SELECT
 			en.enterprise_id,
 			en.enterprise_name,
-			dan.danger_source_name
+			dan.danger_source_name,
+		    dan.part_detail
 		FROM
 			eco_enterprise en
 			JOIN eco_dangersource dan ON en.enterprise_id = dan.enterprise_id
