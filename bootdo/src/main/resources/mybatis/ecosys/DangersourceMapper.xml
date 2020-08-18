@@ -166,7 +166,6 @@
 			<if test="modifyBy != null">`modify_by` = #{modifyBy}, </if>
 			<if test="deleteFlag != null">`delete_flag` = #{deleteFlag}, </if>
 			<if test="enterpriseId != null">`enterprise_id` = #{enterpriseId}, </if>
-			<if test="administrativeDivision != null">`administrative_division` = #{administrativeDivision}, </if>
 			<if test="urbanorrural != null">`urbanorrural` = #{urbanorrural}</if>
 		</set>
 		where danger_source_id = #{dangerSourceId}

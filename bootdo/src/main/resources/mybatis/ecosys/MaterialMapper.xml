@@ -147,8 +147,8 @@
 			#{modifyUserName}, 
 			#{modifyBy}, 
 			'0',
-			#{enterpriseId}, 
-			#{administrativeDivision}, 
+			#{enterpriseId},
+			#{administrativeDivision},
 			#{urbanorrural},
 			#{country}
 		)
@@ -179,7 +179,6 @@
 			<if test="modifyBy != null">`modify_by` = #{modifyBy}, </if>
 			<if test="deleteFlag != null">`delete_flag` = #{deleteFlag}, </if>
 			<if test="enterpriseId != null">`enterprise_id` = #{enterpriseId}, </if>
-			<if test="administrativeDivision != null">`administrative_division` = #{administrativeDivision}, </if>
 			<if test="urbanorrural != null">`urbanorrural` = #{urbanorrural}</if>
 		</set>
 		where material_id = #{materialId}

@@ -248,10 +248,8 @@
 			<if test="modifyUserName != null">`modify_user_name` = #{modifyUserName}, </if>
 			<if test="modifyBy != null">`modify_by` = #{modifyBy}, </if>
 			<if test="deleteFlag != null">`delete_flag` = #{deleteFlag}, </if>
-			<if test="administrativeDivision != null">`administrative_division` = #{administrativeDivision}, </if>
 			<if test="urbanorrural != null">`urbanorrural` = #{urbanorrural},</if>
 			<if test="dosage != null">`dosage` = #{dosage},</if>
-			<if test="country != null">`country` = #{country}</if>
 			<if test="other != null">`other` = #{other}</if>
 		</set>
 		where envir_protection_id = #{envirProtectionId}
