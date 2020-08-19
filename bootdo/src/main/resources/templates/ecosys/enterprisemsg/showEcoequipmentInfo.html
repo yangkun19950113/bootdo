@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>防治设备过期的企业</title>
+    <style type="text/css">
+        body,td,th {
+            font-size: 16PX;
+            color: #000;
+        }
+        p{
+            margin-top: 9px;
+        }
+    </style>
+</head>
+<head th:include="include :: header"></head>
+<body>
+<br/>
+<center >
+
+    <div id="print">
+        <h3 align="center">防治设备过期的企业</h3>
+        <!-- <input id="id" name="id" th:value="${paResult.id}"  type="hidden"> -->
+        <table cellpadding="0" cellspacing="0" border="1"  >
+
+            <tr>
+                <td colspan="1" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">序号</p>
+                </td>
+                <td colspan="4" height="20" width="300" align="center">
+                    <p style ="padding-top: 9px;">企业名称</p>
+                </td>
+                <td  colspan="2" width="180" align="center">
+                    <p style ="padding-top: 9px;" >设备名称</p>
+                </td>
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;">监测时间</p>
+                </td>
+
+            </tr>
+            <tr th:each="EcoequipmentDO,userStat:${ecoequipmentList}">
+                <td colspan="1" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px; "th:text="${userStat.count}"></p>
+                </td>
+                <td  colspan="4" width="300" align="center">
+                    <p style ="padding-top: 9px;"th:text="${EcoequipmentDO.enterpriseName}" ></p>
+                </td>
+                <td colspan="2" height="20" width="180" align="center">
+                    <p style ="padding-top: 9px;"th:text="${EcoequipmentDO.equipmentName}"></p>
+                </td>
+
+                <td colspan="2" height="20" width="120" align="center">
+                    <p style ="padding-top: 9px;"th:text="${#dates.format(EcoequipmentDO.monitTime,'yyyy-MM-dd')}"></p>
+                </td>
+            </tr>
+
+        </table>
+        <h6 id="showDate" align="left"></h6>
+    </div>
+</center>
+</body>
+</head>
+</html>

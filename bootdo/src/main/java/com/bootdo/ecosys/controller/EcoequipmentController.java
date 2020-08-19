@@ -6,10 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.bootdo.ecosys.domain.CodeDO;
-import com.bootdo.ecosys.domain.EcoequipmentDO;
-import com.bootdo.ecosys.domain.EnterpriseDO;
-import com.bootdo.ecosys.domain.MaterialDO;
+import com.bootdo.ecosys.dao.EnterpriseDao;
+import com.bootdo.ecosys.domain.*;
 import com.bootdo.ecosys.service.CodeService;
 import com.bootdo.ecosys.service.EcoequipmentService;
 import com.bootdo.ecosys.service.EnterpriseService;
@@ -45,6 +43,8 @@ public class EcoequipmentController {
 	private EnterpriseService enterpriseService;
 	@Autowired
 	private CodeService codeService;
+	@Autowired
+	private EnterpriseDao enterpriseDao;
 
 	@GetMapping("/{enterpriseId}")
 	String Ecoequipment(@PathVariable("enterpriseId") Long enterpriseId,Model model){
@@ -201,6 +201,42 @@ public class EcoequipmentController {
 //		ecoequipmentService.showExcelInfo(ecoequipmentList);
 
 		// 跳转写成的html页面
+
+	}
+
+	//综合大数据  灭火器过期的企业 详情
+	@GetMapping("/showecoequipmentInfo/{adminCountryCode}")
+	String showecoequipmentInfo(@PathVariable("adminCountryCode") String adminCountryCode,Model model){
+		if(adminCountryCode.length()>6){
+			String admin = adminCountryCode.substring(0,12);
+			System.out.println(admin);
+			String countryCode = adminCountryCode.substring(12,adminCountryCode.length());
+			Map<String, Object> params = new HashMap<>();
+			if("000".equals(countryCode)){
+				params.put("administrativeDivision",admin);
+			}else {
+				params.put("administrativeDivision",admin);
+				params.put("country",countryCode);
+			}
+
+			List<EcoequipmentDO> ecoequipmentList = enterpriseDao.getEecoequipment(params);
+			if(ecoequipmentList.size()>0){
+				model.addAttribute("ecoequipmentList",ecoequipmentList);
+				return "ecosys/enterprisemsg/showEcoequipmentInfo";
+			}else {
+				return "ecosys/enterprisemsg/msg";
+			}
+		}else {
+			Map<String, Object> params = new HashMap<>();
+			List<EcoequipmentDO> ecoequipmentList = enterpriseDao.getEecoequipment(params);
+			if(ecoequipmentList.size()>0){
+				model.addAttribute("ecoequipmentList",ecoequipmentList);
+				return "ecosys/enterprisemsg/showEcoequipmentInfo";
+			}else {
+				return "ecosys/enterprisemsg/msg";
+			}
+		}
+
 
 	}
 

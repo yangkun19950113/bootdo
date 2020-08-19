@@ -47,6 +47,7 @@ public interface EnterpriseDao {
 	int getCountEvn(Map<String, Object> map);
 
 	List<FiredeviceDO> getEffectFireEquip(Map<String, Object> params);
+	List<EcoequipmentDO> getEecoequipment(Map<String, Object> params);
 
 	List<DangersourceDO> getDangerData(Map<String, Object> params);
 }

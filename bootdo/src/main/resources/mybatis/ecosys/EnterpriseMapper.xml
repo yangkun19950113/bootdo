@@ -344,6 +344,22 @@
 			<if test="country != null and country != ''"> and en.country = #{country} </if>
 	</select>
 
+	<select id="getEecoequipment" resultType="com.bootdo.ecosys.domain.EcoequipmentDO">
+		SELECT
+		ec.monit_time,
+		ec.equipment_name,
+		en.enterprise_name
+		FROM
+		eco_ecoequipment ec,
+		eco_enterprise en
+		WHERE
+		en.enterprise_id = ec.enterprise_id
+		AND DateDiff( NOW(), ec.monit_time )> 356
+		AND en.delete_flag = '0'
+		<if test="administrativeDivision != null and administrativeDivision != ''"> and en.administrative_division = #{administrativeDivision} </if>
+		<if test="country != null and country != ''"> and en.country = #{country} </if>
+	</select>
+
 	<select id="getDangerData" resultType="com.bootdo.ecosys.domain.DangersourceDO">
 		SELECT
 			en.enterprise_id,

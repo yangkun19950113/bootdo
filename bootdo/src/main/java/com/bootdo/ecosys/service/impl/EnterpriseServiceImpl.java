@@ -225,6 +225,11 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 		}
 		return list;
 	}
+	@Override
+	public List<EcoequipmentDO> getEecoequipment(Map<String, Object> params) {
+		List<EcoequipmentDO> list = enterpriseDao.getEecoequipment(params);
+		return list;
+	}
 
 	@Override
 	public List<DangersourceDO> getDangerData(Map<String, Object> params) {

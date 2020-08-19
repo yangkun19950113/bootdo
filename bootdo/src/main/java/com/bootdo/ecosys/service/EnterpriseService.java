@@ -1,10 +1,7 @@
 package com.bootdo.ecosys.service;
 
 
-import com.bootdo.ecosys.domain.CommonDO;
-import com.bootdo.ecosys.domain.DangersourceDO;
-import com.bootdo.ecosys.domain.EnterpriseDO;
-import com.bootdo.ecosys.domain.FiredeviceDO;
+import com.bootdo.ecosys.domain.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -53,6 +50,7 @@ public interface EnterpriseService {
 	double getEnvprotectionChart(Map<String, Object> params);
 
 	List<FiredeviceDO> getEffectFireEquip(Map<String, Object> params);
+	List<EcoequipmentDO> getEecoequipment(Map<String, Object> params);
 
 	List<DangersourceDO> getDangerData(Map<String, Object> params);
 

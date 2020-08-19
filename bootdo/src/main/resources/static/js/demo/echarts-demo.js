@@ -1,5 +1,7 @@
 var loadEnterpriseProportionJson;
 $(function () {
+    //折线图(各类企业增长分析)
+    enterpriseHigh();
     administrativeDivision();//加载乡镇
     //饼图1，加载各村街企业占比
     loadEnterpriseProportion();
@@ -7,14 +9,15 @@ $(function () {
     loadEnterpriseNatureCode();
     //饼图3，加载污染类别占比
     loadPollutionCode();
-    //折线图(各类企业增长分析)
-    enterpriseHigh();
+
     //折线图(各类企业消防设备分析)
     fireEquipHigh();
     //仪表盘（环保信息办理）
     envprotectionChart();
     //加载灭火器过期的企业
     getEffectFireEquip();
+    // 防治设备过期的企业
+    getEecoequipment();
 
     getDangerData();
 
@@ -87,6 +90,8 @@ $("#country").bind("change", function(){
     fireEquipHigh();
     getEffectFireEquip();
     getDangerData();
+    // 防治设备过期的企业
+    getEecoequipment();
 
 })
 
@@ -113,6 +118,7 @@ function loadEnterpriseProportion(){
                 },
                 tooltip : {
                     trigger: 'item',
+                    position:'right',
                     formatter: "{a} <br/>{b} : {c} ({d}%)"
                 },
                 calculable : true,
@@ -123,30 +129,7 @@ function loadEnterpriseProportion(){
                         radius : '55%',
                         center: ['50%', '60%'],
                         data:data.data,
-                        /*itemStyle: {
-                            normal: {
-                                color: function(params) {
-                                    var colorList = [
-                                        '#8B0000','#2F4F4F','#008080','#F4A460','#87CECB',
-                                        '#5F9EA0','#DAA520','#20B2AA','#40E0D0','#FA8072'
-                                    ];
-                                    return colorList[params.dataIndex]
-                                },
-                                label: {        //此处为指示线文字
-                                    show: true,
-                                    textStyle: {
-                                        fontWeight: 200,
-                                        fontSize: 10    //文字的字体大小
-                                    }
-                                },
-                                labelLine: {    //指示线状态
-                                    show: true,
-                                    smooth: 0.2/!*,
-                                    length: 10,
-                                    length2: 20*!/
-                                }
-                            }
-                        },*/
+
                     }
                 ]
             };
@@ -178,6 +161,7 @@ function loadEnterpriseNatureCode(){
                 },
                 tooltip : {
                     trigger: 'item',
+                    position:'right',
                     formatter: "{a} <br/>{b} : {c} ({d}%)"
                 },
                 calculable : true,
@@ -220,6 +204,7 @@ function loadPollutionCode(){
                 },
                 tooltip : {
                     trigger: 'item',
+                    position:'right',
                     formatter: "{a} <br/>{b} : {c} ({d}%)"
                 },
                 calculable : true,
@@ -230,30 +215,6 @@ function loadPollutionCode(){
                         radius : '55%',
                         center: ['50%', '60%'],
                         data:data.data,
-                        /*itemStyle: {
-                            normal: {
-                                color: function(params) {
-                                    var colorList = [
-                                        '#8B0000','#2F4F4F','#008080','#F4A460','#87CECB',
-                                        '#5F9EA0','#DAA520','#20B2AA','#40E0D0','#FA8072'
-                                    ];
-                                    return colorList[params.dataIndex]
-                                },
-                                label: {        //此处为指示线文字
-                                    show: true,
-                                    textStyle: {
-                                        fontWeight: 200,
-                                        fontSize: 10    //文字的字体大小
-                                    }
-                                },
-                                labelLine: {    //指示线状态
-                                    show: true,
-                                    smooth: 0.2/!*,
-                                    length: 10,
-                                    length2: 20*!/
-                                }
-                            }
-                        },*/
                     }
                 ]
             };
@@ -291,11 +252,7 @@ function enterpriseHigh(){
                     y2:20,
                     containLabel: true
                 },
-                /*toolbox: {
-                    feature: {
-                        saveAsImage: {}
-                    }
-                },*/
+
                 xAxis: {
                     type: 'category',
                     boundaryGap: false,
@@ -305,19 +262,6 @@ function enterpriseHigh(){
                     type: 'value'
                 },
                 series:data.data.lineList,
-                /*itemStyle: {
-                    normal: {
-                        lineStyle:{
-                            color: function(params) {
-                                var colorList = [
-                                    '#8B0000','#2F4F4F','#008080','#F4A460','#87CECB',
-                                    '#5F9EA0','#DAA520','#20B2AA','#40E0D0','#FA8072'
-                                ];
-                                return colorList[params.dataIndex]
-                            },
-                        },
-                    }
-                },*/
             };
             pieChart.setOption(option);
             $(window).resize(pieChart.resize);
@@ -353,11 +297,7 @@ function fireEquipHigh(){
                     y2:20,
                     containLabel: true
                 },
-                /*toolbox: {
-                    feature: {
-                        saveAsImage: {}
-                    }
-                },*/
+
                 xAxis: {
                     type: 'category',
                     boundaryGap: false,
@@ -367,19 +307,7 @@ function fireEquipHigh(){
                     type: 'value'
                 },
                 series:data.data.lineList,
-                /*itemStyle: {
-                    normal: {
-                        lineStyle:{
-                            color: function(params) {
-                                var colorList = [
-                                    '#8B0000','#2F4F4F','#008080','#F4A460','#87CECB',
-                                    '#5F9EA0','#DAA520','#20B2AA','#40E0D0','#FA8072'
-                                ];
-                                return colorList[params.dataIndex]
-                            },
-                        },
-                    }
-                },*/
+
             };
             pieChart.setOption(option);
             $(window).resize(pieChart.resize);
@@ -408,12 +336,7 @@ function envprotectionChart(){
                 tooltip: {
                     formatter: '{a} <br/>{b} : {c}%'
                 },
-                /*toolbox: {
-                    feature: {
-                        restore: {},
-                        saveAsImage: {}
-                    }
-                },*/
+
                 series: [
                     {
                         name: '环保信息处理',
@@ -477,7 +400,6 @@ function showFiredeviceInfo() {
     var parentId = $("#administrativeDivision option:selected").attr("id");//行政区划id
     var countryCode = $("#country option:selected").val();//村子的编码
     var data =admin+countryCode;
-    console.log(data);
     openPageJump(mainhtml, mainhtml+'/showFiredeviceInfo/'+data,"消防设备过期的企业");
 }
 //  综合大数据  危险源的企业 详情
@@ -487,8 +409,18 @@ function showdangerInfo() {
     var parentId = $("#administrativeDivision option:selected").attr("id");//行政区划id
     var countryCode = $("#country option:selected").val();//村子的编码
     var data =admin+countryCode;
-    console.log(data);
+
     openPageJump(mainhtml, mainhtml+'/showdangerInfo/'+data,"有危险源的企业");
+}
+// 综合大数据  防治设备过期  详情
+function showEcoequipmentInfo() {
+    var mainhtml = "/ecosys/ecoequipment";
+    var admin = $("#administrativeDivision option:selected").val();//行政区划
+    var parentId = $("#administrativeDivision option:selected").attr("id");//行政区划id
+    var countryCode = $("#country option:selected").val();//村子的编码
+    var data =admin+countryCode;
+
+    openPageJump(mainhtml, mainhtml+'/showecoequipmentInfo/'+data,"防治设备过期企业");
 }
 
 //加载灭火器过期的企业
@@ -514,7 +446,7 @@ function getEffectFireEquip(){
                 var strStrat = "<ul>";
                 var strEnd = "</ul>";
                 for(var i = 0;i<data.data.length;i++) {
-                    dataStr = "<li><a href=\"#\" class=\"btn\" style=\"pointer-events:none;background-color: #92B8B1;border: #92B8B1;width: 100%;color: white;font-size:12px\">" +
+                    dataStr = "<li ><a  href=\"#\" class=\"btn\" style=\" font-size: 5px;pointer-events:none;background-color: #92B8B1;border: #92B8B1;width: 100%;color: white;font-size:12px\">" +
                         data.data[i].enterpriseName + "&nbsp;&nbsp;&nbsp;"
                         + data.data[i].equipmentName + "&nbsp;&nbsp;&nbsp;" + "</a></li>" + dataStr;
                 }
@@ -522,6 +454,44 @@ function getEffectFireEquip(){
                 $("#fireData").html(dataStrNew);
             }
             $("#s1").newsScroll({
+                line: 1,
+                speed: 500,
+                timer: 4000,
+            });
+        }
+    })
+}
+//加载消防设备过期企业
+function getEecoequipment(){
+    var admin = $("#administrativeDivision option:selected").val();//行政区划
+    var parentId = $("#administrativeDivision option:selected").attr("id");//行政区划id
+    var countryCode = $("#country option:selected").val();//村子的编码
+    $.ajax({
+        type: "get",
+        url: "/ecosys/chart/getEecoequipment",
+        dataType: "json",
+        data: {
+            administrativeDivision:admin,
+            country:countryCode
+        },
+        success: function (data) {
+            var dataStr = "";
+            if(data.data.length == 0){
+                dataStr = "<li><a href=\"#\" class=\"btn\" style=\"pointer-events:none;background-color: #92B8B1;border: #92B8B1;width: 100%;color: white;font-size:16px\">" +
+                    "暂无" + "</a></li>"
+                $("#eoequipment").html(dataStr);
+            }else{
+                var strStrat = "<ul>";
+                var strEnd = "</ul>";
+                for(var i = 0;i<data.data.length;i++) {
+                    dataStr = "<li ><a  href=\"#\" class=\"btn\" style=\" font-size: 5px;pointer-events:none;background-color: #92B8B1;border: #92B8B1;width: 100%;color: white;font-size:12px\">" +
+                        data.data[i].enterpriseName + "&nbsp;&nbsp;&nbsp;"+
+                    "</a></li>" + dataStr;
+                }
+                var dataStrNew = strStrat + dataStr + strEnd;
+                $("#eoequipment").html(dataStrNew);
+            }
+            $("#s3").newsScroll({
                 line: 1,
                 speed: 500,
                 timer: 4000,

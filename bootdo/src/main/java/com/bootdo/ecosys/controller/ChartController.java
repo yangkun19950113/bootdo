@@ -146,7 +146,7 @@ public class ChartController {
 						for (int k = 0; k < yearArray.length; k++) {
 							if (enterprise.getYear().equals(yearArray[k])) {
 								dataStr = dataStr + enterprise.getNum() + ",";
-								yearList.remove(k);
+//								yearList.remove(k);
 								break;
 							} else {
 								dataStr = dataStr + 0 + ",";
@@ -303,6 +303,12 @@ public class ChartController {
 	@GetMapping("/getEffectFireEquip")
 	public ResponseData getEffectFireEquip(@RequestParam Map<String, Object> params){
 		List<FiredeviceDO> List =  enterpriseService.getEffectFireEquip(params);
+		return MessageResult.success("200","", List);
+	}
+	@ResponseBody
+	@GetMapping("/getEecoequipment")
+	public ResponseData getEecoequipment(@RequestParam Map<String, Object> params){
+		List<EcoequipmentDO> List =  enterpriseService.getEecoequipment(params);
 		return MessageResult.success("200","", List);
 	}
 
