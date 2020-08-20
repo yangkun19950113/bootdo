@@ -1,7 +1,5 @@
 bootdo:
   uploadPath: /root/uploaded_files/
-  username: admin
-  password: 111111
 logging:
   level:
     root: info
@@ -10,9 +8,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://116.62.141.108:3306/ecosys?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+    url: jdbc:mysql://47.110.142.59:3306/ecosys?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
     username: root
-    password: 123456
+    password: abc123
     initialSize: 1
     minIdle: 3
     maxActive: 20
