@@ -19,7 +19,7 @@ public interface EnterpriseDao {
 
 	EnterpriseDO get(Integer enterpriseId);
 
-	List<EnterpriseDO> getCoordinates(@Param("administrativeDivision") String administrativeDivision,@Param("country")  String country);
+	List<EnterpriseDO> getCoordinates(@Param("administrativeDivision") String administrativeDivision,@Param("country")  String country,@Param("enterpriseName")String enterpriseName);
 	EnterpriseDO getdatabycoordinates(String coordinates);
 	List<EnterpriseDO> getEnterpriseName(@Param("enterpriseName") String  enterpriseName);
 	List<EnterpriseDO> list(Map<String, Object> map);

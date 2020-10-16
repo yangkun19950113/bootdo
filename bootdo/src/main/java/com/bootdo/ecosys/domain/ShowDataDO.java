@@ -68,7 +68,7 @@ public class ShowDataDO implements Serializable {
 	// 原材料名称
 	private String materialName;
 	//月使用量
-	private BigDecimal monthConsumption;
+	private String monthConsumption;
 	// 防治设备
 	//设备名称
 	private String equipmentName;
@@ -141,13 +141,13 @@ public class ShowDataDO implements Serializable {
 	private String electricMinImgUrl;
 	private String riskMinImgUrl;
 	private String firedeviceMinImgUrl;
-	private BigDecimal monthProduction;
+	private String monthProduction;
 
-	public BigDecimal getMonthProduction() {
+	public String getMonthProduction() {
 		return monthProduction;
 	}
 
-	public void setMonthProduction(BigDecimal monthProduction) {
+	public void setMonthProduction(String monthProduction) {
 		this.monthProduction = monthProduction;
 	}
 
@@ -325,11 +325,11 @@ public class ShowDataDO implements Serializable {
 		this.materialName = materialName;
 	}
 
-	public BigDecimal getMonthConsumption() {
+	public String getMonthConsumption() {
 		return monthConsumption;
 	}
 
-	public void setMonthConsumption(BigDecimal monthConsumption) {
+	public void setMonthConsumption(String monthConsumption) {
 		this.monthConsumption = monthConsumption;
 	}
 

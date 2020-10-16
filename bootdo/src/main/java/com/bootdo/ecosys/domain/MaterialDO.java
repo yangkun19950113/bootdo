@@ -31,7 +31,7 @@ public class MaterialDO implements Serializable {
 	//
 	private String orgionWay;
 	//月使用量
-	private BigDecimal monthConsumption;
+	private String monthConsumption;
 	//
 	private String dangerMaterial;
 	//
@@ -172,13 +172,13 @@ public class MaterialDO implements Serializable {
 	/**
 	 * 设置：月使用量
 	 */
-	public void setMonthConsumption(BigDecimal monthConsumption) {
+	public void setMonthConsumption(String monthConsumption) {
 		this.monthConsumption = monthConsumption;
 	}
 	/**
 	 * 获取：月使用量
 	 */
-	public BigDecimal getMonthConsumption() {
+	public String getMonthConsumption() {
 		return monthConsumption;
 	}
 	/**

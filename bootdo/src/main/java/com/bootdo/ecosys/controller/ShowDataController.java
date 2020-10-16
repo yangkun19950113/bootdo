@@ -178,7 +178,7 @@ public class ShowDataController {
 			ShowData.setProdutProcess(produtProcess);
 			ShowData.setProductMinImgUrl("/img/product.png");
 			// 月产量
-			BigDecimal monthProduction = productDO.getMonthProduction();
+			String monthProduction = productDO.getMonthProduction();
 			ShowData.setMonthProduction(monthProduction);
 		}else {
 			ShowData.setProdectName("-");
@@ -190,7 +190,7 @@ public class ShowDataController {
 			ShowData.setProdutProcess("-");
 			ShowData.setProductMinImgUrl("/img/product.png");
 			// 月产量
-			ShowData.setMonthProduction(new BigDecimal(0));
+			ShowData.setMonthProduction("0");
 		}
 
 
@@ -212,7 +212,7 @@ public class ShowDataController {
 			String materialName = materialDO.getMaterialName();
 			ShowData.setMaterialName(materialName);
 			//月使用量
-			BigDecimal monthConsumption = materialDO.getMonthConsumption();
+			String monthConsumption = materialDO.getMonthConsumption();
 			ShowData.setMonthConsumption(monthConsumption);
 			ShowData.setMaterialMinImgUrl("/img/material.png");
 		}else {
@@ -220,7 +220,7 @@ public class ShowDataController {
 			// 原材料名称
 			ShowData.setMaterialName("-");
 			//月使用量
-			ShowData.setMonthConsumption(new BigDecimal(0));
+			ShowData.setMonthConsumption("0");
 			ShowData.setMaterialMinImgUrl("/img/material.png");
 		}
 
@@ -410,9 +410,9 @@ public class ShowDataController {
 		}
 	}
 	@GetMapping("/getCoordinates")
-	public ResponseData getCoordinates(String administrativeDivision, String country){
+	public ResponseData getCoordinates(String administrativeDivision, String country,String enterpriseName){
 		List<CoordinatesDO> coordinatesList = new ArrayList<>();
-		List<EnterpriseDO> enterpriseList= enterpriseDao.getCoordinates(administrativeDivision,country);
+		List<EnterpriseDO> enterpriseList= enterpriseDao.getCoordinates(administrativeDivision,country,enterpriseName);
 		for(EnterpriseDO enterpriseDO :enterpriseList){
 			CoordinatesDO coordinatesDO = new CoordinatesDO();
 			String coordinates = enterpriseDO.getCoordinates();

@@ -82,7 +82,7 @@ function load() {
 								},
 																{
 									field : 'minPrice', 
-									title : '价格区间'
+									title : '价格区间(/元)'
 								},
 								/*								{
 									field : 'maxPrice', 

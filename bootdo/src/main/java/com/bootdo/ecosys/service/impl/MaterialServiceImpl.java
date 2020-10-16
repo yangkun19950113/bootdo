@@ -121,8 +121,8 @@ public class MaterialServiceImpl implements MaterialService {
 			// 进货渠道
 			dataMap.put("orgionWay" + i,currMaterialDO.getOrgionWay());
 			// 月使用量
-			BigDecimal monthConsumptionContent = currMaterialDO.getMonthConsumption();
-			dataMap.put("monConsum" + i,monthConsumptionContent.toString());
+			String monthConsumptionContent = currMaterialDO.getMonthConsumption();
+			dataMap.put("monConsum" + i,monthConsumptionContent);
 			// 有毒有害物质
 			dataMap.put("danMat" + i,currMaterialDO.getDangerMaterial());
 			// 含量

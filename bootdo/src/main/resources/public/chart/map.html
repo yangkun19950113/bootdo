@@ -29,20 +29,28 @@
 <body>
 <br>
 <div class="row  border-bottom white-bg dashboard-header">
-    <div class="col-sm-8" style="width: 100px;margin-top: 5px">
+    <div class="col-sm-2" style="width: 100px;margin-top: 5px">
         <label>乡镇：</label>
     </div>
-    <div class="col-sm-8" style="width: 250px">
+    <div class="col-sm-4" style="width: 250px">
         <select class="selectpicker form-control" data-live-search="true" name="administrativeDivision" id="administrativeDivision">
         </select>
     </div>
-    <div class="col-sm-8" style="width: 100px;margin-top: 5px">
+    <div class="col-sm-2" style="width: 100px;margin-top: 5px">
         <label>村街：</label>
     </div>
-    <div class="col-sm-8" style="width: 250px">
+    <div class="col-sm-4" style="width: 250px">
         <select class="selectpicker form-control" data-live-search="true" name="country" id="country">
         </select>
     </div>
+    <div class="col-sm-2" style="width: 100px;margin-top: 5px">
+    <label >  企业名称:</label> &nbsp;	&nbsp;
+    </div>
+    <div class="col-sm-5" style="width: 250px">
+        <input id="enterpriseName" type="text" class="form-control" autocomplete="off"  placeholder="请输入完整企业名称">
+        <button type="button" class="btn btn-success" style="margin-top: -60px;margin-left: 250px" onclick="getdata()">查询</button>
+    </div>&nbsp;
+
 
 </div>
 <br>
@@ -51,6 +59,29 @@
 </body>
 </html>
 <script type="text/javascript">
+
+//    function reLoad() {
+//        var administrativeDivision = $("#administrativeDivision").val();
+//        var enterpriseName = $("#enterpriseName").val();
+//        var country = $("#country").val();
+//        $.ajax({
+//            type: 'GET',
+//            url: '/showData/showData/getCoordinates',
+//            dataType: "json",
+//            data:{administrativeDivision:administrativeDivision,country:country,enterpriseName:enterpriseName},
+//            success: function (res) {
+//                if(200 == res.code) {
+//                    var data = res.data;
+//                    for(var i = 0; i < data.length; i ++){
+//                        var x = data[i].x ;
+//                        var y = data[i].y;
+//                        var point = new BMap.Point(x, y);
+//                        addMarker(point);
+//                    }
+//                }
+//            }
+//        });
+//    }
     //加载行政区划
     //一级
     function administrativeDivision(){
@@ -80,6 +111,7 @@
     //行政区划，监听一级乡镇，联动村子
     $("#administrativeDivision").bind("change", function(){
         var administrativeDivision = $("#administrativeDivision").val();
+        var enterpriseName = $("#enterpriseName").val();
         var country = null;
         deletePoint();
         getdata(administrativeDivision,country);
@@ -115,8 +147,9 @@
     $("#country").bind("change", function(){
         var country = $("#country").val();
         var administrativeDivision = $("#administrativeDivision").val();
+        var enterpriseName = $("#enterpriseName").val();
         deletePoint();
-        getdata(administrativeDivision,country);
+        getdata(administrativeDivision,country,enterpriseName);
 
     })
 
@@ -124,12 +157,15 @@
     var map = new BMap.Map("allmap");    // 创建Map实例
     map.centerAndZoom(new BMap.Point(116.358007, 39.10178), 8);  // 初始化地图,设置中心点坐标和地图级别
     map.enableScrollWheelZoom();
-    function getdata(administrativeDivision,country) {
+    function getdata(administrativeDivision,country,enterpriseName) {
+        var administrativeDivision = $("#administrativeDivision").val();
+        var enterpriseName = $("#enterpriseName").val();
+        var country = $("#country").val();
         $.ajax({
             type: 'GET',
             url: '/showData/showData/getCoordinates',
             dataType: "json",
-            data:{administrativeDivision:administrativeDivision,country:country},
+            data:{administrativeDivision:administrativeDivision,country:country,enterpriseName:enterpriseName},
             success: function (res) {
                 if(200 == res.code) {
                     var data = res.data;

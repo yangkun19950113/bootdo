@@ -39,7 +39,7 @@ public class ProductDO implements Serializable {
 	//设备名称
 	private String deviceName;
 	//月产量
-	private BigDecimal monthProduction;
+	private String monthProduction;
 	//功能作用
 	private String functionRemark;
 	//备注
@@ -221,13 +221,13 @@ public class ProductDO implements Serializable {
 	/**
 	 * 设置：月产量
 	 */
-	public void setMonthProduction(BigDecimal monthProduction) {
+	public void setMonthProduction(String monthProduction) {
 		this.monthProduction = monthProduction;
 	}
 	/**
 	 * 获取：月产量
 	 */
-	public BigDecimal getMonthProduction() {
+	public String getMonthProduction() {
 		return monthProduction;
 	}
 	/**

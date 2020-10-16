@@ -28,7 +28,6 @@ function reLoad(socialCreditCode) {
         dataType: "json",
         data:{enterpriseName:$('#enterpriseName').val(),socialCreditCode:$('#socialCreditCode').val()},
         success: function (res) {
-            console.log(res);
             if(200 == res.code){
                 $("#lunbotu").empty();
                 $("#enterprise").empty();
@@ -45,7 +44,6 @@ function reLoad(socialCreditCode) {
                 var data = res.data;
                 var enterpriseId = data.enterpriseId;
                 var proimgsurl = data.imgUrls;
-                console.log(proimgsurl);
                 var minImgUrl = data.minImgUrl;
                 var enterpriseName = data.enterpriseName;
                 var socialCreditCode = data.socialCreditCode;
@@ -53,6 +51,7 @@ function reLoad(socialCreditCode) {
                 // var registeredTime = data.registeredTime;
                 var enterpriseNatureCode = data.enterpriseNatureCode;
                 var ecoEstimateFlg = data.ecoEstimateFlg;
+                var pp = document.querySelector('#pp');
                 if(0==ecoEstimateFlg){
                     ecoEstimateFlg = '是'
                 }else{
@@ -115,9 +114,10 @@ function reLoad(socialCreditCode) {
 
 
                 //填充每幅图像的具体信息
-                if(null == proimgsurl){
-
+                if(null == proimgsurl ||proimgsurl.length==0 ){
+                    $("#pp").css({"margin-top":"-400px"});
                 }else {
+                     $("#pp").css({"margin-top":"-20px"});
                     for(var i = 0; i < proimgsurl.length; i++) {
                         if(i == 0) {
                             $("#lunbotu").append("<div class='carousel-item active'>" +
@@ -136,7 +136,7 @@ function reLoad(socialCreditCode) {
                     "<div class='card-body'> " +
                     "<h6 class='card-title'>" + enterpriseName + "</h6>" +
                     "<p class='card-text'> 信用编码:" + socialCreditCode + "</p>" +
-                    "<p class='card-text'>" + registeredAddress + "</p>" +
+                    "<p style='font-size: 14px' class='card-text'>" + registeredAddress + "</p >" +
                     "<p class='card-text'> 企业性质:" + enterpriseNatureCode + "</p>" +
                     '<a class="btn btn-primary"  href="#" onclick="openPageJump(\'' + enterpriseMsgMapping +'\',\'' + enterpriseMsgMapping +'/showExcelInfo/'+enterpriseId+'\',\'' + '企业信息' + '\')">'+'企业信息'+'</a>'+
                     "</div>"

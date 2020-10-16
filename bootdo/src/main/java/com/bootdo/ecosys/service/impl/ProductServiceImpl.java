@@ -117,7 +117,7 @@ public class ProductServiceImpl implements ProductService {
 			// 生产设施
 			dataMap.put("deviceName" + i,currProductDO.getDeviceName());
 			// 月产量
-			BigDecimal monthProductionContent = currProductDO.getMonthProduction();
+			String monthProductionContent = currProductDO.getMonthProduction();
 			dataMap.put("monProduction" + i,monthProductionContent.toString());
 			// 功能作用
 			dataMap.put("functionRemark" + i,currProductDO.getFunctionRemark());
