@@ -1,3 +1,6 @@
+server:
+  tomcat:
+    basedir: /tmp/tomcat
 bootdo:
   uploadPath: /root/uploaded_files/
 logging:
