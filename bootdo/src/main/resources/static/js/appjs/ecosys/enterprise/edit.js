@@ -357,8 +357,7 @@ $("#administrativeDivision1").bind("change", function(){
 	//获取
 	var option = $("#administrativeDivision1 option:selected").val();
 	var parentId = $("#administrativeDivision1 option:selected").attr("id");
-
-	// $("#country1").find("option").remove();//清空option
+	$("#country1").find("option").remove();//清空option
 	//根据乡镇获取村
 	$.ajax({
 		type: "get",
