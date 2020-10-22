@@ -1,6 +1,6 @@
 var loadEnterpriseProportionJson;
 $(function () {
-    //折线图(各类企业增长分析)
+    // //折线图(各类企业增长分析)
     enterpriseHigh();
     administrativeDivision();//加载乡镇
     //饼图1，加载各村街企业占比
@@ -51,7 +51,26 @@ function administrativeDivision(){
 
 //行政区划，监听一级乡镇，联动村子
 $("#administrativeDivision").bind("change", function(){
+    enterpriseHigh();
+    //饼图1，加载各村街企业占比
+    loadEnterpriseProportion();
+    //饼图2，加载企业性质占比
+    loadEnterpriseNatureCode();
+    //饼图3，加载污染类别占比
+    loadPollutionCode();
+
+    //折线图(各类企业消防设备分析)
+    fireEquipHigh();
+    //仪表盘（环保信息办理）
+    envprotectionChart();
+    //加载灭火器过期的企业
+    getEffectFireEquip();
+    // 防治设备过期的企业
+    getEecoequipment();
+
+    getDangerData();
     //获取
+    // $("#administrativeDivision").find("option").remove();//清空option
     var option = $("#administrativeDivision option:selected").val();
     var parentId = $("#administrativeDivision option:selected").attr("id");
     $("#country").find("option").remove();//清空option
@@ -82,16 +101,24 @@ $("#administrativeDivision").bind("change", function(){
 
 //监听村子
 $("#country").bind("change", function(){
-    loadEnterpriseProportion();
-    envprotectionChart();
-    loadEnterpriseNatureCode();
-    loadPollutionCode();
     enterpriseHigh();
+    //饼图1，加载各村街企业占比
+    loadEnterpriseProportion();
+    //饼图2，加载企业性质占比
+    loadEnterpriseNatureCode();
+    //饼图3，加载污染类别占比
+    loadPollutionCode();
+
+    //折线图(各类企业消防设备分析)
     fireEquipHigh();
+    //仪表盘（环保信息办理）
+    envprotectionChart();
+    //加载灭火器过期的企业
     getEffectFireEquip();
-    getDangerData();
     // 防治设备过期的企业
     getEecoequipment();
+
+    getDangerData();
 
 })
 

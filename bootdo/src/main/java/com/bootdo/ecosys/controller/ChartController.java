@@ -41,6 +41,16 @@ public class ChartController {
 	@ResponseBody
 	@GetMapping("/loadEnterpriseProportion")
 	public ResponseData loadEnterpriseProportion(@RequestParam Map<String, Object> params){
+		if(params.get("country")!=null){
+			String country = params.get("country").toString();
+			String administrativeDivision = params.get("administrativeDivision").toString();
+			if("000".equals(country)){
+				params.put("country",null);
+			}
+			if("00".equals(administrativeDivision)){
+				params.put("administrativeDivision",null);
+			}
+		}
 		List<CommonDO> valueList = enterpriseService.loadEnterpriseProportion(params);
 		if(valueList.size() == 0){
 			CommonDO common = new CommonDO();
@@ -54,6 +64,16 @@ public class ChartController {
 	@ResponseBody
 	@GetMapping("/loadEnterpriseSum")
 	public ResponseData loadEnterpriseSum(@RequestParam Map<String, Object> params){
+		if(params.get("country")!=null){
+			String country = params.get("country").toString();
+			String administrativeDivision = params.get("administrativeDivision").toString();
+			if("000".equals(country)){
+				params.put("country",null);
+			}
+			if("00".equals(administrativeDivision)){
+				params.put("administrativeDivision",null);
+			}
+		}
 		List<EnterpriseDTO> valueList = enterpriseDao.loadEnterpriseSum(params);
 		return MessageResult.success("200","", valueList);
 	}
@@ -62,6 +82,16 @@ public class ChartController {
 	@ResponseBody
 	@GetMapping("/loadEnterpriseNatureCode")
 	public ResponseData loadEnterpriseNatureCode(@RequestParam Map<String, Object> params){
+		if(params.get("country")!=null){
+			String country = params.get("country").toString();
+			String administrativeDivision = params.get("administrativeDivision").toString();
+			if("000".equals(country)){
+				params.put("country",null);
+			}
+			if("00".equals(administrativeDivision)){
+				params.put("administrativeDivision",null);
+			}
+		}
 		List<CommonDO> valueList = enterpriseService.loadEnterpriseNatureCode(params);
 		if(valueList.size() == 0){
 			CommonDO common = new CommonDO();
@@ -76,6 +106,16 @@ public class ChartController {
 	@ResponseBody
 	@GetMapping("/loadPollutionCode")
 	public ResponseData loadPollutionCode(@RequestParam Map<String, Object> params){
+		if(params.get("country")!=null){
+			String country = params.get("country").toString();
+			String administrativeDivision = params.get("administrativeDivision").toString();
+			if("000".equals(country)){
+				params.put("country",null);
+			}
+			if("00".equals(administrativeDivision)){
+				params.put("administrativeDivision",null);
+			}
+		}
 		List<CommonDO> valueList = enterpriseService.loadPollutionCode(params);
 		if(valueList.size() == 0){
 			CommonDO common = new CommonDO();
@@ -89,6 +129,7 @@ public class ChartController {
 	@ResponseBody
 	@GetMapping("/enterpriseHigh")
 	public ResponseData enterpriseHigh(@RequestParam Map<String, Object> params){
+
 		String administrativeDivision = null;
 		String country = null;
 		if(null != params.get("administrativeDivision") && !params.get("administrativeDivision").equals("")){
@@ -96,6 +137,16 @@ public class ChartController {
 		}
 		if(null != params.get("country") && !params.get("country").equals("")){
 			country = params.get("country").toString();
+		}
+		if(params.get("country")!=null){
+			if("000".equals(country)){
+				params.put("country",null);
+				country = null;
+			}
+			if("00".equals(administrativeDivision)){
+				params.put("administrativeDivision",null);
+				administrativeDivision = null;
+			}
 		}
 		List<LineDO> lineList = new ArrayList<>();
 		String [] yearArray = null;//x轴
@@ -196,6 +247,17 @@ public class ChartController {
 		if(null != params.get("country") && !params.get("country").equals("")){
 			country = params.get("country").toString();
 		}
+		if(params.get("country")!=null){
+
+			if("000".equals(country)){
+				params.put("country",null);
+				country = null;
+			}
+			if("00".equals(administrativeDivision)){
+				params.put("administrativeDivision",null);
+				administrativeDivision = null;
+			}
+		}
 		List<LineDO> lineList = new ArrayList<>();
 		String [] monthArray = null;//x轴
 		String [] monthArray1 = null;
@@ -295,6 +357,16 @@ public class ChartController {
 	@ResponseBody
 	@GetMapping("/envprotectionChart")
 	public ResponseData envprotectionChart(@RequestParam Map<String, Object> params){
+		if(params.get("country")!=null){
+			String country = params.get("country").toString();
+			String administrativeDivision = params.get("administrativeDivision").toString();
+			if("000".equals(country)){
+				params.put("country",null);
+			}
+			if("00".equals(administrativeDivision)){
+				params.put("administrativeDivision",null);
+			}
+		}
 		double num = enterpriseService.getEnvprotectionChart(params);
 		return MessageResult.success("200","", num);
 	}
@@ -302,12 +374,32 @@ public class ChartController {
 	@ResponseBody
 	@GetMapping("/getEffectFireEquip")
 	public ResponseData getEffectFireEquip(@RequestParam Map<String, Object> params){
+		if(params.get("country")!=null){
+			String country = params.get("country").toString();
+			String administrativeDivision = params.get("administrativeDivision").toString();
+			if("000".equals(country)){
+				params.put("country",null);
+			}
+			if("00".equals(administrativeDivision)){
+				params.put("administrativeDivision",null);
+			}
+		}
 		List<FiredeviceDO> List =  enterpriseService.getEffectFireEquip(params);
 		return MessageResult.success("200","", List);
 	}
 	@ResponseBody
 	@GetMapping("/getEecoequipment")
 	public ResponseData getEecoequipment(@RequestParam Map<String, Object> params){
+		if(params.get("country")!=null){
+			String country = params.get("country").toString();
+			String administrativeDivision = params.get("administrativeDivision").toString();
+			if("000".equals(country)){
+				params.put("country",null);
+			}
+			if("00".equals(administrativeDivision)){
+				params.put("administrativeDivision",null);
+			}
+		}
 		List<EcoequipmentDO> List =  enterpriseService.getEecoequipment(params);
 		return MessageResult.success("200","", List);
 	}
@@ -316,6 +408,17 @@ public class ChartController {
 	@ResponseBody
 	@GetMapping("/getDangerData")
 	public ResponseData getDangerData(@RequestParam Map<String, Object> params){
+		if(params.get("country")!=null){
+			String country = params.get("country").toString();
+			String administrativeDivision = params.get("administrativeDivision").toString();
+			if("000".equals(country)){
+				params.put("country",null);
+			}
+			if("00".equals(administrativeDivision)){
+				params.put("administrativeDivision",null);
+			}
+		}
+
 		List<DangersourceDO> List =  enterpriseService.getDangerData(params);
 		return MessageResult.success("200","", List);
 	}
